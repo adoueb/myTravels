@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+<meta charset="utf-8">
+<title>My Travels</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+<meta name="author" content="">
+<!-- In production use:
+  <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+  -->
+<link href="dist/css/bootstrap.css" rel="stylesheet">
+<link href="css/app.css" rel="stylesheet">
+</head>
+<body>
+<!-- it comes from Angular Seed
+	<ul class="menu">
+		<li><a href="#/view1">view1</a></li>
+		<li><a href="#/view2">view2</a></li>
+	</ul>
+
+	<div ng-view></div>
+
+	<div>
+		Angular seed app: v<span app-version></span>
+	</div>
+ -->
+ 
+ 	<!-- ========================================================================================== -->
+ 	<!-- Collapsing Nav Bar                                                                         -->
+ 	<!-- ========================================================================================== -->
+ 	<div class="navbar navbar-inverse navbar-static-top">
+ 		<div class="container">
+ 			<a href="#" class="navbar-brand">Tech Site</a>
+ 			
+ 			<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+ 				<span class="icon-bar"></span>
+ 				<span class="icon-bar"></span>
+ 				<span class="icon-bar"></span>
+ 			</button>
+ 			
+ 			<div class="collapse navbar-collapse navHeaderCollapse">
+ 				<ul class="nav navbar-nav navbar-right">
+ 					<li class="active"><a href="#">Home</a></li>
+ 					<li><a href="#">Blog</a></li>
+ 					<li class="dropdown">
+ 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Social Media <b class="caret"></b></a>
+ 						<ul class="dropdown-menu">
+ 						<li><a href="#">Twitter</a></li>
+ 						<li><a href="#">Facebook</a></li>
+ 						<li><a href="#">Google+</a></li>
+ 						<li><a href="#">Instagram</a></li>
+ 						</ul>
+ 					</li>
+ 					<li><a href="#">About</a></li>
+ 					<li><a href="#contact" data-toggle="modal">Contact</a></li>
+ 				</ul>
+ 			</div>
+
+ 		</div>
+ 	</div>
+ 
+  	<!-- ========================================================================================== -->
+ 	<!-- Articles                                                                                   -->
+ 	<!-- ========================================================================================== -->
+ 	<div class="container">
+	 	<div class="row">
+	 		<!-- Main article -->
+	 		<div class="col-lg-9">
+	 			<div class="panel panel-default">
+	 				<div class="panel-body">
+	 					<div class="page-header">
+	 						<h3>Whatever you want <small>Posted on January 11th</small></h3>	
+	 					</div>
+	 					<img class="featuredImg" src="img/Amed.JPG" width="100%">
+						<p>aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p>
+						<h4>A heading</h4>
+						<p>aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p>
+	 				</div>
+	 			</div>
+	 		</div>
+	 		
+	 		<!-- Articles sidebar -->
+	 		<div class="col-lg-3">
+	 			<div class="list-group">
+	 				<a href="#" class="list-group-item active">
+	 					<h4 class="list-group-item-heading">Lorem ipsum</h4>
+	 					<p class="list-group-item-heading">aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p>
+	 				</a>
+	 			</div>
+	 			<div class="list-group">
+	 				<a href="#" class="list-group-item">
+	 					<h4 class="list-group-item-heading">Lorem ipsum</h4>
+	 					<p class="list-group-item-heading">aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p>
+	 				</a>
+	 			</div>
+	 			<div class="list-group">
+	 				<a href="#" class="list-group-item">
+	 					<h4 class="list-group-item-heading">Lorem ipsum</h4>
+	 					<p class="list-group-item-heading">aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p>
+	 				</a>
+	 			</div>
+	 			<div class="list-group">
+	 				<a href="#" class="list-group-item">
+	 					<h4 class="list-group-item-heading">Lorem ipsum</h4>
+	 					<p class="list-group-item-heading">aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p>
+	 				</a>
+	 			</div>	 			
+	 		</div>
+	 	</div>
+	 </div>
+	 
+   	<!-- ========================================================================================== -->
+ 	<!-- ========================================================================================== -->
+ 	
+ 
+ 	<!-- ========================================================================================== -->
+ 	<!-- Sticky footer that stays in the browser viewport                                           -->
+ 	<!-- ========================================================================================== -->
+ 	<div class="navbar navbar-default navbar-fixed-bottom">
+ 		<div class="container">
+ 			<p class="navbar-text pull-left">Site Built By Agnes Doueb</p>
+ 			<a href="http://youtube.com/codersguide" class="navbar-btn btn-danger btn pull-right">Subscribe on YouTube</a>
+ 		</div>
+ 	</div>
+ 	
+  	<!-- ========================================================================================== -->
+ 	<!-- Contact dialog                                                                             -->
+ 	<!-- ========================================================================================== -->
+ 	<div class="modal fade" id="contact" role="dialog">
+ 		<div class="modal-dialog">
+ 			<div class="modal-content">
+ 				<form class="form-horizontal">
+	 				<div class="modal-header">
+	 					<h4>Contact Tech Site</h4>
+	 				</div>
+	 				<div class="modal-body">
+	 					<div class="form-group">
+	 						<label for="contact-name" class="col-lg-2 control-label">Name:</label>
+	 						<div class="col-lg-10">
+	 							<input type="text" class="form-control" id="contact-name" placeholder="Full Name">
+	 						</div>
+	 					</div>
+	 					<div class="form-group">
+	 						<label for="contact-email" class="col-lg-2 control-label">Name:</label>
+	 						<div class="col-lg-10">
+	 							<input type="email" class="form-control" id="contact-email" placeholder="you@example.com">
+	 						</div>
+	 					</div>
+	 					<div class="form-group">
+	 						<label for="contact-message" class="col-lg-2 control-label">Name:</label>
+	 						<div class="col-lg-10">
+	 							<textarea class="form-control" rows="8"></textarea>
+	 						</div>
+	 					</div>
+	 				</div>
+	 				<div class="modal-footer">
+	 					<a class="btn btn-default" data-dismiss="modal">Close</a>
+	 					<button class="btn btn-primary" type="submit">Send</button>
+	 				</div>
+ 				</form>
+ 			</div>
+ 		</div>
+ 	</div>
+ 
+ 	<!-- Placed at the end of the document so the pages load faster -->
+	<!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+  -->
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular/angular-route.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/services.js"></script>
+	<script src="js/controllers.js"></script>
+	<script src="js/filters.js"></script>
+	<script src="js/directives.js"></script>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+	<!-- In production use:
+    <script src="dist/js/bootstrap.min.js"></script>
+  -->
+    <script src="dist/js/bootstrap.js"></script>
+</body>
+</html>
