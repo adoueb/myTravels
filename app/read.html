@@ -12,7 +12,7 @@
 <link href="dist/css/bootstrap.css" rel="stylesheet">
 <link href="css/app.css" rel="stylesheet">
 </head>
-<body>
+<body  ng-controller="TravelListCtrl">
 <!-- it comes from Angular Seed
 	<ul class="menu">
 		<li><a href="#/view1">view1</a></li>
@@ -31,7 +31,7 @@
  	<!-- ========================================================================================== -->
  	<div class="navbar navbar-inverse navbar-static-top">
  		<div class="container">
- 			<a href="#" class="navbar-brand">Tech Site</a>
+ 			<a href="#" class="navbar-brand"><img src="img/Logo.jpg" height="20px"> My Travels</a>
  			
  			<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
  				<span class="icon-bar"></span>
@@ -63,6 +63,17 @@
   	<!-- ========================================================================================== -->
  	<!-- Articles                                                                                   -->
  	<!-- ========================================================================================== -->
+ 	<!-- div>
+ 		start
+ 	 	<ul>
+ 	 	 <li ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)">
+            {{travel.name}} -  {{travel.year}}
+            <p>{{travel.description}}</p>
+          </li>
+        </ul>
+        end - {{selectionId}}
+        </div -->
+ 	
  	<div class="container">
 	 	<div class="row">
 	 		<!-- Main article -->
@@ -70,41 +81,34 @@
 	 			<div class="panel panel-default">
 	 				<div class="panel-body">
 	 					<div class="page-header">
-	 						<h3>Whatever you want <small>Posted on January 11th</small></h3>	
+	 						<h3>{{selectedTravel.name}} - <small>{{selectedTravel.year}}</small></h3>	
 	 					</div>
-	 					<img class="featuredImg" src="img/Amed.JPG" width="100%">
-						<p>aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p>
-						<h4>A heading</h4>
-						<p>aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p>
+	 					<img class="featuredImg" src="{{selectedTravel.imageUrl}}" width="100%">
+						<p>{{selectedTravel.description}}</p>
+						<!-- h4>A heading</h4>
+						<p>aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p -->
 	 				</div>
 	 			</div>
 	 		</div>
 	 		
 	 		<!-- Articles sidebar -->
 	 		<div class="col-lg-3">
-	 			<div class="list-group">
-	 				<a href="#" class="list-group-item active">
-	 					<h4 class="list-group-item-heading">Lorem ipsum</h4>
-	 					<p class="list-group-item-heading">aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p>
+				<!-- ul class="travels">
+					<li ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)"
+						class="thumbnail phone-listing">
+						<a
+						href="#/phones/{{phone.id}}" class="thumb"><img
+							ng-src="{{phone.imageUrl}}"></a> <a
+						href="#/phones/{{phone.id}}">{{phone.name}}</a>
+						<p>{{phone.snippet}}</p></li>
+				</ul -->
+				
+				<div class="list-group">
+	 				<a href="#" class="list-group-item" ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)">
+	 					<h4 class="list-group-item-heading">{{travel.name}}</h4>
+	 					<p class="list-group-item-heading"><img  src="{{travel.imageUrl}}" width="30%"> {{travel.description}}</p>
 	 				</a>
-	 			</div>
-	 			<div class="list-group">
-	 				<a href="#" class="list-group-item">
-	 					<h4 class="list-group-item-heading">Lorem ipsum</h4>
-	 					<p class="list-group-item-heading">aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p>
-	 				</a>
-	 			</div>
-	 			<div class="list-group">
-	 				<a href="#" class="list-group-item">
-	 					<h4 class="list-group-item-heading">Lorem ipsum</h4>
-	 					<p class="list-group-item-heading">aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p>
-	 				</a>
-	 			</div>
-	 			<div class="list-group">
-	 				<a href="#" class="list-group-item">
-	 					<h4 class="list-group-item-heading">Lorem ipsum</h4>
-	 					<p class="list-group-item-heading">aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p>
-	 				</a>
+	 				<!-- a href="#" class="btn btn-default pull-right">Read More</a -->
 	 			</div>	 			
 	 		</div>
 	 	</div>
@@ -132,7 +136,7 @@
  			<div class="modal-content">
  				<form class="form-horizontal">
 	 				<div class="modal-header">
-	 					<h4>Contact Tech Site</h4>
+	 					<h4>Contact My Travels</h4>
 	 				</div>
 	 				<div class="modal-body">
 	 					<div class="form-group">
@@ -148,7 +152,7 @@
 	 						</div>
 	 					</div>
 	 					<div class="form-group">
-	 						<label for="contact-message" class="col-lg-2 control-label">Name:</label>
+	 						<label for="contact-message" class="col-lg-2 control-label">Message:</label>
 	 						<div class="col-lg-10">
 	 							<textarea class="form-control" rows="8"></textarea>
 	 						</div>
