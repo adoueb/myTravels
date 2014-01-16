@@ -43,3 +43,18 @@ body {
 .featuredImg {
 	margin-bottom: 15px;
 }
+.travels {
+  list-style: none;
+}
+.list-group-item {
+	margin-bottom: 15px;
+}
+.left {
+	float: left;
+	margin: 0 .5em .5em 0;
+}
+
+.right {
+	float: right;
+	margin: 0 0 .5em .5em;
+}
