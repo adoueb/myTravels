@@ -83,12 +83,42 @@
 	 					<div class="page-header">
 	 						<h3>{{selectedTravel.name}} - <small>{{selectedTravel.year}}</small></h3>	
 	 					</div>
-	 					<img class="featuredImg" src="{{selectedTravel.images[0].url}}" width="100%">
+	 					
+	 					<!--  Carousel -->
+	 					<div id="travelCarousel" class="carousel">
+	 						<!--  Indicators -->
+	 						<ol class="carousel-indicators">
+	 							<li data-target="#travelCarousel" ng-repeat="image in selectedTravel.images | filter:{inCarousel:true}" data-slide-to="{{$index}}" 
+	 							    ng-class="{'active': $index == 0, '': $index != 0}">							
+	 						</ol>
+	 						
+	 						<!--  Images -->
+	 						<div class="carousel-inner">
+	 							<div ng-class="{'item active': $index == 0, 'item': $index != 0}" ng-repeat="image in selectedTravel.images | filter:{inCarousel:true}">
+	 								<center><img src="{{image.url}}" alt="{{image.title}}" class="img-responsive" width="100%"></center>
+	 								<div class="carousel-caption">
+	 									<h3>{{image.title}}</h3>
+	 									<p>{{image.description}}</h3>
+	 								</div>
+	 							</div>
+	 						</div>
+	 						
+	 						<!--  Control -->
+	 						<a class="left carousel-control" href="#travelCarousel" data-slide="prev">
+	 							<span class="icon-prev"></span>
+							</a>
+							<a class="right carousel-control" href="#travelCarousel" data-slide="next">
+								<span class="icon-next"></span>
+							</a>
+	 					</div>
+						<!-- img class="featuredImg" src="{{selectedTravel.images[0].url}}" width="100%" -->
+
+						<!--  Description -->
 						<p>{{selectedTravel.description}}</p>
 						<!-- h4>A heading</h4>
 						<p>aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p -->
-	 				</div>
-	 			</div>
+					</div>
+				</div>
 	 		</div>
 	 		
 	 		<!-- Articles sidebar -->
@@ -107,7 +137,9 @@
 	 				<!-- a href="#" class="list-group-item" ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)"-->
 	 				<a href="#" class="list-group-item" ng-repeat="travel in travels | orderBy:orderProp:true" ng-click="setSelectedTravel(travel);">
 	 					<h4 class="list-group-item-heading">{{travel.year}} - {{travel.name}}</h4>
-	 					<p class="list-group-item-heading" style="overflow:auto"><img  src="{{travel.images[0].url}}" width="30%" class="left"> {{travel.description}}</img></p>
+	 					<p class="list-group-item-heading" style="overflow:auto">
+	 						<img  src="{{travel.images[0].url}}" width="30%" class="left"> {{travel.description}}</img>
+	 					</p>
 	 				</a>
 	 				<!-- a href="#" class="btn btn-default pull-right">Read More</a -->
 	 			</div>	 			
