@@ -17,5 +17,9 @@ angular.module('travelApp.controllers', []).
 	    
 	    // Order.
 	    $scope.orderProp = 'year';
+	    
+	    $scope.setSelectedTravel = function(selectedTravel) {
+	    	$scope.selectedTravel =  selectedTravel;
+	    };
 	  });
 	});

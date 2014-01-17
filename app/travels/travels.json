@@ -2,29 +2,97 @@
     {
         "year": 2013, 
         "id": "bali", 
-        "imageUrl": "img/Amed.jpg", 
         "name": "Bali Tour",
-		"description": "All around Bali during 3 weeks"
+		"description": "All around Bali during 3 weeks",
+		"images": [
+			{"url": "img/Bali/Amed.jpg", "title":"", "description":""}
+		]
 	}, 
     {
         "year": 2012, 
         "id": "sardinia", 
-        "imageUrl": "img/Piscinas.jpg", 
         "name": "Sea and sun in Sardinia",
-		"description": "Quietness in Sardinia's wonderful nature"
+		"description": "Quietness in Sardinia's wonderful nature",
+		"images": [
+			{"url": "img/Sardinia/Piscinas.jpg", "title":"", "description":""}
+		]
     }, 
     {
         "year": 2012, 
         "id": "china", 
-        "imageUrl": "img/Temple of Heaven.jpg", 
         "name": "Discover China",
-		"description": "A great discovery of the Chinese civilization"
+		"description": "A great discovery of the Chinese civilization",
+		"images": [
+			{"url": "img/China/IMG_0590.jpg", "title":"", "description":""}
+		]
     }, 
     {
         "year": 2011, 
         "id": "tanzania", 
-        "imageUrl": "img/Tanzania.jpg", 
         "name": "The wilderness of Tanzania",
-		"description": "Such a wonderful travel"
+		"description": "Such a wonderful travel",
+		"images": [
+{"url": "img/Tanzania/Ngorongoro.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3013.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3085.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3097.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3117.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3171.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3173.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3174.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3176.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3189.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3203.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3208.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3210.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3213.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3318.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3323.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3324.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3337.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3344.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3345.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3372.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3389.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3392.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3435.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3460.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3477.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3531.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3533.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3540.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3556.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3564.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3573.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3575.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3609.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3626.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3630.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3644.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3659.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3662.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3676.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3694.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3719.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3725.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3736.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3738.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3756.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3764.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3770.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3778.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3793.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3812.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3814.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3837.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3866.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3879.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3881.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3891.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3909.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3921.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3931.jpg", "title":"", "description":""},
+{"url": "img/Tanzania/IMG_3936.jpg", "title":"", "description":""}
+		]
     }
 ]

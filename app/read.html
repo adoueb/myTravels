@@ -83,7 +83,7 @@
 	 					<div class="page-header">
 	 						<h3>{{selectedTravel.name}} - <small>{{selectedTravel.year}}</small></h3>	
 	 					</div>
-	 					<img class="featuredImg" src="{{selectedTravel.imageUrl}}" width="100%">
+	 					<img class="featuredImg" src="{{selectedTravel.images[0].url}}" width="100%">
 						<p>{{selectedTravel.description}}</p>
 						<!-- h4>A heading</h4>
 						<p>aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p -->
@@ -105,9 +105,9 @@
 				
 				<div class="list-group">
 	 				<!-- a href="#" class="list-group-item" ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)"-->
-	 				<a href="#" class="list-group-item" ng-repeat="travel in travels | orderBy:orderProp" onclick="">
-	 					<h4 class="list-group-item-heading">{{travel.name}} - {{travel.year}}</h4>
-	 					<p class="list-group-item-heading" style="overflow:auto"><img  src="{{travel.imageUrl}}" width="30%" class="left"> {{travel.description}}</img></p>
+	 				<a href="#" class="list-group-item" ng-repeat="travel in travels | orderBy:orderProp:true" ng-click="setSelectedTravel(travel);">
+	 					<h4 class="list-group-item-heading">{{travel.year}} - {{travel.name}}</h4>
+	 					<p class="list-group-item-heading" style="overflow:auto"><img  src="{{travel.images[0].url}}" width="30%" class="left"> {{travel.description}}</img></p>
 	 				</a>
 	 				<!-- a href="#" class="btn btn-default pull-right">Read More</a -->
 	 			</div>	 			
