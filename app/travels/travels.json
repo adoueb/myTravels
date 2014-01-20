@@ -5,7 +5,19 @@
         "name": "Bali Tour",
 		"description": "All around Bali during 3 weeks",
 		"images": [
-			{"url": "img/Bali/Amed.jpg", "inCarousel": true, "title":"Amed", "description":"Far east of Bali. A nice view on the road to Amed"}
+			{"url": "img/Bali/Amed.jpg", "inCarousel": true, "title":"Amed", "description":"Far east of Bali. A nice view on the road to Amed"},
+			{"url": "img/Bali/IMG_3546.jpg", "inCarousel": true, "title":"Sanur beach", "description":"Traditional fisherman boat on Sanur beach"},
+			{"url": "img/Bali/IMG_3635.jpg", "inCarousel": true, "title":"Mount Batur volcano", "description":"View on the volcano"},
+			{"url": "img/Bali/IMG_3648.jpg", "inCarousel": true, "title":"Houses of Bali", "description":"Behind the walls live the Balinese"},
+			{"url": "img/Bali/IMG_3777.jpg", "inCarousel": true, "title":"Sunrise from the top of Mount Batur", "description":"After a 2 hour trek to reach the Mount Batur top, we are ready for the sunrise up to Lombok"},
+			{"url": "img/Bali/IMG_3847.jpg", "inCarousel": true, "title":"Balinese dancers", "description":"Legong dance show in Ubud"},
+			{"url": "img/Bali/IMG_4073.jpg", "inCarousel": true, "title":"Lakes around Munduk", "description":"After a trek in the forest, we crossed the lake on a traditional boat. So amazing. We arrived in a fishmen village with a temple. "},
+			{"url": "img/Bali/IMG_4087.jpg", "inCarousel": true, "title":"Puri Lumbung rice terraces", "description":"In spite of the rain, it was beautiful. They are very famous rice fields of Bali."},
+			{"url": "img/Bali/IMG_4194.jpg", "inCarousel": true, "title":"Menjangan Island", "description":"Snorkeling there was so wonderful. So many fishes of all the colours. It's incredible."},
+			{"url": "img/Bali/IMG_4260.jpg", "inCarousel": true, "title":"Amed with its tradiational fisherman boats", "description":"It was at sunrise. It is worth getting up early. Even if the fishermen came back with empty hands."},
+			{"url": "img/Bali/IMG_4292.jpg", "inCarousel": true, "title":"Knowledge feat in a temple", "description":"All the students were praying together. The view from the temple was incredible."},
+			{"url": "img/Bali/IMG_4297.jpg", "inCarousel": false, "title":"", "description":""},
+			{"url": "img/Bali/IMG_4313.jpg", "inCarousel": false, "title":"", "description":""}
 		]
 	}, 
     {
