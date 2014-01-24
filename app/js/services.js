@@ -2,8 +2,17 @@
 
 /* Services */
 
+angular.module('travelApp.services', [ 'ngResource' ]).
+	value('version', '0.1').
 
-// Demonstrate how to register services
-// In this case it is a simple value service.
-angular.module('travelApp.services', []).
-  value('version', '0.1');
+	factory('Travel', [ '$resource', function($resource) {
+		return $resource('travels/:travelId.json', {}, {
+			query : {
+				method : 'GET',
+				params : {
+					travelId : 'travels'
+				},
+				isArray : true
+			}
+		});
+} ]);
