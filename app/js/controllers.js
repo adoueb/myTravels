@@ -9,7 +9,7 @@ angular.module('travelApp.controllers', []).
 	// Travel list.
     //$scope.travels = Travel.query();
 
-	    $http.get('http://localhost:8080/myTravels').
+	    $http.get('http://localhost:8080/myTravelsRestWebService-0.1.0/myTravels').
 	    success(function(data) {
 	    	  $scope.travels = data;
 	    	  
