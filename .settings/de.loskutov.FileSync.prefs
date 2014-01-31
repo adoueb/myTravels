@@ -1,0 +1,7 @@
+WARNING=DO NOT MODIFY THIS FILE IF YOU DON'T UNDERSTAND
+defaultDestination=C\:/Agnes/Tomcat/apache-tomcat-7.0.50/webapps/MyTravels-0.0.1-SNAPSHOT/app
+defaultVariables=
+eclipse.preferences.version=1
+includeTeamPrivateFiles=false
+map|0=WebContent/app|,|,|,|,
+useCurrentDateForDestinationFiles=false
