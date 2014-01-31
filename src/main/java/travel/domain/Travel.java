@@ -12,7 +12,7 @@ public class Travel {
     private String id;
 
 	private String year;
-	private String travelId;
+	private String country;
     private String name;
     private String description;
 
@@ -20,9 +20,9 @@ public class Travel {
     
     public Travel() {}
 
-	public Travel(String year, String travelId, String name, String description) {
+	public Travel(String year, String country, String name, String description) {
         this.year = year;
-        this.travelId = travelId;
+        this.country = country;
         this.name = name;
         this.description = description;
     }
@@ -44,12 +44,12 @@ public class Travel {
 		this.year = year;
 	}
 
-    public String getTravelId() {
-		return travelId;
+    public String getCountry() {
+		return country;
 	}
 
-	public void setTravelId(String travelId) {
-		this.travelId = travelId;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public String getName() {
@@ -82,7 +82,7 @@ public class Travel {
 
 	@Override
 	public String toString() {
-		return "Travel [year=" + year + ", travelId=" + travelId + ", name="
+		return "Travel [year=" + year + ", country=" + country + ", name="
 				+ name + ", description=" + description + ", images=" + images
 				+ "]";
 	}

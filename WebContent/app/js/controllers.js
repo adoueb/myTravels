@@ -3,13 +3,14 @@
 /* Controllers */
 
 angular.module('travelApp.controllers', []).
-  controller('TravelListCtrl', ['$scope', '$http', 'Travel', function($scope, $http, Travel) {
+  controller('TravelListCtrl', ['$scope', '$http', 'Travel', 'Restangular', function($scope, $http, Travel, Restangular) {
 	    
 	 
-	// Travel list.
+	// Get travels.
     //$scope.travels = Travel.query();
 
-	    $http.get('../myTravels').
+	  /*
+	    $http.get('../travels').
 	    success(function(data) {
 	    	  $scope.travels = data;
 	    	  
@@ -24,7 +25,18 @@ angular.module('travelApp.controllers', []).
 	    error(function(data, status, headers, config) {
 	    	alert('Error status:  ' + status);
 	    	});
-
+	    	*/
+	  var travels =  Restangular.all("travels").getList();
+	  travels.then(function(travels) {
+			  $scope.travels = travels;
+			});
+	  
+	  // Selected travel.
+	  travels.then(function(travels) {
+	    // returns a list of users
+	    $scope.selectedTravel = travels[0];
+	  });
+	  
 	    /*
 	    $http.get('travels/travels.json').success(function(data) {
     	  $scope.travels = data;
@@ -41,9 +53,36 @@ angular.module('travelApp.controllers', []).
     
     // Order.
     $scope.orderProp = 'year';
-    
+   
+    // Set selected travel.
     $scope.setSelectedTravel = function(selectedTravel) {
     	$scope.selectedTravel =  selectedTravel;
     };
+    
+    // Add travel.
+    $scope.addTravel = function() {
+    	var newTravel = {year:        $scope.newTravel_year, 
+    			         country:    $scope.newTravel_country, 
+    			         name:        $scope.newTravel_name, 
+    			         description: $scope.newTravel_description};
+
+    	// POST /travels
+    	var travels =  Restangular.all("travels");
+    	travels.post(newTravel).then(function(travels) {
+			  $scope.travels = travels;
+		}, function() {
+    	    console.log("There was an error saving");
+    	  });
+    };
+    
+    // Send email.
+    $scope.sendEmail = function() {
+    	var link = "mailto:" + $scope.address
+            + "&subject=" + escape($scope.subject)
+            + "&body=" + escape($scope.body);
+
+    	window.location.href = link;
+    };
+
 
 }]);

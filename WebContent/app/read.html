@@ -138,6 +138,10 @@
 						<p>{{phone.snippet}}</p></li>
 				</ul -->
 				
+				<!--  Add new travel  -->
+				
+				<a href="#addTravel" data-toggle="modal">Add Travel</a>
+				
 				<div class="list-group">
 	 				<!-- a href="#" class="list-group-item" ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)"-->
 	 				<a href="#" class="list-group-item" ng-repeat="travel in travels | orderBy:orderProp:true" ng-click="setSelectedTravel(travel);">
@@ -167,6 +171,51 @@
  	</div>
  	
   	<!-- ========================================================================================== -->
+ 	<!-- Add travel dialog                                                                             -->
+ 	<!-- ========================================================================================== -->
+ 	<div class="modal fade" id="addTravel" role="dialog">
+ 		<div class="modal-dialog">
+ 			<div class="modal-content">
+ 				<form class="form-horizontal">
+	 				<div class="modal-header">
+	 					<h4>Add Travel</h4>
+	 				</div>
+	 				<div class="modal-body">
+	 					<div class="form-group">
+	 						<label for="contact-country" class="col-lg-2 control-label">Country:</label>
+	 						<div class="col-lg-10">
+	 							<input type="text" class="form-control" id="contact-country" placeholder="Country" ng-model="newTravel_country">
+	 						</div>
+	 					</div>
+	 					<div class="form-group">
+	 						<label for="contact-year" class="col-lg-2 control-label">Year:</label>
+	 						<div class="col-lg-10">
+	 							<input type="text" class="form-control" id="contact-year" placeholder="2014" ng-model="newTravel_year">
+	 						</div>
+	 					</div>
+	 					<div class="form-group">
+	 						<label for="contact-name" class="col-lg-2 control-label">Name:</label>
+	 						<div class="col-lg-10">
+	 							<input type="text" class="form-control" id="contact-name" placeholder="Name"  ng-model="newTravel_name">
+	 						</div>
+	 					</div>
+	 					<div class="form-group">
+	 						<label for="contact-description" class="col-lg-2 control-label">Description:</label>
+	 						<div class="col-lg-10">
+	 							<textarea class="form-control" rows="8" ng-model="newTravel_description"></textarea>
+	 						</div>
+	 					</div>
+	 				</div>
+	 				<div class="modal-footer">
+	 					<a class="btn btn-default" data-dismiss="modal">Close</a>
+	 					<button class="btn btn-primary" ng-click="addTravel()" data-dismiss="modal">Create</button>
+	 				</div>
+ 				</form>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	
+  	<!-- ========================================================================================== -->
  	<!-- Contact dialog                                                                             -->
  	<!-- ========================================================================================== -->
  	<div class="modal fade" id="contact" role="dialog">
@@ -178,27 +227,27 @@
 	 				</div>
 	 				<div class="modal-body">
 	 					<div class="form-group">
-	 						<label for="contact-name" class="col-lg-2 control-label">Name:</label>
+	 						<label for="contact-email" class="col-lg-2 control-label">E-mail:</label>
 	 						<div class="col-lg-10">
-	 							<input type="text" class="form-control" id="contact-name" placeholder="Full Name">
+	 							<input type="email" class="form-control" id="contact-email" placeholder="you@example.com" value="{{email.address}}">
 	 						</div>
 	 					</div>
 	 					<div class="form-group">
-	 						<label for="contact-email" class="col-lg-2 control-label">Name:</label>
+	 						<label for="contact-subject" class="col-lg-2 control-label">Subject:</label>
 	 						<div class="col-lg-10">
-	 							<input type="email" class="form-control" id="contact-email" placeholder="you@example.com">
+	 							<input type="text" class="form-control" id="contact-subject" placeholder="Subject"  value="{{email.address}}">
 	 						</div>
 	 					</div>
 	 					<div class="form-group">
 	 						<label for="contact-message" class="col-lg-2 control-label">Message:</label>
 	 						<div class="col-lg-10">
-	 							<textarea class="form-control" rows="8"></textarea>
+	 							<textarea class="form-control" rows="8">{{email.body}}</textarea>
 	 						</div>
 	 					</div>
 	 				</div>
 	 				<div class="modal-footer">
 	 					<a class="btn btn-default" data-dismiss="modal">Close</a>
-	 					<button class="btn btn-primary" type="submit">Send</button>
+	 					<button class="btn btn-primary" ng-click="sendEmail();" data-dismiss="modal">Send</button>
 	 				</div>
  				</form>
  			</div>
@@ -222,5 +271,8 @@
     <script src="dist/js/bootstrap.min.js"></script>
   -->
     <script src="dist/js/bootstrap.js"></script>
-</body>
+    <script src="http://cdn.jsdelivr.net/restangular/latest/restangular.js"></script>
+	<!-- script type="text/javascript" src="http://cdn.jsdelivr.net/restangular/latest/restangular.min.js"></script -->
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+    </body>
 </html>

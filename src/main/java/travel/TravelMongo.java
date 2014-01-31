@@ -37,4 +37,8 @@ public class TravelMongo {
 		return travels;
 	}
 
+	public void addTravel(Travel travel) {
+		mongoOperations.insert(travel);
+	}
+
 }

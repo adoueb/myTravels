@@ -1,7 +1,7 @@
 [
 	{
         "year": 2013, 
-        "id": "bali", 
+        "country": "bali", 
         "name": "Bali Tour",
 		"description": "All around Bali during 3 weeks",
 		"images": [
@@ -22,7 +22,7 @@
 	}, 
     {
         "year": 2012, 
-        "id": "sardinia", 
+        "country": "sardinia", 
         "name": "Sea and sun in Sardinia",
 		"description": "Quietness in Sardinia's wonderful nature",
 		"images": [
@@ -31,7 +31,7 @@
     }, 
     {
         "year": 2012, 
-        "id": "china", 
+        "country": "china", 
         "name": "Discover China",
 		"description": "A great discovery of the Chinese civilization",
 		"images": [
@@ -40,7 +40,7 @@
     }, 
     {
         "year": 2011, 
-        "id": "tanzania", 
+        "country": "tanzania", 
         "name": "The wilderness of Tanzania",
 		"description": "Such a wonderful travel",
 		"images": [
