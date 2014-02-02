@@ -58,4 +58,16 @@ public class TravelController {
 		getTravelMongo().addTravel(travel);
 		return getTravelMongo().getTravels();
 	}
+	
+	@RequestMapping(value="/travels", method = RequestMethod.PUT )
+	public @ResponseBody List<Travel> updateTravel(@RequestBody Travel travel) {
+		getTravelMongo().updateTravel(travel);
+		return getTravelMongo().getTravels();
+	}
+	
+	@RequestMapping(value="/travels", method = RequestMethod.DELETE )
+	public @ResponseBody List<Travel> deleteTravel(@RequestBody Travel travel) {
+		getTravelMongo().deleteTravel(travel);
+		return getTravelMongo().getTravels();
+	}
 }

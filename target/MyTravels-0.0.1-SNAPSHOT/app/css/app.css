@@ -58,3 +58,9 @@ body {
 	float: right;
 	margin: 0 0 .5em .5em;
 }
+.gray-link > a {
+    color: #999999;
+}
+.gray-link > a:hover {
+    color: #666666;
+}

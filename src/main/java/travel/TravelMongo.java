@@ -41,4 +41,12 @@ public class TravelMongo {
 		mongoOperations.insert(travel);
 	}
 
+	public void updateTravel(Travel travel) {
+		mongoOperations.save(travel);
+	}
+
+	public void deleteTravel(Travel travel) {
+		mongoOperations.remove(travel);
+	}
+
 }

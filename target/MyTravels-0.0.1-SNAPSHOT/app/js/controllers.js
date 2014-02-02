@@ -62,7 +62,7 @@ angular.module('travelApp.controllers', []).
     // Add travel.
     $scope.addTravel = function() {
     	var newTravel = {year:        $scope.newTravel_year, 
-    			         travelId:    $scope.newTravel_country, 
+    			         country:    $scope.newTravel_country, 
     			         name:        $scope.newTravel_name, 
     			         description: $scope.newTravel_description};
 
@@ -73,6 +73,32 @@ angular.module('travelApp.controllers', []).
 		}, function() {
     	    console.log("There was an error saving");
     	  });
+    };
+    
+    // Set current travel.
+    $scope.setCurrentTravel = function(travel) {
+    	$scope.currentTravel = travel;
+    };
+   
+    // Update travel.
+    $scope.updateTravel = function(travel) {
+    	alert(travel.country);
+    };
+    
+    // Delete travel.
+    $scope.deleteTravel = function(travel) {
+    	var currentTravel = {year:        $scope.newTravel_year, 
+		         country:    $scope.newTravel_country, 
+		         name:        $scope.newTravel_name, 
+		         description: $scope.newTravel_description};
+
+// POST /travels
+var travels =  Restangular.all("travels");
+travels.post(newTravel).then(function(travels) {
+	  $scope.travels = travels;
+}, function() {
+   console.log("There was an error saving");
+ });
     };
     
     // Send email.

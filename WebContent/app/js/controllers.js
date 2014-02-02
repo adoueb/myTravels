@@ -62,7 +62,7 @@ angular.module('travelApp.controllers', []).
     // Add travel.
     $scope.addTravel = function() {
     	var newTravel = {year:        $scope.newTravel_year, 
-    			         country:    $scope.newTravel_country, 
+    			         country:     $scope.newTravel_country, 
     			         name:        $scope.newTravel_name, 
     			         description: $scope.newTravel_description};
 
@@ -72,6 +72,31 @@ angular.module('travelApp.controllers', []).
 			  $scope.travels = travels;
 		}, function() {
     	    console.log("There was an error saving");
+    	  });
+    };
+    
+    // Set current travel.
+    $scope.setCurrentTravel = function(travel) {
+    	$scope.currentTravel = travel;
+    };
+   
+    // Update travel.
+    $scope.updateTravel = function(travel) {
+    	// PUT /travels
+    	travel.put().then(function(travels) {
+    			$scope.travels = travels;
+    		}, function() {
+    			console.log("There was an error saving");
+    		});
+    };
+    
+    // Delete travel.
+    $scope.deleteTravel = function(travel) {
+    	// DELETE /travels
+    	travel.remove().then(function(travels) {
+			  $scope.travels = travels;
+		}, function() {
+    	    console.log("There was an error deleting");
     	  });
     };
     
