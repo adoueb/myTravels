@@ -43,7 +43,7 @@ public class TravelController {
     	
         List<Travel> travels = getTravelMongo().getTravels();
         
-        System.out.println("DONE!");
+        System.out.println("getTravels DONE!");
         
         return travels;
     }
@@ -56,18 +56,21 @@ public class TravelController {
 	@RequestMapping(value="/travels", method = RequestMethod.POST )
 	public @ResponseBody List<Travel> createTravel(@RequestBody Travel travel) {
 		getTravelMongo().addTravel(travel);
+        System.out.println("createTravel DONE!");
 		return getTravelMongo().getTravels();
 	}
 	
 	@RequestMapping(value="/travels", method = RequestMethod.PUT )
 	public @ResponseBody List<Travel> updateTravel(@RequestBody Travel travel) {
 		getTravelMongo().updateTravel(travel);
+        System.out.println("updateTravel DONE!");
 		return getTravelMongo().getTravels();
 	}
 	
 	@RequestMapping(value="/travels", method = RequestMethod.DELETE )
 	public @ResponseBody List<Travel> deleteTravel(@RequestBody Travel travel) {
 		getTravelMongo().deleteTravel(travel);
+        System.out.println("deleteTravel DONE!");
 		return getTravelMongo().getTravels();
 	}
 }
