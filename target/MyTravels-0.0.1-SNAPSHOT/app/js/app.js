@@ -8,7 +8,8 @@ angular.module('travelApp', [
   'travelApp.services',
   'travelApp.directives',
   'travelApp.controllers',
-  'restangular'
+  'restangular',
+  'google-maps'
 ]).
 config(function($routeProvider, RestangularProvider) {
 	RestangularProvider.setBaseUrl('http://localhost:8080/MyTravels-0.0.1-SNAPSHOT');

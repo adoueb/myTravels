@@ -13,22 +13,6 @@
 <link href="css/app.css" rel="stylesheet">
 </head>
 <body  ng-controller="TravelListCtrl">
-<!-- it comes from Angular Seed
-	<ul class="menu">
-		<li><a href="#/view1">view1</a></li>
-		<li><a href="#/view2">view2</a></li>
-	</ul>
-
-	<div ng-view></div>
-
-	<div>
-		Angular seed app: v<span app-version></span>
-	</div>
- -->
- 
- 	<!-- div>It works:
-			<p>The ID is {{myTravel.travelId}}</p>
-			<p>The content is {{myTravel.name}}</p>
  	
  	<!-- ========================================================================================== -->
  	<!-- Collapsing Nav Bar                                                                         -->
@@ -67,20 +51,11 @@
   	<!-- ========================================================================================== -->
  	<!-- Articles                                                                                   -->
  	<!-- ========================================================================================== -->
- 	<!-- div>
- 		start
- 	 	<ul>
- 	 	 <li ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)">
-            {{travel.name}} -  {{travel.year}}
-            <p>{{travel.description}}</p>
-          </li>
-        </ul>
-        end - {{selectionId}}
-        </div -->
- 	
  	<div class="container">
 	 	<div class="row">
-	 		<!-- Main article -->
+		  	<!-- ========================================================================================== -->
+		 	<!-- Main article                                                                               -->
+		 	<!-- ========================================================================================== -->
 	 		<div class="col-lg-9">
 	 			<div class="panel panel-default">
 	 				<div class="panel-body">
@@ -88,8 +63,28 @@
 	 						<h3>{{selectedTravel.name}} - <small>{{selectedTravel.year}}</small></h3>	
 	 					</div>
 	 					
+						<!-- Map with itinerary -->
+						<div class="google-map" center="map.center"
+							zoom="map.zoom" draggable="true" dragging="map.dragging"
+							bounds="map.bounds" events="map.events" options="map.options">
+							<marker ng-repeat="marker in map.markers" coords="marker" icon="marker.icon" click="onMarkerClicked(marker)">
+								<marker-label content="marker.title" anchor="22 0" class="marker-labels" /> 
+								<window show="marker.showWindow" closeClick="marker.closeClick()">
+									<h4>{{marker.title}}</h4>
+									<p>{{marker.description}}</p>
+								</window>
+							</marker>
+						</div>
+
+						<!--  Description and stops -->
+						<h4 style="margin-top:20px;margin-bottom:20px">{{selectedTravel.description}}</h4>
+						<p ng-repeat="marker in map.markers">
+							{{marker.title}}:<br/>
+							{{marker.description}}
+						</p>
+
 	 					<!--  Carousel -->
-	 					<div id="travelCarousel" class="carousel">
+	 					<div id="travelCarousel" class="carousel" style="margin-top:20px">
 	 						<!--  Indicators -->
 	 						<ol class="carousel-indicators">
 	 							<li data-target="#travelCarousel" ng-repeat="image in selectedTravel.images | filter:{inCarousel:true}" data-slide-to="{{$index}}" 
@@ -116,30 +111,15 @@
 							</a>
 	 					</div>
 						<!-- img class="featuredImg" src="{{selectedTravel.images[0].url}}" width="100%" -->
-
-						<!--  Description -->
-						<p>{{selectedTravel.description}}</p>
-						<!-- h4>A heading</h4>
-						<p>aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p -->
 					</div>
 				</div>
 	 		</div>
 	 		
-	 		<!-- Articles sidebar -->
+		  	<!-- ========================================================================================== -->
+		 	<!-- Articles sidebar                                                                           -->
+		 	<!-- ========================================================================================== -->
 	 		<div class="col-lg-3">
-				<!-- ul class="travels">
-					<li ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)"
-						class="thumbnail phone-listing">
-						<a
-						href="#/phones/{{phone.id}}" class="thumb"><img
-							ng-src="{{phone.imageUrl}}"></a> <a
-						href="#/phones/{{phone.id}}">{{phone.name}}</a>
-						<p>{{phone.snippet}}</p></li>
-				</ul -->
-				
 				<!--  Add new travel  -->
-				
-				<!-- a href="#addTravel" data-toggle="modal">Add Travel</a -->
 				<a style="margin-left: 10px; font-size: 14px; display: inline-block;" href="#addTravel" data-toggle="modal"> 
 					<i class="glyphicon glyphicon-plus-sign"></i> Add Travel
 				</a>
@@ -171,14 +151,13 @@
    	<!-- ========================================================================================== -->
  	<!-- ========================================================================================== -->
  	
- 
  	<!-- ========================================================================================== -->
  	<!-- Sticky footer that stays in the browser viewport                                           -->
  	<!-- ========================================================================================== -->
  	<div class="navbar navbar-default navbar-fixed-bottom">
  		<div class="container">
- 			<p class="navbar-text pull-left">Site Built By Agnes Doueb</p>
- 			<a href="http://youtube.com/codersguide" class="navbar-btn btn-danger btn pull-right">Subscribe on YouTube</a>
+ 			<p class="navbar-text pull-left">Site Built By A. Doueb</p>
+ 			<!-- a href="http://www.google.fr" class="navbar-btn btn-danger btn pull-right">Goto Google</a -->
  		</div>
  	</div>
  	
@@ -333,6 +312,9 @@
  		</div>
  	</div>
  	 
+  	<!-- ========================================================================================== -->
+ 	<!-- Libraries                                                                                  -->
+ 	<!-- ========================================================================================== -->
  	<!-- Placed at the end of the document so the pages load faster -->
 	<!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
@@ -356,5 +338,8 @@
 	<!-- script type="text/javascript" src="http://cdn.jsdelivr.net/restangular/latest/restangular.min.js"></script -->
 	<!-- script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script -->
 	<script type="text/javascript" src="dist/js/underscore-min.js"></script>
+	<script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+	<script type="text/javascript" src="dist/js/angular-google-maps.js"></script>
+	
     </body>
 </html>

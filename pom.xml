@@ -118,6 +118,12 @@
 					</execution>
 				</executions>
 			</plugin>
+			<!--  Google App Engine -->
+			<plugin>
+				<groupId>com.google.appengine</groupId>
+				<artifactId>appengine-maven-plugin</artifactId>
+				<version>1.8.9</version>
+			</plugin>		
         </plugins>
 	</build>
 

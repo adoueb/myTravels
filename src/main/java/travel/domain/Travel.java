@@ -18,6 +18,8 @@ public class Travel {
 
     private List<Image> images = new ArrayList<Image>();
     
+    Itinerary itinerary = new Itinerary();
+    
     public Travel() {}
 
 	public Travel(String year, String country, String name, String description) {
@@ -80,10 +82,18 @@ public class Travel {
 		this.images = images;
 	}
 
+	public Itinerary getItinerary() {
+		return itinerary;
+	}
+
+	public void setItinerary(Itinerary itinerary) {
+		this.itinerary = itinerary;
+	}
+
 	@Override
 	public String toString() {
-		return "Travel [year=" + year + ", country=" + country + ", name="
-				+ name + ", description=" + description + ", images=" + images
-				+ "]";
+		return "Travel [id=" + id + ", year=" + year + ", country=" + country
+				+ ", name=" + name + ", description=" + description
+				+ ", images=" + images + ", itinerary=" + itinerary + "]";
 	}
 }

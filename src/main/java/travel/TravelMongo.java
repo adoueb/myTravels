@@ -40,6 +40,10 @@ public class TravelMongo {
 	public void addTravel(Travel travel) {
 		mongoOperations.insert(travel);
 	}
+	
+	public Travel findById(int travelId) {
+		return mongoOperations.findById(travelId, Travel.class);
+	}
 
 	public void updateTravel(Travel travel) {
 		mongoOperations.save(travel);

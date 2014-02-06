@@ -3,8 +3,41 @@
 /* Controllers */
 
 angular.module('travelApp.controllers', []).
-  controller('TravelListCtrl', ['$scope', '$http', 'Travel', 'Restangular', function($scope, $http, Travel, Restangular) {
-	    
+  controller('TravelListCtrl', ['$scope', '$log', '$http', 'Travel', 'Restangular', function($scope, $log, $http, Travel, Restangular) {
+	
+	  $scope.map = {
+	    		center: {
+	    			latitude: 47,
+	    			longitude: -122
+	    		},
+	    		zoom:2 
+	  };
+	  
+	  // Initialize map.
+	  $scope.setMap = function(position, zoom) {
+		  $log.info('setMap');
+		  $log.info('set map data: geolocation');
+		  $scope.map = {
+		    		center: {
+		    			latitude: position.coords.latitude,
+		    			longitude: position.coords.longitude
+		    		},
+		    		zoom: (typeof zoom === "undefined") ? 8 : zoom
+	  	  };		  
+	  };
+	  
+	  $scope.setCurrentMap = function() {
+		  $log.info('setCurrentMap');
+		  if(navigator.geolocation) {
+			  $log.info('geoLocation enabled');
+			  //navigator.geolocation.getCurrentPosition($scope.setMap);
+			  $scope.setMap({coords: {latitude:47, longitude:-122}}, 2);  
+		  } else {
+			  $log.info('geoLocation denied');
+			  $log.info('set map data: default in code');
+			  $scope.setMap({coords: {latitude:47, longitude:-122}}, 2);  
+		  }
+	  };
 	 
 	// Get travels.
     //$scope.travels = Travel.query();
@@ -28,13 +61,15 @@ angular.module('travelApp.controllers', []).
 	    	*/
 	  var travels =  Restangular.all("travels").getList();
 	  travels.then(function(travels) {
+		  $log.info('travels loaded');
 			  $scope.travels = travels;
-			});
+	  });
 	  
 	  // Selected travel.
 	  travels.then(function(travels) {
-	    // returns a list of users
-	    $scope.selectedTravel = travels[0];
+	    if (travels.length >= 1) {
+	    	$scope.setSelectedTravel(travels[0]);
+	    }
 	  });
 	  
 	    /*
@@ -56,7 +91,23 @@ angular.module('travelApp.controllers', []).
    
     // Set selected travel.
     $scope.setSelectedTravel = function(selectedTravel) {
+    	// Set selected travel.
     	$scope.selectedTravel =  selectedTravel;
+    	
+    	// Set map.
+    	if (selectedTravel.itinerary.stops.length >= 1) {
+	    	$log.info('at least one stop');
+	    	$log.info('set map data: itinerary');
+		    $scope.map = {
+		    		center: {
+		    			latitude: selectedTravel.itinerary.stops[0].latitude,
+		    			longitude: selectedTravel.itinerary.stops[0].longitude
+		    		},
+		    		zoom: 8
+		    	};
+	    } else {
+	    	$scope.setCurrentMap();
+	    }
     };
     
     // Add travel.
@@ -67,11 +118,12 @@ angular.module('travelApp.controllers', []).
     			         description: $scope.newTravel_description};
 
     	// POST /travels
+    	$log.info("add " +  newTravel.name);
     	var travels =  Restangular.all("travels");
     	travels.post(newTravel).then(function(travels) {
 			  $scope.travels = travels;
 		}, function() {
-    	    console.log("There was an error saving");
+			$log.error("There was an error saving");
     	  });
     };
     
@@ -83,20 +135,22 @@ angular.module('travelApp.controllers', []).
     // Update travel.
     $scope.updateTravel = function(travel) {
     	// PUT /travels
+    	$log.info("update " +  travel.name);
     	travel.put().then(function(travels) {
     			$scope.travels = travels;
     		}, function() {
-    			console.log("There was an error saving");
+    			$log.error("There was an error updating");
     		});
     };
     
     // Delete travel.
     $scope.deleteTravel = function(travel) {
     	// DELETE /travels
+    	$log.info("delete " +  travel.name);
     	travel.remove().then(function(travels) {
 			  $scope.travels = travels;
 		}, function() {
-    	    console.log("There was an error deleting");
+			$log.error("There was an error deleting");
     	  });
     };
     
@@ -108,6 +162,4 @@ angular.module('travelApp.controllers', []).
 
     	window.location.href = link;
     };
-
-
 }]);

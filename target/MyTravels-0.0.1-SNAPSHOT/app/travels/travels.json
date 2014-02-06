@@ -18,7 +18,14 @@
 			{"url": "img/Bali/IMG_4292.jpg", "inCarousel": true, "title":"Knowledge feast in a temple", "description":"All the students were praying together. The view from the temple was incredible."},
 			{"url": "img/Bali/IMG_4297.jpg", "inCarousel": false, "title":"", "description":""},
 			{"url": "img/Bali/IMG_4313.jpg", "inCarousel": false, "title":"", "description":""}
+		],
+		"itinerary": {
+		"stops": [
+			{"latitude": -8.683333, "longitude": 115.266667, "title": "Sanur", "description": "Sanur (Indonesian:Pantai Sanur, pronounced sah-noor) is a coastal stretch of beach of Denpasar city of southeast Bali, about 30 minutes drive from Ngurah Rai International Airport, which has grown into a little town in its own right."},
+			{"latitude": -8.506875, "longitude": 115.262358, "title": "Ubud", "description": "Ubud is a town on the Indonesian island of Bali in Ubud District, located amongst rice paddies and steep ravines in the central foothills of the Gianyar regency. One of Bali's major arts and culture centres, it has developed a large tourism industry."},
+			{"latitude": -8.162503, "longitude": 115.025661, "title": "Lovina", "description": "Lovina Beach (or often simply Lovina) is a coastal area on the northwestern side of the island of Bali, Indonesia."}
 		]
+		}
 	}, 
     {
         "year": 2012, 
@@ -36,7 +43,15 @@
 		"description": "A great discovery of the Chinese civilization",
 		"images": [
 			{"url": "img/China/IMG_0590.jpg", "inCarousel": true, "title":"The temple of Heaven in central Beijing", "description":"Originally, this was the place where emperors of the Ming Dynasty (1368 - 1644) and Qing Dynasty (1644 - 1911) held the Heaven Worship Ceremony."}
+		],
+		"itinerary": {
+		"stops": [
+			{"latitude": 39.913889, "longitude": 116.391667, "title": "Beijing", "description": "Beijing  is the capital of the People's Republic of China and one of the most populous cities in the world."},
+			{"latitude": 34.266667, "longitude": 108.9, "title": "Xi'an", "description": "Xi'an is the capital of Shaanxi Province, and a sub-provincial city in China. One of the oldest cities in China, with more than 3,100 years of history, the city was known as Chang'an before the Ming Dynasty."},
+			{"latitude": 25.266667, "longitude": 110.283333, "title": "Guilin", "description": "Guilin is a prefecture-level city in the northeast of the Guangxi Region of China. It is situated on the west bank of the Li River, and bordering Hunan to the north. Its name means 'forest of Sweet Osmanthus', owing to the large number of fragrant Sweet Osmanthus trees located in the city. The city has long been renowned for its scenery of karst topography and is one of China's most popular tourist destinations."},
+			{"latitude": 31.2, "longitude": 121.5, "title": "Shanghai", "description": "Shanghai is the largest city by population in China and the largest city proper by population in the world."}
 		]
+		}
     }, 
     {
         "year": 2011, 

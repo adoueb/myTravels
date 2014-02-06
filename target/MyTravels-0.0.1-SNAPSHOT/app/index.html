@@ -29,6 +29,8 @@
  	<!-- div>It works:
 			<p>The ID is {{myTravel.travelId}}</p>
 			<p>The content is {{myTravel.name}}</p>
+			</div -->
+			<div> aaaaaaaaaaaaaaaaaaaaaaaaaa</div>
  	
  	<!-- ========================================================================================== -->
  	<!-- Collapsing Nav Bar                                                                         -->
@@ -88,6 +90,24 @@
 	 						<h3>{{selectedTravel.name}} - <small>{{selectedTravel.year}}</small></h3>	
 	 					</div>
 	 					
+						<!-- Map with itinerary -->
+						<!-- google-map center='map.center' zoom='map.zoom'>
+							<markers models='selectedTravel.itinerary.stops'
+								coords='self'
+								labelContent='test'>
+							</markers>
+						</google-map -->
+						<div class="google-map=" center="map.center"
+							zoom="map.zoom" draggable="true" dragging="map.dragging"
+							bounds="map.bounds" events="map.events" options="map.options">
+						</div>
+
+						<!--  Description -->
+						<p style="margin-top:20px;margin-bottom:20px">{{selectedTravel.description}}</p>
+						<!-- h4>A heading</h4>
+						<p>aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p -->
+						
+
 	 					<!--  Carousel -->
 	 					<div id="travelCarousel" class="carousel">
 	 						<!--  Indicators -->
@@ -116,11 +136,6 @@
 							</a>
 	 					</div>
 						<!-- img class="featuredImg" src="{{selectedTravel.images[0].url}}" width="100%" -->
-
-						<!--  Description -->
-						<p>{{selectedTravel.description}}</p>
-						<!-- h4>A heading</h4>
-						<p>aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p -->
 					</div>
 				</div>
 	 		</div>
@@ -356,5 +371,8 @@
 	<!-- script type="text/javascript" src="http://cdn.jsdelivr.net/restangular/latest/restangular.min.js"></script -->
 	<!-- script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script -->
 	<script type="text/javascript" src="dist/js/underscore-min.js"></script>
+	<script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+	<script type="text/javascript" src="dist/js/angular-google-maps.js"></script>
+	
     </body>
 </html>
