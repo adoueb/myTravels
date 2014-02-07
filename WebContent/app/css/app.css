@@ -67,3 +67,11 @@ body {
 .angular-google-map-container {
 	height: 540px;
 }
+.marker-labels {
+    color: red;
+    font-family: "Lucida Grande", "Arial", sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+}

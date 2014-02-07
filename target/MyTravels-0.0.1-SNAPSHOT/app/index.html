@@ -13,24 +13,6 @@
 <link href="css/app.css" rel="stylesheet">
 </head>
 <body  ng-controller="TravelListCtrl">
-<!-- it comes from Angular Seed
-	<ul class="menu">
-		<li><a href="#/view1">view1</a></li>
-		<li><a href="#/view2">view2</a></li>
-	</ul>
-
-	<div ng-view></div>
-
-	<div>
-		Angular seed app: v<span app-version></span>
-	</div>
- -->
- 
- 	<!-- div>It works:
-			<p>The ID is {{myTravel.travelId}}</p>
-			<p>The content is {{myTravel.name}}</p>
-			</div -->
-			<div> aaaaaaaaaaaaaaaaaaaaaaaaaa</div>
  	
  	<!-- ========================================================================================== -->
  	<!-- Collapsing Nav Bar                                                                         -->
@@ -69,20 +51,11 @@
   	<!-- ========================================================================================== -->
  	<!-- Articles                                                                                   -->
  	<!-- ========================================================================================== -->
- 	<!-- div>
- 		start
- 	 	<ul>
- 	 	 <li ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)">
-            {{travel.name}} -  {{travel.year}}
-            <p>{{travel.description}}</p>
-          </li>
-        </ul>
-        end - {{selectionId}}
-        </div -->
- 	
  	<div class="container">
 	 	<div class="row">
-	 		<!-- Main article -->
+		  	<!-- ========================================================================================== -->
+		 	<!-- Main article                                                                               -->
+		 	<!-- ========================================================================================== -->
 	 		<div class="col-lg-9">
 	 			<div class="panel panel-default">
 	 				<div class="panel-body">
@@ -91,25 +64,36 @@
 	 					</div>
 	 					
 						<!-- Map with itinerary -->
-						<!-- google-map center='map.center' zoom='map.zoom'>
-							<markers models='selectedTravel.itinerary.stops'
-								coords='self'
-								labelContent='test'>
-							</markers>
-						</google-map -->
-						<div class="google-map=" center="map.center"
+						<div class="google-map" center="map.center"
 							zoom="map.zoom" draggable="true" dragging="map.dragging"
 							bounds="map.bounds" events="map.events" options="map.options">
+							<marker ng-repeat="marker in map.markers" coords="marker" icon="marker.icon" click="onMarkerClicked(marker)">
+								<marker-label content="marker.title" anchor="22 0" class="marker-labels" /> 
+								<window show="marker.showWindow" closeClick="marker.closeClick()">
+									<h4>{{marker.title}}</h4>
+									<p>{{marker.description}}</p>
+								</window>
+							</marker>
 						</div>
 
-						<!--  Description -->
-						<p style="margin-top:20px;margin-bottom:20px">{{selectedTravel.description}}</p>
-						<!-- h4>A heading</h4>
-						<p>aaa bbbbb ccccc ddddddddd eeeeeeeeee ffffffffffff gggggggg</p -->
-						
+						<!--  Description and stops -->
+						<div>
+							<h4 style="margin-top:20px;margin-bottom:20px">{{selectedTravel.description}}</h4>
+							<div ng-repeat="marker in map.markers">
+								<p>
+									<b>{{marker.title}}:</b><br/>
+									{{marker.description}}
+								</p>
+								<div class="gray-link" style="text-align: right;">
+									<a ng-click="setCurrentStop(marker)" href="#updateStop" data-toggle="modal"> <i
+										class="glyphicon glyphicon-edit"></i>
+									</a>
+								</div>
+							</div>
+						</div>
 
 	 					<!--  Carousel -->
-	 					<div id="travelCarousel" class="carousel">
+	 					<div id="travelCarousel" class="carousel" style="margin-top:20px">
 	 						<!--  Indicators -->
 	 						<ol class="carousel-indicators">
 	 							<li data-target="#travelCarousel" ng-repeat="image in selectedTravel.images | filter:{inCarousel:true}" data-slide-to="{{$index}}" 
@@ -140,21 +124,11 @@
 				</div>
 	 		</div>
 	 		
-	 		<!-- Articles sidebar -->
+		  	<!-- ========================================================================================== -->
+		 	<!-- Articles sidebar                                                                           -->
+		 	<!-- ========================================================================================== -->
 	 		<div class="col-lg-3">
-				<!-- ul class="travels">
-					<li ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)"
-						class="thumbnail phone-listing">
-						<a
-						href="#/phones/{{phone.id}}" class="thumb"><img
-							ng-src="{{phone.imageUrl}}"></a> <a
-						href="#/phones/{{phone.id}}">{{phone.name}}</a>
-						<p>{{phone.snippet}}</p></li>
-				</ul -->
-				
 				<!--  Add new travel  -->
-				
-				<!-- a href="#addTravel" data-toggle="modal">Add Travel</a -->
 				<a style="margin-left: 10px; font-size: 14px; display: inline-block;" href="#addTravel" data-toggle="modal"> 
 					<i class="glyphicon glyphicon-plus-sign"></i> Add Travel
 				</a>
@@ -186,25 +160,25 @@
    	<!-- ========================================================================================== -->
  	<!-- ========================================================================================== -->
  	
- 
  	<!-- ========================================================================================== -->
  	<!-- Sticky footer that stays in the browser viewport                                           -->
  	<!-- ========================================================================================== -->
  	<div class="navbar navbar-default navbar-fixed-bottom">
  		<div class="container">
- 			<p class="navbar-text pull-left">Site Built By Agnes Doueb</p>
- 			<a href="http://youtube.com/codersguide" class="navbar-btn btn-danger btn pull-right">Subscribe on YouTube</a>
+ 			<p class="navbar-text pull-left">Site Built By A. Doueb</p>
+ 			<!-- a href="http://www.google.fr" class="navbar-btn btn-danger btn pull-right">Goto Google</a -->
  		</div>
  	</div>
  	
   	<!-- ========================================================================================== -->
- 	<!-- Add travel dialog                                                                             -->
+ 	<!-- Add travel dialog                                                                          -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="addTravel" role="dialog">
+ 	<div class="modal fade" id="addTravel" role="dialog" tabindex="-1">
  		<div class="modal-dialog">
  			<div class="modal-content">
  				<form class="form-horizontal">
 	 				<div class="modal-header">
+	 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	 					<h4>Add Travel</h4>
 	 				</div>
 	 				<div class="modal-body">
@@ -243,13 +217,14 @@
  	</div>
  	
   	<!-- ========================================================================================== -->
- 	<!-- Update travel dialog                                                                             -->
+ 	<!-- Update travel dialog                                                                       -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="updateTravel" role="dialog">
+ 	<div class="modal fade" id="updateTravel" role="dialog" tabindex="-1">
  		<div class="modal-dialog">
  			<div class="modal-content">
  				<form class="form-horizontal">
 	 				<div class="modal-header">
+	 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	 					<h4>Update Travel</h4>
 	 				</div>
 	 				<div class="modal-body">
@@ -288,13 +263,14 @@
  	</div>
  	
   	<!-- ========================================================================================== -->
- 	<!-- Delete travel dialog                                                                             -->
+ 	<!-- Delete travel dialog                                                                       -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="removeTravel" role="dialog">
+ 	<div class="modal fade" id="removeTravel" role="dialog" tabindex="-1">
  		<div class="modal-dialog">
  			<div class="modal-content">
  				<form class="form-horizontal">
 	 				<div class="modal-header">
+	 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	 					<h4>Delete Travel</h4>
 	 				</div>
 	 				<div class="modal-body">
@@ -312,11 +288,12 @@
   	<!-- ========================================================================================== -->
  	<!-- Contact dialog                                                                             -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="contact" role="dialog">
+ 	<div class="modal fade" id="contact" role="dialog" tabindex="-1">
  		<div class="modal-dialog">
  			<div class="modal-content">
  				<form class="form-horizontal">
 	 				<div class="modal-header">
+	 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	 					<h4>Contact My Travels</h4>
 	 				</div>
 	 				<div class="modal-body">
@@ -347,7 +324,44 @@
  			</div>
  		</div>
  	</div>
+ 	
+  	<!-- ========================================================================================== -->
+ 	<!-- Edit stop                                                                                -->
+ 	<!-- ========================================================================================== -->
+ 	<div class="modal fade" id="updateStop" role="dialog" tabindex="-1">
+ 		<div class="modal-dialog">
+ 			<div class="modal-content">
+ 				<form class="form-horizontal">
+	 				<div class="modal-header">
+	 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	 					<h4>Update Stop</h4>
+	 				</div>
+	 				<div class="modal-body">
+	 					<div class="form-group">
+	 						<label for="stop-update-title" class="col-lg-2 control-label">Title:</label>
+	 						<div class="col-lg-10">
+	 							<input type="text" class="form-control" id="stop-update-title" placeholder="Title"  ng-model="currentStop.title">
+	 						</div>
+	 					</div>
+	 					<div class="form-group">
+	 						<label for="stop-update-description" class="col-lg-2 control-label">Description:</label>
+	 						<div class="col-lg-10">
+	 							<textarea class="form-control" rows="8" id="stop-update-description" ng-model="currentStop.description"></textarea>
+	 						</div>
+	 					</div>
+	 				</div>
+	 				<div class="modal-footer">
+	 					<a class="btn btn-default" data-dismiss="modal">Close</a>
+	 					<button class="btn btn-primary" ng-click="updateStop(currentStop)" data-dismiss="modal">Update</button>
+	 				</div>
+ 				</form>
+ 			</div>
+ 		</div>
+ 	</div>
  	 
+  	<!-- ========================================================================================== -->
+ 	<!-- Libraries                                                                                  -->
+ 	<!-- ========================================================================================== -->
  	<!-- Placed at the end of the document so the pages load faster -->
 	<!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>

@@ -77,11 +77,19 @@
 						</div>
 
 						<!--  Description and stops -->
-						<h4 style="margin-top:20px;margin-bottom:20px">{{selectedTravel.description}}</h4>
-						<p ng-repeat="marker in map.markers">
-							{{marker.title}}:<br/>
-							{{marker.description}}
-						</p>
+						<div>
+							<h4 style="margin-top:20px;margin-bottom:20px">{{selectedTravel.description}}</h4>
+							<h4>Itinerary</h4>
+							<div ng-repeat="marker in map.markers">
+								<h5><b>{{marker.title}}:</b></h5>
+								<p>{{marker.description}}</p>
+								<div class="gray-link" style="text-align: right;">
+									<a ng-click="setCurrentStop(marker)" href="#updateStop" data-toggle="modal"> <i
+										class="glyphicon glyphicon-edit"></i>
+									</a>
+								</div>
+							</div>
+						</div>
 
 	 					<!--  Carousel -->
 	 					<div id="travelCarousel" class="carousel" style="margin-top:20px">
@@ -162,13 +170,14 @@
  	</div>
  	
   	<!-- ========================================================================================== -->
- 	<!-- Add travel dialog                                                                             -->
+ 	<!-- Add travel dialog                                                                          -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="addTravel" role="dialog">
+ 	<div class="modal fade" id="addTravel" role="dialog" tabindex="-1">
  		<div class="modal-dialog">
  			<div class="modal-content">
  				<form class="form-horizontal">
 	 				<div class="modal-header">
+	 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	 					<h4>Add Travel</h4>
 	 				</div>
 	 				<div class="modal-body">
@@ -207,13 +216,14 @@
  	</div>
  	
   	<!-- ========================================================================================== -->
- 	<!-- Update travel dialog                                                                             -->
+ 	<!-- Update travel dialog                                                                       -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="updateTravel" role="dialog">
+ 	<div class="modal fade" id="updateTravel" role="dialog" tabindex="-1">
  		<div class="modal-dialog">
  			<div class="modal-content">
  				<form class="form-horizontal">
 	 				<div class="modal-header">
+	 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	 					<h4>Update Travel</h4>
 	 				</div>
 	 				<div class="modal-body">
@@ -252,13 +262,14 @@
  	</div>
  	
   	<!-- ========================================================================================== -->
- 	<!-- Delete travel dialog                                                                             -->
+ 	<!-- Delete travel dialog                                                                       -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="removeTravel" role="dialog">
+ 	<div class="modal fade" id="removeTravel" role="dialog" tabindex="-1">
  		<div class="modal-dialog">
  			<div class="modal-content">
  				<form class="form-horizontal">
 	 				<div class="modal-header">
+	 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	 					<h4>Delete Travel</h4>
 	 				</div>
 	 				<div class="modal-body">
@@ -276,11 +287,12 @@
   	<!-- ========================================================================================== -->
  	<!-- Contact dialog                                                                             -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="contact" role="dialog">
+ 	<div class="modal fade" id="contact" role="dialog" tabindex="-1">
  		<div class="modal-dialog">
  			<div class="modal-content">
  				<form class="form-horizontal">
 	 				<div class="modal-header">
+	 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	 					<h4>Contact My Travels</h4>
 	 				</div>
 	 				<div class="modal-body">
@@ -306,6 +318,40 @@
 	 				<div class="modal-footer">
 	 					<a class="btn btn-default" data-dismiss="modal">Close</a>
 	 					<button class="btn btn-primary" ng-click="sendEmail();" data-dismiss="modal">Send</button>
+	 				</div>
+ 				</form>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	
+  	<!-- ========================================================================================== -->
+ 	<!-- Edit stop                                                                                -->
+ 	<!-- ========================================================================================== -->
+ 	<div class="modal fade" id="updateStop" role="dialog" tabindex="-1">
+ 		<div class="modal-dialog">
+ 			<div class="modal-content">
+ 				<form class="form-horizontal">
+	 				<div class="modal-header">
+	 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	 					<h4>Update Stop</h4>
+	 				</div>
+	 				<div class="modal-body">
+	 					<div class="form-group">
+	 						<label for="stop-update-title" class="col-lg-2 control-label">Title:</label>
+	 						<div class="col-lg-10">
+	 							<input type="text" class="form-control" id="stop-update-title" placeholder="Title"  ng-model="currentStop.title">
+	 						</div>
+	 					</div>
+	 					<div class="form-group">
+	 						<label for="stop-update-description" class="col-lg-2 control-label">Description:</label>
+	 						<div class="col-lg-10">
+	 							<textarea class="form-control" rows="8" id="stop-update-description" ng-model="currentStop.description"></textarea>
+	 						</div>
+	 					</div>
+	 				</div>
+	 				<div class="modal-footer">
+	 					<a class="btn btn-default" data-dismiss="modal">Close</a>
+	 					<button class="btn btn-primary" ng-click="updateStop(currentStop)" data-dismiss="modal">Update</button>
 	 				</div>
  				</form>
  			</div>

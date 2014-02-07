@@ -5,38 +5,63 @@
 angular.module('travelApp.controllers', []).
   controller('TravelListCtrl', ['$scope', '$log', '$http', 'Travel', 'Restangular', function($scope, $log, $http, Travel, Restangular) {
 	
+	  // Initialize map.
+
+	  // Enable the new Google Maps visuals until it gets enabled by default.
+	  // See http://googlegeodevelopers.blogspot.ca/2013/05/a-fresh-new-look-for-maps-api-for-all.html
+      google.maps.visualRefresh = true;
+      
 	  $scope.map = {
 	    		center: {
 	    			latitude: 47,
 	    			longitude: -122
 	    		},
-	    		zoom:2 
+	    		zoom:2,
+	    		markers: []
 	  };
-	  
-	  // Initialize map.
-	  $scope.setMap = function(position, zoom) {
-		  $log.info('setMap');
-		  $log.info('set map data: geolocation');
-		  $scope.map = {
+	
+	  // Call to display map when stops defined.
+	  $scope.setMap = function(position, zoom, markers) {
+		 $scope.map = {
 		    		center: {
 		    			latitude: position.coords.latitude,
 		    			longitude: position.coords.longitude
 		    		},
-		    		zoom: (typeof zoom === "undefined") ? 8 : zoom
+		    		zoom: (typeof zoom === "undefined") ? 8 : zoom,
+		    		markers: markers
 	  	  };		  
 	  };
-	  
+
+	  // Call to display map when stops not defined.
 	  $scope.setCurrentMap = function() {
-		  $log.info('setCurrentMap');
+		  /*
 		  if(navigator.geolocation) {
-			  $log.info('geoLocation enabled');
-			  //navigator.geolocation.getCurrentPosition($scope.setMap);
-			  $scope.setMap({coords: {latitude:47, longitude:-122}}, 2);  
+			 navigator.geolocation.getCurrentPosition($scope.setMap);
 		  } else {
-			  $log.info('geoLocation denied');
-			  $log.info('set map data: default in code');
-			  $scope.setMap({coords: {latitude:47, longitude:-122}}, 2);  
+			 $scope.setMap({coords: {latitude:47, longitude:-122}}, 2);  
 		  }
+		  */
+		  $scope.setMap({coords: {latitude:47, longitude:-122}}, 2, []);  
+	  };
+	  
+	  $scope.onMarkerClicked = function (marker) {
+	        marker.showWindow = true;
+	    };
+	    
+	  // Set current stop.
+	  $scope.setCurrentStop = function(marker) {
+	  	$scope.currentStop = marker;
+	  };
+	    
+	  // Update stop.
+	  $scope.updateStop = function(stop) {
+	    	// PUT /stops
+	    	$log.info("update " +  stop.title);
+	    	stop.put().then(function(travels) {
+	    			alert(travels);
+	    		}, function() {
+	    			$log.error("There was an error updating");
+	    		});
 	  };
 	 
 	// Get travels.
@@ -62,7 +87,7 @@ angular.module('travelApp.controllers', []).
 	  var travels =  Restangular.all("travels").getList();
 	  travels.then(function(travels) {
 		  $log.info('travels loaded');
-			  $scope.travels = travels;
+		  $scope.travels = travels;
 	  });
 	  
 	  // Selected travel.
@@ -96,19 +121,62 @@ angular.module('travelApp.controllers', []).
     	
     	// Set map.
     	if (selectedTravel.itinerary.stops.length >= 1) {
-	    	$log.info('at least one stop');
-	    	$log.info('set map data: itinerary');
-		    $scope.map = {
+    		// Compute southwest and northest points for all the markers to be displayed.
+    		// Iterate through the stops.
+    	
+    		var bounds = computeBounds(selectedTravel.itinerary.stops);
+	    	$scope.map = {
 		    		center: {
 		    			latitude: selectedTravel.itinerary.stops[0].latitude,
 		    			longitude: selectedTravel.itinerary.stops[0].longitude
 		    		},
-		    		zoom: 8
+		    		zoom: 9,
+		    		markers: selectedTravel.itinerary.stops,
+		    		bounds: bounds
 		    	};
 	    } else {
 	    	$scope.setCurrentMap();
 	    }
     };
+    
+    // Compute bounds from stops.
+    var computeBounds = function(stops) {
+		var southwest_latitude = stops[0].latitude;
+		var southwest_longitude = stops[0].longitude;
+		var northeast_latitude = stops[0].latitude;
+		var northeast_longitude = stops[0].longitude;
+		
+		for (var stopIndex=0; stopIndex < stops.length; stopIndex++) {
+			var currentStop = stops[stopIndex];
+			if (currentStop.latitude < southwest_latitude) {
+				southwest_latitude = currentStop.latitude;
+			}
+			if (currentStop.longitude < southwest_longitude) {
+				southwest_longitude = currentStop.longitude;
+			}
+			if (currentStop.latitude > northeast_latitude) {
+				northeast_latitude = currentStop.latitude;
+			}
+			if (currentStop.longitude > northeast_longitude) {
+				northeast_longitude = currentStop.longitude;
+			}
+		}
+		southwest_latitude -= 0.01;
+		southwest_longitude -= 0.01;
+		northeast_latitude += 0.01;
+		northeast_longitude += 0.01;
+		
+		return {
+			southwest: {
+				latitude: southwest_latitude,
+				longitude: southwest_longitude
+			},
+			northeast: {
+			    latitude: northeast_latitude,
+			    longitude: northeast_longitude
+			}
+		};
+    }
     
     // Add travel.
     $scope.addTravel = function() {

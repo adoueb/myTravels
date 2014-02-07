@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Repository;
 
+import travel.domain.Stop;
 import travel.domain.Travel;
 
 
@@ -51,6 +52,10 @@ public class TravelMongo {
 
 	public void deleteTravel(Travel travel) {
 		mongoOperations.remove(travel);
+	}
+
+	public void updateStop(Stop stop) {
+		mongoOperations.save(stop);
 	}
 
 }

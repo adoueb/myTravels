@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import travel.domain.Stop;
 import travel.domain.Travel;
 
 @Controller
@@ -71,6 +71,13 @@ public class TravelController {
 	public @ResponseBody List<Travel> deleteTravel(@RequestBody Travel travel) {
 		getTravelMongo().deleteTravel(travel);
         System.out.println("deleteTravel DONE!");
+		return getTravelMongo().getTravels();
+	}
+	
+	@RequestMapping(value="/stops", method = RequestMethod.PUT )
+	public @ResponseBody List<Travel> updateStop(@RequestBody Stop stop) {
+		getTravelMongo().updateStop(stop);
+        System.out.println("updateStop DONE!");
 		return getTravelMongo().getTravels();
 	}
 }
