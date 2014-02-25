@@ -5,19 +5,17 @@
 describe('controllers', function(){
   var scope, httpBackend;
   beforeEach(module('travelApp'));
-  beforeEach(inject(function ($controller, _$httpBackend_, $rootScope, _Restangular_, _$log_, _Travel_) {
+  beforeEach(inject(function ($controller, _$httpBackend_, $rootScope, _$log_, _TravelRest_) {
 	    httpBackend = _$httpBackend_;
 	    httpBackend.expectGET('http://localhost:8080/MyTravels-0.0.1-SNAPSHOT/travels').respond('[]');
-	    Restangular = _Restangular_;
+	    TravelRest = _TravelRest_;
 	    scope = $rootScope.$new();
 	    $log = _$log_;
-	    Travel = _Travel_;
 	    TravelListCtrl = $controller('TravelListCtrl', {
 	    	$scope: scope,
 	    	$log: $log,
 	        $httpBackend: httpBackend,
-	        Travel: Travel,
-	        Restangular: Restangular
+	        TravelRest: TravelRest
 	      });
 	  }));
   afterEach(function () {
