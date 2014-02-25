@@ -2,25 +2,33 @@
 
 /* Filters */
 
-angular.module('travelApp.filters', []).
-  filter('interpolate', ['version', function(version) {
+angular.module('travelApp.filters', [])
+
+// ------------------------------------------------------------------------
+// Interpolate filter.
+// ------------------------------------------------------------------------
+.filter('interpolate', ['version', function(version) {
     return function(text) {
-      return String(text).replace(/\%VERSION\%/mg, version);
+        return String(text).replace(/\%VERSION\%/mg, version);
     };
-  }]).
-  filter('excludeSelectedTravelFilter', [function() {
-	  return function(travels, selectedTravel) {
-		  if (!angular.isUndefined(travels) && !angular.isUndefined(selectedTravel)) {
-			  var tempTravels = [];
-			  angular.forEach(travels, function(travel) {
-				  if (!angular.equals(travel.id, selectedTravel.id)) {
-					  tempTravels.push(travel);
-                  }
-              });
-			  return tempTravels;
+}])
+  
+// ------------------------------------------------------------------------
+// excludeSelectedTravelFilter filter: exclude one element from the list.
+// ------------------------------------------------------------------------
+.filter('excludeSelectedTravelFilter', [function() {
+    return function(travels, selectedTravel) {
+	    if (!angular.isUndefined(travels) && !angular.isUndefined(selectedTravel)) {
+		    var tempTravels = [];
+			angular.forEach(travels, function(travel) {
+			    if (!angular.equals(travel.id, selectedTravel.id)) {
+				    tempTravels.push(travel);
+                }
+            });
+			return tempTravels;
 		} else {
-			  return travels;
+			return travels;
 		}
-	  };
-  }]);
+    };
+}]);
 

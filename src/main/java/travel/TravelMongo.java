@@ -23,14 +23,6 @@ public class TravelMongo {
 		if (!mongoOperations.collectionExists(Travel.class)) {
 			mongoOperations.createCollection(Travel.class);
 		}
-		
-		/*
-    	Travel travel1 = new Travel("2014", "Cuba", "Windsurf in cuba", "Music, feasts and windsurf");
-    	mongoOperations.insert(travel1);
-    	
-    	Travel travel2 = new Travel("2014", "Jamaica", "Reggae in Jamaica", "Music and feasts");
-    	mongoOperations.insert(travel2);
-    	*/
 
 		List<Travel> travels = mongoOperations.findAll(Travel.class);
 		System.out.println("Travels: " + travels);
@@ -42,12 +34,17 @@ public class TravelMongo {
 		mongoOperations.insert(travel);
 	}
 	
-	public Travel findById(int travelId) {
+	public Travel findById(String travelId) {
 		return mongoOperations.findById(travelId, Travel.class);
 	}
 
 	public void updateTravel(Travel travel) {
 		mongoOperations.save(travel);
+	}
+
+	public void deleteTravelById(String travelId) {
+		Travel travelToRemove = findById(travelId);
+		mongoOperations.remove(travelToRemove);
 	}
 
 	public void deleteTravel(Travel travel) {

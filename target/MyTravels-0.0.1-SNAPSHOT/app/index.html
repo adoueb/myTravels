@@ -13,7 +13,7 @@
 <link href="css/app.css" rel="stylesheet">
 </head>
 <body  ng-controller="TravelListCtrl">
- 	
+
  	<!-- ========================================================================================== -->
  	<!-- Collapsing Nav Bar                                                                         -->
  	<!-- ========================================================================================== -->
@@ -47,6 +47,14 @@
 
  		</div>
  	</div>
+ 	
+  	<!-- ========================================================================================== -->
+ 	<!-- Alerts                                                                                     -->
+ 	<!-- ========================================================================================== -->
+ 	<!-- div class="alert alert-warning alert-dismissable">
+  		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+  		<strong>Warning!</strong> Better check yourself, you're not looking too good.
+	</div -->
  
   	<!-- ========================================================================================== -->
  	<!-- Articles                                                                                   -->
@@ -64,28 +72,33 @@
 	 					</div>
 	 					
 						<!-- Map with itinerary -->
-						<div class="google-map" center="map.center"
-							zoom="map.zoom" draggable="true" dragging="map.dragging"
+						<google-map center="map.center" zoom="map.zoom"
 							bounds="map.bounds" events="map.events" options="map.options">
 							<marker ng-repeat="marker in map.markers" coords="marker" icon="marker.icon" click="onMarkerClicked(marker)">
 								<marker-label content="marker.title" anchor="22 0" class="marker-labels" /> 
-								<window show="marker.showWindow" closeClick="marker.closeClick()">
-									<h4>{{marker.title}}</h4>
-									<p>{{marker.description}}</p>
+								<window  show="marker.showWindow" closeClick="marker.closeClick()">
+									<div class="modal-content mapinfowindow" style="border:0px">
+										<div class="modal-body">
+											<h4>{{marker.title}}</h4>
+											<p style="color:blue">{{marker.description}}</p>
+										</div>
+										<div class="modal-footer">
+	 										<button>More info</button>
+	 									</div>
+									</div>
 								</window>
 							</marker>
-						</div>
+						</google-map>
 
 						<!--  Description and stops -->
 						<div>
 							<h4 style="margin-top:20px;margin-bottom:20px">{{selectedTravel.description}}</h4>
+							<h4>Itinerary</h4>
 							<div ng-repeat="marker in map.markers">
-								<p>
-									<b>{{marker.title}}:</b><br/>
-									{{marker.description}}
-								</p>
+								<h5><b>{{marker.title}}:</b></h5>
+								<p>{{marker.description}}</p>
 								<div class="gray-link" style="text-align: right;">
-									<a ng-click="setCurrentStop(marker)" href="#updateStop" data-toggle="modal"> <i
+									<a ng-click="setEditStop(marker)" href="#updateStop" data-toggle="modal"> <i
 										class="glyphicon glyphicon-edit"></i>
 									</a>
 								</div>
@@ -129,7 +142,7 @@
 		 	<!-- ========================================================================================== -->
 	 		<div class="col-lg-3">
 				<!--  Add new travel  -->
-				<a style="margin-left: 10px; font-size: 14px; display: inline-block;" href="#addTravel" data-toggle="modal"> 
+				<a style="margin-left: 10px; font-size: 14px; display: inline-block;" ng-click="setAddTravel()" href="#addTravel" data-toggle="modal"> 
 					<i class="glyphicon glyphicon-plus-sign"></i> Add Travel
 				</a>
 				
@@ -143,10 +156,10 @@
 		 					</p>
 		 				</a>
 						<div class="gray-link" style="text-align: right;">
-							<a ng-click="setCurrentTravel(travel)" href="#removeTravel" data-toggle="modal"> <i
+							<a ng-click="setRemoveTravel(travel)" href="#removeTravel" data-toggle="modal"> <i
 								class="glyphicon glyphicon-trash"></i>
 							</a>
-							<a ng-click="setCurrentTravel(travel)" href="#updateTravel" data-toggle="modal"> <i
+							<a ng-click="setUpdateTravel(travel)" href="#updateTravel" data-toggle="modal"> <i
 								class="glyphicon glyphicon-pencil"></i>
 							</a>
 						</div>
@@ -175,115 +188,129 @@
  	<!-- ========================================================================================== -->
  	<div class="modal fade" id="addTravel" role="dialog" tabindex="-1">
  		<div class="modal-dialog">
- 			<div class="modal-content">
- 				<form class="form-horizontal">
-	 				<div class="modal-header">
-	 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	 					<h4>Add Travel</h4>
-	 				</div>
-	 				<div class="modal-body">
-	 					<div class="form-group">
-	 						<label for="contact-new-country" class="col-lg-2 control-label">Country:</label>
-	 						<div class="col-lg-10">
-	 							<input type="text" class="form-control" id="contact-new-country" placeholder="Country" ng-model="newTravel_country">
-	 						</div>
-	 					</div>
-	 					<div class="form-group">
-	 						<label for="contact-new-year" class="col-lg-2 control-label">Year:</label>
-	 						<div class="col-lg-10">
-	 							<input type="text" class="form-control" id="contact-new-year" placeholder="2014" ng-model="newTravel_year">
-	 						</div>
-	 					</div>
-	 					<div class="form-group">
-	 						<label for="contact-new-name" class="col-lg-2 control-label">Name:</label>
-	 						<div class="col-lg-10">
-	 							<input type="text" class="form-control" id="contact-new-name" placeholder="Name"  ng-model="newTravel_name">
-	 						</div>
-	 					</div>
-	 					<div class="form-group">
-	 						<label for="contact-new-description" class="col-lg-2 control-label">Description:</label>
-	 						<div class="col-lg-10">
-	 							<textarea class="form-control" id="contact-new-description" rows="8" ng-model="newTravel_description"></textarea>
-	 						</div>
-	 					</div>
-	 				</div>
-	 				<div class="modal-footer">
-	 					<a class="btn btn-default" data-dismiss="modal">Close</a>
-	 					<button class="btn btn-primary" ng-click="addTravel()" data-dismiss="modal">Create</button>
-	 				</div>
- 				</form>
- 			</div>
- 		</div>
+		<div class="modal-content">
+			<form class="form-horizontal">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4>Add Travel</h4>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-danger alert-dismissable" ng-show="showAddTravelError">
+		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		  				<strong>Error!</strong> The travel can't be added.
+					</div>
+					
+					<div class="form-group">
+						<label for="contact-new-country" class="col-lg-2 control-label">Country:</label>
+						<div class="col-lg-10">
+							<input type="text" class="form-control" id="contact-new-country" placeholder="Country" ng-model="newTravel_country">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="contact-new-year" class="col-lg-2 control-label">Year:</label>
+						<div class="col-lg-10">
+							<input type="text" class="form-control" id="contact-new-year" placeholder="2014" ng-model="newTravel_year">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="contact-new-name" class="col-lg-2 control-label">Name:</label>
+						<div class="col-lg-10">
+							<input type="text" class="form-control" id="contact-new-name" placeholder="Name"  ng-model="newTravel_name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="contact-new-description" class="col-lg-2 control-label">Description:</label>
+						<div class="col-lg-10">
+							<textarea class="form-control" id="contact-new-description" rows="8" ng-model="newTravel_description"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-default" data-dismiss="modal">Close</a>
+					<button class="btn btn-primary" ng-click="addTravel()">Create</button>
+				</div>
+			</form>
+		</div>
+	</div>
  	</div>
  	
   	<!-- ========================================================================================== -->
  	<!-- Update travel dialog                                                                       -->
  	<!-- ========================================================================================== -->
  	<div class="modal fade" id="updateTravel" role="dialog" tabindex="-1">
- 		<div class="modal-dialog">
- 			<div class="modal-content">
- 				<form class="form-horizontal">
-	 				<div class="modal-header">
-	 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	 					<h4>Update Travel</h4>
-	 				</div>
-	 				<div class="modal-body">
-	 					<div class="form-group">
-	 						<label for="contact-update-country" class="col-lg-2 control-label">Country:</label>
-	 						<div class="col-lg-10">
-	 							<input type="text" class="form-control" id="contact-update-country" placeholder="Country" ng-model="currentTravel.country">
-	 						</div>
-	 					</div>
-	 					<div class="form-group">
-	 						<label for="contact-update-year" class="col-lg-2 control-label">Year:</label>
-	 						<div class="col-lg-10">
-	 							<input type="text" class="form-control" id="contact-update-year" placeholder="2014" ng-model="currentTravel.year">
-	 						</div>
-	 					</div>
-	 					<div class="form-group">
-	 						<label for="contact-update-name" class="col-lg-2 control-label">Name:</label>
-	 						<div class="col-lg-10">
-	 							<input type="text" class="form-control" id="contact-update-name" placeholder="Name"  ng-model="currentTravel.name">
-	 						</div>
-	 					</div>
-	 					<div class="form-group">
-	 						<label for="contact-update-description" class="col-lg-2 control-label">Description:</label>
-	 						<div class="col-lg-10">
-	 							<textarea class="form-control" rows="8" id="contact-update-description" ng-model="currentTravel.description"></textarea>
-	 						</div>
-	 					</div>
-	 				</div>
-	 				<div class="modal-footer">
-	 					<a class="btn btn-default" data-dismiss="modal">Close</a>
-	 					<button class="btn btn-primary" ng-click="updateTravel(currentTravel)" data-dismiss="modal">Update</button>
-	 				</div>
- 				</form>
- 			</div>
- 		</div>
- 	</div>
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4>Update Travel</h4>
+				</div>
+				<div class="modal-body">
+					<div class="alert alert-danger alert-dismissable" ng-show="showUpdateTravelError">
+		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		  				<strong>Error!</strong> The travel can't be updated.
+					</div>
+					
+					<div class="form-group">
+						<label for="contact-update-country" class="col-lg-2 control-label">Country:</label>
+						<div class="col-lg-10">
+							<input type="text" class="form-control" id="contact-update-country" placeholder="Country" ng-model="currentTravel.country">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="contact-update-year" class="col-lg-2 control-label">Year:</label>
+						<div class="col-lg-10">
+							<input type="text" class="form-control" id="contact-update-year" placeholder="2014" ng-model="currentTravel.year">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="contact-update-name" class="col-lg-2 control-label">Name:</label>
+						<div class="col-lg-10">
+							<input type="text" class="form-control" id="contact-update-name" placeholder="Name"  ng-model="currentTravel.name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="contact-update-description" class="col-lg-2 control-label">Description:</label>
+						<div class="col-lg-10">
+							<textarea class="form-control" rows="8" id="contact-update-description" ng-model="currentTravel.description"></textarea>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-default" data-dismiss="modal">Close</a>
+					<button class="btn btn-primary" ng-click="updateTravel(currentTravel)">Update</button>
+				</div>
+			</form>
+		</div>
+</div> 	</div>
  	
   	<!-- ========================================================================================== -->
  	<!-- Delete travel dialog                                                                       -->
  	<!-- ========================================================================================== -->
  	<div class="modal fade" id="removeTravel" role="dialog" tabindex="-1">
- 		<div class="modal-dialog">
- 			<div class="modal-content">
- 				<form class="form-horizontal">
-	 				<div class="modal-header">
-	 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	 					<h4>Delete Travel</h4>
-	 				</div>
-	 				<div class="modal-body">
-	 					Do you really want to delete the "{{currentTravel.name}}" travel ?
-	 				</div>
-	 				<div class="modal-footer">
-	 					<a class="btn btn-default" data-dismiss="modal">No</a>
-	 					<button class="btn btn-primary" ng-click="deleteTravel(currentTravel)" data-dismiss="modal">Yes</button>
-	 				</div>
- 				</form>
- 			</div>
- 		</div>
- 	</div>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form class="form-horizontal">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4>Delete Travel</h4>
+					</div>
+					<div class="alert alert-danger alert-dismissable" ng-show="showDeleteTravelError">
+		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		  				<strong>Error!</strong> The travel can't be deleted.
+					</div>
+							
+					<div class="modal-body">
+						Do you really want to delete the "{{currentTravel.name}}" travel ?
+					</div>
+					<div class="modal-footer">
+						<a class="btn btn-default" data-dismiss="modal">No</a>
+						<button class="btn btn-primary" ng-click="deleteTravel(currentTravel)">Yes</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
  	
   	<!-- ========================================================================================== -->
  	<!-- Contact dialog                                                                             -->
@@ -337,6 +364,11 @@
 	 					<h4>Update Stop</h4>
 	 				</div>
 	 				<div class="modal-body">
+						<div class="alert alert-danger alert-dismissable" ng-show="showEditStopError">
+			  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			  				<strong>Error!</strong> The stop can't be updated.
+						</div>
+
 	 					<div class="form-group">
 	 						<label for="stop-update-title" class="col-lg-2 control-label">Title:</label>
 	 						<div class="col-lg-10">
@@ -352,7 +384,7 @@
 	 				</div>
 	 				<div class="modal-footer">
 	 					<a class="btn btn-default" data-dismiss="modal">Close</a>
-	 					<button class="btn btn-primary" ng-click="updateStop(currentStop)" data-dismiss="modal">Update</button>
+	 					<button class="btn btn-primary" ng-click="updateStop(currentStop)">Update</button>
 	 				</div>
  				</form>
  			</div>
@@ -387,6 +419,7 @@
 	<script type="text/javascript" src="dist/js/underscore-min.js"></script>
 	<script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
 	<script type="text/javascript" src="dist/js/angular-google-maps.js"></script>
+	<!--script src="https://raw.github.com/nlaplante/angular-google-maps/master/dist/angular-google-maps.min.js" type="text/javascript"></script-->
 	
     </body>
 </html>

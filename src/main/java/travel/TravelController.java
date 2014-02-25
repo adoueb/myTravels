@@ -35,22 +35,16 @@ public class TravelController {
 
 	@RequestMapping(value="/travels", method = RequestMethod.GET )
     public @ResponseBody List<Travel> getTravels() {
-    	/*
-    	List<Travel> travels = new ArrayList<Travel>();
-    	travels.add(new Travel("2014", "Cuba", "Windsurf in cuba", "Music, feasts and windsurf"));
-    	travels.add(new Travel("2014", "Jamaica", "Reggae in Jamaica", "Music and feasts"));
-    	*/
-    	
         List<Travel> travels = getTravelMongo().getTravels();
-        
         System.out.println("getTravels DONE!");
-        
         return travels;
     }
 	
 	@RequestMapping("travels/{id}")
-	public @ResponseBody Travel getById(@PathVariable String id) {
-		return null;
+	public @ResponseBody Travel getTravelById(@PathVariable String id) {
+		Travel travel = getTravelMongo().findById(id);
+        System.out.println("getTravelById DONE!");
+		return travel;
 	}
 	
 	@RequestMapping(value="/travels", method = RequestMethod.POST )
@@ -60,16 +54,17 @@ public class TravelController {
 		return getTravelMongo().getTravels();
 	}
 	
-	@RequestMapping(value="/travels", method = RequestMethod.PUT )
-	public @ResponseBody List<Travel> updateTravel(@RequestBody Travel travel) {
+	@RequestMapping(value="/travels/{id}", method = RequestMethod.PUT )
+	public @ResponseBody List<Travel> updateTravel(@PathVariable String id, @RequestBody Travel travel) {
 		getTravelMongo().updateTravel(travel);
         System.out.println("updateTravel DONE!");
 		return getTravelMongo().getTravels();
 	}
 	
-	@RequestMapping(value="/travels", method = RequestMethod.DELETE )
-	public @ResponseBody List<Travel> deleteTravel(@RequestBody Travel travel) {
-		getTravelMongo().deleteTravel(travel);
+	@RequestMapping(value="/travels/{id}", method = RequestMethod.DELETE )
+	public @ResponseBody List<Travel> deleteTravel(@PathVariable String id) {
+        System.out.println("deleteTravel " + id);
+		getTravelMongo().deleteTravelById(id);
         System.out.println("deleteTravel DONE!");
 		return getTravelMongo().getTravels();
 	}
