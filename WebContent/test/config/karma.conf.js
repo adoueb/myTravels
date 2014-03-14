@@ -9,7 +9,6 @@ module.exports = function(config){
       'app/js/**/*.js',
       'test/unit/**/*.js',
       'app/dist/js/underscore-min.js',
-      'app/dist/js/Restangular.js',
       'app/dist/js/angular-google-maps.js'
     ],
 
@@ -35,6 +34,9 @@ module.exports = function(config){
     junitReporter : {
       outputFile: 'unit.xml',
       suite: 'unit'
-    }
-
+    },
+    
+    vendor: [
+             'http://maps.googleapis.com/maps/api/js?sensor=false&language=en'
+    ]
 })}
