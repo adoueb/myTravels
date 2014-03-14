@@ -204,10 +204,10 @@ angular.module('travelApp.controllers', [])
     // --------------------------------------------------------------------
     // Create travel.
     $scope.addTravel = function() {
-        var newTravel = {year:        $scope.newTravel_year, 
-    			         country:     $scope.newTravel_country, 
-    			         name:        $scope.newTravel_name, 
-    			         description: $scope.newTravel_description};
+        var newTravel = {year:        $scope.addTravelData.year, 
+    			         country:     $scope.addTravelData.country, 
+    			         name:        $scope.addTravelData.name, 
+    			         description: $scope.addTravelData.description};
 
 	    // POST /travels
 	    $log.info("add " +  newTravel.name);
@@ -223,14 +223,18 @@ angular.module('travelApp.controllers', [])
 		        $scope.showAddTravelError = true;
 	    });
 	    */
-	    TravelRest.save(newTravel, function(travel) {
-	 	        $scope.travels.push(travel);
+	    TravelRest.save(newTravel, function(travels) {
+	 	        $scope.travels = travels;
 	            $('#addTravel').modal('hide');
 	        }, function() {
 		        $log.error("There was an error saving");
 		        $scope.showAddTravelError = true;
 	    });
     };
+    
+    $scope.canAddTravel = function() {
+    	return $scope.addTravelForm.$dirty && $scope.addTravelForm.$valid;
+    }
     
     // Update travel.
     $scope.updateTravel = function(travel) {
@@ -249,14 +253,9 @@ angular.module('travelApp.controllers', [])
 		        $scope.showEditStopError = true;
     	});
     	*/
-    	TravelRest.update(travel, function(travel) {
+    	TravelRest.update(travel, function(travels) {
     	        // Update list of travels.
-    			for (var travelIndex = 0; travelIndex < $scope.travels.length; travelIndex++) {
-    				if ($scope.travels[travelIndex].id == travel.id) {
-    					$scope.travels[travelIndex] = travel;
-    					break;
-    				}
-    			}
+    			$scope.travels = travels;
  	            $('#updateTravel').modal('hide');
     	    }, function() {
     			$log.error("There was an error updating");
@@ -322,5 +321,9 @@ angular.module('travelApp.controllers', [])
                  + "&body=" + escape($scope.body);
 
     	window.location.href = link;
+    };
+    
+    $scope.showError = function(ngModelController, error) {
+    	return ngModelController.$error[error];
     };
 }]);
