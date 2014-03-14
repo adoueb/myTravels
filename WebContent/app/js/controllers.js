@@ -204,10 +204,10 @@ angular.module('travelApp.controllers', [])
     // --------------------------------------------------------------------
     // Create travel.
     $scope.addTravel = function() {
-        var newTravel = {year:        $scope.newTravel_year, 
-    			         country:     $scope.newTravel_country, 
-    			         name:        $scope.newTravel_name, 
-    			         description: $scope.newTravel_description};
+        var newTravel = {year:        $scope.addTravelData.year, 
+    			         country:     $scope.addTravelData.country, 
+    			         name:        $scope.addTravelData.name, 
+    			         description: $scope.addTravelData.description};
 
 	    // POST /travels
 	    $log.info("add " +  newTravel.name);
@@ -231,6 +231,10 @@ angular.module('travelApp.controllers', [])
 		        $scope.showAddTravelError = true;
 	    });
     };
+    
+    $scope.canAddTravel = function() {
+    	return $scope.addTravelForm.$dirty && $scope.addTravelForm.$valid;
+    }
     
     // Update travel.
     $scope.updateTravel = function(travel) {
@@ -322,5 +326,9 @@ angular.module('travelApp.controllers', [])
                  + "&body=" + escape($scope.body);
 
     	window.location.href = link;
+    };
+    
+    $scope.showError = function(ngModelController, error) {
+    	return ngModelController.$error[error];
     };
 }]);

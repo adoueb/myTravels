@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-
+@Document(collection = "travel")
 public class Travel {
 
 	@Id
@@ -13,6 +15,8 @@ public class Travel {
 
 	private String year;
 	private String country;
+	
+	@Indexed
     private String name;
     private String description;
 
