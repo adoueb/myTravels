@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mytravels.persistence.domain.Stop;
 import com.mytravels.persistence.domain.Travel;
-import com.mytravels.persistence.repository.TravelRepository;
+import com.mytravels.persistence.repository.TravelRepositoryCustom;
 
 @Controller
 public class TravelController {
 
-	public TravelRepository getTravelRepository() {
+	public TravelRepositoryCustom getTravelRepository() {
 		
 		ConfigurableApplicationContext context = null;
 		// use @Configuration using Java:
@@ -27,7 +27,7 @@ public class TravelController {
 		// use XML application context:
         //context = new ClassPathXmlApplicationContext("META-INF/spring/applicationContext.xml");
   	
-        return context.getBean(TravelRepository.class);
+        return context.getBean(TravelRepositoryCustom.class);
 	}
 
 	@RequestMapping(value="/travels", method = RequestMethod.GET )

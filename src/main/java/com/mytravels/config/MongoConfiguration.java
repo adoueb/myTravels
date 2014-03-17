@@ -12,9 +12,12 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 import com.mongodb.Mongo;
 import com.mytravels.persistence.repository.TravelRepository;
+import com.mytravels.persistence.repository.TravelRepositoryImpl;
 
 
 @Configuration
+@EnableMongoRepositories(basePackages = "com.mytravels.persistence.repository",
+includeFilters = @ComponentScan.Filter(value = {TravelRepository.class}, type = FilterType.ASSIGNABLE_TYPE))
 public class MongoConfiguration {
 
 	public @Bean MongoOperations mongoTemplate(Mongo mongo) {
