@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mytravels.persistence.integration.TravelRepositoryIntegrationTests" time="0.023" tests="1" errors="0" skipped="0" failures="0">
+<testsuite name="com.mytravels.persistence.integration.TravelRepositoryIntegrationTests" time="0.014" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Agnes\java\jdk1.7.0_45\jre\bin"/>
@@ -43,7 +43,7 @@
     <property name="java.vm.specification.version" value="1.7"/>
     <property name="sun.arch.data.model" value="32"/>
     <property name="java.home" value="C:\Agnes\java\jdk1.7.0_45\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean tomcat7:deploy"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean tomcat7:redeploy"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="fr"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -60,5 +60,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase name="thatTravelIsInsertedIntoRepoWorks" classname="com.mytravels.persistence.integration.TravelRepositoryIntegrationTests" time="0.023"/>
+  <testcase name="thatTravelIsInsertedIntoRepoWorks" classname="com.mytravels.persistence.integration.TravelRepositoryIntegrationTests" time="0.014"/>
 </testsuite>

@@ -53,9 +53,9 @@ public class TravelController {
 	
 	@RequestMapping("travels/{id}")
 	public @ResponseBody Travel getTravelById(@PathVariable String id) {
-		Travel travel = getTravelRepositoryCustom().findById(id);
+		List<Travel> travels = getTravelRepository().findById(id);
         System.out.println("getTravelById DONE!");
-		return travel;
+        return (travels.size() > 0) ? travels.get(0) : null;
 	}
 	
 	@RequestMapping(value="/travels", method = RequestMethod.POST )
