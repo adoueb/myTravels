@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mytravels.persistence.integration.TravelMappingIntegrationTests" time="0.675" tests="2" errors="0" skipped="0" failures="0">
+<testsuite name="com.mytravels.persistence.integration.TravelMappingIntegrationTests" time="2.535" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Agnes\java\jdk1.7.0_45\jre\bin"/>
@@ -60,6 +60,6 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase name="thatTravelIsInsertedIntoCollectionHasCorrectIndexes" classname="com.mytravels.persistence.integration.TravelMappingIntegrationTests" time="0.616"/>
-  <testcase name="thatTravelCustomMappingWorks" classname="com.mytravels.persistence.integration.TravelMappingIntegrationTests" time="0.059"/>
+  <testcase name="thatTravelIsInsertedIntoCollectionHasCorrectIndexes" classname="com.mytravels.persistence.integration.TravelMappingIntegrationTests" time="2.458"/>
+  <testcase name="thatTravelCustomMappingWorks" classname="com.mytravels.persistence.integration.TravelMappingIntegrationTests" time="0.077"/>
 </testsuite>
