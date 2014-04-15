@@ -1,15 +1,18 @@
-'use strict';
+'use strict';	// Strict Mode is a new feature in ECMAScript 5 that allows you to place a 
+				// program, or a function, in a "strict" operating context. This strict 
+				// context prevents certain actions from being taken and throws more exceptions.
 
 
-// Declare app level module which depends on filters, and services
+// Declare app level module which depends on filters, services, directives and controllers.
 angular.module('travelApp', [
-  'ngRoute',
   'travelApp.filters',
   'travelApp.services',
   'travelApp.directives',
   'travelApp.controllers',
-  'google-maps'
+  'google-maps',
+  'ngRoute',
 ]);
+
 /*
 .config(function($routeProvider, RestangularProvider) {
 	RestangularProvider.setBaseUrl('http://localhost:8080/MyTravels-0.0.1-SNAPSHOT');

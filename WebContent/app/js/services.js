@@ -4,8 +4,17 @@
 
 angular.module('travelApp.services', [ 'ngResource' ])
 	
+// ------------------------------------------------------------------------
+// version value
+// ------------------------------------------------------------------------
 .value('version', '0.1')
 
+// ------------------------------------------------------------------------
+// Travel factory: 
+// like in angular-phonecat app
+// Get data from file resources
+// Not used in the project
+// ------------------------------------------------------------------------
 .factory('Travel', [ '$resource', function($resource) {
 		return $resource('travels/:travelId.json', {}, {
 			query : {
@@ -18,6 +27,11 @@ angular.module('travelApp.services', [ 'ngResource' ])
 		});
 } ])
 
+// ------------------------------------------------------------------------
+// travelResource factory
+// Consuming REST services 
+// REST: CRUD methods: query, save, remove, update
+// ------------------------------------------------------------------------
 .factory('travelResource', function ($http) {
 
     return function () {
@@ -107,6 +121,10 @@ angular.module('travelApp.services', [ 'ngResource' ])
     };
 })
 
+// ------------------------------------------------------------------------
+// TravelRest factory
+// The one used in the controller.
+// ------------------------------------------------------------------------
 .factory('TravelRest', function (travelResource) {
     return travelResource();
 });

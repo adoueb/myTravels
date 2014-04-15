@@ -12,8 +12,8 @@ angular.module('travelApp.controllers', [])
 // TravelListCtrl controller
 // ------------------------------------------------------------------------
 .controller('TravelListCtrl', 
-            ['$scope', '$log', '$http', 'TravelRest', 
-		    function($scope, $log, $http, TravelRest) {
+            ['$scope', '$log', '$filter', 'TravelRest',
+		    function($scope, $log, $filter, TravelRest) {
 	
     // --------------------------------------------------------------------
     // Initializations.
@@ -40,15 +40,11 @@ angular.module('travelApp.controllers', [])
 	      }
     });
     */
+    $scope.selectedTravel = null;
     TravelRest.query(function(travels) {
 		  // List of travels.
 	      $log.info('travels loaded');
-		  $scope.travels = travels;
-	  
-		  // Selected travel.
-	      if (travels.length >= 1) {
-	          $scope.setSelectedTravel(travels[0]);
-	      }
+		  $scope.initializeTravels(travels);
     }, function() {
     	alert('error while loading the travels');
     });   
@@ -92,7 +88,7 @@ angular.module('travelApp.controllers', [])
     };
 
 	// Call to display map when stops not defined.
-	$scope.setCurrentMap = function() {
+	$scope.setDefaultMap = function() {
 	    /*
 		if(navigator.geolocation) {
             navigator.geolocation.getCurrentPosition($scope.setMap);
@@ -145,47 +141,66 @@ angular.module('travelApp.controllers', [])
 			}
 		};
     };
-    	    
+
     // --------------------------------------------------------------------
-    // Manage stops.
+    // Manage travels.
     // --------------------------------------------------------------------
-	// Update stop.
-	$scope.updateStop = function(stop) {
-        // PUT /stops
-	    $log.info("update " +  stop.title);
-	    $scope.updateTravel($scope.selectedTravel);
-	    // TODO: different error
-	    $('#updateStop').modal('hide');
+    // Initialize travels.
+    $scope.initializeTravels = function(travels) {
+    	$scope.setTravels(travels);
+   	  
+		// Selected travel.
+	    if ($scope.travels.length >= 1) {
+	    	
+	        $scope.setSelectedTravel($scope.travels[0]);
+	    } else {
+	        $scope.setSelectedTravel(null);
+	    }
+    };
+    
+    // Set travels.
+    $scope.setTravels = function(travels) {
+    	// Order by date, reverse.
+    	// ng-repeat="travel in travels | orderBy:orderProp:true" in HTML.
+    	$scope.travels = $filter('orderBy')(travels, $scope.orderProp, true);
     };
 	 
     // Set selected travel.
     $scope.setSelectedTravel = function(selectedTravel) {
-        // Set selected travel.
-    	$scope.selectedTravel =  selectedTravel;
-    	
-    	// Set map.
-    	if (selectedTravel.itinerary.stops.length >= 1) {
-    	    // Compute southwest and northeast points for all the markers to be displayed.
-    		// Iterate through the stops.
-    	
-    		var bounds = computeBounds(selectedTravel.itinerary.stops);
-    		$scope.map.center = {
-	    	    latitude: selectedTravel.itinerary.stops[0].latitude,
-	    		longitude: selectedTravel.itinerary.stops[0].longitude
-	    	};
-    		$scope.map.zoom = 9;
-    		$scope.map.markers = selectedTravel.itinerary.stops;
-    		$scope.map.bounds = bounds;
-	    } else {
-	    	$scope.setCurrentMap();
-	    }
-    	
-    	// Stops: set icon.
-    	for (var stopIndex=0; stopIndex < $scope.selectedTravel.itinerary.stops.length; stopIndex++) {
-		    var currentStop = $scope.selectedTravel.itinerary.stops[stopIndex];
-			currentStop.icon = "img/blue_Marker" + String.fromCharCode(65 + stopIndex) + ".png";
-			currentStop.draggable = true;
-    	}
+    	if (selectedTravel != null && selectedTravel != undefined) {
+	        // Set selected travel.
+	    	$scope.selectedTravel =  selectedTravel;
+	    	
+	    	// Set map.
+	    	if (selectedTravel.itinerary.stops.length >= 1) {
+	    	    // Compute southwest and northeast points for all the markers to be displayed.
+	    		// Iterate through the stops.
+	    	
+	    		var bounds = computeBounds(selectedTravel.itinerary.stops);
+	    		$scope.map.center = {
+		    	    latitude: selectedTravel.itinerary.stops[0].latitude,
+		    		longitude: selectedTravel.itinerary.stops[0].longitude
+		    	};
+	    		$scope.map.zoom = 9;
+	    		$scope.map.markers = selectedTravel.itinerary.stops;
+	    		$scope.map.bounds = bounds;
+		    } else {
+		    	$scope.map.markers = [];
+		    	$scope.setDefaultMap();
+		    }
+	    	
+	    	// Stops: set icon.
+	    	for (var stopIndex=0; stopIndex < $scope.selectedTravel.itinerary.stops.length; stopIndex++) {
+			    var currentStop = $scope.selectedTravel.itinerary.stops[stopIndex];
+				currentStop.icon = "img/blue_Marker" + String.fromCharCode(65 + stopIndex) + ".png";
+				currentStop.draggable = true;
+	    	}
+    	} else {
+    		// No selected travel
+    		$scope.selectedTravel = null;
+    		$scope.setDefaultMap();
+    	} 
+    		
     };
 
     // Set edit stop.
@@ -198,6 +213,18 @@ angular.module('travelApp.controllers', [])
 	$scope.setCurrentStop = function(marker) {
 	    $scope.currentStop = marker;
 	};
+    
+    // --------------------------------------------------------------------
+    // Manage stops.
+    // --------------------------------------------------------------------
+	// Update stop.
+	$scope.updateStop = function(stop) {
+        // PUT /stops
+	    $log.info("update " +  stop.title);
+	    $scope.updateTravel($scope.selectedTravel);
+	    // TODO: different error
+	    $('#updateStop').modal('hide');
+    };
     
     // --------------------------------------------------------------------
     // Manage CRUD operations on travels.
@@ -224,7 +251,11 @@ angular.module('travelApp.controllers', [])
 	    });
 	    */
 	    TravelRest.save(newTravel, function(travels) {
-	 	        $scope.travels = travels;
+	 	        if (travels.length == 1) {
+	 	        	$scope.initializeTravels(travels);
+	 	        } else {
+	 	        	$scope.setTravels(travels);
+	 	        }
 	            $('#addTravel').modal('hide');
 	        }, function() {
 		        $log.error("There was an error saving");
@@ -255,7 +286,7 @@ angular.module('travelApp.controllers', [])
     	*/
     	TravelRest.update(travel, function(travels) {
     	        // Update list of travels.
-    			$scope.travels = travels;
+    			$scope.setTravels(travels);
  	            $('#updateTravel').modal('hide');
     	    }, function() {
     			$log.error("There was an error updating");
@@ -282,6 +313,12 @@ angular.module('travelApp.controllers', [])
     	*/
     	TravelRest.remove(travel, function(travels) {
  	        $scope.travels = travels;
+ 	       if ($scope.selectedTravel.id == travel.id) {
+ 	    	   // Delete the selected travel.
+ 	    	   $scope.initializeTravels(travels);	
+		   } else {
+			   $scope.setTravel(travels);
+		   }
  	       $('#removeTravel').modal('hide');
         }, function() {
         	$log.error("There was an error deleting");

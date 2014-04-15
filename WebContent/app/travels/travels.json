@@ -126,5 +126,17 @@
 			{"url": "img/Tanzania/IMG_3931.jpg", "inCarousel": false, "title":"", "description":""},
 			{"url": "img/Tanzania/IMG_3936.jpg", "inCarousel": false, "title":"", "description":""} 
 		]
+    }, 
+    {
+        "year": 2014, 
+        "country": "Brazil", 
+        "name": "Rio and Ihla Grande",
+		"description": ""
+    }, 
+    {
+        "year": 2015, 
+        "country": "USA", 
+        "name": "Yellowstone and Salt Lake City",
+		"description": ""
     }
 ]

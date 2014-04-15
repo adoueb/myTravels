@@ -1,0 +1,23 @@
+Travel
+	_id ObjectId
+	year string
+	country string
+	name string
+	description string
+	images array of Image
+	itinerary
+	
+Image
+	url string
+	inCarousel boolean
+	title string
+	description string
+	
+Itinerary
+	stops array of Stop
+	
+Stop
+	latitude float
+	longitude float
+	title string
+	description string

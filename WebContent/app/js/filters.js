@@ -15,6 +15,8 @@ angular.module('travelApp.filters', [])
   
 // ------------------------------------------------------------------------
 // excludeSelectedTravelFilter filter: exclude one element from the list.
+// Example: <href="#" class="list-group-item" 
+// ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)">
 // ------------------------------------------------------------------------
 .filter('excludeSelectedTravelFilter', [function() {
     return function(travels, selectedTravel) {

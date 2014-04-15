@@ -12,7 +12,40 @@
 <link href="dist/css/bootstrap.css" rel="stylesheet">
 <link href="css/app.css" rel="stylesheet">
 </head>
-<body  ng-controller="TravelListCtrl">
+<!-- TODO -->
+<!-- Internationalization -->
+<body  ng-controller="TravelListCtrl" ng-cloak>
+  	<!-- ========================================================================================== -->
+ 	<!-- Libraries: AngularJS, jQuery, Bootstrap, underscore, Google Maps API, angular-google-maps  -->
+ 	<!-- ========================================================================================== -->
+ 	<!-- Placed at the top of the landing page with ng-cloak because the page is mainly dynamic -->
+ 	<!-- Wrong: Placed at the end of the document so the pages load faster -->
+ 	
+	<!-- In production use: -->
+    <!-- script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script -->
+	<script src="lib/angular/angular.js"></script>
+	<script src="lib/angular/angular-route.js"></script>
+	<script src="lib/angular/angular-resource.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/services.js"></script>
+	<script src="js/controllers.js"></script>
+	<script src="js/filters.js"></script>
+	<script src="js/directives.js"></script>
+    <!-- script src="http://code.jquery.com/jquery-latest.js"></script -->
+	<script src="dist/js/jquery-latest.js"></script>
+	<!-- In production use:
+    <script src="dist/js/bootstrap.min.js"></script>
+    -->
+    <script src="dist/js/bootstrap.js"></script>
+    <!-- script src="http://cdn.jsdelivr.net/restangular/latest/restangular.js"></script -->
+    <!--  script src="dist/js/restangular.js"></script -->
+	<!-- script type="text/javascript" src="http://cdn.jsdelivr.net/restangular/latest/restangular.min.js"></script -->
+	<!-- script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script -->
+	<script type="text/javascript" src="dist/js/underscore-min.js"></script>
+	<script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
+	<script type="text/javascript" src="dist/js/angular-google-maps.js"></script>
+	<!--script src="https://raw.github.com/nlaplante/angular-google-maps/master/dist/angular-google-maps.min.js" type="text/javascript"></script-->
+	
 
  	<!-- ========================================================================================== -->
  	<!-- Collapsing Nav Bar                                                                         -->
@@ -27,6 +60,7 @@
  				<span class="icon-bar"></span>
  			</button>
  			
+ 			<!-- TODO -->
  			<div class="collapse navbar-collapse navHeaderCollapse">
  				<ul class="nav navbar-nav navbar-right">
  					<li class="active"><a href="#">Home</a></li>
@@ -64,8 +98,21 @@
 		  	<!-- ========================================================================================== -->
 		 	<!-- Main article                                                                               -->
 		 	<!-- ========================================================================================== -->
-	 		<div class="col-lg-9">
-	 			<div class="panel panel-default">
+	 		<div class="col-lg-9" ng-switch on="selectedTravel">
+	 		
+				<!-- No travel selected -->
+				<div class="panel-body" ng-switch-when="null">
+					<div class="jumbotron">
+			 			<center>
+			 				<h1>No selected travels</h1>
+							<p>Enter your travels with your pictures and itinerary</p>
+							<a class="btn btn-default" ng-click="setAddTravel()" href="#addTravel" data-toggle="modal">Add Travel</a>
+						</center>
+					</div>
+				</div>
+				
+				<!-- Selected travel -->
+	 			<div class="panel panel-default" ng-switch-default>
 	 				<div class="panel-body">
 	 					<div class="page-header">
 	 						<h3>{{selectedTravel.name}} - <small>{{selectedTravel.year}}</small></h3>	
@@ -93,14 +140,16 @@
 						<!--  Description and stops -->
 						<div>
 							<h4 style="margin-top:20px;margin-bottom:20px">{{selectedTravel.description}}</h4>
-							<h4>Itinerary</h4>
-							<div ng-repeat="marker in map.markers">
-								<h5><b>{{marker.title}}:</b></h5>
-								<p>{{marker.description}}</p>
-								<div class="gray-link" style="text-align: right;">
-									<a ng-click="setEditStop(marker)" href="#updateStop" data-toggle="modal"> <i
-										class="glyphicon glyphicon-edit"></i>
-									</a>
+							<div ng-show="map.markers.length >= 1">
+								<h4 >Itinerary</h4>
+								<div ng-repeat="marker in map.markers">
+									<h5><b>{{marker.title}}:</b></h5>
+									<p>{{marker.description}}</p>
+									<div class="gray-link" style="text-align: right;">
+										<a ng-click="setEditStop(marker)" href="#updateStop" data-toggle="modal"> <i
+											class="glyphicon glyphicon-edit"></i>
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -116,7 +165,7 @@
 	 						<!--  Images -->
 	 						<div class="carousel-inner">
 	 							<div ng-class="{'item active': $index == 0, 'item': $index != 0}" ng-repeat="image in selectedTravel.images | filter:{inCarousel:true}">
-	 								<center><img src="{{image.url}}" alt="{{image.title}}" class="img-responsive" width="100%"></center>
+	 								<center><img ng-src="{{image.url}}" alt="{{image.title}}" class="img-responsive" width="100%"></center>
 	 								<div class="carousel-caption">
 	 									<h3>{{image.title}}</h3>
 	 									<p>{{image.description}}</h3>
@@ -142,25 +191,30 @@
 		 	<!-- ========================================================================================== -->
 	 		<div class="col-lg-3">
 				<!--  Add new travel  -->
-				<a style="margin-left: 10px; font-size: 14px; display: inline-block;" ng-click="setAddTravel()" href="#addTravel" data-toggle="modal"> 
+				<a style="margin-left: 10px; font-size: 14px; display: inline-block;" ng-click="setAddTravel()" href="#addTravel" data-toggle="modal"
+				   ng-show="travels.length != 0"> 
 					<i class="glyphicon glyphicon-plus-sign"></i> Add Travel
 				</a>
 				
 				<div class="list-group">
 	 				<!-- a href="#" class="list-group-item" ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)"-->
-	 				<div class="list-group-item" ng-repeat="travel in travels | orderBy:orderProp:true">
+	 				<div class="list-group-item" ng-repeat="travel in travels">
 		 				<a href="#" class="list-group-item"  style="border:0px;padding:0;margin-bottom:0" ng-click="setSelectedTravel(travel);">
 		 					<h4 class="list-group-item-heading">{{travel.year}} - {{travel.name}}</h4>
 		 					<p class="list-group-item-heading" style="overflow:auto">
-		 						<img  src="{{travel.images[0].url}}" width="30%" class="left"> {{travel.description}}</img>
+		 						<div ng-switch on="travel.images.length">
+		 							<div ng-switch-when="0">{{travel.description}}</div>
+		 							<div ng-switch-default><img ng-src="{{travel.images[0].url}}" width="30%" class="left"> {{travel.description}}</img></div>
+		 						</div>
+		 						
 		 					</p>
 		 				</a>
 						<div class="gray-link" style="text-align: right;">
-							<a ng-click="setRemoveTravel(travel)" href="#removeTravel" data-toggle="modal"> <i
-								class="glyphicon glyphicon-trash"></i>
+							<a ng-click="setRemoveTravel(travel)" href="#removeTravel" data-toggle="modal">
+							    <i class="glyphicon glyphicon-trash" title="Delete"></i>
 							</a>
-							<a ng-click="setUpdateTravel(travel)" href="#updateTravel" data-toggle="modal"> <i
-								class="glyphicon glyphicon-pencil"></i>
+							<a ng-click="setUpdateTravel(travel)" href="#updateTravel" data-toggle="modal">
+							    <i class="glyphicon glyphicon-pencil" title="Update"></i>
 							</a>
 						</div>
 						<!-- a href="#" class="btn btn-default pull-right">Read More</a -->
@@ -394,35 +448,5 @@
  		</div>
  	</div>
  	 
-  	<!-- ========================================================================================== -->
- 	<!-- Libraries                                                                                  -->
- 	<!-- ========================================================================================== -->
- 	<!-- Placed at the end of the document so the pages load faster -->
-	<!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-  -->
-	<script src="lib/angular/angular.js"></script>
-	<script src="lib/angular/angular-route.js"></script>
-	<script src="lib/angular/angular-resource.js"></script>
-	<script src="js/app.js"></script>
-	<script src="js/services.js"></script>
-	<script src="js/controllers.js"></script>
-	<script src="js/filters.js"></script>
-	<script src="js/directives.js"></script>
-    <!-- script src="http://code.jquery.com/jquery-latest.js"></script -->
-	<script src="dist/js/jquery-latest.js"></script>
-	<!-- In production use:
-    <script src="dist/js/bootstrap.min.js"></script>
-  -->
-    <script src="dist/js/bootstrap.js"></script>
-    <!-- script src="http://cdn.jsdelivr.net/restangular/latest/restangular.js"></script -->
-    <script src="dist/js/restangular.js"></script>
-	<!-- script type="text/javascript" src="http://cdn.jsdelivr.net/restangular/latest/restangular.min.js"></script -->
-	<!-- script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script -->
-	<script type="text/javascript" src="dist/js/underscore-min.js"></script>
-	<script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
-	<script type="text/javascript" src="dist/js/angular-google-maps.js"></script>
-	<!--script src="https://raw.github.com/nlaplante/angular-google-maps/master/dist/angular-google-maps.min.js" type="text/javascript"></script-->
-	
     </body>
 </html>

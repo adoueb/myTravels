@@ -1,0 +1,58 @@
+Index.html
+----------
+Collapsing navbar
+Main article
+Articles sidebar
+Sticky footer
+
+Dialogs
+Add travel
+ validation: country, year, name required
+Update travel
+Delete travel
+Contact
+Edit stop
+
+controller.js
+-------------
+app travelApp.controllers
+ctrl TravelListCtrl
+Dependencies: $scope, $log, $http, TravelRest
+
+$scope
+showAddTravelError
+showUpdateTravelError
+showDeleteTravelError
+showEditStopError
+orderProp // Order by year for example
+travels // List of travels
+map
+mapInstance
+marker
+selectedTravel // Display as main article
+currentTravel // For update, remove actions
+
+setMap
+setDefaultMap
+onMarkedClicked
+updateStop
+setTravels
+setSelectedTravel
+setEditStop
+setCurrentStop
+addTravel
+canAddTravel // if form dirty and valid
+updateTravel
+deleteTravel
+setAddTravel
+setUpdateTravel
+setRemoveTravel
+setCurrentTravel
+sendEmail
+showError
+
+Use
+TravelRest.query
+google
+$scope.$apply
+
