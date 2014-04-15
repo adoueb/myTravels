@@ -343,6 +343,12 @@ angular.module('travelApp.controllers', [])
     	$scope.setCurrentTravel(travel);
     };
 
+    // Set "upload photos" travel.
+    $scope.setUploadPhotosTravel = function(travel) {
+        $scope.showUploadImagesTravelError = false;
+    	$scope.setCurrentTravel(travel);
+    };
+
     // Set current travel.
     $scope.setCurrentTravel = function(travel) {
         $scope.currentTravel = travel;

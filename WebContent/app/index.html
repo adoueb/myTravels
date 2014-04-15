@@ -198,32 +198,31 @@
 				
 				<div class="list-group">
 	 				<!-- a href="#" class="list-group-item" ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)"-->
-	 				<div class="list-group-item" ng-repeat="travel in travels">
-		 				<a href="#" class="list-group-item thumbnail"  style="border:0px;padding:0;margin-bottom:0" ng-click="setSelectedTravel(travel);">
+	 				<div class="list-group-item" ng-repeat="travel in travels" ng-style="activeStyle(travel)">
+	 					<a href="#" class="list-group-item thumbnail" ng-class="{active:travel.id==selectedTravel.id}" style="border:0px;padding:0;margin-bottom:0" ng-click="setSelectedTravel(travel);">
 		 					<div>
-		 					<h4 class="list-group-item-heading">{{travel.year}} - {{travel.name}}</h4>
-		 					<p class="list-group-item-heading" style="overflow:auto">
-		 						<div ng-switch on="travel.images.length">
-		 							<div ng-switch-when="0">{{travel.description}}</div>
-		 							<div ng-switch-default><img ng-src="{{travel.images[0].url}}" width="60px" height="60px" class="left"> {{travel.description}}</img></div>
-		 						</div>
-		 						
-		 					</p>
+			 					<h4 class="list-group-item-heading">{{travel.year}} - {{travel.name}}</h4>
+			 					<p class="list-group-item-heading" style="overflow:auto">
+			 						<div ng-switch on="travel.images.length">
+			 							<div ng-switch-when="0">{{travel.description}}</div>
+			 							<div ng-switch-default><img ng-src="{{travel.images[0].url}}" width="60px" height="60px" class="left"> {{travel.description}}</img></div>
+			 						</div>
+			 						
+			 					</p>
 		 					</div>
-		 					<div class="gray-link" style="text-align: right;">
-		 					
-							<a ng-click="setRemoveTravel(travel)" href="#removeTravel" data-toggle="modal">
-							    <i class="glyphicon glyphicon-trash" title="Delete travel"></i>
-							</a>
-							<a ng-click="setUpdateTravel(travel)" href="#updateTravel" data-toggle="modal">
-							    <i class="glyphicon glyphicon-edit" title="Update travel"></i>
-							</a>
-							<a ng-click="setUploadPhotosTravel(travel)" href="#uploadPhotosTravel" data-toggle="modal">
-							    <i class="glyphicon glyphicon-camera" title="Upload photos of travel"></i>
-							</a>
-						</div>
+		 					<div class="gray-link" ng-class="{active:travel.id==selectedTravel.id}" style="text-align: right;">			
+								<a ng-click="setRemoveTravel(travel)" href="#removeTravel" data-toggle="modal">
+								    <i class="glyphicon glyphicon-trash" title="Delete travel"></i>
+								</a>
+								<a ng-click="setUpdateTravel(travel)" href="#updateTravel" data-toggle="modal">
+								    <i class="glyphicon glyphicon-edit" title="Update travel"></i>
+								</a>
+								<a ng-click="setUploadPhotosTravel(travel)" href="#uploadPhotosTravel" data-toggle="modal">
+								    <i class="glyphicon glyphicon-camera" title="Upload photos of travel"></i>
+								</a>
+							</div>
 		 				</a>
-						
+		 							
 						<!-- a href="#" class="btn btn-default pull-right">Read More</a -->
 	 				</div>
 	 			</div>	 			

@@ -146,8 +146,8 @@
 									<h5><b>{{marker.title}}:</b></h5>
 									<p>{{marker.description}}</p>
 									<div class="gray-link" style="text-align: right;">
-										<a ng-click="setEditStop(marker)" href="#updateStop" data-toggle="modal"> <i
-											class="glyphicon glyphicon-edit"></i>
+										<a ng-click="setEditStop(marker)" href="#updateStop" data-toggle="modal">
+											<i class="glyphicon glyphicon-edit" title="Update stop"></i>
 										</a>
 									</div>
 								</div>
@@ -193,30 +193,37 @@
 				<!--  Add new travel  -->
 				<a style="margin-left: 10px; font-size: 14px; display: inline-block;" ng-click="setAddTravel()" href="#addTravel" data-toggle="modal"
 				   ng-show="travels.length != 0"> 
-					<i class="glyphicon glyphicon-plus-sign"></i> Add Travel
+					<i class="glyphicon glyphicon-plus-sign" title="Add Travel"></i> Add Travel
 				</a>
 				
 				<div class="list-group">
 	 				<!-- a href="#" class="list-group-item" ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)"-->
 	 				<div class="list-group-item" ng-repeat="travel in travels">
-		 				<a href="#" class="list-group-item"  style="border:0px;padding:0;margin-bottom:0" ng-click="setSelectedTravel(travel);">
+		 				<a href="#" class="list-group-item thumbnail"  style="border:0px;padding:0;margin-bottom:0" ng-click="setSelectedTravel(travel);">
+		 					<div>
 		 					<h4 class="list-group-item-heading">{{travel.year}} - {{travel.name}}</h4>
 		 					<p class="list-group-item-heading" style="overflow:auto">
 		 						<div ng-switch on="travel.images.length">
 		 							<div ng-switch-when="0">{{travel.description}}</div>
-		 							<div ng-switch-default><img ng-src="{{travel.images[0].url}}" width="30%" class="left"> {{travel.description}}</img></div>
+		 							<div ng-switch-default><img ng-src="{{travel.images[0].url}}" width="60px" height="60px" class="left"> {{travel.description}}</img></div>
 		 						</div>
 		 						
 		 					</p>
-		 				</a>
-						<div class="gray-link" style="text-align: right;">
+		 					</div>
+		 					<div class="gray-link" style="text-align: right;">
+		 					
 							<a ng-click="setRemoveTravel(travel)" href="#removeTravel" data-toggle="modal">
-							    <i class="glyphicon glyphicon-trash" title="Delete"></i>
+							    <i class="glyphicon glyphicon-trash" title="Delete travel"></i>
 							</a>
 							<a ng-click="setUpdateTravel(travel)" href="#updateTravel" data-toggle="modal">
-							    <i class="glyphicon glyphicon-pencil" title="Update"></i>
+							    <i class="glyphicon glyphicon-edit" title="Update travel"></i>
+							</a>
+							<a ng-click="setUploadPhotosTravel(travel)" href="#uploadPhotosTravel" data-toggle="modal">
+							    <i class="glyphicon glyphicon-camera" title="Upload photos of travel"></i>
 							</a>
 						</div>
+		 				</a>
+						
 						<!-- a href="#" class="btn btn-default pull-right">Read More</a -->
 	 				</div>
 	 			</div>	 			

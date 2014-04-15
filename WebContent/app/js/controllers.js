@@ -202,6 +202,18 @@ angular.module('travelApp.controllers', [])
     	} 
     		
     };
+    
+    $scope.activeStyle = function(travel) {
+    	if (travel.id == $scope.selectedTravel.id) {
+    		return {
+    			'background-color': '#428BCA'
+    		};
+    	} else {
+    		return {
+    			'background-color': ''
+    		};
+    	}
+    };
 
     // Set edit stop.
 	$scope.setEditStop = function(marker) {

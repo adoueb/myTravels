@@ -64,6 +64,12 @@ body {
 .gray-link > a:hover {
     color: #666666;
 }
+.gray-link.active > a {
+    color: #ffffff;
+}
+.gray-link.active > a:hover {
+    color: #666666;
+}
 .angular-google-map-container {
 	height: 540px;
 }
