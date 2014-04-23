@@ -1,5 +1,8 @@
 package com.mytravels.config;
 
+import javax.servlet.MultipartConfigElement;
+
+import org.springframework.boot.context.embedded.MultiPartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +15,6 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 import com.mongodb.Mongo;
 import com.mytravels.persistence.repository.TravelRepository;
-import com.mytravels.persistence.repository.TravelRepositoryImpl;
 
 
 @Configuration
@@ -40,4 +42,14 @@ public class MongoConfiguration {
 	public @Bean PersistenceExceptionTranslationPostProcessor persistenceExceptionTranslationPostProcessor() {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
+	
+
+    @Bean
+    public MultipartConfigElement multipartConfigElement() {
+        MultiPartConfigFactory factory = new MultiPartConfigFactory();
+        factory.setMaxFileSize("256KB");
+        factory.setMaxRequestSize("256KB");
+        return factory.createMultipartConfig();
+    }
+
 }

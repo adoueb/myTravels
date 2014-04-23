@@ -11,6 +11,7 @@ angular.module('travelApp', [
   'travelApp.controllers',
   'google-maps',
   'ngRoute',
+  'angularFileUpload'
 ]);
 
 /*

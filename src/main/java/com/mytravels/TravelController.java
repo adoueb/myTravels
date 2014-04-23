@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.Lists;
 import com.mytravels.persistence.domain.Stop;
@@ -85,5 +87,11 @@ public class TravelController {
 		getTravelRepositoryCustom().updateStop(stop);
         System.out.println("updateStop DONE!");
 		return getTravelRepositoryCustom().getTravels();
+	}
+	
+	@RequestMapping(value="/app/upload", method = RequestMethod.POST )
+	public @ResponseBody String handleFileUpload(@RequestParam("fileData") String travel, @RequestParam("uploadPhotosTravelForm") MultipartFile file){
+        System.out.println("uploadPhoto " + travel);
+        return "It works";
 	}
 }

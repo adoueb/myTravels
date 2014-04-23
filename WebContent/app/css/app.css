@@ -86,3 +86,8 @@ body {
 	font-family: "Lucida Grande", "Arial", sans-serif;
     font-size: 10px;
 }
+
+#uploadPhotosTravel .modal-dialog
+{
+  width: 1050px;
+}

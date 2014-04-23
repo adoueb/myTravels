@@ -11,6 +11,9 @@
   -->
 <link href="dist/css/bootstrap.css" rel="stylesheet">
 <link href="css/app.css" rel="stylesheet">
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="css/jquery.fileupload.css">
+<link rel="stylesheet" href="css/jquery.fileupload-ui.css">
 </head>
 <!-- TODO -->
 <!-- Internationalization -->
@@ -23,9 +26,11 @@
  	
 	<!-- In production use: -->
     <!-- script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script -->
+	<script src="js/angular-file-upload-shim.js"></script>
 	<script src="lib/angular/angular.js"></script>
 	<script src="lib/angular/angular-route.js"></script>
 	<script src="lib/angular/angular-resource.js"></script>
+	<script src="js/angular-file-upload.js"></script>
 	<script src="js/app.js"></script>
 	<script src="js/services.js"></script>
 	<script src="js/controllers.js"></script>
@@ -198,32 +203,31 @@
 				
 				<div class="list-group">
 	 				<!-- a href="#" class="list-group-item" ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)"-->
-	 				<div class="list-group-item" ng-repeat="travel in travels">
-		 				<a href="#" class="list-group-item thumbnail"  style="border:0px;padding:0;margin-bottom:0" ng-click="setSelectedTravel(travel);">
+	 				<div class="list-group-item" ng-repeat="travel in travels" ng-style="activeStyle(travel)">
+	 					<a href="#" class="list-group-item thumbnail" ng-class="{active:travel.id==selectedTravel.id}" style="border:0px;padding:0;margin-bottom:0" ng-click="setSelectedTravel(travel);">
 		 					<div>
-		 					<h4 class="list-group-item-heading">{{travel.year}} - {{travel.name}}</h4>
-		 					<p class="list-group-item-heading" style="overflow:auto">
-		 						<div ng-switch on="travel.images.length">
-		 							<div ng-switch-when="0">{{travel.description}}</div>
-		 							<div ng-switch-default><img ng-src="{{travel.images[0].url}}" width="60px" height="60px" class="left"> {{travel.description}}</img></div>
-		 						</div>
-		 						
-		 					</p>
+			 					<h4 class="list-group-item-heading">{{travel.year}} - {{travel.name}}</h4>
+			 					<p class="list-group-item-heading" style="overflow:auto">
+			 						<div ng-switch on="travel.images.length">
+			 							<div ng-switch-when="0">{{travel.description}}</div>
+			 							<div ng-switch-default><img ng-src="{{travel.images[0].url}}" width="60px" height="60px" class="left"> {{travel.description}}</img></div>
+			 						</div>
+			 						
+			 					</p>
 		 					</div>
-		 					<div class="gray-link" style="text-align: right;">
-		 					
-							<a ng-click="setRemoveTravel(travel)" href="#removeTravel" data-toggle="modal">
-							    <i class="glyphicon glyphicon-trash" title="Delete travel"></i>
-							</a>
-							<a ng-click="setUpdateTravel(travel)" href="#updateTravel" data-toggle="modal">
-							    <i class="glyphicon glyphicon-edit" title="Update travel"></i>
-							</a>
-							<a ng-click="setUploadPhotosTravel(travel)" href="#uploadPhotosTravel" data-toggle="modal">
-							    <i class="glyphicon glyphicon-camera" title="Upload photos of travel"></i>
-							</a>
-						</div>
+		 					<div class="gray-link" ng-class="{active:travel.id==selectedTravel.id}" style="text-align: right;">			
+								<a ng-click="setRemoveTravel(travel)" href="#removeTravel" data-toggle="modal">
+								    <i class="glyphicon glyphicon-trash" title="Delete travel"></i>
+								</a>
+								<a ng-click="setUpdateTravel(travel)" href="#updateTravel" data-toggle="modal">
+								    <i class="glyphicon glyphicon-edit" title="Update travel"></i>
+								</a>
+								<a ng-click="setUploadPhotosTravel(travel)" href="#uploadPhotosTravel" data-toggle="modal">
+								    <i class="glyphicon glyphicon-camera" title="Upload photos of travel"></i>
+								</a>
+							</div>
 		 				</a>
-						
+		 							
 						<!-- a href="#" class="btn btn-default pull-right">Read More</a -->
 	 				</div>
 	 			</div>	 			
@@ -375,6 +379,100 @@
 			</div>
 		</div>
 	</div>
+ 	
+  	<!-- ========================================================================================== -->
+ 	<!-- Upload photos dialog                                                                       -->
+ 	<!-- ========================================================================================== -->
+ 	<div class="modal fade" id="uploadPhotosTravel" role="dialog" tabindex="-1">
+ 		<div  class="modal-dialog">
+		<div class="modal-content">
+			<form class="form-horizontal" name="uploadPhotosTravelForm">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4>Upload photos</h4>
+				</div>
+				<div class="modal-body">
+					<!-- div class="alert alert-danger alert-dismissable" ng-show="showUploadImagesTravelError">
+		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		  				<strong>Error!</strong> The photos can't be uploaded.
+					</div -->
+					
+					<div class="container">
+					 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+				        <div class="row fileupload-buttonbar">
+				            <div class="col-lg-7">
+				                <!-- The fileinput-button span is used to style the file input field as button -->
+				                <span class="btn btn-success fileinput-button" ng-class="{disabled: disabled}">
+				                    <i class="glyphicon glyphicon-plus"></i>
+				                    <span>Add files...</span>
+				                    <input type="file" ng-file-select="onFileSelect($files)" multiple>
+				                    
+				                    <!-- file name="uploadPhotos" ng-model="uploadPhotos" accept="image/png,image/jpg,image/jpeg" / -->
+				                    <!-- input type="file" multiple ng-disabled="disabled" onchange="TravelListCtrl.prototype.setFile(this)" -->
+				                </span>
+				                <button type="button" class="btn btn-primary start" data-ng-click="startUploads()">
+				                    <i class="glyphicon glyphicon-upload"></i>
+				                    <span>Start upload</span>
+				                </button>
+				                <button type="button" class="btn btn-warning cancel" data-ng-click="abortUploads()">
+				                    <i class="glyphicon glyphicon-ban-circle"></i>
+				                    <span>Cancel upload</span>
+				                </button>
+				                <!-- The global file processing state -->
+				                <span class="fileupload-process"></span>
+				            </div>
+				             
+				            <!-- The global progress state -->
+				            <div class="col-lg-5 fade" data-ng-class="{in: active()}">
+				                <!-- The global progress bar -->
+				                <div class="progress progress-striped active" data-file-upload-progress="progress()"><div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div></div>
+				                <!-- The extended global progress state -->
+				                <div class="progress-extended">&nbsp;</div>
+				            </div>
+				        </div>
+				        
+				        <!-- The table listing the files available for upload/download -->
+	        			<table class="table-striped files ng-cloak">
+				            <tr data-ng-repeat="file in selectedFiles" data-ng-class="{'processing': file.$processing()}">
+				            	<td width="70px" valign="center" padding="10px">
+				                	<img class="thumbnail" ng-show="dataUrls[$index]" ng-src="{{dataUrls[$index]}}" width="60px" height="60px" ></img>
+				                </td>
+				                <td width="150px" valign="center" padding="10px">
+				                	<div>{{file.name}}</div>
+				                </td>
+				                <td width="150px" valign="center" padding="10px">
+				                	<label>Title:</label>
+				                	<input type="text" placeholder="Title" ng-model="file.title">
+				                </td>
+				                <td width="300px" valign="center" padding="10px" border="1px">
+				                	<label>Description:</label>
+				                	<textarea rows="1" cols="50" placeholder="Description"  ng-model="file.description"></textarea>
+				                </td>
+				                <td width="200px" valign="center" padding="10px">
+				                	<span class="progress" ng-show="progress[$index] >= 0">						
+										<div class="progress-bar progress-bar-success" style="border-style:solid;border-width:1px;width:{{progress[$index]}}%">{{progress[$index]}}%</div>
+									</span>	
+				                </td>
+					            <td width="70px" valign="center" padding="10px">
+				                	<button type="button" class="btn btn-danger destroy" ng-click="deleteSelectedFile($index)">
+				                        <i class="glyphicon glyphicon-trash"></i>
+				                        <span>Delete</span>
+				                    </button>
+				                </td>
+				            </tr>
+				        </table>
+        			</div>
+					
+					<div class="form-group">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<a class="btn btn-primary" data-dismiss="modal">Close</a>
+				</div>
+			</form>
+		</div>
+	</div>
+ 	</div>
  	
   	<!-- ========================================================================================== -->
  	<!-- Contact dialog                                                                             -->

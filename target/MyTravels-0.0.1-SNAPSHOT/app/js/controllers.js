@@ -12,8 +12,8 @@ angular.module('travelApp.controllers', [])
 // TravelListCtrl controller
 // ------------------------------------------------------------------------
 .controller('TravelListCtrl', 
-            ['$scope', '$log', '$filter', 'TravelRest',
-		    function($scope, $log, $filter, TravelRest) {
+            ['$scope', '$log', '$filter', '$timeout', '$upload', 'TravelRest',
+		    function($scope, $log, $filter, $timeout, $upload, TravelRest) {
 	
     // --------------------------------------------------------------------
     // Initializations.
@@ -22,6 +22,7 @@ angular.module('travelApp.controllers', [])
     $scope.showUpdateTravelError = false;
     $scope.showDeleteTravelError = false;
     $scope.showEditStopError = false;
+    $scope.showUploadImagesTravelError = false;
  
     // Order of travels.
     $scope.orderProp = 'year';
@@ -202,6 +203,18 @@ angular.module('travelApp.controllers', [])
     	} 
     		
     };
+    
+    $scope.activeStyle = function(travel) {
+    	if (travel.id == $scope.selectedTravel.id) {
+    		return {
+    			'background-color': '#428BCA'
+    		};
+    	} else {
+    		return {
+    			'background-color': ''
+    		};
+    	}
+    };
 
     // Set edit stop.
 	$scope.setEditStop = function(marker) {
@@ -353,6 +366,129 @@ angular.module('travelApp.controllers', [])
     $scope.setCurrentTravel = function(travel) {
         $scope.currentTravel = travel;
     };
+    
+    
+    // --------------------------------------------------------------------
+    // Photos upload.
+    // --------------------------------------------------------------------
+    // Upload started.
+	$scope.hasUploader = function(index) {
+		return $scope.upload[index] != null;
+	};
+	
+	// Stop current upload.
+	$scope.abort = function(index) {
+		$scope.upload[index].abort(); 
+		$scope.upload[index] = null;
+	};
+	
+	// Abort uploads.
+	$scope.abortUploads = function() {
+		if ($scope.upload && $scope.upload.length > 0) {
+			for (var i = 0; i < $scope.upload.length; i++) {
+				if ($scope.upload[i] != null) {
+					$scope.upload[i].abort();
+				}
+			}
+		}
+	}
+	
+	// Add files for upload.
+	$scope.onFileSelect = function($files) {
+		if ($scope.selectedFiles == undefined) {
+			$scope.selectedFiles = [];
+			$scope.dataUrls = [];
+			$scope.progress = [];
+			$scope.upload = [];
+			$scope.uploadResult = [];
+		}
+		var previousFilesCount = $scope.selectedFiles.length;
+		
+		// Abort the uploads.
+		$scope.abortUploads();
+		
+		$scope.selectedFiles = $scope.selectedFiles.concat($files);
+
+		// Iterate through newly selected files.
+		for ( var i = 0; i < $files.length; i++) {
+			var $file = $files[i];
+			if (window.FileReader && $file.type.indexOf('image') > -1) {
+				var fileReader = new FileReader();
+				fileReader.readAsDataURL($files[i]);
+				var loadFile = function(fileReader, index) {
+					fileReader.onload = function(e) {
+						$timeout(function() {
+							$scope.dataUrls[previousFilesCount + index] = e.target.result;
+						});
+					}
+				}(fileReader, i);
+			}
+			$scope.progress[previousFilesCount + i] = -1;
+			if ($scope.uploadRightAway) {
+				$scope.start(previousFilesCount + i);
+			}
+		}
+	};
+	
+	// Delete file for upload.
+	$scope.deleteSelectedFile = function(index) {
+		// Abort the uploads.
+		$scope.abortUploads();
+		
+		$scope.selectedFiles.splice(index, 1);
+		$scope.dataUrls.splice(index, 1);
+		$scope.progress.splice(index, 1);
+	};
+	
+	// Start upload.
+	$scope.start = function(index) {
+		$scope.progress[index] = 0;
+		
+		$scope.fileData = {
+			"travelId": $scope.currentTravel.id,
+			"title": $scope.selectedFiles[index].title,
+			"description": $scope.selectedFiles[index].description
+		};
+
+	    $scope.upload[index] = $upload.upload({
+	        url: 'upload', //upload.php script, node.js route, or servlet url
+	        method: 'POST',
+	        headers: {'my-header': 'my-header-value'},
+	        // withCredentials: true,
+	        data: {fileData: $scope.fileData},
+	        file: $scope.selectedFiles[index], // or list of files: $files for html5 only
+	        /* set the file formData name ('Content-Desposition'). Default is 'file' */
+	        fileFormDataName: 'uploadPhotosTravelForm', //or a list of names for multiple files (html5).
+	        /* customize how data is added to formData. See #40#issuecomment-28612000 for sample code */
+	        //formDataAppender: function(formData, key, val){}
+	      }).progress(function(evt) {
+	    	  $log.info('upload progress');
+	    	  $scope.progress[index] = parseInt(100.0 * evt.loaded / evt.total);
+	      }).success(function(data, status, headers, config) {
+	    	  // file is uploaded successfully
+	    	  $log.info('upload success');
+	    	  console.log(data);
+		  	  $scope.selectedFiles.splice(index, 1);
+			  $scope.dataUrls.splice(index, 1);
+			  $scope.progress.splice(index, 1);
+	      }).error(function(data, status, headers, config) {
+	    	  $log.info('upload error');
+	    	  $scope.nextUploadIndex += 1;
+	    	  
+	      });
+	};
+	
+	// Start uploads.
+	$scope.startUploads = function() {
+		var max = 1;
+		$scope.nextUploadIndex = 0;
+		while (max <= 1 && $scope.nextUploadIndex < $scope.selectedFiles.length) {
+			$log.info('max:' + max);
+			max += 1;
+			$log.info('upload:' + $scope.nextUploadIndex);
+			$scope.start($scope.nextUploadIndex);
+		}
+	}
     
     // --------------------------------------------------------------------
     // General actions of navigation bar.
