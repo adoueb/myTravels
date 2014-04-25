@@ -454,6 +454,7 @@ angular.module('travelApp.controllers', [])
 		
 		$scope.fileData = {
 			"travelId": $scope.currentTravel.id,
+			"name": $scope.selectedFiles[index].name,
 			"title": $scope.selectedFiles[index].title,
 			"description": $scope.selectedFiles[index].description
 		};

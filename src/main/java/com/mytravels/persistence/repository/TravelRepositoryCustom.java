@@ -4,11 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.mapreduce.MapReduceResults;
 import org.springframework.stereotype.Repository;
 
+import com.mytravels.TravelController;
 import com.mytravels.persistence.domain.Stop;
 import com.mytravels.persistence.domain.Travel;
 
@@ -17,6 +19,7 @@ import com.mytravels.persistence.domain.Travel;
 
 @Repository
 public class TravelRepositoryCustom {
+	private static final Logger log = Logger.getLogger(TravelRepositoryCustom.class);
 
 	@Autowired
 	MongoOperations mongoOperations;
@@ -28,7 +31,7 @@ public class TravelRepositoryCustom {
 		}
 
 		List<Travel> travels = mongoOperations.findAll(Travel.class);
-		System.out.println("Travels: " + travels);
+		log.info("Travels: " + travels);
 		
 		return travels;
 	}

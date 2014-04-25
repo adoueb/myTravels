@@ -393,6 +393,14 @@ angular.module('travelApp.controllers', [])
 		}
 	}
 	
+	// Clear.
+	$scope.clearUploads = function(index) {
+		$scope.selectedFiles = [];
+		$scope.dataUrls = [];
+		$scope.progress = [];
+		$scope.upload = [];
+	};
+	
 	// Add files for upload.
 	$scope.onFileSelect = function($files) {
 		if ($scope.selectedFiles == undefined) {
@@ -400,7 +408,6 @@ angular.module('travelApp.controllers', [])
 			$scope.dataUrls = [];
 			$scope.progress = [];
 			$scope.upload = [];
-			$scope.uploadResult = [];
 		}
 		var previousFilesCount = $scope.selectedFiles.length;
 		
@@ -442,10 +449,12 @@ angular.module('travelApp.controllers', [])
 	
 	// Start upload.
 	$scope.start = function(index) {
+		$log.info('start ' + index);
 		$scope.progress[index] = 0;
 		
 		$scope.fileData = {
 			"travelId": $scope.currentTravel.id,
+			"name": $scope.selectedFiles[index].name,
 			"title": $scope.selectedFiles[index].title,
 			"description": $scope.selectedFiles[index].description
 		};
@@ -468,25 +477,18 @@ angular.module('travelApp.controllers', [])
 	    	  // file is uploaded successfully
 	    	  $log.info('upload success');
 	    	  console.log(data);
-		  	  $scope.selectedFiles.splice(index, 1);
-			  $scope.dataUrls.splice(index, 1);
-			  $scope.progress.splice(index, 1);
+	    	  $scope.selectedFiles[index].completed = true;
 	      }).error(function(data, status, headers, config) {
 	    	  $log.info('upload error');
-	    	  $scope.nextUploadIndex += 1;
-	    	  
 	      });
 	};
 	
 	// Start uploads.
 	$scope.startUploads = function() {
-		var max = 1;
-		$scope.nextUploadIndex = 0;
-		while (max <= 1 && $scope.nextUploadIndex < $scope.selectedFiles.length) {
-			$log.info('max:' + max);
-			max += 1;
-			$log.info('upload:' + $scope.nextUploadIndex);
-			$scope.start($scope.nextUploadIndex);
+		for (var index = 0; index < $scope.selectedFiles.length; index++) {
+			if ($scope.selectedFiles[index].completed == undefined) {
+				$scope.start(index);
+			}
 		}
 	}
     
