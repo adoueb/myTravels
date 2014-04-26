@@ -1,5 +1,8 @@
 package com.mytravels;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -101,26 +104,26 @@ public class TravelController {
         String fileName = jsonObj.getString("name");
         String fileTitle = jsonObj.getString("title");
         String fileDescription = jsonObj.getString("description");
-        String url = new String("img\\");
+        String url = new String(".\\");
         url += fileName;
         boolean inCarousel = true;
         log.info("uploadPhoto travelId: " + travelId + " url: " + url + " title: " + fileTitle  + " description: " + fileDescription);
      
         // Write file.
-//        if (!file.isEmpty()) {
-//            try {
-//                byte[] bytes = file.getBytes();
-//                BufferedOutputStream stream = 
-//                        new BufferedOutputStream(new FileOutputStream(new File(url)));
-//                stream.write(bytes);
-//                stream.close();
-//                return "You successfully uploaded " + url + " !";
-//            } catch (Exception e) {
-//                return "You failed to upload " + url + " => " + e.getMessage();
-//            }
-//        } else {
-//            return "You failed to upload " + url + " because the file was empty.";
-//        }
-        return "";
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                BufferedOutputStream stream = 
+                        new BufferedOutputStream(new FileOutputStream(new File(url)));
+                stream.write(bytes);
+                stream.close();
+                return "You successfully uploaded " + url + " !";
+            } catch (Exception e) {
+                return "You failed to upload " + url + " => " + e.getMessage();
+            }
+        } else {
+            return "You failed to upload " + url + " because the file was empty.";
+        }
+        //return "";
 	}
 }
