@@ -455,8 +455,8 @@ angular.module('travelApp.controllers', [])
 		$scope.fileData = {
 			"travelId": $scope.currentTravel.id,
 			"name": $scope.selectedFiles[index].name,
-			"title": $scope.selectedFiles[index].title,
-			"description": $scope.selectedFiles[index].description
+			"title": $scope.selectedFiles[index].title != undefined ? $scope.selectedFiles[index].title: "",
+			"description": $scope.selectedFiles[index].description != undefined ? $scope.selectedFiles[index].description: ""
 		};
 
 	    $scope.upload[index] = $upload.upload({
@@ -485,9 +485,11 @@ angular.module('travelApp.controllers', [])
 	
 	// Start uploads.
 	$scope.startUploads = function() {
-		for (var index = 0; index < $scope.selectedFiles.length; index++) {
-			if ($scope.selectedFiles[index].completed == undefined) {
-				$scope.start(index);
+		if ($scope.selectedFiles != undefined)  {
+			for (var index = 0; index < $scope.selectedFiles.length; index++) {
+				if ($scope.selectedFiles[index].completed == undefined) {
+					$scope.start(index);
+				}
 			}
 		}
 	}

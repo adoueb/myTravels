@@ -2,13 +2,20 @@ package com.mytravels;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +26,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.Lists;
+import com.mongodb.gridfs.GridFSDBFile;
+import com.mytravels.persistence.domain.Image;
 import com.mytravels.persistence.domain.Stop;
 import com.mytravels.persistence.domain.Travel;
 import com.mytravels.persistence.repository.TravelRepository;
@@ -29,6 +38,9 @@ import com.mytravels.persistence.repository.TravelRepositoryCustom;
 @Controller
 public class TravelController {
 	private static final Logger log = Logger.getLogger(TravelController.class);
+	
+	@Autowired
+	GridFsTemplate gridFsTemplate;
 	
 	public TravelRepository getTravelRepository() {
 		
@@ -111,12 +123,47 @@ public class TravelController {
      
         // Write file.
         if (!file.isEmpty()) {
+
             try {
                 byte[] bytes = file.getBytes();
                 BufferedOutputStream stream = 
                         new BufferedOutputStream(new FileOutputStream(new File(url)));
                 stream.write(bytes);
                 stream.close();
+                
+                
+                // Update the travel by adding an image.
+                List<Travel> travels = getTravelRepository().findById(travelId);
+                if (travels.size()  == 1) {
+                	Travel travel = travels.get(0);
+                	 log.info("travel found");
+                	
+                	Image image = new Image(url, inCarousel, fileTitle, fileDescription);
+                	travel.addImage(image);
+                	
+                	getTravelRepository().save(travel);
+                }
+                
+                // Store the image in GridFS.
+                InputStream inputStream = new FileInputStream(url);
+                gridFsTemplate.store(inputStream, fileName);
+                
+                List<GridFSDBFile> result = gridFsTemplate.find(
+                        new Query().addCriteria(Criteria.where("filename").is(fileName)));
+          
+		     	for (GridFSDBFile fileRead : result) {
+		     		try {
+		     			log.info(fileRead.getFilename());
+		     			log.info(fileRead.getContentType());
+		      
+		     			//save as another image
+		     			fileRead.writeTo(".//retrieved.png");
+		     		} catch (IOException e) {
+		     			e.printStackTrace();
+		     		}
+		     	}
+                
+                
                 return "You successfully uploaded " + url + " !";
             } catch (Exception e) {
                 return "You failed to upload " + url + " => " + e.getMessage();
