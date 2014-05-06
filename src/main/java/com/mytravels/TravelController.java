@@ -1,12 +1,17 @@
 package com.mytravels;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
@@ -26,6 +31,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.common.collect.Lists;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import com.mongodb.gridfs.GridFSDBFile;
 import com.mytravels.persistence.domain.Image;
 import com.mytravels.persistence.domain.Stop;
@@ -116,61 +123,120 @@ public class TravelController {
         String fileName = jsonObj.getString("name");
         String fileTitle = jsonObj.getString("title");
         String fileDescription = jsonObj.getString("description");
-        String url = new String(".\\");
-        url += fileName;
         boolean inCarousel = true;
-        log.info("uploadPhoto travelId: " + travelId + " url: " + url + " title: " + fileTitle  + " description: " + fileDescription);
-     
-        // Write file.
+        log.info("uploadPhoto travelId: " + travelId + " filename: " + fileName + " title: " + fileTitle  + " description: " + fileDescription);
+ 
+        // Retrieve the travel.
+        List<Travel> travels = getTravelRepository().findById(travelId);
+        if (travels.size()  != 1) {
+        	 return "You failed to upload " + fileName + " because the travel doesn't exist.";
+        }
+        Travel travel = travels.get(0);
+    	log.info("travel found");
+    	
+        // Store the image in the DB.
         if (!file.isEmpty()) {
 
-            try {
+            try {            	
+            	// Store the image in a temporary file.
+                String url = new String(".\\uploaded-img.jpg");
+                File tmpFile = new File(url);
                 byte[] bytes = file.getBytes();
-                BufferedOutputStream stream = 
-                        new BufferedOutputStream(new FileOutputStream(new File(url)));
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(tmpFile));
                 stream.write(bytes);
-                stream.close();
-                
+                stream.close();       
                 
                 // Update the travel by adding an image.
-                List<Travel> travels = getTravelRepository().findById(travelId);
-                if (travels.size()  == 1) {
-                	Travel travel = travels.get(0);
-                	 log.info("travel found");
-                	
-                	Image image = new Image(url, inCarousel, fileTitle, fileDescription);
-                	travel.addImage(image);
-                	
-                	getTravelRepository().save(travel);
+                String imageUrl = ".\\img\\" + travelId + "_" + fileName;
+            	Image image = new Image(imageUrl, inCarousel, fileTitle, fileDescription);
+            	travel.addImage(image);            	
+            	getTravelRepository().save(travel);
+     
+                // Store the image in GridFS.
+            	DBObject imageMetaData = new BasicDBObject();
+            	imageMetaData.put("travelId", travelId);
+            	imageMetaData.put("fileName", fileName);
+                InputStream inputStream = new FileInputStream(url);
+                gridFsTemplate.store(inputStream, fileName, imageMetaData);
+                if (inputStream != null) {
+                    inputStream.close();
                 }
                 
-                // Store the image in GridFS.
-                InputStream inputStream = new FileInputStream(url);
-                gridFsTemplate.store(inputStream, fileName);
+                // Delete the temporary file.
+                tmpFile.delete();
+            
+                // Tests.
+//                Query resultQuery = new Query();
+//                resultQuery.addCriteria(Criteria.where("metadata.travelId").is(travelId));
+//                resultQuery.addCriteria(Criteria.where("metadata.fileName").is(fileName));
+//                List<GridFSDBFile> result = gridFsTemplate.find(resultQuery);
+//          
+//		     	for (GridFSDBFile fileRead : result) {
+//		     		try {
+//		     			log.info(fileRead.getFilename());
+//		     			log.info(fileRead.getMetaData().get("travelId"));
+//		     			log.info(fileRead.getMetaData().get("fileName"));
+//		      
+//		     			//save as another image
+//		     			fileRead.writeTo(".//retrieved.jpg");
+//		     		} catch (IOException e) {
+//		     			e.printStackTrace();
+//		     		}
+//		     	}
                 
-                List<GridFSDBFile> result = gridFsTemplate.find(
-                        new Query().addCriteria(Criteria.where("filename").is(fileName)));
-          
-		     	for (GridFSDBFile fileRead : result) {
-		     		try {
-		     			log.info(fileRead.getFilename());
-		     			log.info(fileRead.getContentType());
-		      
-		     			//save as another image
-		     			fileRead.writeTo(".//retrieved.png");
-		     		} catch (IOException e) {
-		     			e.printStackTrace();
-		     		}
-		     	}
                 
-                
-                return "You successfully uploaded " + url + " !";
+                return "You successfully uploaded " + fileName + " !";
             } catch (Exception e) {
-                return "You failed to upload " + url + " => " + e.getMessage();
+                return "You failed to upload " + fileName + " => " + e.getMessage();
             }
         } else {
-            return "You failed to upload " + url + " because the file was empty.";
+            return "You failed to upload " + fileName + " because the file was empty.";
         }
         //return "";
+	}
+	
+
+	@RequestMapping(value="/app/img/{id}", method = RequestMethod.GET)
+	public @ResponseBody byte[] getImage(@PathVariable String id) {
+        log.info("getImage " + id);
+        
+        String[] tokens = id.split("_");
+        if (tokens.length != 2) return null;
+        String travelId = tokens[0];
+        String fileName = tokens[1];
+        
+        // Retrieve the file in GridFS.
+        Query resultQuery = new Query();
+        resultQuery.addCriteria(Criteria.where("metadata.travelId").is(travelId));
+        resultQuery.addCriteria(Criteria.where("metadata.fileName").is(fileName));
+        List<GridFSDBFile> result = gridFsTemplate.find(resultQuery);
+  
+     	for (GridFSDBFile fileRead : result) {
+     		try {
+     			log.info(fileRead.getFilename());
+     			log.info(fileRead.getMetaData().get("travelId"));
+     			log.info(fileRead.getMetaData().get("fileName"));
+      
+     			// Save in a temporary file.
+     			String url = new String(".\\restored-img.jpg");
+     			fileRead.writeTo(url);
+     			
+     			InputStream is = new FileInputStream(url);
+    	        BufferedImage img = ImageIO.read(is);
+    	        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+    	        ImageIO.write(img, "jpg", bos);
+    	        
+    	        // Delete the temporary file.
+    	        File tmpFile = new File(url);
+    	        tmpFile.delete();
+    	        
+    	        return bos.toByteArray();
+    	        
+     		} catch (IOException e) {
+     			e.printStackTrace();
+     		}
+     	}
+ 
+	    return null;
 	}
 }
