@@ -373,21 +373,21 @@ angular.module('travelApp.controllers', [])
     // --------------------------------------------------------------------
     // Upload started.
 	$scope.hasUploader = function(index) {
-		return $scope.upload[index] != null;
+		return $scope.uploaders[index] != null;
 	};
 	
 	// Stop current upload.
 	$scope.abort = function(index) {
-		$scope.upload[index].abort(); 
-		$scope.upload[index] = null;
+		$scope.uploaders[index].abort(); 
+		$scope.uploaders[index] = null;
 	};
 	
 	// Abort uploads.
 	$scope.abortUploads = function() {
-		if ($scope.upload && $scope.upload.length > 0) {
-			for (var i = 0; i < $scope.upload.length; i++) {
-				if ($scope.upload[i] != null) {
-					$scope.upload[i].abort();
+		if ($scope.uploaders && $scope.uploaders.length > 0) {
+			for (var index = 0; index < $scope.uploaders.length; i++) {
+				if ($scope.uploaders[i] != null) {
+					$scope.uploaders[i].abort();
 				}
 			}
 		}
@@ -395,19 +395,25 @@ angular.module('travelApp.controllers', [])
 	
 	// Clear.
 	$scope.clearUploads = function(index) {
-		$scope.selectedFiles = [];
-		$scope.dataUrls = [];
-		$scope.progress = [];
-		$scope.upload = [];
+		if (index == undefined) {
+			$scope.selectedFiles = [];
+			$scope.dataUrls = [];
+			$scope.progress = [];
+			$scope.uploaders = [];
+			$scope.results = [];
+		} else {
+			$scope.selectedFiles.splice(index, 1);
+			$scope.dataUrls.splice(index, 1);
+			$scope.progress.splice(index, 1);
+			$scope.uploaders.splice(index, 1);
+			$scope.results.splice(index, 1);
+		}
 	};
 	
 	// Add files for upload.
 	$scope.onFileSelect = function($files) {
 		if ($scope.selectedFiles == undefined) {
-			$scope.selectedFiles = [];
-			$scope.dataUrls = [];
-			$scope.progress = [];
-			$scope.upload = [];
+			$scope.clearUploads();
 		}
 		var previousFilesCount = $scope.selectedFiles.length;
 		
@@ -417,22 +423,23 @@ angular.module('travelApp.controllers', [])
 		$scope.selectedFiles = $scope.selectedFiles.concat($files);
 
 		// Iterate through newly selected files.
-		for ( var i = 0; i < $files.length; i++) {
-			var $file = $files[i];
+		for ( var fileIndex = 0; fileIndex < $files.length; fileIndex++) {
+			var $file = $files[fileIndex];
 			if (window.FileReader && $file.type.indexOf('image') > -1) {
 				var fileReader = new FileReader();
-				fileReader.readAsDataURL($files[i]);
+				fileReader.readAsDataURL($files[fileIndex]);
 				var loadFile = function(fileReader, index) {
 					fileReader.onload = function(e) {
 						$timeout(function() {
 							$scope.dataUrls[previousFilesCount + index] = e.target.result;
 						});
 					}
-				}(fileReader, i);
+				}(fileReader, fileIndex);
 			}
-			$scope.progress[previousFilesCount + i] = -1;
+			$scope.progress[previousFilesCount + fileIndex] = -1;
+			$scope.results[previousFilesCount + fileIndex] = "";
 			if ($scope.uploadRightAway) {
-				$scope.start(previousFilesCount + i);
+				$scope.start(previousFilesCount + fileIndex);
 			}
 		}
 	};
@@ -442,15 +449,14 @@ angular.module('travelApp.controllers', [])
 		// Abort the uploads.
 		$scope.abortUploads();
 		
-		$scope.selectedFiles.splice(index, 1);
-		$scope.dataUrls.splice(index, 1);
-		$scope.progress.splice(index, 1);
+		$scope.clearUploads(index);
 	};
 	
 	// Start upload.
 	$scope.start = function(index) {
 		$log.info('start ' + index);
 		$scope.progress[index] = 0;
+		$scope.results[index] = "";
 		
 		$scope.fileData = {
 			"travelId": $scope.currentTravel.id,
@@ -459,7 +465,7 @@ angular.module('travelApp.controllers', [])
 			"description": $scope.selectedFiles[index].description != undefined ? $scope.selectedFiles[index].description: ""
 		};
 
-	    $scope.upload[index] = $upload.upload({
+	    $scope.uploaders[index] = $upload.upload({
 	        url: 'upload', //upload.php script, node.js route, or servlet url
 	        method: 'POST',
 	        headers: {'my-header': 'my-header-value'},
@@ -477,10 +483,21 @@ angular.module('travelApp.controllers', [])
 	    	  // file is uploaded successfully
 	    	  $log.info('upload success');
 	    	  console.log(data);
+	    	  $scope.updateResult(index, data);
 	    	  $scope.selectedFiles[index].completed = true;
 	      }).error(function(data, status, headers, config) {
+	    	  $scope.updateResult(index, data);
 	    	  $log.info('upload error');
 	      });
+	};
+	
+	$scope.updateResult = function (index, data) {
+		if (data.errorCode == 0) {
+			// No error
+			$scope.results[index] = "";
+		} else {
+			$scope.results[index] = data.errorDesciption;
+		}
 	};
 	
 	// Start uploads.
