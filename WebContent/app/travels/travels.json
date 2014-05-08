@@ -1,6 +1,6 @@
 [
 	{
-        "year": 2013, 
+        "year": "2013", 
         "country": "Indonesia", 
         "name": "Bali Tour",
 		"description": "All around Bali during 3 weeks",
@@ -33,7 +33,7 @@
 		}
 	}, 
     {
-        "year": 2012, 
+        "year": "2012", 
         "country": "Italy", 
         "name": "Sea and sun in Sardinia",
 		"description": "Quietness in Sardinia's wonderful nature",
@@ -42,7 +42,7 @@
 		]
     }, 
     {
-        "year": 2012, 
+        "year": "2012", 
         "country": "China", 
         "name": "Discover China",
 		"description": "A great discovery of the Chinese civilization",
@@ -59,7 +59,7 @@
 		}
     }, 
     {
-        "year": 2011, 
+        "year": "2011", 
         "country": "Tanzania", 
         "name": "The wilderness of Tanzania",
 		"description": "Such a wonderful travel",
@@ -128,13 +128,13 @@
 		]
     }, 
     {
-        "year": 2014, 
+        "year": "2014", 
         "country": "Brazil", 
         "name": "Rio and Ihla Grande",
 		"description": ""
     }, 
     {
-        "year": 2015, 
+        "year": "2015", 
         "country": "USA", 
         "name": "Yellowstone and Salt Lake City",
 		"description": ""

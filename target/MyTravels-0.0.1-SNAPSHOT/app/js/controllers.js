@@ -193,7 +193,7 @@ angular.module('travelApp.controllers', [])
 	    	// Stops: set icon.
 	    	for (var stopIndex=0; stopIndex < $scope.selectedTravel.itinerary.stops.length; stopIndex++) {
 			    var currentStop = $scope.selectedTravel.itinerary.stops[stopIndex];
-				currentStop.icon = "img/blue_Marker" + String.fromCharCode(65 + stopIndex) + ".png";
+				currentStop.icon = "img/static/blue_Marker" + String.fromCharCode(65 + stopIndex) + ".png";
 				currentStop.draggable = true;
 	    	}
     	} else {
@@ -391,7 +391,7 @@ angular.module('travelApp.controllers', [])
 				}
 			}
 		}
-	}
+	};
 	
 	// Clear.
 	$scope.clearUploads = function(index) {

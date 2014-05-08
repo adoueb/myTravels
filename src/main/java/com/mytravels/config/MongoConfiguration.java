@@ -24,6 +24,10 @@ import com.mytravels.persistence.repository.TravelRepository;
 @EnableMongoRepositories(basePackages = "com.mytravels.persistence.repository",
 includeFilters = @ComponentScan.Filter(value = {TravelRepository.class}, type = FilterType.ASSIGNABLE_TYPE))
 public class MongoConfiguration extends AbstractMongoConfiguration {
+	
+	private final String HOST = "localhost";
+	private final String DB = "mytravels";
+	private final String MAX_FILESIZE = "256KB";
 
 	public @Bean MongoOperations mongoTemplate(Mongo mongo) {
 		MongoTemplate mongoTemplate = new MongoTemplate(mongo, "mytravels");
@@ -35,7 +39,7 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
 	 */
 	public @Bean MongoFactoryBean mongoFactoryBean() {
 		MongoFactoryBean mongo = new MongoFactoryBean();
-		mongo.setHost("localhost");
+		mongo.setHost(HOST);
 		return mongo;
 	}
 
@@ -46,14 +50,14 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
 
 	@Override
 	protected String getDatabaseName() {
-		return "mytravels";
+		return DB;
 	}
 
 	@Override
 	@Bean
 	public Mongo mongo() throws Exception {
 		
-		return new MongoClient("localhost");
+		return new MongoClient(HOST);
 	}
 	
 	/*
@@ -67,8 +71,8 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
     @Bean
     public MultipartConfigElement multipartConfigElement() {
         MultiPartConfigFactory factory = new MultiPartConfigFactory();
-        factory.setMaxFileSize("256KB");
-        factory.setMaxRequestSize("256KB");
+        factory.setMaxFileSize(MAX_FILESIZE);
+        factory.setMaxRequestSize(MAX_FILESIZE);
         return factory.createMultipartConfig();
     }
 
