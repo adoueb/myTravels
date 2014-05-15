@@ -6,6 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +30,9 @@ import com.google.common.collect.Lists;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.gridfs.GridFSDBFile;
+import com.mytravels.config.DropOversizeFilesMultipartResolver;
+import com.mytravels.exception.Result;
 import com.mytravels.persistence.domain.Image;
-import com.mytravels.persistence.domain.Result;
 import com.mytravels.persistence.domain.Stop;
 import com.mytravels.persistence.domain.Travel;
 import com.mytravels.persistence.repository.TravelRepository;
@@ -72,32 +76,32 @@ public class TravelController {
         return travels;
     }
 	
-	@RequestMapping("travels/{id}")
+	@RequestMapping(value="travels/{id}", method = RequestMethod.GET)
 	public @ResponseBody Travel getTravelById(@PathVariable String id) {
 		List<Travel> travels = getTravelRepository().findById(id);
-        log.info("getTravelById DONE!");
+        log.info("getTravelById (" + id + ") DONE!");
         return (travels.size() > 0) ? travels.get(0) : null;
 	}
 	
 	@RequestMapping(value="/travels", method = RequestMethod.POST )
-	public @ResponseBody List<Travel> createTravel(@RequestBody Travel travel) {
-		getTravelRepository().save(travel);
+	public @ResponseBody Travel createTravel(@RequestBody Travel travel) {
+		Travel createdTravel = getTravelRepository().save(travel);
         log.info("createTravel DONE!");
-		return Lists.newArrayList(getTravelRepository().findAll());
+		return createdTravel;
 	}
 	
 	@RequestMapping(value="/travels/{id}", method = RequestMethod.PUT )
-	public @ResponseBody List<Travel> updateTravel(@PathVariable String id, @RequestBody Travel travel) {
-		getTravelRepository().save(travel);
-        log.info("updateTravel DONE!");
-		return Lists.newArrayList(getTravelRepository().findAll());
+	public @ResponseBody Travel updateTravel(@PathVariable String id, @RequestBody Travel travel) {
+		Travel updatedTravel = getTravelRepository().save(travel);
+		log.info("updateTravel (" + id + ") DONE!");
+		return updatedTravel;
 	}
 	
 	@RequestMapping(value="/travels/{id}", method = RequestMethod.DELETE )
 	public @ResponseBody List<Travel> deleteTravel(@PathVariable String id) {
 		log.info("deleteTravel " + id);
 		getTravelRepository().delete(id);
-        log.info("deleteTravel DONE!");
+        log.info("deleteTravel (" + id + ") DONE!");
 		return Lists.newArrayList(getTravelRepository().findAll());
 	}
 	
@@ -109,9 +113,17 @@ public class TravelController {
 	}
 	
 	@RequestMapping(value="/app/upload", method = RequestMethod.POST )
-	public @ResponseBody synchronized Result handleFileUpload(@RequestParam("fileData") String fileData, @RequestParam("uploadPhotosTravelForm") MultipartFile file){
+	public @ResponseBody synchronized Result handleFileUpload(HttpServletRequest request, @RequestParam("fileData") String fileData, @RequestParam("uploadPhotosTravelForm") MultipartFile file){
 		
 		Result result;
+		log.info("Request is " + request);
+
+		Object exception = request.getAttribute(DropOversizeFilesMultipartResolver.EXCEPTION_KEY);
+	    if (exception != null && FileUploadBase.SizeLimitExceededException.class.equals(exception.getClass())) {
+	       result = new Result(-4, "File exeeds size limit");
+	       log.error(exception);
+	       return result;
+	    }	    
 		
 		// Collect data for image creation.
         JSONObject jsonObj = new JSONObject(fileData);

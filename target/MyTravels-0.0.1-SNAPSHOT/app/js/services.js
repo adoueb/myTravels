@@ -109,7 +109,17 @@ angular.module('travelApp.services', [ 'ngResource' ])
         	    errorFct();
             });
         };
-        
+
+        Resource.queryOne = function (id, successFct, errorFct) {
+            return $http.get(travelRestUrl + '/' + id).then(function (response) {
+            	var result = response.data;
+                successFct(result);
+                return result;
+            }, function() {
+        	    errorFct();
+            });
+        };
+
         //other CRUD methods go here
 
         //convenience methods

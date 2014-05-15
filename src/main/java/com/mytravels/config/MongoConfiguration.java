@@ -14,6 +14,7 @@ import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
@@ -28,6 +29,7 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
 	private final String HOST = "localhost";
 	private final String DB = "mytravels";
 	private final String MAX_FILESIZE = "256KB";
+	private final int MAX_UPLOAD_SIZE = 128000;
 
 	public @Bean MongoOperations mongoTemplate(Mongo mongo) {
 		MongoTemplate mongoTemplate = new MongoTemplate(mongo, "mytravels");
@@ -66,7 +68,6 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
 	public @Bean PersistenceExceptionTranslationPostProcessor persistenceExceptionTranslationPostProcessor() {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
-	
 
     @Bean
     public MultipartConfigElement multipartConfigElement() {
@@ -76,4 +77,12 @@ public class MongoConfiguration extends AbstractMongoConfiguration {
         return factory.createMultipartConfig();
     }
 
+    /*
+    @Bean
+    public CommonsMultipartResolver multipartResolver (){
+        
+    	DropOversizeFilesMultipartResolver multipartResolver = new DropOversizeFilesMultipartResolver();
+        multipartResolver.setMaxUploadSize(MAX_UPLOAD_SIZE);
+        return multipartResolver;
+    }*/
 }

@@ -165,6 +165,16 @@ angular.module('travelApp.controllers', [])
     	// ng-repeat="travel in travels | orderBy:orderProp:true" in HTML.
     	$scope.travels = $filter('orderBy')(travels, $scope.orderProp, true);
     };
+    
+    $scope.addTravelData = function (travel) {
+    	var travelList = $scope.travels;
+    	travelList.add(travel);
+    	$scope.setTravels(travelList);
+    	if (travelList.length == 1) {
+    		// First travel creation.
+    		$scope.setSelectedTravel($scope.travels[0]);
+    	}
+    };
 	 
     // Set selected travel.
     $scope.setSelectedTravel = function(selectedTravel) {
@@ -202,6 +212,28 @@ angular.module('travelApp.controllers', [])
     		$scope.setDefaultMap();
     	} 
     		
+    };
+    
+    $scope.refreshTravel = function(id) {
+    	TravelRest.queryOne(id, function(travel) {
+			  // Travel.
+		      $log.info("update travel " + id + " / " + travel.country);
+		     
+		      // Iterate through travels.
+		      for (var indexTravel = 0; indexTravel < $scope.travels.length; indexTravel++) {
+		    	  if ($scope.travels[indexTravel].id == travel.id) {
+		    		  $scope.travels[indexTravel] = travel;
+		    		  // Update selection if so.
+		    		  if (id == $scope.selectedTravel.id) {
+		    			  $scope.selectedTravel =  travel; 
+		    		  }
+		    		  break;
+		    	  }
+		      }
+		      $log.info("travel " + id + " / " + travel.country + " refreshed");
+	    }, function() {
+	    	alert('error while refreshing the travel');
+	    }); 
     };
     
     $scope.activeStyle = function(travel) {
@@ -264,7 +296,7 @@ angular.module('travelApp.controllers', [])
 	    });
 	    */
 	    TravelRest.save(newTravel, function(travels) {
-	 	        if (travels.length == 1) {
+	 	        if ($scope.travels.length == 0) {
 	 	        	$scope.initializeTravels(travels);
 	 	        } else {
 	 	        	$scope.setTravels(travels);
@@ -492,17 +524,31 @@ angular.module('travelApp.controllers', [])
 	};
 	
 	$scope.updateResult = function (index, data) {
+		// Display error message if any.
 		if (data.errorCode == 0) {
 			// No error
 			$scope.results[index] = "";
 		} else {
-			$scope.results[index] = data.errorDesciption;
+			$log.info("error description: " + data.errorDescription);
+			$scope.results[index] = data.errorDescription;
+		}
+		
+		// Refresh if last uploaded image.
+		if (index == $scope.lastFileIndex) {
+			if ( ($scope.currentTravel.id == $scope.selectedTravel.id) || ($scope.areFirstUploads == true) ) {
+				$scope.refreshTravel($scope.currentTravel.id);
+			}
 		}
 	};
 	
 	// Start uploads.
 	$scope.startUploads = function() {
 		if ($scope.selectedFiles != undefined)  {
+			// Initializations.
+			$scope.lastFileIndex = $scope.selectedFiles.length - 1;
+			$scope.areFirstUploads = $scope.currentTravel.images.length == 0 ? true : false;
+			
+			// Iterate through files to upload.
 			for (var index = 0; index < $scope.selectedFiles.length; index++) {
 				if ($scope.selectedFiles[index].completed == undefined) {
 					$scope.start(index);

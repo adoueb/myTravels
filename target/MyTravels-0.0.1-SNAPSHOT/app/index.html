@@ -456,7 +456,7 @@
 				                	<span class="progress" ng-show="progress[$index] >= 0">	
 				                		<div ng-switch on="results[$index].length">
 			 								<div ng-switch-when="0"><div class="progress-bar progress-bar-success" style="border-style:solid;border-width:1px;width:{{progress[$index]}}%">{{progress[$index]}}%</div></div>
-			 								<div ng-switch-default><div class="progress-bar progress-bar-danger" style="border-style:solid;border-width:1px;width:100%">results[$index]</div></div>
+			 								<div ng-switch-default><div class="progress-bar progress-bar-danger" style="border-style:solid;border-width:1px;width:100%">{{results[$index]}}</div></div>
 			 							</div>					
 										
 									</span>	
