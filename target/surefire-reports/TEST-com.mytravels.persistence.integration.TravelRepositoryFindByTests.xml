@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <testsuite name="com.mytravels.persistence.integration.TravelRepositoryFindByTests" time="0.09" tests="2" errors="0" skipped="0" failures="0">
+=======
+<testsuite name="com.mytravels.persistence.integration.TravelRepositoryFindByTests" time="0.065" tests="2" errors="0" skipped="0" failures="0">
+>>>>>>> 9fcf4b25d7d9b3772841abcba50486b262323e7e
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files (x86)\Java\jdk1.7.0_17\jre\bin"/>
@@ -59,6 +63,11 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
+<<<<<<< HEAD
   <testcase name="thatFindByYearWorks" classname="com.mytravels.persistence.integration.TravelRepositoryFindByTests" time="0.05"/>
   <testcase name="thatFindByIdWorks" classname="com.mytravels.persistence.integration.TravelRepositoryFindByTests" time="0.04"/>
+=======
+  <testcase name="thatFindByYearWorks" classname="com.mytravels.persistence.integration.TravelRepositoryFindByTests" time="0.034"/>
+  <testcase name="thatFindByIdWorks" classname="com.mytravels.persistence.integration.TravelRepositoryFindByTests" time="0.031"/>
+>>>>>>> 9fcf4b25d7d9b3772841abcba50486b262323e7e
 </testsuite>
