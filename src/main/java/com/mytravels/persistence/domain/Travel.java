@@ -24,6 +24,8 @@ public class Travel {
     
     Itinerary itinerary = new Itinerary();
     
+    private int imageMax = 0;
+    
     public Travel() {}
 
 	public Travel(String year, String country, String name, String description) {
@@ -92,6 +94,18 @@ public class Travel {
 
 	public void setItinerary(Itinerary itinerary) {
 		this.itinerary = itinerary;
+	}
+
+	public int getImageMax() {
+		return imageMax;
+	}
+
+	public void setImageMax(int imageMax) {
+		this.imageMax = imageMax;
+	}
+
+	public void incrementImageMax() {
+		this.imageMax += 1;
 	}
 
 	@Override

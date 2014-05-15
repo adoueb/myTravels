@@ -166,15 +166,30 @@ angular.module('travelApp.controllers', [])
     	$scope.travels = $filter('orderBy')(travels, $scope.orderProp, true);
     };
     
-    $scope.addTravelData = function (travel) {
+    $scope.addTravelToList = function (travel) {
     	var travelList = $scope.travels;
-    	travelList.add(travel);
+    	travelList.push(travel);
     	$scope.setTravels(travelList);
     	if (travelList.length == 1) {
     		// First travel creation.
     		$scope.setSelectedTravel($scope.travels[0]);
     	}
     };
+    
+    $scope.updateTravelInList = function (travel) {
+    	// Iterate through travels.
+	      for (var indexTravel = 0; indexTravel < $scope.travels.length; indexTravel++) {
+	    	  if ($scope.travels[indexTravel].id == travel.id) {
+	    		  $scope.travels[indexTravel] = travel;
+	    		  // Update selection if so.
+	    		  if (travel.id == $scope.selectedTravel.id) {
+	    			  $scope.selectedTravel =  travel; 
+	    		  }
+	    		  break;
+	    	  }
+	      }
+	      $log.info("travel " + travel.id + " / " + travel.country + " refreshed");
+	};
 	 
     // Set selected travel.
     $scope.setSelectedTravel = function(selectedTravel) {
@@ -217,20 +232,8 @@ angular.module('travelApp.controllers', [])
     $scope.refreshTravel = function(id) {
     	TravelRest.queryOne(id, function(travel) {
 			  // Travel.
-		      $log.info("update travel " + id + " / " + travel.country);
-		     
-		      // Iterate through travels.
-		      for (var indexTravel = 0; indexTravel < $scope.travels.length; indexTravel++) {
-		    	  if ($scope.travels[indexTravel].id == travel.id) {
-		    		  $scope.travels[indexTravel] = travel;
-		    		  // Update selection if so.
-		    		  if (id == $scope.selectedTravel.id) {
-		    			  $scope.selectedTravel =  travel; 
-		    		  }
-		    		  break;
-		    	  }
-		      }
-		      $log.info("travel " + id + " / " + travel.country + " refreshed");
+		      $log.info("update travel " + id + " / " + travel.country);     
+		      $scope.updateTravelInList(travel);
 	    }, function() {
 	    	alert('error while refreshing the travel');
 	    }); 
@@ -295,12 +298,8 @@ angular.module('travelApp.controllers', [])
 		        $scope.showAddTravelError = true;
 	    });
 	    */
-	    TravelRest.save(newTravel, function(travels) {
-	 	        if ($scope.travels.length == 0) {
-	 	        	$scope.initializeTravels(travels);
-	 	        } else {
-	 	        	$scope.setTravels(travels);
-	 	        }
+	    TravelRest.save(newTravel, function(travel) {
+	 	        $scope.addTravelToList(travel);
 	            $('#addTravel').modal('hide');
 	        }, function() {
 		        $log.error("There was an error saving");
@@ -329,9 +328,9 @@ angular.module('travelApp.controllers', [])
 		        $scope.showEditStopError = true;
     	});
     	*/
-    	TravelRest.update(travel, function(travels) {
+    	TravelRest.update(travel, function(travel) {
     	        // Update list of travels.
-    			$scope.setTravels(travels);
+    			$scope.updateTravelInList(travel);
  	            $('#updateTravel').modal('hide');
     	    }, function() {
     			$log.error("There was an error updating");
@@ -535,9 +534,7 @@ angular.module('travelApp.controllers', [])
 		
 		// Refresh if last uploaded image.
 		if (index == $scope.lastFileIndex) {
-			if ( ($scope.currentTravel.id == $scope.selectedTravel.id) || ($scope.areFirstUploads == true) ) {
-				$scope.refreshTravel($scope.currentTravel.id);
-			}
+			$scope.refreshTravel($scope.currentTravel.id);
 		}
 	};
 	

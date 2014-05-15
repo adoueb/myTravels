@@ -210,9 +210,8 @@
 			 					<p class="list-group-item-heading" style="overflow:auto">
 			 						<div ng-switch on="travel.images.length">
 			 							<div ng-switch-when="0">{{travel.description}}</div>
-			 							<div ng-switch-default><img ng-src="{{travel.images[0].url}}" width="60px" height="60px" class="left"> {{travel.description}}</img></div>
-			 						</div>
-			 						
+			 							<div ng-switch-default><img ng-src="{{travel.images[0].url}}" width="30px" height="30px" class="left"> {{travel.description}}</img></div>
+			 						</div>				
 			 					</p>
 		 					</div>
 		 					<div class="gray-link" ng-class="{active:travel.id==selectedTravel.id}" style="text-align: right;">			

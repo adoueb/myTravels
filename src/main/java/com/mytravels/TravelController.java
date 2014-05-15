@@ -140,6 +140,7 @@ public class TravelController {
         	 result = new Result(-2, "Travel (" + travelId + ") not found");
         } else {
 	        Travel travel = travels.get(0);
+	        travel.incrementImageMax();
 	    	log.info("travel found");
 	    	
 	        // Store the image in the DB.
@@ -147,7 +148,7 @@ public class TravelController {
 	
 	            try {            	
 	                // Update the travel by adding an image.
-	                String imageUrl = ".\\img\\" + travelId + "_" + fileName;
+	                String imageUrl = ".\\img\\" + travelId + "_" + Integer.toString(travel.getImageMax()) + "_" + fileName;
 	            	Image image = new Image(imageUrl, inCarousel, fileTitle, fileDescription);
 	            	travel.addImage(image);            	
 	            	getTravelRepository().save(travel);
@@ -155,8 +156,10 @@ public class TravelController {
 	                // Store the image in GridFS.
 	            	DBObject imageMetaData = new BasicDBObject();
 	            	imageMetaData.put("travelId", travelId);
+	            	imageMetaData.put("indexInTravel", Integer.toString(travel.getImageMax()));
 	            	imageMetaData.put("fileName", fileName);
 	            	log.info("GridFS store image travelId=" + travelId);
+	            	log.info("GridFS store image indexInTravel=" + travel.getImageMax());
 	            	log.info("GridFS store image fileName=" + fileName);
 	            	
 	                InputStream inputStream = new ByteArrayInputStream(file.getBytes());
@@ -182,15 +185,19 @@ public class TravelController {
         log.info("getImage " + id);
         
         String[] tokens = id.split("_");
-        if (tokens.length < 2) return null;
+        if (tokens.length < 3) return null;
         String travelId = tokens[0];
-        String fileName = id.substring(id.indexOf('_')+1) + ".jpg";
+        String indexInTravel = tokens[1];
+        String endStr = id.substring(id.indexOf('_')+1);
+        String fileName = endStr.substring(endStr.indexOf('_')+1) + ".jpg";
         log.info("travelId is " + travelId);
+        log.info("indexInTravel is " + indexInTravel);
         log.info("fileName is " + fileName);
         
         // Retrieve the file in GridFS.
         Query resultQuery = new Query();
         resultQuery.addCriteria(Criteria.where("metadata.travelId").is(travelId));
+        resultQuery.addCriteria(Criteria.where("metadata.index").is(indexInTravel));
         resultQuery.addCriteria(Criteria.where("metadata.fileName").is(fileName));
         List<GridFSDBFile> result = gridFsTemplate.find(resultQuery);
   
@@ -198,7 +205,8 @@ public class TravelController {
      		try {
      			log.info("GridFS get image filename=" + fileRead.getFilename());
      			log.info("GridFS get image travelId=" + fileRead.getMetaData().get("travelId"));
-     			log.info("GridFS get image fileName=" + fileRead.getMetaData().get("fileName"));
+     			log.info("GridFS get image indexInTravel=" + fileRead.getMetaData().get("indexInTravel"));
+    			log.info("GridFS get image fileName=" + fileRead.getMetaData().get("fileName"));
       
      			// Return the byte array.
      	        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();

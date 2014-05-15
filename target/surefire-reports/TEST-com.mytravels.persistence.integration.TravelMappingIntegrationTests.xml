@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
-<testsuite name="com.mytravels.persistence.integration.TravelMappingIntegrationTests" time="0.834" tests="2" errors="0" skipped="0" failures="0">
-=======
-<testsuite name="com.mytravels.persistence.integration.TravelMappingIntegrationTests" time="0.668" tests="2" errors="0" skipped="0" failures="0">
->>>>>>> 9fcf4b25d7d9b3772841abcba50486b262323e7e
+<testsuite name="com.mytravels.persistence.integration.TravelMappingIntegrationTests" time="0.954" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files (x86)\Java\jdk1.7.0_17\jre\bin"/>
@@ -63,11 +59,6 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-<<<<<<< HEAD
-  <testcase name="thatTravelIsInsertedIntoCollectionHasCorrectIndexes" classname="com.mytravels.persistence.integration.TravelMappingIntegrationTests" time="0.77"/>
-  <testcase name="thatTravelCustomMappingWorks" classname="com.mytravels.persistence.integration.TravelMappingIntegrationTests" time="0.064"/>
-=======
-  <testcase name="thatTravelIsInsertedIntoCollectionHasCorrectIndexes" classname="com.mytravels.persistence.integration.TravelMappingIntegrationTests" time="0.628"/>
-  <testcase name="thatTravelCustomMappingWorks" classname="com.mytravels.persistence.integration.TravelMappingIntegrationTests" time="0.04"/>
->>>>>>> 9fcf4b25d7d9b3772841abcba50486b262323e7e
+  <testcase name="thatTravelIsInsertedIntoCollectionHasCorrectIndexes" classname="com.mytravels.persistence.integration.TravelMappingIntegrationTests" time="0.869"/>
+  <testcase name="thatTravelCustomMappingWorks" classname="com.mytravels.persistence.integration.TravelMappingIntegrationTests" time="0.085"/>
 </testsuite>

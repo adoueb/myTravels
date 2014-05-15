@@ -64,10 +64,7 @@ angular.module('travelApp.services', [ 'ngResource' ])
 
         Resource.save = function (data, successFct, errorFct) {
             return $http.post(travelRestUrl, data).then(function (response) {
-            	var result = [];
-                angular.forEach(response.data, function (value, key) {
-                    result[key] = new Resource(value);
-                });
+            	var result = response.data;
                 successFct(result);
                 return result;
             }, function() {
@@ -99,10 +96,7 @@ angular.module('travelApp.services', [ 'ngResource' ])
 
         Resource.update = function (data, successFct, errorFct) {
             return $http.put(travelRestUrl + '/' + data.id, data).then(function (response) {
-            	var result = [];
-                angular.forEach(response.data, function (value, key) {
-                    result[key] = new Resource(value);
-                });
+            	var result = response.data;
                 successFct(result);
                 return result;
             }, function() {
