@@ -90,10 +90,12 @@
   	<!-- ========================================================================================== -->
  	<!-- Alerts                                                                                     -->
  	<!-- ========================================================================================== -->
- 	<!-- div class="alert alert-warning alert-dismissable">
-  		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-  		<strong>Warning!</strong> Better check yourself, you're not looking too good.
-	</div -->
+ 	<div ng-repeat="error in MainErrors">
+		<div class="alert alert-dismissable" ng-class="{'alert-danger': error.class == 'danger', 'alert-warning': error.class == 'warning', 'alert-info': error.class == 'info', 'alert-success': error.class == 'success'}">
+        	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        	{{error.description}}
+		</div>
+	</div>
  
   	<!-- ========================================================================================== -->
  	<!-- Articles                                                                                   -->
@@ -123,6 +125,37 @@
 	 						<h3>{{selectedTravel.name}} - <small>{{selectedTravel.year}}</small></h3>	
 	 					</div>
 	 					
+	 					<!--  Carousel -->
+	 					<div id="travelCarousel" class="carousel" style="margin-top:20px">
+	 						<!--  Indicators -->
+	 						<ol class="carousel-indicators">
+	 							<li data-target="#travelCarousel" ng-repeat="image in selectedTravel.images | filter:{inCarousel:true}" data-slide-to="{{$index}}" 
+	 							    ng-class="{'active': $index == 0, '': $index != 0}">							
+	 						</ol>
+	 						
+	 						<!--  Images -->
+	 						<div class="carousel-inner">
+	 							<div ng-class="{'item active': $index == 0, 'item': $index != 0}" ng-repeat="image in selectedTravel.images | filter:{inCarousel:true}">
+	 								<center><img ng-src="{{image.url}}" alt="{{image.title}}" class="img-responsive" width="100%"></center>
+	 								<div class="carousel-caption">
+	 									<h3>{{image.title}}</h3>
+	 									<p>{{image.description}}</h3>
+	 								</div>
+	 							</div>
+	 						</div>
+	 						
+	 						<!--  Control -->
+	 						<a class="left carousel-control" href="#travelCarousel" data-slide="prev">
+	 							<span class="icon-prev"></span>
+							</a>
+							<a class="right carousel-control" href="#travelCarousel" data-slide="next">
+								<span class="icon-next"></span>
+							</a>
+	 					</div>
+	 					<br><br>
+	 					
+						<!-- img class="featuredImg" src="{{selectedTravel.images[0].url}}" width="100%" -->
+
 						<!-- Map with itinerary -->
 						<google-map center="map.center" zoom="map.zoom"
 							bounds="map.bounds" events="map.events" options="map.options">
@@ -159,34 +192,6 @@
 							</div>
 						</div>
 
-	 					<!--  Carousel -->
-	 					<div id="travelCarousel" class="carousel" style="margin-top:20px">
-	 						<!--  Indicators -->
-	 						<ol class="carousel-indicators">
-	 							<li data-target="#travelCarousel" ng-repeat="image in selectedTravel.images | filter:{inCarousel:true}" data-slide-to="{{$index}}" 
-	 							    ng-class="{'active': $index == 0, '': $index != 0}">							
-	 						</ol>
-	 						
-	 						<!--  Images -->
-	 						<div class="carousel-inner">
-	 							<div ng-class="{'item active': $index == 0, 'item': $index != 0}" ng-repeat="image in selectedTravel.images | filter:{inCarousel:true}">
-	 								<center><img ng-src="{{image.url}}" alt="{{image.title}}" class="img-responsive" width="100%"></center>
-	 								<div class="carousel-caption">
-	 									<h3>{{image.title}}</h3>
-	 									<p>{{image.description}}</h3>
-	 								</div>
-	 							</div>
-	 						</div>
-	 						
-	 						<!--  Control -->
-	 						<a class="left carousel-control" href="#travelCarousel" data-slide="prev">
-	 							<span class="icon-prev"></span>
-							</a>
-							<a class="right carousel-control" href="#travelCarousel" data-slide="next">
-								<span class="icon-next"></span>
-							</a>
-	 					</div>
-						<!-- img class="featuredImg" src="{{selectedTravel.images[0].url}}" width="100%" -->
 					</div>
 				</div>
 	 		</div>
@@ -474,7 +479,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<a class="btn btn-primary" data-dismiss="modal">Close</a>
+					<a class="btn btn-primary"  ng-click="closeUpload()" data-dismiss="modal">Close</a>
 				</div>
 			</form>
 		</div>

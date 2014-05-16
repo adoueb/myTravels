@@ -18,6 +18,7 @@ angular.module('travelApp.controllers', [])
     // --------------------------------------------------------------------
     // Initializations.
     // --------------------------------------------------------------------
+    $scope.MainErrors = [];
     $scope.showAddTravelError = false;
     $scope.showUpdateTravelError = false;
     $scope.showDeleteTravelError = false;
@@ -43,11 +44,12 @@ angular.module('travelApp.controllers', [])
     */
     $scope.selectedTravel = null;
     TravelRest.query(function(travels) {
-		  // List of travels.
-	      $log.info('travels loaded');
-		  $scope.initializeTravels(travels);
+		// List of travels.
+	    $log.info('travels loaded');
+	    $scope.initializeTravels(travels);
     }, function() {
-    	alert('error while loading the travels');
+    	$log.info('Error while loading travels');
+    	$scope.MainErrors.push({"class": "danger", "description": "The travels can't be loaded. Please retry."});
     });   
 	  
     // --------------------------------------------------------------------
@@ -231,11 +233,13 @@ angular.module('travelApp.controllers', [])
     
     $scope.refreshTravel = function(id) {
     	TravelRest.queryOne(id, function(travel) {
-			  // Travel.
-		      $log.info("update travel " + id + " / " + travel.country);     
-		      $scope.updateTravelInList(travel);
-	    }, function() {
-	    	alert('error while refreshing the travel');
+			// Travel.
+		    $log.info("update travel " + id + " / " + travel.country);     
+		    $scope.updateTravelInList(travel);
+	    }, function(travel) {
+	    	$log.info("Failed to update travel " + id + " / " + travel.country);
+	    	var msg = "Error while refreshing the travel " + travel.name;
+	    	$scope.MainErrors.push({"class": "danger", "description": msg});
 	    }); 
     };
     
@@ -416,9 +420,9 @@ angular.module('travelApp.controllers', [])
 	// Abort uploads.
 	$scope.abortUploads = function() {
 		if ($scope.uploaders && $scope.uploaders.length > 0) {
-			for (var index = 0; index < $scope.uploaders.length; i++) {
-				if ($scope.uploaders[i] != null) {
-					$scope.uploaders[i].abort();
+			for (var index = 0; index < $scope.uploaders.length; index++) {
+				if ($scope.uploaders[index] != null) {
+					$scope.uploaders[index].abort();
 				}
 			}
 		}
@@ -552,7 +556,17 @@ angular.module('travelApp.controllers', [])
 				}
 			}
 		}
-	}
+	};
+	
+	// Upload dialog closed.
+	$scope.closeUpload = function() {
+		// Iterate through files to upload.
+		for (var index = $scope.selectedFiles.length - 1; index >= 0; index--) {
+			if ($scope.selectedFiles[index].completed == true) {
+				$scope.clearUploads(index);
+			}
+		}
+	};
     
     // --------------------------------------------------------------------
     // General actions of navigation bar.
