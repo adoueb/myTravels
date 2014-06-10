@@ -24,6 +24,7 @@ angular.module('travelApp.controllers', [])
     $scope.showDeleteTravelError = false;
     $scope.showEditStopError = false;
     $scope.showUploadImagesTravelError = false;
+    $scope.showManageImagesTravelError = false;
  
     // Order of travels.
     $scope.orderProp = 'year';
@@ -394,6 +395,12 @@ angular.module('travelApp.controllers', [])
     // Set "upload photos" travel.
     $scope.setUploadPhotosTravel = function(travel) {
         $scope.showUploadImagesTravelError = false;
+    	$scope.setCurrentTravel(travel);
+    };
+
+    // Set "manage photos" travel.
+    $scope.setManagePhotosTravel = function(travel) {
+        $scope.showManageImagesTravelError = false;
     	$scope.setCurrentTravel(travel);
     };
 
