@@ -69,7 +69,7 @@
  			<div class="collapse navbar-collapse navHeaderCollapse">
  				<ul class="nav navbar-nav navbar-right">
  					<li class="active"><a href="#">Home</a></li>
- 					<li><a href="#">Blog</a></li>
+ 					<!-- li><a href="#">Blog</a></li>
  					<li class="dropdown">
  						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Social Media <b class="caret"></b></a>
  						<ul class="dropdown-menu">
@@ -77,6 +77,18 @@
  						<li><a href="#">Facebook</a></li>
  						<li><a href="#">Google+</a></li>
  						<li><a href="#">Instagram</a></li>
+ 						</ul>
+ 					</li -->
+ 					<li class="dropdown">
+ 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Itinerary <b class="caret"></b></a>
+ 						<ul class="dropdown-menu">
+ 						<li><a href="#">Manage</a></li>
+ 						</ul>
+ 					</li>
+  					<li class="dropdown">
+ 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Photos <b class="caret"></b></a>
+ 						<ul class="dropdown-menu">
+ 						<li><a href="#">Manage</a></li>
  						</ul>
  					</li>
  					<li><a href="#">About</a></li>
@@ -436,7 +448,9 @@
 				            <!-- The global progress state -->
 				            <div class="col-lg-5 fade" data-ng-class="{in: active()}">
 				                <!-- The global progress bar -->
-				                <div class="progress progress-striped active" data-file-upload-progress="progress()"><div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div></div>
+				                <div class="progress progress-striped active" data-file-upload-progress="progress()">
+				                	<div class="progress-bar progress-bar-success" data-ng-style="{width: num + '%'}"></div>
+				                </div>
 				                <!-- The extended global progress state -->
 				                <div class="progress-extended">&nbsp;</div>
 				            </div>
