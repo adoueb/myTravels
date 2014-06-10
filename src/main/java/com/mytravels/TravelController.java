@@ -197,17 +197,18 @@ public class TravelController {
         // Retrieve the file in GridFS.
         Query resultQuery = new Query();
         resultQuery.addCriteria(Criteria.where("metadata.travelId").is(travelId));
-        resultQuery.addCriteria(Criteria.where("metadata.index").is(indexInTravel));
+        resultQuery.addCriteria(Criteria.where("metadata.indexInTravel").is(indexInTravel));
         resultQuery.addCriteria(Criteria.where("metadata.fileName").is(fileName));
         List<GridFSDBFile> result = gridFsTemplate.find(resultQuery);
+        log.info("Found: " + result.size() + " files");
   
      	for (GridFSDBFile fileRead : result) {
-     		try {
+     		try {     			
      			log.info("GridFS get image filename=" + fileRead.getFilename());
      			log.info("GridFS get image travelId=" + fileRead.getMetaData().get("travelId"));
      			log.info("GridFS get image indexInTravel=" + fileRead.getMetaData().get("indexInTravel"));
     			log.info("GridFS get image fileName=" + fileRead.getMetaData().get("fileName"));
-      
+    			
      			// Return the byte array.
      	        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     	        fileRead.writeTo(outputStream);
