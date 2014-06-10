@@ -1,0 +1,302 @@
+[33mcommit ef1f429ab4a279d4ee982d77844ff1dc2116ec3c[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Fri May 16 17:23:42 2014 +0200
+
+    clear upload list when completed and display errors in main page
+
+[33mcommit 9de509889368019020784ec5f02a1436ed604510[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Thu May 15 20:38:05 2014 +0200
+
+    manage duplicate filenames for images
+
+[33mcommit 68367dc42412fef657a5e33fba19d297a866b2e6[m
+Merge: 70eb4fc 9fcf4b2
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Thu May 15 17:29:47 2014 +0200
+
+    refresh after upload images
+
+[33mcommit 70eb4fc88cbcd00756998185a8553e24e15ca7fe[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Thu May 15 17:06:55 2014 +0200
+
+    refresh after upload images
+
+[33mcommit 71aeb0d48f98e4b87f94baafca59b9fe2fadb7dc[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Thu May 8 19:55:27 2014 +0200
+
+    display error when upload images
+
+[33mcommit 66aa74c1ea462cc9d3e5d1a33a2bb09c3ab2dbe7[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Thu May 8 14:03:59 2014 +0200
+
+    upload photos
+
+[33mcommit 9fcf4b25d7d9b3772841abcba50486b262323e7e[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Tue May 6 17:27:31 2014 +0200
+
+    store images in db ongoing
+
+[33mcommit 39f4d7f160c2563a2e770a84a24b2f656fa516cb[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Mon May 5 17:10:43 2014 +0200
+
+    read write in gridfs
+
+[33mcommit 3256c789bc3971ec79c238308a1e468846fe9ad8[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Sat Apr 26 08:46:18 2014 +0200
+
+    upload and log4j
+
+[33mcommit 5bc9388edb5caa2a61f77458aab4dbeee245cf55[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Fri Apr 25 22:50:49 2014 +0200
+
+    upload and log4j
+
+[33mcommit 83ddd2d05982f5c053322bf219082d5759442312[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Wed Apr 23 22:02:52 2014 +0200
+
+    start upload
+
+[33mcommit e4288aca41a050e41974a2c8e51429240324b4aa[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Tue Apr 15 22:50:15 2014 +0200
+
+    active travel
+
+[33mcommit 30e0db2cc6525bcc6ad2622c4ba0bfefee7ac626[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Tue Apr 15 16:13:00 2014 +0200
+
+    clean web part
+
+[33mcommit 1febfd23b1c3feda7f9f05b7edbd1b1444fed247[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Fri Mar 21 17:44:23 2014 +0100
+
+    remove thymeleaf dependency and change data
+
+[33mcommit d654c60963997083ffc36465690673cda0011a84[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Tue Mar 18 17:51:39 2014 +0100
+
+    use TravelRepository in webapp
+
+[33mcommit cfc29e96688ab1d544978f4b3ef785bfe956d96b[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Tue Mar 18 17:29:34 2014 +0100
+
+    use TravelRepository in webapp
+
+[33mcommit 6cf921d7aa1760e89d910b17ff7cb9eb441764b3[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Mon Mar 17 22:39:30 2014 +0100
+
+    add mongo repository and mapreduce in unit tests
+
+[33mcommit 8fa01a0a1af7c2045ce5f661e3c2b13f13227711[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Mon Mar 17 22:37:09 2014 +0100
+
+    add mongo repository and mapreduce in unit tests
+
+[33mcommit 6f026f87cd21fed782b2b7940d55ca8388ae18df[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Fri Mar 14 14:17:03 2014 +0100
+
+    packages reshuffle
+
+[33mcommit 0c54646150cdd4065fd2993322077c178fdc85c4[m
+Merge: fdc0749 dcbce11
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Fri Mar 14 10:11:08 2014 +0100
+
+    manage merge conflicts
+
+[33mcommit fdc07492bd590b2c1cc0e64b64c7c84c6d29871e[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Fri Mar 14 10:06:48 2014 +0100
+
+    add unit tests
+
+[33mcommit dcbce11b277506a76e1c9b566ecbf9000004ec25[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Thu Feb 27 08:33:28 2014 +0100
+
+    http service 2
+
+[33mcommit 40b4234aafd07a62d57b22906fb922f94f05cea9[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Tue Feb 25 16:51:32 2014 +0100
+
+    tests
+
+[33mcommit eed388e921a42a3e070b8944d6689c331555a688[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Tue Feb 25 16:18:37 2014 +0100
+
+    http service
+
+[33mcommit 673d56de67d1bc26eb3ed934e4efc2926f2b4f4e[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Tue Feb 25 16:17:14 2014 +0100
+
+    http service
+
+[33mcommit 7007fb1a21a25ebd9baa67da3756d49a9ba2d40b[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Fri Feb 7 16:12:05 2014 +0100
+
+    add itinerary
+
+[33mcommit b0fdc253630f2d5ead22251eb866187e29d98781[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Thu Feb 6 11:24:25 2014 +0100
+
+    add map
+
+[33mcommit 2912bfa90899786c529893226592212679eba06a[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Thu Feb 6 11:06:17 2014 +0100
+
+    add map
+
+[33mcommit 0d5e86cf6033b9571669fb40a6e5fd3969fc61cf[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Thu Feb 6 11:04:41 2014 +0100
+
+    add map
+
+[33mcommit 511a009ae915ec851774471dbf3567846c78988d[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Sun Feb 2 19:06:13 2014 +0100
+
+    add jetty server
+
+[33mcommit 6708429e54a08109e8b5306b2d71c0d14508d2eb[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Sun Feb 2 19:01:47 2014 +0100
+
+    add jetty server
+
+[33mcommit b6c35889cbb77cecc6c213b99b55a7368b5e7571[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Sun Feb 2 19:01:26 2014 +0100
+
+    add jetty server
+
+[33mcommit e1cdfed3a30eb6f44b099b21bdf06239e1896bd1[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Sun Feb 2 18:59:53 2014 +0100
+
+    add jetty server
+
+[33mcommit 1da9cf942df052b982cb853f906caf1f9848435f[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Sun Feb 2 10:23:50 2014 +0100
+
+    update and delete travel
+
+[33mcommit 9d0f6a9fc97f98a1178f8f38498b77a39b0e3c0b[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Sun Feb 2 10:23:02 2014 +0100
+
+    update and delete travel
+
+[33mcommit fdf8c20c984a087fa19d3a5b92cdc50fbffdf937[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Fri Jan 31 17:25:43 2014 +0100
+
+    add travel
+
+[33mcommit de5f89ad024af8aabf44b80120f83c5d866df0b3[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Fri Jan 31 17:25:03 2014 +0100
+
+    add travel
+
+[33mcommit f6bc3d07a358c13a8b027ae7959d1b3e65287b3c[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Tue Jan 28 14:38:20 2014 +0100
+
+    server deployable under Tomcat
+
+[33mcommit 922e9f3be1e541cfb7d68641cf9988c84a9097ef[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Tue Jan 28 14:36:08 2014 +0100
+
+    server deployable under Tomcat
+
+[33mcommit 0310559bba1964fc76453b77a8c662b272b44307[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Tue Jan 28 10:04:05 2014 +0100
+
+    jar to war conversion
+
+[33mcommit 7671dbb0705b62593019d61f26723af61d5d9344[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Fri Jan 24 10:06:31 2014 +0100
+
+    data retrieved from server except images
+
+[33mcommit 7a8d0c97c3444fd89c21f278f6098db6ff26bacd[m
+Merge: 3568e6d b650dd6
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Mon Jan 20 14:38:00 2014 +0100
+
+    update photos
+
+[33mcommit 3568e6d7bb5d8d435e573eb84f3c8eb7b4024a66[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Mon Jan 20 14:11:38 2014 +0100
+
+    update photos
+
+[33mcommit bdc0ec4124227e56d74e4031e2ff957e3bc3b326[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Fri Jan 17 17:32:42 2014 +0100
+
+    update carousel
+
+[33mcommit d28272b9add12905a335c38d469f6c2675b45a2e[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Fri Jan 17 17:28:28 2014 +0100
+
+    update carousel
+
+[33mcommit 9ee12e4de565ee3a49c5695cb89714a4de4247fc[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Fri Jan 17 13:59:31 2014 +0100
+
+    select travel
+
+[33mcommit 6deb2077ba23f2b8949c3ef9cda5a58fad53cb4a[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Thu Jan 16 15:34:58 2014 +0100
+
+    add some fixes
+
+[33mcommit b650dd6d8c0c495ac3c55bcb53bd5684b5a20cec[m
+Author: adoueb <adoueb@club-internet.fr>
+Date:   Mon Jan 13 19:03:21 2014 +0100
+
+    change readme
+
+[33mcommit 24bbb8696c46cbef37b4e1a7733dba2e7a6234fe[m
+Author: adoueb <agnes.doueb@gmail.com>
+Date:   Mon Jan 13 11:10:00 2014 +0100
+
+    comment
+
+[33mcommit 1c724915f3a44a9e727a149dea70965df81b339d[m
+Author: adoueb <adoueb@club-internet.fr>
+Date:   Sun Jan 12 19:08:16 2014 +0100
+
+    Initial project from Bootstrap tutorial
