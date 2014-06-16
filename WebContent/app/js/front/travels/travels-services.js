@@ -158,15 +158,15 @@ angular.module('travels-services', [ 'ngResource'])
 		var travelsData = {travels:{selectedTravel:null}, error:{}};
 		
 	    TravelRest.query(function(travels) {
-	    	$log.info('Error while loading travels');
-	    	travelsData.error = {"class": "danger", "description": "The travels can't be loaded. Please retry."};
+			// List of travels.
+		    $log.info('travels loaded');
+		    travelsData.travels = []; //this.getTravelsData(travels);
 	    }, function() {
 	    	$log.info('Error while loading travels');
 	    	travelsData.error = {"class": "danger", "description": "The travels can't be loaded. Please retry."};
 	    });
 	    
-	    return travelsData;
-	    */
+	    return travelsData;*/
 	};
 	
 	// Order for display the travels.

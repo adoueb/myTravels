@@ -17,5 +17,10 @@ angular.module('common-services', [])
                  + "&body=" + escape(email.body);
 
 		window.location.href = link;
-	};    
+	};
+	
+	// show error.   
+    this.showError = function(ngModelController, error) {
+    	return ngModelController.$error[error];
+    };
 }]);

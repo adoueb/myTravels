@@ -475,6 +475,6 @@ angular.module('travels-controllers', [
     };
     
     $scope.showError = function(ngModelController, error) {
-    	return ngModelController.$error[error];
+    	CommonService.showError(ngModelController, error);
     };
 }]);
