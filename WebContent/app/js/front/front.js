@@ -5,10 +5,9 @@
 
 // Declare app level module which depends on filters, services, directives and controllers.
 angular.module('travelApp', [
-  'travels',
-  'google-maps',
-  'ngRoute',
-  'angularFileUpload'
+  'common',
+  'travel-maps',
+  'travels'
 ]);
 
 /*

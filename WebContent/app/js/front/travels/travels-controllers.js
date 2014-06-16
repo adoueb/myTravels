@@ -6,18 +6,24 @@
 
 /* Controllers */
 
-angular.module('travels-controllers', [])
+angular.module('travels-controllers', [
+           'google-maps',
+           'ngRoute',
+           'angularFileUpload'])
  
 // ------------------------------------------------------------------------
 // TravelListCtrl controller
 // ------------------------------------------------------------------------
 .controller('TravelListCtrl', 
-            ['$scope', '$log', '$filter', '$timeout', '$upload', 'TravelRest',
-		    function($scope, $log, $filter, $timeout, $upload, TravelRest) {
+            ['$scope', '$log', '$timeout', '$upload', 'TravelRest', 'MapService', 'TravelService', 'CommonService',
+		    function($scope, $log, $timeout, $upload, TravelRest, MapService, TravelService, CommonService) {
 	
     // --------------------------------------------------------------------
     // Initializations.
     // --------------------------------------------------------------------
+    
+   TravelService.initTravels();
+   
     $scope.MainErrors = [];
     $scope.showAddTravelError = false;
     $scope.showUpdateTravelError = false;
@@ -25,9 +31,6 @@ angular.module('travels-controllers', [])
     $scope.showEditStopError = false;
     $scope.showUploadImagesTravelError = false;
     $scope.showManageImagesTravelError = false;
- 
-    // Order of travels.
-    $scope.orderProp = 'year';
 
     // Retrieve list of travels from the server.
     /*
@@ -56,10 +59,8 @@ angular.module('travels-controllers', [])
     // --------------------------------------------------------------------
     // Map initialization.
     // --------------------------------------------------------------------
-
-	// Enable the new Google Maps visuals until it gets enabled by default.
-	// See http://googlegeodevelopers.blogspot.ca/2013/05/a-fresh-new-look-for-maps-api-for-all.html
-    google.maps.visualRefresh = true;
+    
+    MapService.initMap();
       
     // Initialize map.
 	$scope.map = {
@@ -81,157 +82,47 @@ angular.module('travels-controllers', [])
 	
     // --------------------------------------------------------------------
     // Manage map.
-    // --------------------------------------------------------------------
-	$scope.setMap = function(position, zoom, markers) {
-		$scope.map.center =  {
-	        latitude: position.coords.latitude,
-	        longitude: position.coords.longitude
-	    };
-		$scope.map.zoom = (typeof zoom === "undefined") ? 8 : zoom;
-		$scope.markers = markers;
-    };
-
-	// Call to display map when stops not defined.
-	$scope.setDefaultMap = function() {
-	    /*
-		if(navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition($scope.setMap);
-		} else {
-		    $scope.setMap({coords: {latitude:47, longitude:-122}}, 2);  
-		}
-		*/
-		$scope.setMap({coords: {latitude:47, longitude:-122}}, 2, []);  
-    };
-	  
+    // --------------------------------------------------------------------	  
 	$scope.onMarkerClicked = function (marker) {
 	    marker.showWindow = true;
 	};
     
-    // Compute bounds from stops.
-    var computeBounds = function(stops) {
-	    var southwest_latitude = stops[0].latitude;
-		var southwest_longitude = stops[0].longitude;
-		var northeast_latitude = stops[0].latitude;
-		var northeast_longitude = stops[0].longitude;
-		
-		for (var stopIndex=0; stopIndex < stops.length; stopIndex++) {
-			var currentStop = stops[stopIndex];
-			if (currentStop.latitude < southwest_latitude) {
-				southwest_latitude = currentStop.latitude;
-			}
-			if (currentStop.longitude < southwest_longitude) {
-				southwest_longitude = currentStop.longitude;
-			}
-			if (currentStop.latitude > northeast_latitude) {
-				northeast_latitude = currentStop.latitude;
-			}
-			if (currentStop.longitude > northeast_longitude) {
-				northeast_longitude = currentStop.longitude;
-			}
-		}
-		southwest_latitude -= 0.01;
-		southwest_longitude -= 0.01;
-		northeast_latitude += 0.01;
-		northeast_longitude += 0.01;
-		
-		return {
-		    southwest: {
-			    latitude: southwest_latitude,
-				longitude: southwest_longitude
-			},
-			northeast: {
-			    latitude: northeast_latitude,
-			    longitude: northeast_longitude
-			}
-		};
-    };
-
     // --------------------------------------------------------------------
     // Manage travels.
     // --------------------------------------------------------------------
-    // Initialize travels.
     $scope.initializeTravels = function(travels) {
-    	$scope.setTravels(travels);
-   	  
-		// Selected travel.
-	    if ($scope.travels.length >= 1) {
-	    	
-	        $scope.setSelectedTravel($scope.travels[0]);
-	    } else {
-	        $scope.setSelectedTravel(null);
-	    }
-    };
-    
-    // Set travels.
-    $scope.setTravels = function(travels) {
-    	// Order by date, reverse.
-    	// ng-repeat="travel in travels | orderBy:orderProp:true" in HTML.
-    	$scope.travels = $filter('orderBy')(travels, $scope.orderProp, true);
+    	var travelsData = TravelService.getTravelsData(travels);
+    	$scope.travels = travelsData.travelsList;
+    	$scope.selectedTravel = travelsData.selectedTravel;
+    	$scope.map = travelsData.map;
+    	$scope.markers = travelsData.markers;
     };
     
     $scope.addTravelToList = function (travel) {
-    	var travelList = $scope.travels;
-    	travelList.push(travel);
-    	$scope.setTravels(travelList);
-    	if (travelList.length == 1) {
-    		// First travel creation.
-    		$scope.setSelectedTravel($scope.travels[0]);
+    	var travelsData = TravelService.addTravel($scope.travels, travel);
+    	$scope.travels = travelsData.travelsList;
+    	if (travelsData.selectedTravel != null) {
+    		// New selection.
+        	$scope.selectedTravel = travelsData.selectedTravel;
+        	$scope.map = travelsData.map;
+        	$scope.markers = travelsData.markers;
     	}
     };
     
     $scope.updateTravelInList = function (travel) {
-    	// Iterate through travels.
-	      for (var indexTravel = 0; indexTravel < $scope.travels.length; indexTravel++) {
-	    	  if ($scope.travels[indexTravel].id == travel.id) {
-	    		  $scope.travels[indexTravel] = travel;
-	    		  // Update selection if so.
-	    		  if (travel.id == $scope.selectedTravel.id) {
-	    			  $scope.selectedTravel =  travel; 
-	    		  }
-	    		  break;
-	    	  }
-	      }
-	      $log.info("travel " + travel.id + " / " + travel.country + " refreshed");
+    	var updateTravelData = TravelService.updateTravel($scope.travels, $scope.selectedTravel, travel);
+    	if (updateTravelData.selectedTravel != null) {
+    		$scope.selectedTravel = updateTravelData.selectedTravel;
+    	}
 	};
-	 
-    // Set selected travel.
-    $scope.setSelectedTravel = function(selectedTravel) {
-    	if (selectedTravel != null && selectedTravel != undefined) {
-	        // Set selected travel.
-	    	$scope.selectedTravel =  selectedTravel;
-	    	
-	    	// Set map.
-	    	if (selectedTravel.itinerary.stops.length >= 1) {
-	    	    // Compute southwest and northeast points for all the markers to be displayed.
-	    		// Iterate through the stops.
-	    	
-	    		var bounds = computeBounds(selectedTravel.itinerary.stops);
-	    		$scope.map.center = {
-		    	    latitude: selectedTravel.itinerary.stops[0].latitude,
-		    		longitude: selectedTravel.itinerary.stops[0].longitude
-		    	};
-	    		$scope.map.zoom = 9;
-	    		$scope.map.markers = selectedTravel.itinerary.stops;
-	    		$scope.map.bounds = bounds;
-		    } else {
-		    	$scope.map.markers = [];
-		    	$scope.setDefaultMap();
-		    }
-	    	
-	    	// Stops: set icon.
-	    	for (var stopIndex=0; stopIndex < $scope.selectedTravel.itinerary.stops.length; stopIndex++) {
-			    var currentStop = $scope.selectedTravel.itinerary.stops[stopIndex];
-				currentStop.icon = "img/static/blue_Marker" + String.fromCharCode(65 + stopIndex) + ".png";
-				currentStop.draggable = true;
-	    	}
-    	} else {
-    		// No selected travel
-    		$scope.selectedTravel = null;
-    		$scope.setDefaultMap();
-    	} 
-    		
+	
+	$scope.selectTravel = function(travel) {
+		var travelData = TravelService.getSelectedTravelData(travel);
+    	$scope.selectedTravel = travelData.selectedTravel;
+    	$scope.map = travelData.map;
+    	$scope.markers = travelData.markers;
     };
-    
+   
     $scope.refreshTravel = function(id) {
     	TravelRest.queryOne(id, function(travel) {
 			// Travel.
@@ -580,11 +471,7 @@ angular.module('travels-controllers', [])
     // --------------------------------------------------------------------
     // Send email.
     $scope.sendEmail = function() {
-    	var link = "mailto:" + $scope.address
-                 + "&subject=" + escape($scope.subject)
-                 + "&body=" + escape($scope.body);
-
-    	window.location.href = link;
+    	CommonService.sendEmail($scope.email);
     };
     
     $scope.showError = function(ngModelController, error) {

@@ -28,9 +28,9 @@
  	<!-- Wrong: Placed at the end of the document so the pages load faster -->
  	
  	<!-- AngularJS -->
-	<script src="lib/angular-1.3.0-beta.11/angular.js"></script>
-	<script src="lib/angular-1.3.0-beta.11/angular-route.js"></script>
-	<script src="lib/angular-1.3.0-beta.11/angular-resource.js"></script>
+	<script src="lib/angular-1.2.17/angular.js"></script>
+	<script src="lib/angular-1.2.17/angular-route.js"></script>
+	<script src="lib/angular-1.2.17/angular-resource.js"></script>
 	
 	<!-- jQuery -->
 	<script src="lib/jQuery/jquery-latest.js"></script>
@@ -48,16 +48,22 @@
 	<script type="text/javascript" src="lib/angulargooglemaps/angular-google-maps.js"></script>
 	
 	<!-- Application -->
-	<script src="js/front/front.js"></script>
+	<script src="js/front/common/common-services.js"></script>
+	<script src="js/front/common/common.js"></script>
 	
-	<script src="js/front/travels/travels.js"></script>
+	<script src="js/front/upload/angular-file-upload-shim.js"></script>
+	<script src="js/front/upload//angular-file-upload.js"></script>
+	
+	<script src="js/front/travel-maps/travel-maps-services.js"></script>
+	<script src="js/front/travel-maps/travel-maps.js"></script>
+	
 	<script src="js/front/travels/travels-services.js"></script>
 	<script src="js/front/travels/travels-controllers.js"></script>
 	<script src="js/front/travels/travels-filters.js"></script>
 	<script src="js/front/travels/travels-directives.js"></script>
+	<script src="js/front/travels/travels.js"></script>
 	
-	<script src="js/front/upload/angular-file-upload-shim.js"></script>
-	<script src="js/front/upload//angular-file-upload.js"></script>
+	<script src="js/front/front.js"></script>
 		
 
  	<!-- ========================================================================================== -->
@@ -229,7 +235,7 @@
 				<div class="list-group">
 	 				<!-- a href="#" class="list-group-item" ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)"-->
 	 				<div class="list-group-item" ng-repeat="travel in travels" ng-style="activeStyle(travel)">
-	 					<a href="#" class="list-group-item thumbnail" ng-class="{active:travel.id==selectedTravel.id}" style="border:0px;padding:0;margin-bottom:0" ng-click="setSelectedTravel(travel);">
+	 					<a href="#" class="list-group-item thumbnail" ng-class="{active:travel.id==selectedTravel.id}" style="border:0px;padding:0;margin-bottom:0" ng-click="selectTravel(travel);">
 		 					<div>
 			 					<h4 class="list-group-item-heading">{{travel.year}} - {{travel.name}}</h4>
 			 					<p class="list-group-item-heading" style="overflow:auto">
