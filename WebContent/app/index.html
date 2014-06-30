@@ -249,12 +249,12 @@
 			 					</p>
 		 					</div>
 		 					<div class="gray-link" ng-class="{active:travel.id==selectedTravel.id}" style="text-align: right;">			
-								<a ng-click="setRemoveTravel(travel)" href="#removeTravel" data-toggle="modal">
+								<a ng-click="setDeleteTravel(travel)" href="#deleteTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-trash" title="Delete travel"></i>
 								</a>
 								<a ng-click="setUpdateTravel(travel)" href="#updateTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-edit" title="Update travel"></i>
-								</a>
+								</a>								
 								<a ng-click="setUploadPhotosTravel(travel)" href="#uploadPhotosTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-upload" title="Upload photos of travel"></i>
 								</a>
@@ -287,7 +287,8 @@
   	<!-- ========================================================================================== -->
  	<!-- Add travel dialog                                                                          -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="addTravel" role="dialog" tabindex="-1">
+ 	<div class="modal fade" id="addTravel" role="dialog" tabindex="-1" ng-controller="AddTravelCtrl">
+ 	
  		<div class="modal-dialog">
 		<div class="modal-content">
 			<form class="form-horizontal" name="addTravelForm">
@@ -296,7 +297,7 @@
 					<h4>Add Travel</h4>
 				</div>
 				<div class="modal-body">
-					<div class="alert alert-danger alert-dismissable" ng-show="showAddTravelError">
+					<div class="alert alert-danger alert-dismissable" ng-show="getAddTravelError()">
 		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		  				<strong>Error!</strong> The travel can't be added.
 					</div>
@@ -335,13 +336,13 @@
 				</div>
 			</form>
 		</div>
-	</div>
+		</div>
  	</div>
  	
   	<!-- ========================================================================================== -->
  	<!-- Update travel dialog                                                                       -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="updateTravel" role="dialog" tabindex="-1">
+ 	<div class="modal fade" id="updateTravel" role="dialog" tabindex="-1" ng-controller="UpdateTravelCtrl">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<form class="form-horizontal">
@@ -350,11 +351,11 @@
 					<h4>Update Travel</h4>
 				</div>
 				<div class="modal-body">
-					<div class="alert alert-danger alert-dismissable" ng-show="showUpdateTravelError">
+					<div class="alert alert-danger alert-dismissable" ng-show="getUpdateTravelError()">
 		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		  				<strong>Error!</strong> The travel can't be updated.
 					</div>
-					
+
 					<div class="form-group">
 						<label for="contact-update-country" class="col-lg-2 control-label">Country:</label>
 						<div class="col-lg-10">
@@ -386,12 +387,13 @@
 				</div>
 			</form>
 		</div>
-</div> 	</div>
- 	
+	</div>
+	</div>
+	
   	<!-- ========================================================================================== -->
  	<!-- Delete travel dialog                                                                       -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="removeTravel" role="dialog" tabindex="-1">
+ 	<div class="modal fade" id="deleteTravel" role="dialog" tabindex="-1" ng-controller="DeleteTravelCtrl">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form class="form-horizontal">
@@ -399,11 +401,11 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4>Delete Travel</h4>
 					</div>
-					<div class="alert alert-danger alert-dismissable" ng-show="showDeleteTravelError">
+					<div class="alert alert-danger alert-dismissable" ng-show="getDeleteTravelError()">
 		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		  				<strong>Error!</strong> The travel can't be deleted.
 					</div>
-							
+
 					<div class="modal-body">
 						Do you really want to delete the "{{currentTravel.name}}" travel ?
 					</div>
@@ -415,7 +417,7 @@
 			</div>
 		</div>
 	</div>
- 	
+	
   	<!-- ========================================================================================== -->
  	<!-- Upload photos dialog                                                                       -->
  	<!-- ========================================================================================== -->
@@ -523,7 +525,7 @@
   	<!-- ========================================================================================== -->
  	<!-- Contact dialog                                                                             -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="contact" role="dialog" tabindex="-1">
+ 	<div class="modal fade" id="contact" role="dialog" tabindex="-1" ng-controller="ContactCtrl">
  		<div class="modal-dialog">
  			<div class="modal-content">
  				<form class="form-horizontal">

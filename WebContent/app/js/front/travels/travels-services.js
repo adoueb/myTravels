@@ -251,7 +251,7 @@ angular.module('travels-services', [ 'ngResource'])
 	// Update travel and return travels data (travelsList + selectedTravel + map + markers).
 	this.updateTravel = function(travels, selectedTravel, travel) {
 		
-		var selectedTravel = null;
+		var selectedUpdatedTravel = null;
 		
     	// Iterate through travels.
 	      for (var indexTravel = 0; indexTravel < travels.length; indexTravel++) {
@@ -259,13 +259,74 @@ angular.module('travels-services', [ 'ngResource'])
 	    		  travels[indexTravel] = travel;
 	    		  // Update selection if so.
 	    		  if (travel.id ==selectedTravel.id) {
-	    			  selectedTravel =  travel; 
+	    			  selectedUpdatedTravel =  travel; 
 	    		  }
 	    		  break;
 	    	  }
 	      }
 	      $log.info("travel " + travel.id + " / " + travel.country + " refreshed");
 		
-	   	return {selectedTravel: selectedTravel};
+	   	return {selectedTravel: selectedUpdatedTravel};
 	};
-}]);
+}])
+
+// ------------------------------------------------------------------------
+// AddTravelService
+// ------------------------------------------------------------------------
+.factory('AddTravelService', ['$log', function($log) {
+	var me = {};
+	
+	me.showAddTravelError = false;	
+
+	me.getShowAddTravelError = function() {
+		return me.showAddTravelError;
+	};
+
+	me.setShowAddTravelError = function(bValue) {
+		me.showAddTravelError = bValue;
+		$log.info("showAddTravelError = " + me.showAddTravelError);
+	};
+
+	return me;
+}])
+
+// ------------------------------------------------------------------------
+// UpdateTravelService
+// ------------------------------------------------------------------------
+.factory('UpdateTravelService', ['$log', function($log) {
+	var me = {};
+	
+	me.showUpdateTravelError = false;	
+
+	me.getShowUpdateTravelError = function() {
+		return me.showUpdateTravelError;
+	};
+
+	me.setShowUpdateTravelError = function(bValue) {
+		me.showUpdateTravelError = bValue;
+		$log.info("showUpdateTravelError = " + me.showUpdateTravelError);
+	};
+
+	return me;
+}])
+
+// ------------------------------------------------------------------------
+// DeleteTravelService
+// ------------------------------------------------------------------------
+.factory('DeleteTravelService', ['$log', function($log) {
+	var me = {};
+	
+	me.showDeleteTravelError = false;	
+
+	me.getShowDeleteTravelError = function() {
+		return me.showDeleteTravelError;
+	};
+
+	me.setShowDeleteTravelError = function(bValue) {
+		me.showDeleteTravelError = bValue;
+		$log.info("showDeleteTravelError = " + me.showDeleteTravelError);
+	};
+
+	return me;
+}])
+;

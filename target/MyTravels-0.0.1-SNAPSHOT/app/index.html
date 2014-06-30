@@ -37,6 +37,9 @@
 	
 	<!-- Bootstrap -->
     <script src="lib/bootstrap-3.1.1-dist/js/bootstrap.js"></script>
+	
+	<!-- UI Bootstrap -->
+    <script src="lib/ui-bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
     
     <!-- Underscore -->
     <script type="text/javascript" src="lib/underscore/underscore-min.js"></script>
@@ -235,7 +238,7 @@
 				<div class="list-group">
 	 				<!-- a href="#" class="list-group-item" ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)"-->
 	 				<div class="list-group-item" ng-repeat="travel in travels" ng-style="activeStyle(travel)">
-	 					<a href="#" class="list-group-item thumbnail" ng-class="{active:travel.id==selectedTravel.id}" style="border:0px;padding:0;margin-bottom:0" ng-click="setSelectedTravel(travel);">
+	 					<a href="#" class="list-group-item thumbnail" ng-class="{active:travel.id==selectedTravel.id}" style="border:0px;padding:0;margin-bottom:0" ng-click="selectTravel(travel);">
 		 					<div>
 			 					<h4 class="list-group-item-heading">{{travel.year}} - {{travel.name}}</h4>
 			 					<p class="list-group-item-heading" style="overflow:auto">
@@ -246,12 +249,12 @@
 			 					</p>
 		 					</div>
 		 					<div class="gray-link" ng-class="{active:travel.id==selectedTravel.id}" style="text-align: right;">			
-								<a ng-click="setRemoveTravel(travel)" href="#removeTravel" data-toggle="modal">
+								<a ng-click="setDeleteTravel(travel)" href="#deleteTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-trash" title="Delete travel"></i>
 								</a>
 								<a ng-click="setUpdateTravel(travel)" href="#updateTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-edit" title="Update travel"></i>
-								</a>
+								</a>								
 								<a ng-click="setUploadPhotosTravel(travel)" href="#uploadPhotosTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-upload" title="Upload photos of travel"></i>
 								</a>
@@ -284,7 +287,8 @@
   	<!-- ========================================================================================== -->
  	<!-- Add travel dialog                                                                          -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="addTravel" role="dialog" tabindex="-1">
+ 	<div class="modal fade" id="addTravel" role="dialog" tabindex="-1" ng-controller="AddTravelCtrl">
+ 	
  		<div class="modal-dialog">
 		<div class="modal-content">
 			<form class="form-horizontal" name="addTravelForm">
@@ -332,13 +336,13 @@
 				</div>
 			</form>
 		</div>
-	</div>
+		</div>
  	</div>
  	
   	<!-- ========================================================================================== -->
  	<!-- Update travel dialog                                                                       -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="updateTravel" role="dialog" tabindex="-1">
+ 	<div class="modal fade" id="updateTravel" role="dialog" tabindex="-1" ng-controller="UpdateTravelCtrl">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<form class="form-horizontal">
@@ -351,7 +355,7 @@
 		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		  				<strong>Error!</strong> The travel can't be updated.
 					</div>
-					
+
 					<div class="form-group">
 						<label for="contact-update-country" class="col-lg-2 control-label">Country:</label>
 						<div class="col-lg-10">
@@ -383,12 +387,13 @@
 				</div>
 			</form>
 		</div>
-</div> 	</div>
- 	
+	</div>
+	</div>
+	
   	<!-- ========================================================================================== -->
  	<!-- Delete travel dialog                                                                       -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="removeTravel" role="dialog" tabindex="-1">
+ 	<div class="modal fade" id="deleteTravel" role="dialog" tabindex="-1" ng-controller="DeleteTravelCtrl">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<form class="form-horizontal">
@@ -400,7 +405,7 @@
 		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		  				<strong>Error!</strong> The travel can't be deleted.
 					</div>
-							
+
 					<div class="modal-body">
 						Do you really want to delete the "{{currentTravel.name}}" travel ?
 					</div>
@@ -412,7 +417,7 @@
 			</div>
 		</div>
 	</div>
- 	
+	
   	<!-- ========================================================================================== -->
  	<!-- Upload photos dialog                                                                       -->
  	<!-- ========================================================================================== -->
@@ -520,7 +525,7 @@
   	<!-- ========================================================================================== -->
  	<!-- Contact dialog                                                                             -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="contact" role="dialog" tabindex="-1">
+ 	<div class="modal fade" id="contact" role="dialog" tabindex="-1" ng-controller="ContactCtrl">
  		<div class="modal-dialog">
  			<div class="modal-content">
  				<form class="form-horizontal">

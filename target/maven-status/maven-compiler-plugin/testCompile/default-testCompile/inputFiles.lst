@@ -1,7 +1,7 @@
-C:\Mes documents\Dev\myProjects\myTravels\src\test\java\com\mytravels\persistence\domain\fixture\PersistenceFixture.java
-C:\Mes documents\Dev\myProjects\myTravels\src\test\java\com\mytravels\persistence\integration\TravelRepositoryAnalyseCountriesIntegrationTests.java
-C:\Mes documents\Dev\myProjects\myTravels\src\test\java\com\mytravels\persistence\integration\TravelRepositoryIntegrationTests.java
-C:\Mes documents\Dev\myProjects\myTravels\src\test\java\com\mytravels\persistence\integration\TravelMappingIntegrationTests.java
-C:\Mes documents\Dev\myProjects\myTravels\src\test\java\com\mytravels\persistence\integration\TravelRepositoryFindByTests.java
-C:\Mes documents\Dev\myProjects\myTravels\src\test\java\com\mytravels\persistence\domain\fixture\MongoAssertions.java
-C:\Mes documents\Dev\myProjects\myTravels\src\test\java\com\mytravels\config\MongoConfigurationTest.java
+C:\Agnes\workspace\myTravels\src\test\java\com\mytravels\config\MongoConfigurationTest.java
+C:\Agnes\workspace\myTravels\src\test\java\com\mytravels\persistence\integration\TravelRepositoryIntegrationTests.java
+C:\Agnes\workspace\myTravels\src\test\java\com\mytravels\persistence\integration\TravelRepositoryAnalyseCountriesIntegrationTests.java
+C:\Agnes\workspace\myTravels\src\test\java\com\mytravels\persistence\domain\fixture\PersistenceFixture.java
+C:\Agnes\workspace\myTravels\src\test\java\com\mytravels\persistence\domain\fixture\MongoAssertions.java
+C:\Agnes\workspace\myTravels\src\test\java\com\mytravels\persistence\integration\TravelMappingIntegrationTests.java
+C:\Agnes\workspace\myTravels\src\test\java\com\mytravels\persistence\integration\TravelRepositoryFindByTests.java

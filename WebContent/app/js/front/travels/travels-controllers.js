@@ -15,8 +15,8 @@ angular.module('travels-controllers', [
 // TravelListCtrl controller
 // ------------------------------------------------------------------------
 .controller('TravelListCtrl', 
-            ['$scope', '$log', '$timeout', '$upload', 'TravelRest', 'MapService', 'TravelService', 'CommonService',
-		    function($scope, $log, $timeout, $upload, TravelRest, MapService, TravelService, CommonService) {
+            ['$scope', '$log', '$timeout', '$upload', 'TravelRest', 'MapService', 'TravelService', 'AddTravelService', 'UpdateTravelService', 'DeleteTravelService', 'CommonService',
+		    function($scope, $log, $timeout, $upload, TravelRest, MapService, TravelService, AddTravelService, UpdateTravelService, DeleteTravelService, CommonService) {
 	
     // --------------------------------------------------------------------
     // Initializations.
@@ -25,9 +25,6 @@ angular.module('travels-controllers', [
    TravelService.initTravels();
    
     $scope.MainErrors = [];
-    $scope.showAddTravelError = false;
-    $scope.showUpdateTravelError = false;
-    $scope.showDeleteTravelError = false;
     $scope.showEditStopError = false;
     $scope.showUploadImagesTravelError = false;
     $scope.showManageImagesTravelError = false;
@@ -171,118 +168,29 @@ angular.module('travels-controllers', [
     };
     
     // --------------------------------------------------------------------
-    // Manage CRUD operations on travels.
+    // Manage popups.
     // --------------------------------------------------------------------
-    // Create travel.
-    $scope.addTravel = function() {
-        var newTravel = {year:        $scope.addTravelData.year, 
-    			         country:     $scope.addTravelData.country, 
-    			         name:        $scope.addTravelData.name, 
-    			         description: $scope.addTravelData.description};
-
-	    // POST /travels
-	    $log.info("add " +  newTravel.name);
-	    /*
-	    Restangular.all("travels").post(newTravel).then(function(travels) {
-	    	    Restangular.all("travels").getList().then(function(travels) {
-	    	        // List of travels.
-	 	            $scope.travels = travels;
-	    		});
-	            $('#addTravel').modal('hide');
-	        }, function() {
-		        $log.error("There was an error saving");
-		        $scope.showAddTravelError = true;
-	    });
-	    */
-	    TravelRest.save(newTravel, function(travel) {
-	 	        $scope.addTravelToList(travel);
-	            $('#addTravel').modal('hide');
-	        }, function() {
-		        $log.error("There was an error saving");
-		        $scope.showAddTravelError = true;
-	    });
-    };
-    
-    $scope.canAddTravel = function() {
-    	return $scope.addTravelForm.$dirty && $scope.addTravelForm.$valid;
-    }
-    
-    // Update travel.
-    $scope.updateTravel = function(travel) {
-        // PUT /travels
-    	$log.info("update " +  travel.name);
-    	/*
-    	travel.put().then(function(travels) {
-    		    Restangular.all("travels").getList().then(function(travels) {
-    	            // List of travels.
- 	                $scope.travels = travels;
-    		    });
-    		    $('#updateTravel').modal('hide');
-    	    }, function() {
-    			$log.error("There was an error updating");
-		        $scope.showUpdateTravelError = true;
-		        $scope.showEditStopError = true;
-    	});
-    	*/
-    	TravelRest.update(travel, function(travel) {
-    	        // Update list of travels.
-    			$scope.updateTravelInList(travel);
- 	            $('#updateTravel').modal('hide');
-    	    }, function() {
-    			$log.error("There was an error updating");
-		        $scope.showUpdateTravelError = true;
-		        $scope.showEditStopError = true;
-    	});
-    };
-    
-    // Delete travel.
-    $scope.deleteTravel = function(travel) {
-        // DELETE /travels
-    	$log.info("delete " +  travel.name);
-    	/*
-    	travel.remove().then(function(travels) {
-    		    Restangular.all("travels").getList().then(function(travels) {
-    	            // List of travels.
- 	                $scope.travels = travels;
-    		    });
-		        $('#removeTravel').modal('hide');
-		    }, function() {
-			    $log.error("There was an error deleting");
-		        $scope.showDeleteTravelError = true;
-    	});
-    	*/
-    	TravelRest.remove(travel, function(travels) {
- 	        $scope.travels = travels;
- 	       if ($scope.selectedTravel.id == travel.id) {
- 	    	   // Delete the selected travel.
- 	    	   $scope.initializeTravels(travels);	
-		   } else {
-			   $scope.setTravel(travels);
-		   }
- 	       $('#removeTravel').modal('hide');
-        }, function() {
-        	$log.error("There was an error deleting");
-	        $scope.showDeleteTravelError = true;
-        });
-    };
-
     // Set add travel.
     $scope.setAddTravel = function() {
         $scope.showAddTravelError = false;
     };
-
+    
     // Set update travel.
     $scope.setUpdateTravel = function(travel) {
-        $scope.showUpdateTravelError = false;
-    	$scope.setCurrentTravel(travel);
+    	$scope.showUpdateTravelError = false;
+        $scope.setCurrentTravel(travel);
     };
 
-    // Set remove travel.
-    $scope.setRemoveTravel = function(travel) {
-        $scope.showDeleteTravelError = false;
+    // Set delete travel.
+    $scope.setDeleteTravel = function(travel) {
+    	$scope.showDeleteTravelError = false;
     	$scope.setCurrentTravel(travel);
     };
-
+    
+    // --------------------------------------------------------------------
+    // Manage CRUD operations on travels.
+    // --------------------------------------------------------------------
+    
     // Set "upload photos" travel.
     $scope.setUploadPhotosTravel = function(travel) {
         $scope.showUploadImagesTravelError = false;
@@ -465,16 +373,132 @@ angular.module('travels-controllers', [
 			}
 		}
 	};
+}])
+
+// ------------------------------------------------------------------------
+// AddTravelCtrl controller
+// ------------------------------------------------------------------------
+.controller('AddTravelCtrl', 
+        ['$scope', '$log', 'TravelRest', 'AddTravelService', 'TravelService', 'CommonService',
+		    function($scope, $log, TravelRest, AddTravelService, TravelService, CommonService) {
     
-    // --------------------------------------------------------------------
-    // General actions of navigation bar.
-    // --------------------------------------------------------------------
-    // Send email.
-    $scope.sendEmail = function() {
-    	CommonService.sendEmail($scope.email);
+    $scope.$parent.showAddTravelError = false;
+    
+    $scope.getAddTravelError = function () {
+    	return $scope.$parent.showAddTravelError;
+    };
+    
+    // Create travel.
+    $scope.addTravel = function() {
+        var newTravel = {year:        $scope.addTravelData.year, 
+    			         country:     $scope.addTravelData.country, 
+    			         name:        $scope.addTravelData.name, 
+    			         description: $scope.addTravelData.description};
+
+	    // POST /travels
+	    $log.info("add " +  newTravel.name);
+	    TravelRest.save(newTravel, function(travel) {
+	 	        //$scope.$parent.addTravelToList(travel);
+	            //$('#addTravel').modal('hide');
+	            $log.error("There was an error saving");
+	            $scope.$parent.showAddTravelError = true;
+	        }, function() {
+		        $log.error("There was an error saving");
+		        $scope.$parent.showAddTravelError = true;
+	    });
+    };
+    
+    $scope.canAddTravel = function() {
+    	return $scope.addTravelForm.$dirty && $scope.addTravelForm.$valid;
+    };
+       
+    $scope.showError = function(ngModelController, error) {
+    	return CommonService.showError(ngModelController, error);
+    };
+   
+}])
+
+// ------------------------------------------------------------------------
+// UpdateTravelCtrl controller
+// ------------------------------------------------------------------------
+.controller('UpdateTravelCtrl', 
+        ['$scope', '$log', 'TravelRest', 'UpdateTravelService', 'TravelService', 'CommonService',
+		    function($scope, $log, TravelRest, UpdateTravelService, TravelService, CommonService) {
+       
+    $scope.$parent.showUpdateTravelError = false;
+    
+    $scope.getUpdateTravelError = function () {
+    	return $scope.$parent.showUpdateTravelError;
+    };
+     
+    // Update travel.
+    $scope.updateTravel = function(travel) {
+        // PUT /travels
+    	$log.info("update " +  travel.name);
+    	$log.info("selected travel " +  $scope.$parent.selectedTravel.name);
+    	TravelRest.update(travel, function(travel) {
+    	        // Update list of travels.
+    			$scope.$parent.updateTravelInList(travel);
+ 	            $('#updateTravel').modal('hide');
+    	    }, function() {
+    			$log.error("There was an error updating");
+    			$scope.$parentshowUpdateTravelError = true;
+		        $scope.$parent.showEditStopError = true;
+    	});
     };
     
     $scope.showError = function(ngModelController, error) {
-    	CommonService.showError(ngModelController, error);
+    	return CommonService.showError(ngModelController, error);
+    };
+   
+}])
+
+// ------------------------------------------------------------------------
+// DeleteTravelCtrl controller
+// ------------------------------------------------------------------------
+.controller('DeleteTravelCtrl', 
+        ['$scope', '$log', 'TravelRest', 'DeleteTravelService', 'TravelService', 'CommonService',
+		    function($scope, $log, TravelRest, DeleteTravelService, TravelService, CommonService) {    
+        	
+    $scope.$parent.showDeleteTravelError = false;
+    
+    $scope.getDeleteTravelError = function () {
+    	return $scope.$parent.showDeleteTravelError;
+    };
+       	
+    // Delete travel.
+    $scope.deleteTravel = function(travel) {
+        // DELETE /travels
+    	$log.info("delete " +  travel.name);
+    	TravelRest.remove(travel, function(travels) {
+ 	       //$scope.$parent.travels = travels;
+ 	       if ($scope.$parent.selectedTravel.id == travel.id) {
+ 	    	   // Delete the selected travel.
+ 	    	   $scope.$parent.initializeTravels(travels);	
+		   } else {
+			   $scope.$parent.travels = TravelService.getOrderedTravels(travels);
+		   }
+ 	       $('#deleteTravel').modal('hide');
+        }, function() {
+        	$log.error("There was an error deleting");
+        	$scope.$parent.showDeleteTravelError = true;
+        });
+    };
+    
+    $scope.showError = function(ngModelController, error) {
+    	return CommonService.showError(ngModelController, error);
+    };    
+}])
+
+// ------------------------------------------------------------------------
+// ContactCtrl controller
+// ------------------------------------------------------------------------
+.controller('ContactCtrl', 
+        ['$scope', '$log', 'CommonService',
+		    function($scope, $log, CommonService) {
+        	
+    // Send email.
+    $scope.sendEmail = function() {
+        CommonService.sendEmail($scope.email);
     };
 }]);
