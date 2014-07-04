@@ -297,7 +297,7 @@
 					<h4>Add Travel</h4>
 				</div>
 				<div class="modal-body">
-					<div class="alert alert-danger alert-dismissable" ng-show="showAddTravelError">
+					<div class="alert alert-danger alert-dismissable" ng-show="getAddTravelError()">
 		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		  				<strong>Error!</strong> The travel can't be added.
 					</div>
@@ -351,7 +351,7 @@
 					<h4>Update Travel</h4>
 				</div>
 				<div class="modal-body">
-					<div class="alert alert-danger alert-dismissable" ng-show="showUpdateTravelError">
+					<div class="alert alert-danger alert-dismissable" ng-show="getUpdateTravelError()">
 		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		  				<strong>Error!</strong> The travel can't be updated.
 					</div>
@@ -401,7 +401,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4>Delete Travel</h4>
 					</div>
-					<div class="alert alert-danger alert-dismissable" ng-show="showDeleteTravelError">
+					<div class="alert alert-danger alert-dismissable" ng-show="getDeleteTravelError()">
 		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		  				<strong>Error!</strong> The travel can't be deleted.
 					</div>
@@ -421,7 +421,7 @@
   	<!-- ========================================================================================== -->
  	<!-- Upload photos dialog                                                                       -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="uploadPhotosTravel" role="dialog" tabindex="-1">
+ 	<div class="modal fade" id="uploadPhotosTravel" role="dialog" tabindex="-1" ng-controller="UploadImagesCtrl">
  		<div  class="modal-dialog">
 		<div class="modal-content">
 			<form class="form-horizontal" name="uploadPhotosTravelForm">
@@ -565,7 +565,7 @@
   	<!-- ========================================================================================== -->
  	<!-- Edit stop                                                                                -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="updateStop" role="dialog" tabindex="-1">
+ 	<div class="modal fade" id="updateStop" role="dialog" tabindex="-1" ng-controller="UpdateTravelCtrl">
  		<div class="modal-dialog">
  			<div class="modal-content">
  				<form class="form-horizontal">
@@ -574,7 +574,7 @@
 	 					<h4>Update Stop</h4>
 	 				</div>
 	 				<div class="modal-body">
-						<div class="alert alert-danger alert-dismissable" ng-show="showEditStopError">
+						<div class="alert alert-danger alert-dismissable" ng-show="getShowEditStopError()">
 			  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 			  				<strong>Error!</strong> The stop can't be updated.
 						</div>

@@ -1,14 +1,14 @@
-C:\Agnes\workspace\myTravels\src\main\java\com\mytravels\config\MongoConfiguration.java
-C:\Agnes\workspace\myTravels\src\main\java\com\mytravels\persistence\repository\AnalyseCountries.java
-C:\Agnes\workspace\myTravels\src\main\java\com\mytravels\TravelController.java
-C:\Agnes\workspace\myTravels\src\main\java\com\mytravels\Application.java
-C:\Agnes\workspace\myTravels\src\main\java\com\mytravels\persistence\domain\Travel.java
-C:\Agnes\workspace\myTravels\src\main\java\com\mytravels\persistence\domain\Stop.java
-C:\Agnes\workspace\myTravels\src\main\java\com\mytravels\config\DropOversizeFilesMultipartResolver.java
-C:\Agnes\workspace\myTravels\src\main\java\com\mytravels\persistence\domain\Itinerary.java
-C:\Agnes\workspace\myTravels\src\main\java\com\mytravels\exception\Result.java
-C:\Agnes\workspace\myTravels\src\main\java\com\mytravels\persistence\repository\TravelRepositoryCustom.java
-C:\Agnes\workspace\myTravels\src\main\java\com\mytravels\persistence\repository\TravelRepositoryImpl.java
-C:\Agnes\workspace\myTravels\src\main\java\com\mytravels\persistence\repository\TravelRepository.java
-C:\Agnes\workspace\myTravels\src\main\java\com\mytravels\persistence\domain\Image.java
-C:\Agnes\workspace\myTravels\src\main\java\com\mytravels\TravelWebXml.java
+C:\Mes documents\Dev\myProjects\myTravels\src\main\java\com\mytravels\persistence\domain\Itinerary.java
+C:\Mes documents\Dev\myProjects\myTravels\src\main\java\com\mytravels\persistence\repository\AnalyseCountries.java
+C:\Mes documents\Dev\myProjects\myTravels\src\main\java\com\mytravels\config\DropOversizeFilesMultipartResolver.java
+C:\Mes documents\Dev\myProjects\myTravels\src\main\java\com\mytravels\exception\Result.java
+C:\Mes documents\Dev\myProjects\myTravels\src\main\java\com\mytravels\persistence\domain\Image.java
+C:\Mes documents\Dev\myProjects\myTravels\src\main\java\com\mytravels\TravelWebXml.java
+C:\Mes documents\Dev\myProjects\myTravels\src\main\java\com\mytravels\persistence\repository\TravelRepositoryCustom.java
+C:\Mes documents\Dev\myProjects\myTravels\src\main\java\com\mytravels\persistence\domain\Travel.java
+C:\Mes documents\Dev\myProjects\myTravels\src\main\java\com\mytravels\TravelController.java
+C:\Mes documents\Dev\myProjects\myTravels\src\main\java\com\mytravels\persistence\domain\Stop.java
+C:\Mes documents\Dev\myProjects\myTravels\src\main\java\com\mytravels\persistence\repository\TravelRepository.java
+C:\Mes documents\Dev\myProjects\myTravels\src\main\java\com\mytravels\persistence\repository\TravelRepositoryImpl.java
+C:\Mes documents\Dev\myProjects\myTravels\src\main\java\com\mytravels\config\MongoConfiguration.java
+C:\Mes documents\Dev\myProjects\myTravels\src\main\java\com\mytravels\Application.java

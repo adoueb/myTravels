@@ -159,7 +159,21 @@
 				<groupId>com.google.appengine</groupId>
 				<artifactId>appengine-maven-plugin</artifactId>
 				<version>1.8.9</version>
-			</plugin>		
+			</plugin>
+			<!-- JRebel -->
+			<plugin>
+			  <groupId>org.zeroturnaround</groupId>
+			  <artifactId>jrebel-maven-plugin</artifactId>
+			  <executions>
+			    <execution>
+			      <id>generate-rebel-xml</id>
+			      <phase>process-resources</phase>
+			      <goals>
+			        <goal>generate</goal>
+			      </goals>
+			    </execution>
+			  </executions>
+			</plugin>				
         </plugins>
 	</build>
 
