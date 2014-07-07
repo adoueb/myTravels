@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests" time="2.516" tests="1" errors="0" skipped="0" failures="0">
+<testsuite name="com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests" time="11.267" tests="1" errors="1" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_05\jre\bin"/>
@@ -8,58 +8,426 @@
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
-    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) Client VM"/>
     <property name="file.encoding.pkg" value="sun.io"/>
     <property name="user.script" value=""/>
     <property name="user.country" value="FR"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
-    <property name="sun.os.patch.level" value=""/>
+    <property name="sun.os.patch.level" value="Service Pack 1"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Mes documents\Dev\myProjects\myTravels"/>
+    <property name="user.dir" value="C:\Agnes\workspace\myTravels"/>
     <property name="java.runtime.version" value="1.8.0_05-b13"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_05\jre\lib\endorsed"/>
-    <property name="os.arch" value="amd64"/>
-    <property name="java.io.tmpdir" value="C:\Users\Agnes\AppData\Local\Temp\"/>
+    <property name="os.arch" value="x86"/>
+    <property name="java.io.tmpdir" value="C:\Users\adoueb\AppData\Local\Temp\"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="user.variant" value=""/>
-    <property name="os.name" value="Windows 8"/>
-    <property name="classworlds.conf" value="C:\Mes documents\Dev\Java\Maven\apache-maven-3.0.5\bin\..\bin\m2.conf"/>
+    <property name="os.name" value="Windows 7"/>
+    <property name="classworlds.conf" value="C:\Agnes\java\apache-maven-3.1.1\bin\..\bin\m2.conf"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_05\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Ruby192\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Windows Live\Shared;C:\Program Files (x86)\Java\jre7\bin;C:\Program Files (x86)\Maven\apache-maven-3.0.5\bin;C:\Program Files (x86)\Git\cmd;C:\Program Files (x86)\nodejs\;C:\Program Files (x86)\phantomjs-1.9.0-windows;C:\Program Files (x86)\QuickTime\QTSystem\;C:\Program Files (x86)\Heroku\bin;C:\Program Files (x86)\git\cmd;C:\Program Files\MongoDB 2.6 Standard\bin;C:\Users\Agnes\AppData\Roaming\npm;C:\Chocolatey\bin;C:\Program Files\groovy-2.1.7/bin;C:\Mes documents\Dev\Java\Maven\apache-maven-3.0.5/bin;C:\Mes documents\Dev\Java\gradle-1.10/bin;;C:\Mes documents\Dev\Java\grails-2.3.8/bin;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk1.8.0_05\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\TortoiseSVN\bin;C:\Program Files\doxygen\bin;C:\Program Files\QuickTime\QTSystem\;C:\Program Files\Java\jdk1.8.0_05\bin;C:\Agnes\java\apache-maven-3.1.1\bin;C:\Program Files\Heroku\bin;C:\Program Files\git\cmd;C:\Program Files\nodejs\;C:\Chocolatey\bin;C:\Agnes\java\gradle-1.10\bin;C:\Agnes\java\jetty-distribution-9.1.1.v20140108\bin;C:\Program Files\MongoDB 2.6 Standard\bin;C:\Users\adoueb\AppData\Roaming\npm;."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
-    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="6.2"/>
-    <property name="user.home" value="C:\Users\Agnes"/>
+    <property name="sun.management.compiler" value="HotSpot Client Compiler"/>
+    <property name="os.version" value="6.1"/>
+    <property name="user.home" value="C:\Users\adoueb"/>
     <property name="user.timezone" value="Europe/Paris"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
     <property name="java.specification.version" value="1.8"/>
     <property name="file.encoding" value="Cp1252"/>
-    <property name="user.name" value="Agnes"/>
-    <property name="java.class.path" value="C:\Mes documents\Dev\Java\Maven\apache-maven-3.0.5\bin\..\boot\plexus-classworlds-2.4.jar"/>
+    <property name="user.name" value="adoueb"/>
+    <property name="java.class.path" value="C:\Agnes\java\apache-maven-3.1.1\bin\..\boot\plexus-classworlds-2.5.1.jar"/>
+    <property name="org.slf4j.simpleLogger.defaultLogLevel" value="info"/>
     <property name="java.vm.specification.version" value="1.8"/>
-    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.arch.data.model" value="32"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_05\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean test"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="fr"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
-    <property name="java.vm.info" value="mixed mode"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
     <property name="java.version" value="1.8.0_05"/>
-    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext;C:\WINDOWS\Sun\Java\lib\ext"/>
+    <property name="java.ext.dirs" value="C:\Program Files\Java\jdk1.8.0_05\jre\lib\ext;C:\Windows\Sun\Java\lib\ext"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_05\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_05\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_05\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_05\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_05\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_05\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_05\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_05\jre\classes"/>
     <property name="sun.stderr.encoding" value="cp850"/>
     <property name="java.vendor" value="Oracle Corporation"/>
-    <property name="maven.home" value="C:\Mes documents\Dev\Java\Maven\apache-maven-3.0.5\bin\.."/>
+    <property name="maven.home" value="C:\Agnes\java\apache-maven-3.1.1\bin\.."/>
     <property name="file.separator" value="\"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.stdout.encoding" value="cp850"/>
     <property name="sun.desktop" value="windows"/>
-    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase name="thatTravelIsInsertedIntoRepoWorks" classname="com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests" time="2.516"/>
+  <testcase name="thatTravelIsInsertedIntoRepoWorks" classname="com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests" time="11.267">
+    <error message="Error creating bean with name &apos;com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests&apos;: Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.mytravels.persistence.repository.TravelRepository com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests.travelRepository; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name &apos;travelRepository&apos;: FactoryBean threw exception on object creation; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting for a server that matches AnyServerSelector{} after 209 ms" type="org.springframework.beans.factory.BeanCreationException">org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.mytravels.persistence.repository.TravelRepository com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests.travelRepository; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'travelRepository': FactoryBean threw exception on object creation; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting for a server that matches AnyServerSelector{} after 209 ms
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:292)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1185)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:384)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:110)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:75)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:326)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:232)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:175)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:264)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:124)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:200)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:153)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.mytravels.persistence.repository.TravelRepository com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests.travelRepository; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'travelRepository': FactoryBean threw exception on object creation; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting for a server that matches AnyServerSelector{} after 209 ms
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:508)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:289)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1185)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:384)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:110)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:75)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:326)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:232)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:175)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:264)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:124)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:200)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:153)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'travelRepository': FactoryBean threw exception on object creation; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting for a server that matches AnyServerSelector{} after 209 ms
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:151)
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:103)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1514)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:252)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:195)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1014)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:957)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:855)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:480)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:289)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1185)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:384)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:110)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:75)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:326)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:232)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:175)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:264)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:124)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:200)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:153)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+Caused by: com.mongodb.MongoTimeoutException: Timed out while waiting for a server that matches AnyServerSelector{} after 209 ms
+	at com.mongodb.BaseCluster.getServer(BaseCluster.java:87)
+	at com.mongodb.DBTCPConnector.getServer(DBTCPConnector.java:654)
+	at com.mongodb.DBTCPConnector.access$300(DBTCPConnector.java:39)
+	at com.mongodb.DBTCPConnector$MyPort.getConnection(DBTCPConnector.java:503)
+	at com.mongodb.DBTCPConnector$MyPort.get(DBTCPConnector.java:451)
+	at com.mongodb.DBTCPConnector.getPrimaryPort(DBTCPConnector.java:409)
+	at com.mongodb.DBCollectionImpl.createIndex(DBCollectionImpl.java:337)
+	at com.mongodb.DBCollection.createIndex(DBCollection.java:564)
+	at com.mongodb.DBCollection.ensureIndex(DBCollection.java:663)
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator.ensureIndex(MongoPersistentEntityIndexCreator.java:213)
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator$1.doWithPersistentProperty(MongoPersistentEntityIndexCreator.java:146)
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator$1.doWithPersistentProperty(MongoPersistentEntityIndexCreator.java:120)
+	at org.springframework.data.mapping.model.BasicPersistentEntity.doWithProperties(BasicPersistentEntity.java:257)
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator.checkForIndexes(MongoPersistentEntityIndexCreator.java:120)
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator.onApplicationEvent(MongoPersistentEntityIndexCreator.java:92)
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator.onApplicationEvent(MongoPersistentEntityIndexCreator.java:49)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:98)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:333)
+	at org.springframework.data.mapping.context.AbstractMappingContext.addPersistentEntity(AbstractMappingContext.java:268)
+	at org.springframework.data.mapping.context.AbstractMappingContext.getPersistentEntity(AbstractMappingContext.java:168)
+	at org.springframework.data.mapping.context.AbstractMappingContext.getPersistentEntity(AbstractMappingContext.java:137)
+	at org.springframework.data.mapping.context.AbstractMappingContext.getPersistentEntity(AbstractMappingContext.java:63)
+	at org.springframework.data.mongodb.repository.support.MongoRepositoryFactory.getEntityInformation(MongoRepositoryFactory.java:141)
+	at org.springframework.data.mongodb.repository.support.MongoRepositoryFactory.getTargetRepository(MongoRepositoryFactory.java:83)
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:150)
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:162)
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:44)
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:144)
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:103)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1514)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:252)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:195)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1014)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:957)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:855)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:480)
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87)
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:289)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1185)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:384)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:110)
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:75)
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:326)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:212)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:232)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:175)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:264)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:124)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:200)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:153)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103)
+</error>
+    <system-out>11:31:47.790 [main] DEBUG o.s.t.c.j.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests].
+11:31:47.898 [main] DEBUG o.s.t.c.s.AbstractDelegatingSmartContextLoader - Delegating to AnnotationConfigContextLoader to process context configuration [ContextConfigurationAttributes@1baeedf declaringClass = 'com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests', locations = '{}', classes = '{class com.mytravels.config.MongoConfigurationTest}', inheritLocations = true, initializers = '{}', inheritInitializers = true, name = [null], contextLoaderClass = 'org.springframework.test.context.ContextLoader'].
+11:31:47.900 [main] DEBUG o.s.test.context.ContextLoaderUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests]
+11:31:47.905 [main] DEBUG o.s.test.context.TestContextManager - @TestExecutionListeners is not present for class [class com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests]: using defaults.
+11:31:47.928 [main] DEBUG o.s.t.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests]
+11:31:47.930 [main] DEBUG o.s.t.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests]
+11:31:47.934 [main] DEBUG o.s.t.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests]
+11:31:47.935 [main] DEBUG o.s.t.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests]
+11:31:47.941 [main] DEBUG o.s.t.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests]
+11:31:47.942 [main] DEBUG o.s.t.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests]
+11:31:47.948 [main] DEBUG o.s.t.c.s.DependencyInjectionTestExecutionListener - Performing dependency injection for test context [[DefaultTestContext@17b4f4c testClass = TravelRepositoryAnalyseCountriesIntegrationTests, testInstance = com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests@7740a2, testMethod = [null], testException = [null], mergedContextConfiguration = [MergedContextConfiguration@1a5fe33 testClass = TravelRepositoryAnalyseCountriesIntegrationTests, locations = '{}', classes = '{class com.mytravels.config.MongoConfigurationTest}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]].
+11:31:47.949 [main] DEBUG o.s.t.c.s.AbstractDelegatingSmartContextLoader - Delegating to AnnotationConfigContextLoader to load context from [MergedContextConfiguration@1a5fe33 testClass = TravelRepositoryAnalyseCountriesIntegrationTests, locations = '{}', classes = '{class com.mytravels.config.MongoConfigurationTest}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]].
+11:31:47.949 [main] DEBUG o.s.t.c.s.AbstractGenericContextLoader - Loading ApplicationContext for merged context configuration [[MergedContextConfiguration@1a5fe33 testClass = TravelRepositoryAnalyseCountriesIntegrationTests, locations = '{}', classes = '{class com.mytravels.config.MongoConfigurationTest}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
+11:31:48.067 [main] DEBUG o.s.core.env.StandardEnvironment - Initializing new StandardEnvironment
+11:31:48.069 [main] DEBUG o.s.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+11:31:48.071 [main] DEBUG o.s.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+11:31:48.071 [main] DEBUG o.s.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+11:31:48.072 [main] DEBUG o.s.t.c.s.AnnotationConfigContextLoader - Registering annotated classes: {class com.mytravels.config.MongoConfigurationTest}
+11:31:48.122 [main] INFO  o.s.c.s.GenericApplicationContext - Refreshing org.springframework.context.support.GenericApplicationContext@1fe2924: startup date [Mon Jul 07 11:31:48 CEST 2014]; root of context hierarchy
+11:31:48.123 [main] DEBUG o.s.c.s.GenericApplicationContext - Bean factory for org.springframework.context.support.GenericApplicationContext@1fe2924: org.springframework.beans.factory.support.DefaultListableBeanFactory@1fcd140: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,mongoConfigurationTest]; root of factory hierarchy
+11:31:48.147 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
+11:31:48.148 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
+11:31:48.176 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor' to allow for resolving potential circular references
+11:31:48.179 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
+11:31:48.212 [main] DEBUG o.s.c.a.ConfigurationClassBeanDefinitionReader - Registering bean definition for @Bean method com.mytravels.config.MongoConfigurationTest.mongo()
+11:31:48.214 [main] DEBUG o.s.c.a.ConfigurationClassBeanDefinitionReader - Registering bean definition for @Bean method com.mytravels.config.MongoConfigurationTest.mongoTemplate()
+11:31:48.230 [main] DEBUG o.s.core.env.StandardEnvironment - Initializing new StandardEnvironment
+11:31:48.230 [main] DEBUG o.s.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+11:31:48.230 [main] DEBUG o.s.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+11:31:48.230 [main] DEBUG o.s.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+11:31:48.243 [main] DEBUG o.s.c.i.s.PathMatchingResourcePatternResolver - Looking for matching resources in directory tree [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository]
+11:31:48.244 [main] DEBUG o.s.c.i.s.PathMatchingResourcePatternResolver - Searching directory [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository] for files matching pattern [C:/Agnes/workspace/myTravels/target/classes/com/mytravels/persistence/repository/**/*.class]
+11:31:48.250 [main] DEBUG o.s.c.i.s.PathMatchingResourcePatternResolver - Resolved location pattern [classpath*:com/mytravels/persistence/repository/**/*.class] to resources [file [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository\AnalyseCountries.class], file [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository\TravelRepository.class], file [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository\TravelRepositoryCustom.class], file [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository\TravelRepositoryImpl$CountryAnalysis.class], file [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository\TravelRepositoryImpl.class]]
+11:31:48.270 [main] DEBUG o.s.d.r.c.RepositoryComponentProvider - Identified candidate component class: file [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository\TravelRepository.class]
+11:31:48.289 [main] DEBUG o.s.core.env.StandardEnvironment - Initializing new StandardEnvironment
+11:31:48.290 [main] DEBUG o.s.core.env.StandardEnvironment - Adding [systemProperties] PropertySource with lowest search precedence
+11:31:48.290 [main] DEBUG o.s.core.env.StandardEnvironment - Adding [systemEnvironment] PropertySource with lowest search precedence
+11:31:48.290 [main] DEBUG o.s.core.env.StandardEnvironment - Initialized StandardEnvironment with PropertySources [systemProperties,systemEnvironment]
+11:31:48.295 [main] DEBUG o.s.c.i.s.PathMatchingResourcePatternResolver - Looking for matching resources in directory tree [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository]
+11:31:48.296 [main] DEBUG o.s.c.i.s.PathMatchingResourcePatternResolver - Searching directory [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository] for files matching pattern [C:/Agnes/workspace/myTravels/target/classes/com/mytravels/persistence/repository/**/*.class]
+11:31:48.299 [main] DEBUG o.s.c.i.s.PathMatchingResourcePatternResolver - Resolved location pattern [classpath*:com/mytravels/persistence/repository/**/*.class] to resources [file [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository\AnalyseCountries.class], file [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository\TravelRepository.class], file [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository\TravelRepositoryCustom.class], file [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository\TravelRepositoryImpl$CountryAnalysis.class], file [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository\TravelRepositoryImpl.class]]
+11:31:48.302 [main] DEBUG o.s.c.a.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\Agnes\workspace\myTravels\target\classes\com\mytravels\persistence\repository\TravelRepositoryImpl.class]
+11:31:48.302 [main] DEBUG o.s.d.r.c.RepositoryBeanDefinitionBuilder - Registering custom repository implementation: travelRepositoryImpl com.mytravels.persistence.repository.TravelRepositoryImpl
+11:31:48.395 [main] DEBUG o.s.c.a.ConfigurationClassEnhancer - Successfully enhanced com.mytravels.config.MongoConfigurationTest; enhanced class name is: com.mytravels.config.MongoConfigurationTest$$EnhancerByCGLIB$$ca7d04ac
+11:31:48.395 [main] DEBUG o.s.c.a.ConfigurationClassPostProcessor - Replacing bean definition 'mongoConfigurationTest' existing class name 'com.mytravels.config.MongoConfigurationTest' with enhanced class name 'com.mytravels.config.MongoConfigurationTest$$EnhancerByCGLIB$$ca7d04ac'
+11:31:48.402 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
+11:31:48.402 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
+11:31:48.403 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor' to allow for resolving potential circular references
+11:31:48.404 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
+11:31:48.404 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalRequiredAnnotationProcessor'
+11:31:48.405 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.context.annotation.internalRequiredAnnotationProcessor'
+11:31:48.406 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.context.annotation.internalRequiredAnnotationProcessor' to allow for resolving potential circular references
+11:31:48.407 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.context.annotation.internalRequiredAnnotationProcessor'
+11:31:48.407 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
+11:31:48.407 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
+11:31:48.416 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor' to allow for resolving potential circular references
+11:31:48.417 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
+11:31:48.417 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor'
+11:31:48.417 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor'
+11:31:48.417 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor' to allow for resolving potential circular references
+11:31:48.417 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor'
+11:31:48.417 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.context.annotation.ConfigurationClassPostProcessor.enhancedConfigurationProcessor'
+11:31:48.417 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.context.annotation.ConfigurationClassPostProcessor.enhancedConfigurationProcessor'
+11:31:48.417 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.context.annotation.ConfigurationClassPostProcessor.enhancedConfigurationProcessor' to allow for resolving potential circular references
+11:31:48.417 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.context.annotation.ConfigurationClassPostProcessor.enhancedConfigurationProcessor'
+11:31:48.418 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'org.springframework.data.repository.core.support.RepositoryInterfaceAwareBeanPostProcessor#0'
+11:31:48.418 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'org.springframework.data.repository.core.support.RepositoryInterfaceAwareBeanPostProcessor#0'
+11:31:48.419 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'org.springframework.data.repository.core.support.RepositoryInterfaceAwareBeanPostProcessor#0' to allow for resolving potential circular references
+11:31:48.420 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'org.springframework.data.repository.core.support.RepositoryInterfaceAwareBeanPostProcessor#0'
+11:31:48.431 [main] DEBUG o.s.c.s.GenericApplicationContext - Unable to locate MessageSource with name 'messageSource': using default [org.springframework.context.support.DelegatingMessageSource@66af20]
+11:31:48.434 [main] DEBUG o.s.c.s.GenericApplicationContext - Unable to locate ApplicationEventMulticaster with name 'applicationEventMulticaster': using default [org.springframework.context.event.SimpleApplicationEventMulticaster@14425a7]
+11:31:48.442 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Pre-instantiating singletons in org.springframework.beans.factory.support.DefaultListableBeanFactory@1fcd140: defining beans [org.springframework.context.annotation.internalConfigurationAnnotationProcessor,org.springframework.context.annotation.internalAutowiredAnnotationProcessor,org.springframework.context.annotation.internalRequiredAnnotationProcessor,org.springframework.context.annotation.internalCommonAnnotationProcessor,mongoConfigurationTest,org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor,org.springframework.context.annotation.ConfigurationClassPostProcessor.enhancedConfigurationProcessor,mongo,mongoTemplate,org.springframework.data.repository.core.support.RepositoryInterfaceAwareBeanPostProcessor#0,travelRepositoryImpl,travelRepository]; root of factory hierarchy
+11:31:48.442 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.context.annotation.internalConfigurationAnnotationProcessor'
+11:31:48.442 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.context.annotation.internalAutowiredAnnotationProcessor'
+11:31:48.442 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.context.annotation.internalRequiredAnnotationProcessor'
+11:31:48.443 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.context.annotation.internalCommonAnnotationProcessor'
+11:31:48.443 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'mongoConfigurationTest'
+11:31:48.443 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'mongoConfigurationTest'
+11:31:48.450 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'mongoConfigurationTest' to allow for resolving potential circular references
+11:31:48.485 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'mongoConfigurationTest'
+11:31:48.486 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.context.annotation.ConfigurationClassPostProcessor.importAwareProcessor'
+11:31:48.486 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.context.annotation.ConfigurationClassPostProcessor.enhancedConfigurationProcessor'
+11:31:48.487 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'mongo'
+11:31:48.487 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'mongo'
+11:31:48.491 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'mongoConfigurationTest'
+11:31:48.523 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'mongo' to allow for resolving potential circular references
+11:31:48.531 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Invoking afterPropertiesSet() on bean with name 'mongo'
+11:31:48.818 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'mongo'
+11:31:48.819 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'mongoTemplate'
+11:31:48.819 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'mongoTemplate'
+11:31:48.819 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'mongoConfigurationTest'
+11:31:48.823 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'mongo'
+11:31:48.824 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Autowiring by type from bean name 'mongoTemplate' via factory method to bean named 'mongo'
+11:31:48.920 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'mongoTemplate' to allow for resolving potential circular references
+11:31:48.933 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'mongoTemplate'
+11:31:48.933 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'org.springframework.data.repository.core.support.RepositoryInterfaceAwareBeanPostProcessor#0'
+11:31:48.933 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'travelRepositoryImpl'
+11:31:48.933 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'travelRepositoryImpl'
+11:31:48.937 [main] DEBUG o.s.b.f.annotation.InjectionMetadata - Registered injected element on class [com.mytravels.persistence.repository.TravelRepositoryImpl]: AutowiredFieldElement for org.springframework.data.mongodb.core.MongoOperations com.mytravels.persistence.repository.TravelRepositoryImpl.mongoOperations
+11:31:48.937 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'travelRepositoryImpl' to allow for resolving potential circular references
+11:31:48.944 [main] DEBUG o.s.b.f.annotation.InjectionMetadata - Processing injected method of bean 'travelRepositoryImpl': AutowiredFieldElement for org.springframework.data.mongodb.core.MongoOperations com.mytravels.persistence.repository.TravelRepositoryImpl.mongoOperations
+11:31:48.948 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'mongoTemplate'
+11:31:48.948 [main] DEBUG o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowiring by type from bean name 'travelRepositoryImpl' to bean named 'mongoTemplate'
+11:31:48.949 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'travelRepositoryImpl'
+11:31:48.949 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'travelRepositoryImpl'
+11:31:48.949 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating shared instance of singleton bean 'travelRepository'
+11:31:48.949 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean 'travelRepository'
+11:31:48.959 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Eagerly caching bean 'travelRepository' to allow for resolving potential circular references
+11:31:49.013 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)'
+11:31:49.013 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Creating instance of bean '(inner bean)#1'
+11:31:49.027 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Invoking afterPropertiesSet() on bean with name '(inner bean)#1'
+11:31:49.028 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)#1'
+11:31:49.038 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean '(inner bean)'
+11:31:49.040 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'travelRepositoryImpl'
+11:31:49.043 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'mongoTemplate'
+11:31:49.050 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Invoking afterPropertiesSet() on bean with name 'travelRepository'
+11:31:49.055 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Finished creating instance of bean 'travelRepository'
+11:31:49.058 [main] DEBUG o.s.c.s.GenericApplicationContext - Unable to locate LifecycleProcessor with name 'lifecycleProcessor': using default [org.springframework.context.support.DefaultLifecycleProcessor@14d66d2]
+11:31:49.058 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'lifecycleProcessor'
+11:31:49.065 [main] DEBUG o.s.c.e.PropertySourcesPropertyResolver - Searching for key 'spring.liveBeansView.mbeanDomain' in [systemProperties]
+11:31:49.065 [main] DEBUG o.s.c.e.PropertySourcesPropertyResolver - Searching for key 'spring.liveBeansView.mbeanDomain' in [systemEnvironment]
+11:31:49.066 [main] DEBUG o.s.c.e.PropertySourcesPropertyResolver - Could not find key 'spring.liveBeansView.mbeanDomain' in any property source. Returning [null]
+11:31:49.066 [main] DEBUG o.s.t.c.CacheAwareContextLoaderDelegate - Storing ApplicationContext in cache under key [[MergedContextConfiguration@1a5fe33 testClass = TravelRepositoryAnalyseCountriesIntegrationTests, locations = '{}', classes = '{class com.mytravels.config.MongoConfigurationTest}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
+11:31:49.072 [main] DEBUG o.s.b.f.annotation.InjectionMetadata - Processing injected method of bean 'com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests': AutowiredFieldElement for com.mytravels.persistence.repository.TravelRepository com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests.travelRepository
+11:31:49.074 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'travelRepository'
+11:31:49.126 [main] DEBUG o.s.d.m.c.i.MongoPersistentEntityIndexCreator - Analyzing class class com.mytravels.persistence.domain.Itinerary for index information.
+11:31:49.129 [main] DEBUG o.s.d.m.c.i.MongoPersistentEntityIndexCreator - Analyzing class class com.mytravels.persistence.domain.Travel for index information.
+11:31:49.139 [main] DEBUG o.s.data.mongodb.core.MongoDbUtils - Getting Mongo Database name=[mytravelstest]
+11:31:59.177 [main] ERROR o.s.test.context.TestContextManager - Caught exception while allowing TestExecutionListener [org.springframework.test.context.support.DependencyInjectionTestExecutionListener@8355dd] to prepare test instance [com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests@7740a2]
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests': Injection of autowired dependencies failed; nested exception is org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.mytravels.persistence.repository.TravelRepository com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests.travelRepository; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'travelRepository': FactoryBean threw exception on object creation; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting for a server that matches AnyServerSelector{} after 209 ms
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:292) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1185) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireBeanProperties(AbstractAutowireCapableBeanFactory.java:384) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.injectDependencies(DependencyInjectionTestExecutionListener.java:110) ~[spring-test-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.test.context.support.DependencyInjectionTestExecutionListener.prepareTestInstance(DependencyInjectionTestExecutionListener.java:75) ~[spring-test-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:326) ~[spring-test-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.createTest(SpringJUnit4ClassRunner.java:212) [spring-test-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner$1.runReflectiveCall(SpringJUnit4ClassRunner.java:289) [spring-test-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12) [junit-4.11.jar:na]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.methodBlock(SpringJUnit4ClassRunner.java:291) [spring-test-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:232) [spring-test-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89) [spring-test-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:238) [junit-4.11.jar:na]
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:63) [junit-4.11.jar:na]
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:236) [junit-4.11.jar:na]
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:53) [junit-4.11.jar:na]
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:229) [junit-4.11.jar:na]
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61) [spring-test-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71) [spring-test-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:309) [junit-4.11.jar:na]
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:175) [spring-test-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:264) [surefire-junit4-2.15.jar:2.15]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:153) [surefire-junit4-2.15.jar:2.15]
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:124) [surefire-junit4-2.15.jar:2.15]
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:200) [surefire-booter-2.15.jar:2.15]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:153) [surefire-booter-2.15.jar:2.15]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:103) [surefire-booter-2.15.jar:2.15]
+Caused by: org.springframework.beans.factory.BeanCreationException: Could not autowire field: com.mytravels.persistence.repository.TravelRepository com.mytravels.persistence.integration.TravelRepositoryAnalyseCountriesIntegrationTests.travelRepository; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'travelRepository': FactoryBean threw exception on object creation; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting for a server that matches AnyServerSelector{} after 209 ms
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:508) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessPropertyValues(AutowiredAnnotationBeanPostProcessor.java:289) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	... 26 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'travelRepository': FactoryBean threw exception on object creation; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting for a server that matches AnyServerSelector{} after 209 ms
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:151) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.getObjectFromFactoryBean(FactoryBeanRegistrySupport.java:103) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getObjectForBeanInstance(AbstractBeanFactory.java:1514) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:252) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:195) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1014) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:957) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:855) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:480) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	... 28 common frames omitted
+Caused by: com.mongodb.MongoTimeoutException: Timed out while waiting for a server that matches AnyServerSelector{} after 209 ms
+	at com.mongodb.BaseCluster.getServer(BaseCluster.java:87) ~[mongo-java-driver-2.12.2.jar:na]
+	at com.mongodb.DBTCPConnector.getServer(DBTCPConnector.java:654) ~[mongo-java-driver-2.12.2.jar:na]
+	at com.mongodb.DBTCPConnector.access$300(DBTCPConnector.java:39) ~[mongo-java-driver-2.12.2.jar:na]
+	at com.mongodb.DBTCPConnector$MyPort.getConnection(DBTCPConnector.java:503) ~[mongo-java-driver-2.12.2.jar:na]
+	at com.mongodb.DBTCPConnector$MyPort.get(DBTCPConnector.java:451) ~[mongo-java-driver-2.12.2.jar:na]
+	at com.mongodb.DBTCPConnector.getPrimaryPort(DBTCPConnector.java:409) ~[mongo-java-driver-2.12.2.jar:na]
+	at com.mongodb.DBCollectionImpl.createIndex(DBCollectionImpl.java:337) ~[mongo-java-driver-2.12.2.jar:na]
+	at com.mongodb.DBCollection.createIndex(DBCollection.java:564) ~[mongo-java-driver-2.12.2.jar:na]
+	at com.mongodb.DBCollection.ensureIndex(DBCollection.java:663) ~[mongo-java-driver-2.12.2.jar:na]
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator.ensureIndex(MongoPersistentEntityIndexCreator.java:213) ~[spring-data-mongodb-1.3.3.RELEASE.jar:na]
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator$1.doWithPersistentProperty(MongoPersistentEntityIndexCreator.java:146) ~[spring-data-mongodb-1.3.3.RELEASE.jar:na]
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator$1.doWithPersistentProperty(MongoPersistentEntityIndexCreator.java:120) ~[spring-data-mongodb-1.3.3.RELEASE.jar:na]
+	at org.springframework.data.mapping.model.BasicPersistentEntity.doWithProperties(BasicPersistentEntity.java:257) ~[spring-data-commons-1.6.3.RELEASE.jar:na]
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator.checkForIndexes(MongoPersistentEntityIndexCreator.java:120) ~[spring-data-mongodb-1.3.3.RELEASE.jar:na]
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator.onApplicationEvent(MongoPersistentEntityIndexCreator.java:92) ~[spring-data-mongodb-1.3.3.RELEASE.jar:na]
+	at org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator.onApplicationEvent(MongoPersistentEntityIndexCreator.java:49) ~[spring-data-mongodb-1.3.3.RELEASE.jar:na]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:98) ~[spring-context-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:333) ~[spring-context-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	at org.springframework.data.mapping.context.AbstractMappingContext.addPersistentEntity(AbstractMappingContext.java:268) ~[spring-data-commons-1.6.3.RELEASE.jar:na]
+	at org.springframework.data.mapping.context.AbstractMappingContext.getPersistentEntity(AbstractMappingContext.java:168) ~[spring-data-commons-1.6.3.RELEASE.jar:na]
+	at org.springframework.data.mapping.context.AbstractMappingContext.getPersistentEntity(AbstractMappingContext.java:137) ~[spring-data-commons-1.6.3.RELEASE.jar:na]
+	at org.springframework.data.mapping.context.AbstractMappingContext.getPersistentEntity(AbstractMappingContext.java:63) ~[spring-data-commons-1.6.3.RELEASE.jar:na]
+	at org.springframework.data.mongodb.repository.support.MongoRepositoryFactory.getEntityInformation(MongoRepositoryFactory.java:141) ~[spring-data-mongodb-1.3.3.RELEASE.jar:na]
+	at org.springframework.data.mongodb.repository.support.MongoRepositoryFactory.getTargetRepository(MongoRepositoryFactory.java:83) ~[spring-data-mongodb-1.3.3.RELEASE.jar:na]
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport.getRepository(RepositoryFactorySupport.java:150) ~[spring-data-commons-1.6.3.RELEASE.jar:na]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:162) ~[spring-data-commons-1.6.3.RELEASE.jar:na]
+	at org.springframework.data.repository.core.support.RepositoryFactoryBeanSupport.getObject(RepositoryFactoryBeanSupport.java:44) ~[spring-data-commons-1.6.3.RELEASE.jar:na]
+	at org.springframework.beans.factory.support.FactoryBeanRegistrySupport.doGetObjectFromFactoryBean(FactoryBeanRegistrySupport.java:144) ~[spring-beans-4.0.0.RELEASE.jar:4.0.0.RELEASE]
+	... 36 common frames omitted
+</system-out>
+  </testcase>
 </testsuite>

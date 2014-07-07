@@ -1,4 +1,44 @@
 -------------------------------------------------------------------------------
 Test set: com.mytravels.persistence.integration.TravelRepositoryIntegrationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.066 sec - in com.mytravels.persistence.integration.TravelRepositoryIntegrationTests
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 19.946 sec <<< FAILURE! - in com.mytravels.persistence.integration.TravelRepositoryIntegrationTests
+thatTravelIsInsertedIntoRepoWorks(com.mytravels.persistence.integration.TravelRepositoryIntegrationTests)  Time elapsed: 19.919 sec  <<< ERROR!
+org.springframework.dao.InvalidDataAccessResourceUsageException: Timed out while waiting to connect after 1277 ms; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting to connect after 1277 ms
+	at com.mongodb.BaseCluster.getDescription(BaseCluster.java:114)
+	at com.mongodb.DBTCPConnector.getClusterDescription(DBTCPConnector.java:396)
+	at com.mongodb.DBTCPConnector.getType(DBTCPConnector.java:569)
+	at com.mongodb.DBTCPConnector.getReplicaSetStatus(DBTCPConnector.java:364)
+	at com.mongodb.Mongo.getReplicaSetStatus(Mongo.java:465)
+	at com.mongodb.DB.getCommandReadPreference(DB.java:86)
+	at com.mongodb.DB.command(DB.java:314)
+	at com.mongodb.DB.command(DB.java:296)
+	at com.mongodb.DB.command(DB.java:371)
+	at com.mongodb.DB.command(DB.java:243)
+	at com.mongodb.DBCollection.drop(DBCollection.java:1014)
+	at com.mongodb.DBCollectionImpl.drop(DBCollectionImpl.java:285)
+	at org.springframework.data.mongodb.core.MongoTemplate$6.doInCollection(MongoTemplate.java:464)
+	at org.springframework.data.mongodb.core.MongoTemplate$6.doInCollection(MongoTemplate.java:462)
+	at org.springframework.data.mongodb.core.MongoTemplate.execute(MongoTemplate.java:402)
+	at org.springframework.data.mongodb.core.MongoTemplate.dropCollection(MongoTemplate.java:462)
+	at com.mytravels.persistence.integration.TravelRepositoryIntegrationTests.setup(TravelRepositoryIntegrationTests.java:33)
+
+thatTravelIsInsertedIntoRepoWorks(com.mytravels.persistence.integration.TravelRepositoryIntegrationTests)  Time elapsed: 19.919 sec  <<< ERROR!
+org.springframework.dao.InvalidDataAccessResourceUsageException: Timed out while waiting to connect after 5265 ms; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting to connect after 5265 ms
+	at com.mongodb.BaseCluster.getDescription(BaseCluster.java:114)
+	at com.mongodb.DBTCPConnector.getClusterDescription(DBTCPConnector.java:396)
+	at com.mongodb.DBTCPConnector.getType(DBTCPConnector.java:569)
+	at com.mongodb.DBTCPConnector.getReplicaSetStatus(DBTCPConnector.java:364)
+	at com.mongodb.Mongo.getReplicaSetStatus(Mongo.java:465)
+	at com.mongodb.DB.getCommandReadPreference(DB.java:86)
+	at com.mongodb.DB.command(DB.java:314)
+	at com.mongodb.DB.command(DB.java:296)
+	at com.mongodb.DB.command(DB.java:371)
+	at com.mongodb.DB.command(DB.java:243)
+	at com.mongodb.DBCollection.drop(DBCollection.java:1014)
+	at com.mongodb.DBCollectionImpl.drop(DBCollectionImpl.java:285)
+	at org.springframework.data.mongodb.core.MongoTemplate$6.doInCollection(MongoTemplate.java:464)
+	at org.springframework.data.mongodb.core.MongoTemplate$6.doInCollection(MongoTemplate.java:462)
+	at org.springframework.data.mongodb.core.MongoTemplate.execute(MongoTemplate.java:402)
+	at org.springframework.data.mongodb.core.MongoTemplate.dropCollection(MongoTemplate.java:462)
+	at com.mytravels.persistence.integration.TravelRepositoryIntegrationTests.teardown(TravelRepositoryIntegrationTests.java:38)
+

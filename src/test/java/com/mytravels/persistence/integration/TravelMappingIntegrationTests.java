@@ -17,6 +17,8 @@ import static com.mytravels.persistence.domain.fixture.MongoAssertions.usingMong
 import static com.mytravels.persistence.domain.fixture.PersistenceFixture.standardTravel;
 
 /*
+ * Dependency: on MongoDB that must run.
+ * 
  * http://spring.io/guides/tutorials/data/2/
  * This is a simple usage of MongoTemplate that uses the persistence.domain.Travel class 
  * to push data into and out of a Mongo Collection.
@@ -33,6 +35,11 @@ public class TravelMappingIntegrationTests {
 
   MongoOperations mongo;
 
+  /**
+   * Use a MongoDB database for tests: mytravelstests.
+   * 
+   * @throws Exception
+   */
   @Before
   public void setup() throws Exception {
     mongo = new MongoTemplate(new SimpleMongoDbFactory(new Mongo(), "mytravelstests"));
@@ -45,6 +52,12 @@ public class TravelMappingIntegrationTests {
     mongo.dropCollection("travel");
   }
 
+  /**
+   * Create a travel.
+   * Test that the travel has a name, year, country and description in MongoDB.
+   * 
+   * @throws Exception
+   */
   @Test
   public void thatTravelCustomMappingWorks() throws Exception {
     mongo.insert(standardTravel());
@@ -55,7 +68,11 @@ public class TravelMappingIntegrationTests {
     assertTrue(usingMongo(mongo).collection("travel").first().hasField("description"));
   }
   
-
+  /**
+   * Check that there is an index on _id and name.
+   * 
+   * @throws Exception
+   */
   @Test
   public void thatTravelIsInsertedIntoCollectionHasCorrectIndexes() throws Exception {
 
