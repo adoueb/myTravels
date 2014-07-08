@@ -50,6 +50,9 @@
 	<!-- angular-google-maps  -->
 	<script type="text/javascript" src="lib/angulargooglemaps/angular-google-maps.js"></script>
 	
+	<!-- speak.js -->
+	<script src="lib/speakjs/speakClient.js"></script>
+	
 	<!-- Application -->
 	<script src="js/front/common/common-services.js"></script>
 	<script src="js/front/common/common.js"></script>
@@ -67,7 +70,9 @@
 	<script src="js/front/travels/travels.js"></script>
 	
 	<script src="js/front/front.js"></script>
-		
+	
+	<div id="audio">
+    </div>
 
  	<!-- ========================================================================================== -->
  	<!-- Collapsing Nav Bar                                                                         -->
@@ -115,6 +120,7 @@
 
  		</div>
  	</div>
+ 	
  	
   	<!-- ========================================================================================== -->
  	<!-- Alerts                                                                                     -->
@@ -215,6 +221,9 @@
 									<div class="gray-link" style="text-align: right;">
 										<a ng-click="setEditStop(marker)" href="#updateStop" data-toggle="modal">
 											<i class="glyphicon glyphicon-edit" title="Update stop"></i>
+										</a>
+										<a ng-click="readAloud(marker)">
+											<i class="glyphicon glyphicon-play-circle" title="Read aloud"></i>
 										</a>
 									</div>
 								</div>

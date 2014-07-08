@@ -174,6 +174,13 @@ angular.module('travels-controllers', [
 	$scope.setCurrentStop = function(marker) {
 	    $scope.currentStop = marker;
 	};
+	
+
+    // Read aloud the description.
+	$scope.readAloud = function(marker) {
+		speak(marker.title + "   " + marker.description);
+	};
+
 }])
 
 // ------------------------------------------------------------------------
