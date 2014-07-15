@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Jasmine Spec Runner</title>
+  <script type="text/javascript">
+    window.onerror = function(msg,url,line) {
+      if (document.head) {
+        var jserror = document.head.getAttribute('jmp_jserror') || '';
+        if (jserror) {
+          jserror += ':!:';
+        }
+        jserror += msg;
+        document.head.setAttribute('jmp_jserror',jserror);
+      }
+    };
+  </script>
+  <link rel="stylesheet" type="text/css" href="/webjars/jasmine/2.0.0/jasmine.css"/>
+  <script type="text/javascript" src="/webjars/jasmine/2.0.0/jasmine.js"></script>
+  <script type="text/javascript" src="/webjars/jasmine/2.0.0/jasmine-html.js"></script>
+  <script type="text/javascript" src="/classpath/lib/boot.js"></script>
+
+  <script type="text/javascript">
+    window.onload = jasmine.boot;
+  </script>
+  <script type="text/javascript" src="src/lib/jQuery/jquery-latest.js"></script>
+  <script type="text/javascript" src="src/lib/angular-1.2.17/angular.js"></script>
+  <script type="text/javascript" src="src/lib/angular-1.2.17/angular-mocks.js"></script>
+  <script type="text/javascript" src="src/js/front/travels/travels-services.js"></script>
+  <script type="text/javascript" src="src/js/front/travels/travels-controllers.js"></script>
+  <script type="text/javascript" src="src/js/front/travels/travels-filters.js"></script>
+  <script type="text/javascript" src="src/js/front/travels/travels-directives.js"></script>
+  <script type="text/javascript" src="src/js/front/travels/travels.js"></script>
+  <script type="text/javascript" src="spec/js/front/travels/test/controllersSpec.js"></script>
+  <script type="text/javascript" src="spec/js/front/travels/test/servicesSpec.js"></script>
+
+</head>
+<body>
+  <script type="text/javascript">
+    if(window.location.href.indexOf("ManualSpecRunner.html") !== -1) {
+      document.body.appendChild(document.createTextNode("Warning: Opening this HTML file directly from the file system is deprecated. You should instead try running `mvn jasmine:bdd` from the command line, and then visit `http://localhost:8234` in your browser. "))
+    }
+  </script>
+</body>
+</html>

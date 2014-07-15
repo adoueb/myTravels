@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.mytravels.persistence.integration.TravelRepositoryFindByTests" time="79.557" tests="4" errors="4" skipped="0" failures="0">
+<testsuite name="com.mytravels.persistence.integration.TravelRepositoryFindByTests" time="0.17" tests="2" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_05\jre\bin"/>
@@ -43,7 +43,7 @@
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="32"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_05\jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher clean tomcat7:redeploy"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="fr"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -62,128 +62,6 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase name="thatFindByYearWorks" classname="com.mytravels.persistence.integration.TravelRepositoryFindByTests" time="19.773">
-    <error message="Timed out while waiting to connect after 3283 ms; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting to connect after 3283 ms" type="org.springframework.dao.InvalidDataAccessResourceUsageException">org.springframework.dao.InvalidDataAccessResourceUsageException: Timed out while waiting to connect after 3283 ms; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting to connect after 3283 ms
-	at com.mongodb.BaseCluster.getDescription(BaseCluster.java:114)
-	at com.mongodb.DBTCPConnector.getClusterDescription(DBTCPConnector.java:396)
-	at com.mongodb.DBTCPConnector.getType(DBTCPConnector.java:569)
-	at com.mongodb.DBTCPConnector.getReplicaSetStatus(DBTCPConnector.java:364)
-	at com.mongodb.Mongo.getReplicaSetStatus(Mongo.java:465)
-	at com.mongodb.DB.getCommandReadPreference(DB.java:86)
-	at com.mongodb.DB.command(DB.java:314)
-	at com.mongodb.DB.command(DB.java:296)
-	at com.mongodb.DB.command(DB.java:371)
-	at com.mongodb.DB.command(DB.java:243)
-	at com.mongodb.DBCollection.drop(DBCollection.java:1014)
-	at com.mongodb.DBCollectionImpl.drop(DBCollectionImpl.java:285)
-	at org.springframework.data.mongodb.core.MongoTemplate$6.doInCollection(MongoTemplate.java:464)
-	at org.springframework.data.mongodb.core.MongoTemplate$6.doInCollection(MongoTemplate.java:462)
-	at org.springframework.data.mongodb.core.MongoTemplate.execute(MongoTemplate.java:402)
-	at org.springframework.data.mongodb.core.MongoTemplate.dropCollection(MongoTemplate.java:462)
-	at com.mytravels.persistence.integration.TravelRepositoryFindByTests.setup(TravelRepositoryFindByTests.java:34)
-</error>
-    <system-out>11:31:59.196 [main] DEBUG o.s.t.c.s.DirtiesContextTestExecutionListener - After test class: context [DefaultTestContext@17b4f4c testClass = TravelRepositoryAnalyseCountriesIntegrationTests, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [MergedContextConfiguration@1a5fe33 testClass = TravelRepositoryAnalyseCountriesIntegrationTests, locations = '{}', classes = '{class com.mytravels.config.MongoConfigurationTest}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]], dirtiesContext [false].
-11:31:59.197 [main] DEBUG o.s.t.c.j.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class com.mytravels.persistence.integration.TravelRepositoryFindByTests].
-11:31:59.198 [main] DEBUG o.s.t.c.s.AbstractDelegatingSmartContextLoader - Delegating to AnnotationConfigContextLoader to process context configuration [ContextConfigurationAttributes@1e8f619 declaringClass = 'com.mytravels.persistence.integration.TravelRepositoryFindByTests', locations = '{}', classes = '{class com.mytravels.config.MongoConfigurationTest}', inheritLocations = true, initializers = '{}', inheritInitializers = true, name = [null], contextLoaderClass = 'org.springframework.test.context.ContextLoader'].
-11:31:59.198 [main] DEBUG o.s.test.context.ContextLoaderUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [com.mytravels.persistence.integration.TravelRepositoryFindByTests]
-11:31:59.198 [main] DEBUG o.s.test.context.TestContextManager - @TestExecutionListeners is not present for class [class com.mytravels.persistence.integration.TravelRepositoryFindByTests]: using defaults.
-11:31:59.198 [main] DEBUG o.s.t.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [com.mytravels.persistence.integration.TravelRepositoryFindByTests]
-11:31:59.199 [main] DEBUG o.s.t.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [com.mytravels.persistence.integration.TravelRepositoryFindByTests]
-11:31:59.199 [main] DEBUG o.s.t.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [com.mytravels.persistence.integration.TravelRepositoryFindByTests]
-11:31:59.199 [main] DEBUG o.s.t.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [com.mytravels.persistence.integration.TravelRepositoryFindByTests]
-11:31:59.199 [main] DEBUG o.s.t.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [com.mytravels.persistence.integration.TravelRepositoryFindByTests]
-11:31:59.199 [main] DEBUG o.s.t.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [com.mytravels.persistence.integration.TravelRepositoryFindByTests]
-11:31:59.199 [main] DEBUG o.s.t.c.s.DependencyInjectionTestExecutionListener - Performing dependency injection for test context [[DefaultTestContext@b4bc72 testClass = TravelRepositoryFindByTests, testInstance = com.mytravels.persistence.integration.TravelRepositoryFindByTests@5ed836, testMethod = [null], testException = [null], mergedContextConfiguration = [MergedContextConfiguration@add4fb testClass = TravelRepositoryFindByTests, locations = '{}', classes = '{class com.mytravels.config.MongoConfigurationTest}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]].
-11:31:59.200 [main] DEBUG o.s.t.c.CacheAwareContextLoaderDelegate - Retrieved ApplicationContext from cache with key [[MergedContextConfiguration@add4fb testClass = TravelRepositoryFindByTests, locations = '{}', classes = '{class com.mytravels.config.MongoConfigurationTest}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
-11:31:59.203 [main] DEBUG o.s.b.f.annotation.InjectionMetadata - Processing injected method of bean 'com.mytravels.persistence.integration.TravelRepositoryFindByTests': AutowiredFieldElement for com.mytravels.persistence.repository.TravelRepository com.mytravels.persistence.integration.TravelRepositoryFindByTests.travelRepository
-11:31:59.203 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'travelRepository'
-11:31:59.286 [main] DEBUG o.s.aop.framework.JdkDynamicAopProxy - Creating JDK dynamic proxy: target source is SingletonTargetSource for target object [org.springframework.data.mongodb.repository.support.SimpleMongoRepository@18162bc]
-11:31:59.297 [main] DEBUG o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowiring by type from bean name 'com.mytravels.persistence.integration.TravelRepositoryFindByTests' to bean named 'travelRepository'
-11:31:59.298 [main] DEBUG o.s.b.f.annotation.InjectionMetadata - Processing injected method of bean 'com.mytravels.persistence.integration.TravelRepositoryFindByTests': AutowiredFieldElement for org.springframework.data.mongodb.core.MongoOperations com.mytravels.persistence.integration.TravelRepositoryFindByTests.mongo
-11:31:59.299 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'mongoTemplate'
-11:31:59.299 [main] DEBUG o.s.b.f.a.AutowiredAnnotationBeanPostProcessor - Autowiring by type from bean name 'com.mytravels.persistence.integration.TravelRepositoryFindByTests' to bean named 'mongoTemplate'
-11:31:59.304 [main] DEBUG o.s.data.mongodb.core.MongoDbUtils - Getting Mongo Database name=[mytravelstest]
-11:32:09.313 [main] DEBUG o.s.data.mongodb.core.MongoDbUtils - Getting Mongo Database name=[mytravelstest]
-11:32:19.316 [main] DEBUG o.s.t.c.s.DirtiesContextTestExecutionListener - After test method: context [DefaultTestContext@b4bc72 testClass = TravelRepositoryFindByTests, testInstance = com.mytravels.persistence.integration.TravelRepositoryFindByTests@5ed836, testMethod = thatFindByYearWorks@TravelRepositoryFindByTests, testException = org.junit.internal.runners.model.MultipleFailureException: There were 2 errors:
-  org.springframework.dao.InvalidDataAccessResourceUsageException(Timed out while waiting to connect after 3283 ms; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting to connect after 3283 ms)
-  org.springframework.dao.InvalidDataAccessResourceUsageException(Timed out while waiting to connect after 1275 ms; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting to connect after 1275 ms), mergedContextConfiguration = [MergedContextConfiguration@add4fb testClass = TravelRepositoryFindByTests, locations = '{}', classes = '{class com.mytravels.config.MongoConfigurationTest}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]], class dirties context [false], class mode [null], method dirties context [false].
-</system-out>
-  </testcase>
-  <testcase name="thatFindByYearWorks" classname="com.mytravels.persistence.integration.TravelRepositoryFindByTests" time="19.774">
-    <error message="Timed out while waiting to connect after 1275 ms; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting to connect after 1275 ms" type="org.springframework.dao.InvalidDataAccessResourceUsageException">org.springframework.dao.InvalidDataAccessResourceUsageException: Timed out while waiting to connect after 1275 ms; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting to connect after 1275 ms
-	at com.mongodb.BaseCluster.getDescription(BaseCluster.java:114)
-	at com.mongodb.DBTCPConnector.getClusterDescription(DBTCPConnector.java:396)
-	at com.mongodb.DBTCPConnector.getType(DBTCPConnector.java:569)
-	at com.mongodb.DBTCPConnector.getReplicaSetStatus(DBTCPConnector.java:364)
-	at com.mongodb.Mongo.getReplicaSetStatus(Mongo.java:465)
-	at com.mongodb.DB.getCommandReadPreference(DB.java:86)
-	at com.mongodb.DB.command(DB.java:314)
-	at com.mongodb.DB.command(DB.java:296)
-	at com.mongodb.DB.command(DB.java:371)
-	at com.mongodb.DB.command(DB.java:243)
-	at com.mongodb.DBCollection.drop(DBCollection.java:1014)
-	at com.mongodb.DBCollectionImpl.drop(DBCollectionImpl.java:285)
-	at org.springframework.data.mongodb.core.MongoTemplate$6.doInCollection(MongoTemplate.java:464)
-	at org.springframework.data.mongodb.core.MongoTemplate$6.doInCollection(MongoTemplate.java:462)
-	at org.springframework.data.mongodb.core.MongoTemplate.execute(MongoTemplate.java:402)
-	at org.springframework.data.mongodb.core.MongoTemplate.dropCollection(MongoTemplate.java:462)
-	at com.mytravels.persistence.integration.TravelRepositoryFindByTests.teardown(TravelRepositoryFindByTests.java:39)
-</error>
-  </testcase>
-  <testcase name="thatFindByIdWorks" classname="com.mytravels.persistence.integration.TravelRepositoryFindByTests" time="20.005">
-    <error message="Timed out while waiting to connect after 5282 ms; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting to connect after 5282 ms" type="org.springframework.dao.InvalidDataAccessResourceUsageException">org.springframework.dao.InvalidDataAccessResourceUsageException: Timed out while waiting to connect after 5282 ms; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting to connect after 5282 ms
-	at com.mongodb.BaseCluster.getDescription(BaseCluster.java:114)
-	at com.mongodb.DBTCPConnector.getClusterDescription(DBTCPConnector.java:396)
-	at com.mongodb.DBTCPConnector.getType(DBTCPConnector.java:569)
-	at com.mongodb.DBTCPConnector.getReplicaSetStatus(DBTCPConnector.java:364)
-	at com.mongodb.Mongo.getReplicaSetStatus(Mongo.java:465)
-	at com.mongodb.DB.getCommandReadPreference(DB.java:86)
-	at com.mongodb.DB.command(DB.java:314)
-	at com.mongodb.DB.command(DB.java:296)
-	at com.mongodb.DB.command(DB.java:371)
-	at com.mongodb.DB.command(DB.java:243)
-	at com.mongodb.DBCollection.drop(DBCollection.java:1014)
-	at com.mongodb.DBCollectionImpl.drop(DBCollectionImpl.java:285)
-	at org.springframework.data.mongodb.core.MongoTemplate$6.doInCollection(MongoTemplate.java:464)
-	at org.springframework.data.mongodb.core.MongoTemplate$6.doInCollection(MongoTemplate.java:462)
-	at org.springframework.data.mongodb.core.MongoTemplate.execute(MongoTemplate.java:402)
-	at org.springframework.data.mongodb.core.MongoTemplate.dropCollection(MongoTemplate.java:462)
-	at com.mytravels.persistence.integration.TravelRepositoryFindByTests.setup(TravelRepositoryFindByTests.java:34)
-</error>
-    <system-out>11:32:19.321 [main] DEBUG o.s.t.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [com.mytravels.persistence.integration.TravelRepositoryFindByTests]
-11:32:19.322 [main] DEBUG o.s.t.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [com.mytravels.persistence.integration.TravelRepositoryFindByTests]
-11:32:19.322 [main] DEBUG o.s.t.c.s.DependencyInjectionTestExecutionListener - Performing dependency injection for test context [[DefaultTestContext@b4bc72 testClass = TravelRepositoryFindByTests, testInstance = com.mytravels.persistence.integration.TravelRepositoryFindByTests@149f6af, testMethod = [null], testException = [null], mergedContextConfiguration = [MergedContextConfiguration@add4fb testClass = TravelRepositoryFindByTests, locations = '{}', classes = '{class com.mytravels.config.MongoConfigurationTest}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]]].
-11:32:19.323 [main] DEBUG o.s.t.c.CacheAwareContextLoaderDelegate - Retrieved ApplicationContext from cache with key [[MergedContextConfiguration@add4fb testClass = TravelRepositoryFindByTests, locations = '{}', classes = '{class com.mytravels.config.MongoConfigurationTest}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]].
-11:32:19.323 [main] DEBUG o.s.b.f.annotation.InjectionMetadata - Processing injected method of bean 'com.mytravels.persistence.integration.TravelRepositoryFindByTests': AutowiredFieldElement for com.mytravels.persistence.repository.TravelRepository com.mytravels.persistence.integration.TravelRepositoryFindByTests.travelRepository
-11:32:19.323 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'travelRepository'
-11:32:19.323 [main] DEBUG o.s.b.f.annotation.InjectionMetadata - Processing injected method of bean 'com.mytravels.persistence.integration.TravelRepositoryFindByTests': AutowiredFieldElement for org.springframework.data.mongodb.core.MongoOperations com.mytravels.persistence.integration.TravelRepositoryFindByTests.mongo
-11:32:19.324 [main] DEBUG o.s.b.f.s.DefaultListableBeanFactory - Returning cached instance of singleton bean 'mongoTemplate'
-11:32:19.324 [main] DEBUG o.s.data.mongodb.core.MongoDbUtils - Getting Mongo Database name=[mytravelstest]
-11:32:29.326 [main] DEBUG o.s.data.mongodb.core.MongoDbUtils - Getting Mongo Database name=[mytravelstest]
-11:32:39.328 [main] DEBUG o.s.t.c.s.DirtiesContextTestExecutionListener - After test method: context [DefaultTestContext@b4bc72 testClass = TravelRepositoryFindByTests, testInstance = com.mytravels.persistence.integration.TravelRepositoryFindByTests@149f6af, testMethod = thatFindByIdWorks@TravelRepositoryFindByTests, testException = org.junit.internal.runners.model.MultipleFailureException: There were 2 errors:
-  org.springframework.dao.InvalidDataAccessResourceUsageException(Timed out while waiting to connect after 5282 ms; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting to connect after 5282 ms)
-  org.springframework.dao.InvalidDataAccessResourceUsageException(Timed out while waiting to connect after 3269 ms; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting to connect after 3269 ms), mergedContextConfiguration = [MergedContextConfiguration@add4fb testClass = TravelRepositoryFindByTests, locations = '{}', classes = '{class com.mytravels.config.MongoConfigurationTest}', contextInitializerClasses = '[]', activeProfiles = '{}', contextLoader = 'org.springframework.test.context.support.DelegatingSmartContextLoader', parent = [null]]], class dirties context [false], class mode [null], method dirties context [false].
-</system-out>
-  </testcase>
-  <testcase name="thatFindByIdWorks" classname="com.mytravels.persistence.integration.TravelRepositoryFindByTests" time="20.005">
-    <error message="Timed out while waiting to connect after 3269 ms; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting to connect after 3269 ms" type="org.springframework.dao.InvalidDataAccessResourceUsageException">org.springframework.dao.InvalidDataAccessResourceUsageException: Timed out while waiting to connect after 3269 ms; nested exception is com.mongodb.MongoTimeoutException: Timed out while waiting to connect after 3269 ms
-	at com.mongodb.BaseCluster.getDescription(BaseCluster.java:114)
-	at com.mongodb.DBTCPConnector.getClusterDescription(DBTCPConnector.java:396)
-	at com.mongodb.DBTCPConnector.getType(DBTCPConnector.java:569)
-	at com.mongodb.DBTCPConnector.getReplicaSetStatus(DBTCPConnector.java:364)
-	at com.mongodb.Mongo.getReplicaSetStatus(Mongo.java:465)
-	at com.mongodb.DB.getCommandReadPreference(DB.java:86)
-	at com.mongodb.DB.command(DB.java:314)
-	at com.mongodb.DB.command(DB.java:296)
-	at com.mongodb.DB.command(DB.java:371)
-	at com.mongodb.DB.command(DB.java:243)
-	at com.mongodb.DBCollection.drop(DBCollection.java:1014)
-	at com.mongodb.DBCollectionImpl.drop(DBCollectionImpl.java:285)
-	at org.springframework.data.mongodb.core.MongoTemplate$6.doInCollection(MongoTemplate.java:464)
-	at org.springframework.data.mongodb.core.MongoTemplate$6.doInCollection(MongoTemplate.java:462)
-	at org.springframework.data.mongodb.core.MongoTemplate.execute(MongoTemplate.java:402)
-	at org.springframework.data.mongodb.core.MongoTemplate.dropCollection(MongoTemplate.java:462)
-	at com.mytravels.persistence.integration.TravelRepositoryFindByTests.teardown(TravelRepositoryFindByTests.java:39)
-</error>
-  </testcase>
+  <testcase name="thatFindByYearWorks" classname="com.mytravels.persistence.integration.TravelRepositoryFindByTests" time="0.081"/>
+  <testcase name="thatFindByIdWorks" classname="com.mytravels.persistence.integration.TravelRepositoryFindByTests" time="0.089"/>
 </testsuite>

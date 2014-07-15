@@ -1,0 +1,93 @@
+/* app css stylesheet */
+/*
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+*/
+body {
+	margin-bottom: 80px;
+}
+.page-header {
+	margin-top: 0;
+}
+
+.panel-body {
+	padding-top: 0;
+}
+
+.featuredImg {
+	margin-bottom: 15px;
+}
+.travels {
+  list-style: none;
+}
+.list-group-item {
+	margin-bottom: 15px;
+}
+.left {
+	float: left;
+	margin: 0 .5em .5em 0;
+}
+
+.right {
+	float: right;
+	margin: 0 0 .5em .5em;
+}
+.gray-link > a {
+    color: #999999;
+}
+.gray-link > a:hover {
+    color: #666666;
+}
+.gray-link.active > a {
+    color: #ffffff;
+}
+.gray-link.active > a:hover {
+    color: #666666;
+}
+.angular-google-map-container {
+	height: 540px;
+}
+.marker-labels {
+    color: blue;
+    font-family: "Lucida Grande", "Arial", sans-serif;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.mapinfowindow {
+	font-family: "Lucida Grande", "Arial", sans-serif;
+    font-size: 10px;
+}
+
+#uploadPhotosTravel .modal-dialog
+{
+  width: 1050px;
+}
