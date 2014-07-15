@@ -161,7 +161,7 @@
 				<version>1.8.9</version>
 			</plugin>
 			<!-- JRebel -->
-			<plugin>
+			<!-- plugin>
 			  <groupId>org.zeroturnaround</groupId>
 			  <artifactId>jrebel-maven-plugin</artifactId>
 			  <executions>
@@ -173,7 +173,38 @@
 			      </goals>
 			    </execution>
 			  </executions>
-			</plugin>				
+			</plugin -->
+			<!-- Jasmine maven plugin -->
+			<plugin>
+				<groupId>com.github.searls</groupId>
+				<artifactId>jasmine-maven-plugin</artifactId>
+				<version>2.0-alpha-01</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<jsSrcDir>WebContent/app</jsSrcDir>
+					<jsTestSrcDir>WebContent/app</jsTestSrcDir>
+					<preloadSources>
+					  <preloadSource>lib/jQuery/jquery-latest.js</preloadSource>
+					  <preloadSource>lib/angular-1.2.17/angular.js</preloadSource>
+					  <preloadSource>lib/angular-1.2.17/angular-mocks.js</preloadSource>
+					</preloadSources>
+					<sourceIncludes>
+						<include>js/front/travels/*.js</include>
+					</sourceIncludes>
+					<sourceExcludes>
+						<include>**/*Spec.js</include>
+					</sourceExcludes>
+					<specIncludes>
+				    	<include>**/*Spec.js</include>
+				    </specIncludes>
+				</configuration>
+			</plugin>			
         </plugins>
 	</build>
 

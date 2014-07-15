@@ -3,4 +3,5 @@ C:\Agnes\workspace\myTravels\src\test\java\com\mytravels\persistence\integration
 C:\Agnes\workspace\myTravels\src\test\java\com\mytravels\persistence\integration\TravelRepositoryAnalyseCountriesIntegrationTests.java
 C:\Agnes\workspace\myTravels\src\test\java\com\mytravels\persistence\domain\fixture\PersistenceFixture.java
 C:\Agnes\workspace\myTravels\src\test\java\com\mytravels\persistence\domain\fixture\MongoAssertions.java
+C:\Agnes\workspace\myTravels\src\test\java\com\mytravels\persistence\integration\TravelMappingIntegrationTests.java
 C:\Agnes\workspace\myTravels\src\test\java\com\mytravels\persistence\integration\TravelRepositoryFindByTests.java
