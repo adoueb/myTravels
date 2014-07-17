@@ -1,9 +1,0 @@
-com\mytravels\persistence\domain\fixture\MongoAssertions$CollectionAssertions$DocumentAssertions.class
-com\mytravels\persistence\domain\fixture\MongoAssertions$CollectionAssertions.class
-com\mytravels\persistence\integration\TravelRepositoryIntegrationTests.class
-com\mytravels\persistence\integration\TravelRepositoryFindByTests.class
-com\mytravels\persistence\integration\TravelMappingIntegrationTests.class
-com\mytravels\config\MongoConfigurationTest.class
-com\mytravels\persistence\domain\fixture\PersistenceFixture.class
-com\mytravels\persistence\integration\TravelRepositoryAnalyseCountriesIntegrationTests.class
-com\mytravels\persistence\domain\fixture\MongoAssertions.class
