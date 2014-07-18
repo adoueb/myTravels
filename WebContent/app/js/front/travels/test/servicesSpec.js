@@ -2,15 +2,43 @@
 
 /* jasmine specs for services go here */
 
-describe('travels services tests', function() {
+describe('Service: travels services', function() {
 
-	describe('TravelService tests', function() {
-		  it('should ....', function() {  
-		  });
+	describe('Service: TravelService', function() {
+		// Load the travels-services module, which contains the service
+		beforeEach(function(){
+		    module('ngResource');
+		    //module('travels-services');
+		});
+		
+		beforeEach(module('travels-services', function($provide) {
+			MapService = {};
+			$filter = {};
+
+		    $provide.value('MapService', MapService);
+		    $provide.value('$filter', $filter);
+		  }));
+	
+		var TravelService, $log, TravelRest;
+		beforeEach(inject(function(_TravelService_, _$log_) {
+			TravelService = _TravelService_;
+			$log = _$log_;
+		}));
+
+		// Ordered by year
+		it('should order travels by year', function() {
+			expect(TravelService).toBeDefined();
+			expect(TravelService.getOrderProp()).toEqual("year");
+			
+			//spyOn($filter, 'orderBy');
+			//TravelService.getOrderedTravels(travels);
+		    //expect($filter.orderBy).toHaveBeenCalled();
+		});
+		
 	});
 		
 
-	describe('AddTravelService tests', function() {
+	describe('Service: AddTravelService', function() {
 		
 		// Load the travels-services module, which contains the service
 		beforeEach(module('travels-services'));
@@ -35,7 +63,7 @@ describe('travels services tests', function() {
 	});
 	
 
-	describe('UpdateTravelService tests', function() {
+	describe('Service: UpdateTravelService', function() {
 		
 		// Load the travels-services module, which contains the service
 		beforeEach(module('travels-services'));
@@ -60,7 +88,7 @@ describe('travels services tests', function() {
 	});
 
 
-	describe('DeleteTravelService tests', function() {
+	describe('Service: DeleteTravelService', function() {
 		
 		// Load the travels-services module, which contains the service
 		beforeEach(module('travels-services'));
