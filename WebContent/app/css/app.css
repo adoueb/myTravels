@@ -91,3 +91,6 @@ body {
 {
   width: 1050px;
 }
+.modal-large .modal-dialog {
+  width: 90%;
+}

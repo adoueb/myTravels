@@ -164,6 +164,12 @@ angular.module('travels-controllers', [
         $scope.showUploadImagesTravelError = false;
     	$scope.setCurrentTravel(travel);
     };
+    
+    // Set "manage photos" travel.
+    $scope.setManagePhotosTravel = function(travel) {
+        $scope.showManageImagesTravelError = false;
+    	$scope.setCurrentTravel(travel);
+    };
 
     // Set current travel.
     $scope.setCurrentTravel = function(travel) {
@@ -488,6 +494,20 @@ angular.module('travels-controllers', [
 			}
 		}
 	};
+}])
+
+// ------------------------------------------------------------------------
+// ManageImagesCtrl controller
+// ------------------------------------------------------------------------
+.controller('ManageImagesCtrl', 
+     ['$scope', '$log',
+		    function($scope, $log) {    
+  
+    $scope.$parent.showManageImagesTravelError = false;
+ 
+    $scope.getManageImagesTravelError = function () {
+ 	    return $scope.$parent.showManageImagesTravelError;
+    };
 }])
 
 // ------------------------------------------------------------------------
