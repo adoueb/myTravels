@@ -542,28 +542,21 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4>Manage photos</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body panel-body-dark">
 					<div ng-repeat="image in currentTravel.images" ng-switch="$index%4">
 						<div class="row" ng-switch-when="0">
-							<div class="col-lg-3">
-								<a href="#" class="thumbnail">
-									<img ng-src="{{currentTravel.images[$index+0].url}}" alt="{{currentTravel.images[$index+0].title}}" class="img-responsive">
-								</a>
-							</div>
-							<div class="col-lg-3">
-								<a href="#" class="thumbnail">
-									<img ng-src="{{currentTravel.images[$index+1].url}}" alt="{{currentTravel.images[$index+1].title}}" class="img-responsive">
-								</a>
-							</div>
-							<div class="col-lg-3">
-								<a href="#" class="thumbnail">
-									<img ng-src="{{currentTravel.images[$index+2].url}}" alt="{{currentTravel.images[$index+2].title}}" class="img-responsive">
-								</a>
-							</div>
-							<div class="col-lg-3">
-								<a href="#" class="thumbnail">
-									<img ng-src="{{currentTravel.images[$index+3].url}}" alt="{{currentTravel.images[$index+3].title}}" class="img-responsive">
-								</a>
+							<div data-ng-repeat="i in [0,1,2,3]">
+								<div class="col-lg-3">
+									<div class="panel panel-default" ng-show="$parent.$index+$index < currentTravel.images.length">
+							          <div class="panel-thumbnail">
+							          	<img ng-src="{{currentTravel.images[$parent.$index+$index].url}}" class="img-responsive panel-img">
+							          </div>
+							          <div class="panel-body panel-text">
+							            <p class="cuttext panel-text-bold">{{currentTravel.images[$parent.$index+$index].title}}</p>
+							            <p class="cuttext">{{currentTravel.images[$parent.$index+$index].description}}</p>
+							          </div>
+							        </div>
+								</div>
 							</div>
 						</div>
 					</div>
