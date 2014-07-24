@@ -13,6 +13,9 @@
 <!--  Bootstrap -->
 <link href="lib/bootstrap-3.1.1-dist/css/bootstrap.css" rel="stylesheet">
 
+<!-- Angular-xeditable -->
+<link href="lib/angular-xeditable-0.1.8/css/xeditable.css" rel="stylesheet">
+
 <!-- Application -->
 <link href="css/app.css" rel="stylesheet">
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
@@ -53,6 +56,9 @@
 	<!-- speak.js -->
 	<script src="lib/speakjs/speakClient.js"></script>
 	
+	<!-- angular-xeditable -->
+	<script src="lib/angular-xeditable-0.1.8/js/xeditable.js"></script>
+	
 	<!-- Application -->
 	<script src="js/front/common/common-services.js"></script>
 	<script src="js/front/common/common.js"></script>
@@ -73,7 +79,7 @@
 	
 	<div id="audio">
     </div>
-
+ 
  	<!-- ========================================================================================== -->
  	<!-- Collapsing Nav Bar                                                                         -->
  	<!-- ========================================================================================== -->
@@ -549,7 +555,7 @@
 								<div class="col-lg-3">
 									<div class="panel panel-default" ng-show="$parent.$index+$index < currentTravel.images.length">
 							          <div class="panel-thumbnail">
-							          	<img ng-src="{{currentTravel.images[$parent.$index+$index].url}}" class="img-responsive panel-img">
+							            <img ng-src="{{currentTravel.images[$parent.$index+$index].url}}" class="img-responsive panel-img">
 							          </div>
 							          <div class="panel-body panel-text">
 							            <p class="cuttext panel-text-bold">{{currentTravel.images[$parent.$index+$index].title}}</p>

@@ -7,7 +7,8 @@
 angular.module('travelApp', [
   'common',
   'travel-maps',
-  'travels'
+  'travels',
+  'xeditable'
 ]);
 
 /*
