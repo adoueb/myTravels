@@ -543,7 +543,7 @@
 	<div class="modal fade modal-large" id="managePhotosTravel" role="dialog" tabindex="-1" ng-controller="ManageImagesCtrl">
 		<div class="modal-dialog">
 			<div class="modal-content">
-			<form class="form-horizontal">
+			
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4>Manage photos</h4>
@@ -558,8 +558,14 @@
 							            <img ng-src="{{currentTravel.images[$parent.$index+$index].url}}" class="img-responsive panel-img">
 							          </div>
 							          <div class="panel-body panel-text">
-							            <p class="cuttext panel-text-bold">{{currentTravel.images[$parent.$index+$index].title}}</p>
-							            <p class="cuttext">{{currentTravel.images[$parent.$index+$index].description}}</p>
+							          	<div click-to-edit="currentTravel.images[$parent.$index+$index].title"></div>
+							          	<div click-to-edit="currentTravel.images[$parent.$index+$index].description"></div>
+<!-- 							            <p class="cuttext panel-text-bold"> -->
+<!-- 							            	<a href="#" ng-click="editManagePhotoTitle($parent.$index+$index)" editable-text="currentTravel.currentManagePhotoText" onbeforesave="checkManagePhotoText($data)">{{currentTravel.images[$parent.$index+$index].title || "[Add title]"}}</a> -->
+<!-- 							            </p> -->
+<!-- 							            <p class="cuttext"> -->
+<!-- 							            	<a href="#" ng-click="editManagePhotoDescription($parent.$index+$index)" editable-text="currentTravel.currentManagePhotoText" onbeforesave="checkManagePhotoText($data)">{{currentTravel.images[$parent.$index+$index].description || "[Add description]"}}</a> -->
+<!-- 							            </p> -->
 							          </div>
 							        </div>
 								</div>
@@ -570,9 +576,11 @@
 				<div class="modal-footer">
 					<a class="btn btn-primary" data-dismiss="modal">Close</a>
 				</div>
-			</form>
+			
 		</div>
 	</div>
+	
+  	<!--  a href="#" editable-text="user.name">{{ user.name || "empty" }}</a -->
 
 	<!-- ========================================================================================== -->
  	<!-- Contact dialog                                                                             -->

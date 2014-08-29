@@ -28,4 +28,46 @@ angular.module('travels-directives', [])
     }
 })
 */
+.directive("clickToEdit", function() {
+    var editorTemplate = '<div class="click-to-edit">' +
+        '<p class="cuttext panel-text" ng-hide="view.editorEnabled">' +
+            '{{value}} ' +
+            '<a ng-click="enableEditor()"><i class="glyphicon glyphicon-edit" title="Edit"></i></a>' +
+        '</p>' +
+        '<p class="cuttext panel-text" ng-show="view.editorEnabled">' +
+            '<input ng-model="view.editableValue">' +
+            '<a href="#" ng-click="save()"><i class="glyphicon glyphicon-ok" title="Save"></i></a>' +
+            '<a ng-click="disableEditor()"><i class="glyphicon glyphicon-remove" title="Cancel"></i></a>' +
+        '</p class="cuttext panel-text-bold">' +
+    '</div>';
+
+    return {
+        restrict: "A",
+        replace: true,
+        template: editorTemplate,
+        scope: {
+            value: "=clickToEdit",
+        },
+        controller: function($scope) {
+            $scope.view = {
+                editableValue: $scope.value,
+                editorEnabled: false
+            };
+
+            $scope.enableEditor = function() {
+                $scope.view.editorEnabled = true;
+                $scope.view.editableValue = $scope.value;
+            };
+
+            $scope.disableEditor = function() {
+                $scope.view.editorEnabled = false;
+            };
+
+            $scope.save = function() {
+                $scope.value = $scope.view.editableValue;
+                $scope.disableEditor();
+            };
+        }
+    };
+})
 ;

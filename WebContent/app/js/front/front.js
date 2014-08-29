@@ -4,12 +4,16 @@
 
 
 // Declare app level module which depends on filters, services, directives and controllers.
-angular.module('travelApp', [
+var app = angular.module('travelApp', [
   'common',
   'travel-maps',
   'travels',
   'xeditable'
 ]);
+
+app.run(function(editableOptions) {
+   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
+});
 
 /*
 .config(function($routeProvider, RestangularProvider) {

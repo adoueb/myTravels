@@ -23,8 +23,6 @@ angular.module('travels-controllers', [
     // -------------------------------------------------------------------- 
     TravelService.initTravels();
     
-    //editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-   
     $scope.MainErrors = [];
     
     $scope.selectedTravel = null;
@@ -509,6 +507,28 @@ angular.module('travels-controllers', [
  
     $scope.getManageImagesTravelError = function () {
  	    return $scope.$parent.showManageImagesTravelError;
+    };
+    
+    $scope.editManagePhotoTitle = function (index) {
+    	$scope.currentManagePhotoIndex = index;
+    	$scope.currentManagePhotoType = "title";
+    	$scope.currentTravel.currentManagePhotoText = $scope.currentTravel.images[index].title;
+    };
+    
+    $scope.editManagePhotoDescription = function (index) {
+    	$scope.currentManagePhotoIndex = index;
+    	$scope.currentManagePhotoType = "description";
+    	$scope.currentTravel.currentManagePhotoText = $scope.currentTravel.images[index].description;
+    };
+    
+    $scope.checkManagePhotoText = function(data) {
+    	if ($scope.currentManagePhotoType == "title") {
+    		// Set title.
+    		$scope.currentTravel.images[$scope.currentManagePhotoIndex].title = data;
+    	} else {
+    		// Set description.
+    		$scope.currentTravel.images[$scope.currentManagePhotoIndex].description = data;
+    	}
     };
 }])
 
