@@ -557,15 +557,9 @@
 							          <div class="panel-thumbnail">
 							            <img ng-src="{{currentTravel.images[$parent.$index+$index].url}}" class="img-responsive panel-img">
 							          </div>
-							          <div class="panel-body panel-text">
-							          	<div click-to-edit="currentTravel.images[$parent.$index+$index].title"></div>
-							          	<div click-to-edit="currentTravel.images[$parent.$index+$index].description"></div>
-<!-- 							            <p class="cuttext panel-text-bold"> -->
-<!-- 							            	<a href="#" ng-click="editManagePhotoTitle($parent.$index+$index)" editable-text="currentTravel.currentManagePhotoText" onbeforesave="checkManagePhotoText($data)">{{currentTravel.images[$parent.$index+$index].title || "[Add title]"}}</a> -->
-<!-- 							            </p> -->
-<!-- 							            <p class="cuttext"> -->
-<!-- 							            	<a href="#" ng-click="editManagePhotoDescription($parent.$index+$index)" editable-text="currentTravel.currentManagePhotoText" onbeforesave="checkManagePhotoText($data)">{{currentTravel.images[$parent.$index+$index].description || "[Add description]"}}</a> -->
-<!-- 							            </p> -->
+							          <div>
+							          	<div click-to-edit="currentTravel.images[$parent.$index+$index].title" click-to-edit-bold="true" click-to-edit-tooltip="Edit title"></div>
+							          	<div click-to-edit="currentTravel.images[$parent.$index+$index].description" click-to-edit-bold="false" click-to-edit-tooltip="Edit description"></div>
 							          </div>
 							        </div>
 								</div>
