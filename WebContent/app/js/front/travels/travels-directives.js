@@ -10,27 +10,18 @@ angular.module('travels-directives', [])
        elm.text(version);
     };
 }])
-.directive("clickToEdit", function() {
-    var editorTemplate = '<div class="click-to-edit">' +
-        '<p class="cuttext" ng-class="{isbold: boldValue == true}" ng-hide="view.editorEnabled">' +
-            '{{value || "[Enter text here]"}} ' +
-            '<a ng-click="enableEditor()" ng-attr-title="{{value}}"><i class="glyphicon glyphicon-edit"></i></a>' +
-        '</p>' +
-        '<p class="cuttext"  ng-class="{isbold: boldValue == true}" ng-show="view.editorEnabled">' +
-            '<input ng-model="view.editableValue">' +
-            '<a href="#" ng-click="save()"><i class="glyphicon glyphicon-ok" title="Save"></i></a>' +
-            '<a ng-click="disableEditor()"><i class="glyphicon glyphicon-remove" title="Cancel"></i></a>' +
-        '</p class="cuttext panel-text-bold">' +
-    '</div>';
 
+// clickToEdit directive
+// Ex: <click-to-edit value="ref to obj" bold="true or false" tooltip="string"></click-to-edit>
+.directive("clickToEdit", function() {   
     return {
-        restrict: "A",
+        restrict: "E",
         replace: true,
-        template: editorTemplate,
+        templateUrl: "partials/clickToEdit.html",
         scope: {
-            value: "=clickToEdit",
-            boldValue: "=clickToEditBold",
-            //editTooltipValue: "=clickToEditTooltip"
+            value: "=value",
+            boldValue: "=bold",
+            editTooltipValue: "@tooltip"
         },
         controller: function($scope) {
         	
@@ -54,5 +45,4 @@ angular.module('travels-directives', [])
             };
         }
     };
-})
-;
+});

@@ -1,0 +1,24 @@
+<div>
+	<!--  Displayed text -->
+    <div class="panel-default" ng-class="{isbold: boldValue == true}" ng-hide="view.editorEnabled">
+    	<div style="float:left; max-width:90%;" class="ellipsistext cte">
+        	<span>{{value}} </span>
+    	</div>
+    	<div style="float:right; width:25px;" class="pull-right">
+        	<a ng-click="enableEditor()"><i class="glyphicon glyphicon-edit" ng-attr-title="{{editTooltipValue}}"></i></a>
+    	</div>
+    	<div style="clear:both"></div>
+    </div>
+    
+    <!--  Edited text -->
+    <div class="panel-default" ng-class="{isbold: boldValue == true}" ng-show="view.editorEnabled">
+    	<div style="float:left; width="90%";max-width:90%;">
+        	<span><input ng-model="view.editableValue" style="width="90%;"></span>
+    	</div>
+    	<div style="float:right; width:40px;" class="pull-right">
+    		<a href="#" ng-click="save()"><i class="glyphicon glyphicon-ok" title="Save"></i></a>
+       		<a ng-click="disableEditor()"><i class="glyphicon glyphicon-remove" title="Cancel"></i></a>
+    	</div>
+    	<div style="clear:both"></div>
+    </div>
+</div>

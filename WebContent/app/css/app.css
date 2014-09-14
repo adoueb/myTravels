@@ -98,27 +98,33 @@ body {
   padding:0;
 }
 .panel-thumbnail {
-  height: 150px;
+  height: 180px;
   overflow:hidden;
 }
 .panel-img {
   max-width: 100%;
   height: auto;
 }
+.panel-body-dark {
+  background-color: #e0e0e0;
+}
 .isbold {
   font-weight:bold;
 }
+.ellipsistext {
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: nowrap;
+}
+.cte {
+    //height: 35px;
+    padding:0;
+}
+
 .cuttext {
     text-decoration: none; 
     text-overflow: ellipsis; 
     overflow: hidden; 
     white-space: nowrap;
-    width: 100%; 
-    height: 27px;
-    padding:0;
-    margin: 5px 2px 5px 2px;
-}
-
-.panel-body-dark {
-  background-color: #e0e0e0;
+    width: 100%;
 }
