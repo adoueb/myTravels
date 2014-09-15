@@ -554,9 +554,11 @@
 							<div data-ng-repeat="i in [0,1,2,3]">
 								<div class="col-lg-3">
 									<div class="panel panel-default" ng-show="$parent.$index+$index < currentTravel.images.length">
+									  <!-- Image -->
 							          <div class="panel-thumbnail">
 							            <img ng-src="{{currentTravel.images[$parent.$index+$index].url}}" class="img-responsive panel-img">
 							          </div>
+							          <!-- Title + description -->
 							          <div>
 							          	<click-to-edit value="currentTravel.images[$parent.$index+$index].title" bold="true" tooltip="Edit title"></click-to-edit>
 							          	<click-to-edit value="currentTravel.images[$parent.$index+$index].description" bold="false" tooltip="Edit description"></click-to-edit>
