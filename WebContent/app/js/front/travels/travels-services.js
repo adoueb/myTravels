@@ -285,17 +285,6 @@ angular.module('travels-services', [ 'ngResource'])
 .factory('UpdateTravelService', ['$log', function($log) {
 	var me = {};
 	
-	me.showUpdateTravelAlert = false;	
-
-	me.getShowUpdateTravelAlert = function() {
-		return me.showUpdateTravelAlert;
-	};
-
-	me.setShowUpdateTravelAlert = function(bValue) {
-		me.showUpdateTravelAlert = bValue;
-		$log.info("showUpdateTravelAlert = " + me.showUpdateTravelAlert);
-	};
-
 	return me;
 }])
 
@@ -305,17 +294,6 @@ angular.module('travels-services', [ 'ngResource'])
 .factory('DeleteTravelService', ['$log', function($log) {
 	var me = {};
 	
-	me.showDeleteTravelAlert = false;	
-
-	me.getShowDeleteTravelAlert = function() {
-		return me.showDeleteTravelAlert;
-	};
-
-	me.setShowDeleteTravelAlert = function(bValue) {
-		me.showDeleteTravelAlert = bValue;
-		$log.info("showDeleteTravelAlert = " + me.showDeleteTravelAlert);
-	};
-
 	return me;
 }])
 ;

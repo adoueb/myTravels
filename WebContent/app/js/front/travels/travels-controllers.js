@@ -26,13 +26,6 @@ angular.module('travels-controllers', [
     $scope.selectedTravel = null;
     
     AlertService.initAlerts("main");
-//    AlertService.addAlert("main", "danger", "aa");
-//    AlertService.addAlert("main", "warning", "bb");
-//    AlertService.addAlert("main", "danger", "cc");
-    
-    $scope.addAlert = function() {
-    	AlertService.addAlert("main", "info", "dd");
-    }
     
     TravelRest.query(function(travels) {
 		// List of travels.
@@ -138,38 +131,38 @@ angular.module('travels-controllers', [
     // --------------------------------------------------------------------
     // Manage popups.
     // --------------------------------------------------------------------
-    // Set add travel.
+    // Init add travel.
     $scope.initAddTravel = function() {
         AlertService.resetAlerts("addTravel");
     };
     
-    // Set update travel.
-    $scope.setUpdateTravel = function(travel) {
-    	$scope.showUpdateTravelAlert = false;
+    // Init update travel.
+    $scope.initUpdateTravel = function(travel) {
+    	AlertService.resetAlerts("updateTravel");
         $scope.setCurrentTravel(travel);
     };
 
-    // Set delete travel.
-    $scope.setDeleteTravel = function(travel) {
-    	$scope.showDeleteTravelAlert = false;
+    // Init delete travel.
+    $scope.initDeleteTravel = function(travel) {
+    	AlertService.resetAlerts("deleteTravel");
     	$scope.setCurrentTravel(travel);
     };
 
-    // Set edit stop.
-	$scope.setEditStop = function(marker) {
-		$scope.showEditStopAlert = false;
+    // Init edit stop.
+	$scope.initEditStop = function(marker) {
+    	AlertService.resetAlerts("updateTravel");
 	    $scope.setCurrentStop(marker);
 	};
     
-    // Set "upload photos" travel.
-    $scope.setUploadPhotosTravel = function(travel) {
-        $scope.showUploadImagesTravelAlert = false;
+    // Init "upload photos" travel.
+    $scope.initUploadPhotosTravel = function(travel) {
+    	AlertService.resetAlerts("uploadImages");
     	$scope.setCurrentTravel(travel);
     };
     
-    // Set "manage photos" travel.
-    $scope.setManagePhotosTravel = function(travel) {
-        $scope.showManageImagesTravelAlert = false;
+    // Init "manage photos" travel.
+    $scope.initManagePhotosTravel = function(travel) {
+    	AlertService.resetAlerts("manageImages");
     	$scope.setCurrentTravel(travel);
     };
 
@@ -226,14 +219,8 @@ angular.module('travels-controllers', [
 // UpdateTravelCtrl controller
 // ------------------------------------------------------------------------
 .controller('UpdateTravelCtrl', 
-        ['$scope', '$log', 'TravelRest', 'UpdateTravelService', 'TravelService', 'CommonService',
-		    function($scope, $log, TravelRest, UpdateTravelService, TravelService, CommonService) {
-       
-    $scope.$parent.showUpdateTravelAlert = false;
-    
-    $scope.getUpdateTravelAlert = function () {
-    	return $scope.$parent.showUpdateTravelAlert;
-    };
+        ['$scope', '$log', 'TravelRest', 'UpdateTravelService', 'TravelService', 'CommonService', 'AlertService',
+		    function($scope, $log, TravelRest, UpdateTravelService, TravelService, CommonService, AlertService) {
      
     // Update travel.
     $scope.updateTravel = function(travel) {
@@ -246,20 +233,8 @@ angular.module('travels-controllers', [
  	            $('#updateTravel').modal('hide');
     	    }, function() {
     			$log.error("There was an error updating");
-    			$scope.$parentshowUpdateTravelAlert = true;
-		        $scope.$parent.showEditStopAlert = true;
+    			AlertService.addAlert("updateTravel", "danger", "The travel can't be updated. Please retry.");
     	});
-    };
-    
-    $scope.showError = function(ngModelController, error) {
-    	return CommonService.showError(ngModelController, error);
-    };
-  
-    // Update stops.
-    $scope.$parent.showEditStopAlert = false;
- 
-    $scope.getShowEditStopAlert = function () {
-    	return $scope.$parent.showEditStopAlert;
     };
 
 	// Update stop.
@@ -277,37 +252,27 @@ angular.module('travels-controllers', [
 // DeleteTravelCtrl controller
 // ------------------------------------------------------------------------
 .controller('DeleteTravelCtrl', 
-        ['$scope', '$log', 'TravelRest', 'DeleteTravelService', 'TravelService', 'CommonService',
-		    function($scope, $log, TravelRest, DeleteTravelService, TravelService, CommonService) {    
+        ['$scope', '$log', 'TravelRest', 'DeleteTravelService', 'TravelService', 'CommonService', 'AlertService',
+		    function($scope, $log, TravelRest, DeleteTravelService, TravelService, CommonService, AlertService) {    
         	
-    $scope.$parent.showDeleteTravelAlert = false;
-    
-    $scope.getDeleteTravelAlert = function () {
-    	return $scope.$parent.showDeleteTravelAlert;
-    };
-       	
     // Delete travel.
-    $scope.deleteTravel = function(travel) {
+	$scope.deleteTravel = function(travel) {
         // DELETE /travels
     	$log.info("delete " +  travel.name);
     	TravelRest.remove(travel, function(travels) {
- 	       //$scope.$parent.travels = travels;
  	       if ($scope.$parent.selectedTravel.id == travel.id) {
  	    	   // Delete the selected travel.
  	    	   $scope.$parent.initializeTravels(travels);	
 		   } else {
 			   $scope.$parent.travels = TravelService.getOrderedTravels(travels);
 		   }
- 	       $('#deleteTravel').modal('hide');
+ 	       $('#deleteTravel').modal('hide');    		
         }, function() {
         	$log.error("There was an error deleting");
-        	$scope.$parent.showDeleteTravelAlert = true;
+        	AlertService.addAlert("deleteTravel", "danger", "The travel can't be deleted. Please retry.");
         });
     };
-    
-    $scope.showError = function(ngModelController, error) {
-    	return CommonService.showError(ngModelController, error);
-    };    
+        	    
 }])
 
 // ------------------------------------------------------------------------
@@ -316,13 +281,7 @@ angular.module('travels-controllers', [
 .controller('UploadImagesCtrl', 
      ['$scope', '$log', '$timeout', '$upload',
 		    function($scope, $log, $timeout, $upload) {    
-  
-    $scope.$parent.showUploadImagesTravelAlert = false;
- 
-    $scope.getUploadImagesTravelAlert = function () {
- 	    return $scope.$parent.showUploadImagesTravelAlert;
-    };
-    	
+      	
     // Upload started.
 	$scope.hasUploader = function(index) {
 		return $scope.uploaders[index] != null;
@@ -493,20 +452,8 @@ angular.module('travels-controllers', [
      ['$scope', '$log',
 		    function($scope, $log) {    
   
-    // Alert + level
-    $scope.$parent.showManageImagesTravelAlert = false;
-    $scope.$parent.manageImagesTravelAlertLevel = "alert-danger";
-    
     // Multi-selection.
     $scope.nbSelected = 0;
- 
-    $scope.getManageImagesTravelAlert = function () {
- 	    return $scope.$parent.showManageImagesTravelAlert;
-    };
-    
-    $scope.getManageImagesTravelAlertLevel = function () {
- 	    return $scope.$parent.manageImagesTravelAlertLevel;
-    };
    
     $scope.togglePhotoSelection = function (photoIndex) {
     	var selected = $scope.currentTravel.images[photoIndex].selected;

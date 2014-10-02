@@ -219,7 +219,7 @@
 									<h5><b>{{marker.title}}:</b></h5>
 									<p>{{marker.description}}</p>
 									<div class="gray-link" style="text-align: right;">
-										<a ng-click="setEditStop(marker)" href="#updateStop" data-toggle="modal">
+										<a ng-click="initEditStop(marker)" href="#updateStop" data-toggle="modal">
 											<i class="glyphicon glyphicon-edit" title="Update stop"></i>
 										</a>
 										<a ng-click="readAloud(marker)">
@@ -258,16 +258,16 @@
 			 					</p>
 		 					</div>
 		 					<div class="gray-link" ng-class="{active:travel.id==selectedTravel.id}" style="text-align: right;">			
-								<a ng-click="setDeleteTravel(travel)" href="#deleteTravel" data-toggle="modal">
+								<a ng-click="initDeleteTravel(travel)" href="#deleteTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-trash" title="Delete travel"></i>
 								</a>
-								<a ng-click="setUpdateTravel(travel)" href="#updateTravel" data-toggle="modal">
+								<a ng-click="initUpdateTravel(travel)" href="#updateTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-edit" title="Update travel"></i>
 								</a>								
-								<a ng-click="setUploadPhotosTravel(travel)" href="#uploadPhotosTravel" data-toggle="modal">
+								<a ng-click="initUploadPhotosTravel(travel)" href="#uploadPhotosTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-upload" title="Upload photos of travel"></i>
 								</a>
-								<a ng-click="setManagePhotosTravel(travel)" href="#managePhotosTravel" data-toggle="modal">
+								<a ng-click="initManagePhotosTravel(travel)" href="#managePhotosTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-camera" title="Manage photos of travel"></i>
 								</a>
 							</div>
@@ -307,10 +307,6 @@
 				</div>
 				<div class="modal-body">
 					<show-alerts key="addTravel" alerts="alerts"></show-alerts>
-<!-- 					<div class="alert alert-danger alert-dismissable" ng-show="getAddTravelAlert()"> -->
-<!-- 		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
-<!-- 		  				<strong>Error!</strong> The travel can't be added. -->
-<!-- 					</div> -->
 					
 					<div class="form-group">
 						<label for="contact-new-country" class="col-lg-2 control-label">Country:</label>
@@ -361,10 +357,7 @@
 					<h4>Update Travel</h4>
 				</div>
 				<div class="modal-body">
-					<div class="alert alert-danger alert-dismissable" ng-show="getUpdateTravelAlert()">
-		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		  				<strong>Error!</strong> The travel can't be updated.
-					</div>
+					<show-alerts key="updateTravel" alerts="alerts"></show-alerts>
 
 					<div class="form-group">
 						<label for="contact-update-country" class="col-lg-2 control-label">Country:</label>
@@ -411,10 +404,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4>Delete Travel</h4>
 					</div>
-					<div class="alert alert-danger alert-dismissable" ng-show="getDeleteTravelAlert()">
-		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		  				<strong>Error!</strong> The travel can't be deleted.
-					</div>
+					<show-alerts key="deleteTravel" alerts="alerts"></show-alerts>
 
 					<div class="modal-body">
 						Do you really want to delete the "{{currentTravel.name}}" travel ?
@@ -440,10 +430,7 @@
 					<h4>Upload photos</h4>
 				</div>
 				<div class="modal-body">
-					<!-- div class="alert alert-danger alert-dismissable" ng-show="showUploadImagesTravelAlert">
-		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		  				<strong>Error!</strong> The photos can't be uploaded.
-					</div -->
+					<show-alerts key="uploadImages" alerts="alerts"></show-alerts>
 					
 					<div class="container">
 					 <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
@@ -545,10 +532,7 @@
 				</div>
 				<div class="modal-body panel-body-dark">
 				
-					<div class="alert alert-danger alert-dismissable" ng-show="true">
-		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		  				<strong>Alert!!</strong> TODO
-					</div>
+					<show-alerts key="manageImages" alerts="alerts"></show-alerts>
 					
 					<div ng-repeat="image in currentTravel.images" ng-switch="$index%4">
 						<div class="row" ng-switch-when="0">
@@ -633,10 +617,7 @@
 	 					<h4>Update Stop</h4>
 	 				</div>
 	 				<div class="modal-body">
-						<div class="alert alert-danger alert-dismissable" ng-show="getShowEditStopAlert()">
-			  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-			  				<strong>Error!</strong> The stop can't be updated.
-						</div>
+	 					<show-alerts key="updateTravel" alerts="alerts"></show-alerts>
 
 	 					<div class="form-group">
 	 						<label for="stop-update-title" class="col-lg-2 control-label">Title:</label>
