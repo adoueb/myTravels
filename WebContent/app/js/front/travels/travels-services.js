@@ -276,15 +276,15 @@ angular.module('travels-services', [ 'ngResource'])
 .factory('AddTravelService', ['$log', function($log) {
 	var me = {};
 	
-	me.showAddTravelError = false;	
+	me.showAddTravelAlert = false;	
 
-	me.getShowAddTravelError = function() {
-		return me.showAddTravelError;
+	me.getShowAddTravelAlert = function() {
+		return me.showAddTravelAlert;
 	};
 
-	me.setShowAddTravelError = function(bValue) {
-		me.showAddTravelError = bValue;
-		$log.info("showAddTravelError = " + me.showAddTravelError);
+	me.setShowAddTravelAlert = function(bValue) {
+		me.showAddTravelAlert = bValue;
+		$log.info("showAddTravelAlert = " + me.showAddTravelAlert);
 	};
 
 	return me;
@@ -296,15 +296,15 @@ angular.module('travels-services', [ 'ngResource'])
 .factory('UpdateTravelService', ['$log', function($log) {
 	var me = {};
 	
-	me.showUpdateTravelError = false;	
+	me.showUpdateTravelAlert = false;	
 
-	me.getShowUpdateTravelError = function() {
-		return me.showUpdateTravelError;
+	me.getShowUpdateTravelAlert = function() {
+		return me.showUpdateTravelAlert;
 	};
 
-	me.setShowUpdateTravelError = function(bValue) {
-		me.showUpdateTravelError = bValue;
-		$log.info("showUpdateTravelError = " + me.showUpdateTravelError);
+	me.setShowUpdateTravelAlert = function(bValue) {
+		me.showUpdateTravelAlert = bValue;
+		$log.info("showUpdateTravelAlert = " + me.showUpdateTravelAlert);
 	};
 
 	return me;
@@ -316,15 +316,15 @@ angular.module('travels-services', [ 'ngResource'])
 .factory('DeleteTravelService', ['$log', function($log) {
 	var me = {};
 	
-	me.showDeleteTravelError = false;	
+	me.showDeleteTravelAlert = false;	
 
-	me.getShowDeleteTravelError = function() {
-		return me.showDeleteTravelError;
+	me.getShowDeleteTravelAlert = function() {
+		return me.showDeleteTravelAlert;
 	};
 
-	me.setShowDeleteTravelError = function(bValue) {
-		me.showDeleteTravelError = bValue;
-		$log.info("showDeleteTravelError = " + me.showDeleteTravelError);
+	me.setShowDeleteTravelAlert = function(bValue) {
+		me.showDeleteTravelAlert = bValue;
+		$log.info("showDeleteTravelAlert = " + me.showDeleteTravelAlert);
 	};
 
 	return me;

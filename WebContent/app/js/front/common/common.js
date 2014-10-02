@@ -5,5 +5,6 @@
 
 // Declare common level module which depends on filters, services, directives and controllers.
 angular.module('common', [
+  'common-directives',
   'common-services'
 ]);

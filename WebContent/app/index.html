@@ -13,9 +13,6 @@
 <!--  Bootstrap -->
 <link href="lib/bootstrap-3.1.1-dist/css/bootstrap.css" rel="stylesheet">
 
-<!-- Angular-xeditable -->
-<link href="lib/angular-xeditable-0.1.8/css/xeditable.css" rel="stylesheet">
-
 <!-- Application -->
 <link href="css/app.css" rel="stylesheet">
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
@@ -40,7 +37,7 @@
 	
 	<!-- Bootstrap -->
     <script src="lib/bootstrap-3.1.1-dist/js/bootstrap.js"></script>
-	
+    
 	<!-- UI Bootstrap -->
     <script src="lib/ui-bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
     
@@ -56,11 +53,9 @@
 	<!-- speak.js -->
 	<script src="lib/speakjs/speakClient.js"></script>
 	
-	<!-- angular-xeditable -->
-	<script src="lib/angular-xeditable-0.1.8/js/xeditable.js"></script>
-	
 	<!-- Application -->
 	<script src="js/front/common/common-services.js"></script>
+	<script src="js/front/common/common-directives.js"></script>
 	<script src="js/front/common/common.js"></script>
 	
 	<script src="js/front/upload/angular-file-upload-shim.js"></script>
@@ -77,6 +72,9 @@
 	
 	<script src="js/front/front.js"></script>
 	
+ 	<!-- ========================================================================================== -->
+ 	<!-- Audio                                                                                      -->
+ 	<!-- ========================================================================================== -->
 	<div id="audio">
     </div>
  
@@ -131,12 +129,8 @@
   	<!-- ========================================================================================== -->
  	<!-- Alerts                                                                                     -->
  	<!-- ========================================================================================== -->
- 	<div ng-repeat="error in MainErrors">
-		<div class="alert alert-dismissable" ng-class="{'alert-danger': error.class == 'danger', 'alert-warning': error.class == 'warning', 'alert-info': error.class == 'info', 'alert-success': error.class == 'success'}">
-        	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        	{{error.description}}
-		</div>
-	</div>
+ 	<show-alerts key="main" alerts="alerts"></show-alerts>
+<!-- 	<a ng-click="addAlert()">Add alert</a> -->
  
   	<!-- ========================================================================================== -->
  	<!-- Articles                                                                                   -->
@@ -154,7 +148,7 @@
 			 			<center>
 			 				<h1>No selected travels</h1>
 							<p>Enter your travels with your pictures and itinerary</p>
-							<a class="btn btn-default" ng-click="setAddTravel()" href="#addTravel" data-toggle="modal">Add Travel</a>
+							<a class="btn btn-default" ng-click="initAddTravel()" href="#addTravel" data-toggle="modal">Add Travel</a>
 						</center>
 					</div>
 				</div>
@@ -245,7 +239,7 @@
 		 	<!-- ========================================================================================== -->
 	 		<div class="col-lg-3">
 				<!--  Add new travel  -->
-				<a style="margin-left: 10px; font-size: 14px; display: inline-block;" ng-click="setAddTravel()" href="#addTravel" data-toggle="modal"
+				<a style="margin-left: 10px; font-size: 14px; display: inline-block;" ng-click="initAddTravel()" href="#addTravel" data-toggle="modal"
 				   ng-show="travels.length != 0"> 
 					<i class="glyphicon glyphicon-plus-sign" title="Add Travel"></i> Add Travel
 				</a>
@@ -312,7 +306,7 @@
 					<h4>Add Travel</h4>
 				</div>
 				<div class="modal-body">
-					<div class="alert alert-danger alert-dismissable" ng-show="getAddTravelError()">
+					<div class="alert alert-danger alert-dismissable" ng-show="getAddTravelAlert()">
 		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		  				<strong>Error!</strong> The travel can't be added.
 					</div>
@@ -366,7 +360,7 @@
 					<h4>Update Travel</h4>
 				</div>
 				<div class="modal-body">
-					<div class="alert alert-danger alert-dismissable" ng-show="getUpdateTravelError()">
+					<div class="alert alert-danger alert-dismissable" ng-show="getUpdateTravelAlert()">
 		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		  				<strong>Error!</strong> The travel can't be updated.
 					</div>
@@ -416,7 +410,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4>Delete Travel</h4>
 					</div>
-					<div class="alert alert-danger alert-dismissable" ng-show="getDeleteTravelError()">
+					<div class="alert alert-danger alert-dismissable" ng-show="getDeleteTravelAlert()">
 		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		  				<strong>Error!</strong> The travel can't be deleted.
 					</div>
@@ -445,7 +439,7 @@
 					<h4>Upload photos</h4>
 				</div>
 				<div class="modal-body">
-					<!-- div class="alert alert-danger alert-dismissable" ng-show="showUploadImagesTravelError">
+					<!-- div class="alert alert-danger alert-dismissable" ng-show="showUploadImagesTravelAlert">
 		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		  				<strong>Error!</strong> The photos can't be uploaded.
 					</div -->
@@ -546,16 +540,23 @@
 			
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4>Manage photos</h4>
+					<h4>Manage photos<span ng-show="nbSelected != 0"> / {{nbSelected}} selected</span></h4>
 				</div>
 				<div class="modal-body panel-body-dark">
+				
+					<div class="alert alert-danger alert-dismissable" ng-show="true">
+		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		  				<strong>Alert!!</strong> TODO
+					</div>
+					
 					<div ng-repeat="image in currentTravel.images" ng-switch="$index%4">
 						<div class="row" ng-switch-when="0">
 							<div data-ng-repeat="i in [0,1,2,3]">
 								<div class="col-lg-3">
-									<div class="panel panel-default" ng-show="$parent.$index+$index < currentTravel.images.length">
+									<!-- Block -->
+									<div class="panel panel-default" ng-class="{'photoselected': currentTravel.images[$parent.$index+$index].selected == true}" ng-show="$parent.$index+$index < currentTravel.images.length">
 									  <!-- Image -->
-							          <div class="panel-thumbnail">
+							          <div class="panel-thumbnail" ng-click="togglePhotoSelection($parent.$index+$index)">
 							            <img ng-src="{{currentTravel.images[$parent.$index+$index].url}}" class="img-responsive panel-img">
 							          </div>
 							          <!-- Title + description -->
@@ -570,7 +571,8 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<a class="btn btn-primary" data-dismiss="modal">Close</a>
+					<a class="btn btn-default" data-dismiss="modal">Close</a>
+					<button class="btn btn-primary" ng-click="deleteSelectedPhotos()">Delete</button>
 				</div>
 			
 		</div>
@@ -630,7 +632,7 @@
 	 					<h4>Update Stop</h4>
 	 				</div>
 	 				<div class="modal-body">
-						<div class="alert alert-danger alert-dismissable" ng-show="getShowEditStopError()">
+						<div class="alert alert-danger alert-dismissable" ng-show="getShowEditStopAlert()">
 			  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 			  				<strong>Error!</strong> The stop can't be updated.
 						</div>

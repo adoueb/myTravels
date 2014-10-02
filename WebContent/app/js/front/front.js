@@ -7,27 +7,5 @@
 var app = angular.module('travelApp', [
   'common',
   'travel-maps',
-  'travels',
-  'xeditable'
+  'travels'
 ]);
-
-app.run(function(editableOptions) {
-   editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
-});
-
-/*
-.config(function($routeProvider, RestangularProvider) {
-	RestangularProvider.setBaseUrl('http://localhost:8080/MyTravels-0.0.1-SNAPSHOT');
-	RestangularProvider.setRestangularFields({
-	      id: '_id.$oid'
-	    });
-    RestangularProvider.setRequestInterceptor(function(elem, operation, what) {
-        
-        if (operation === 'put') {
-          elem._id = undefined;
-          return elem;
-        }
-        return elem;
-      });
-    RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json'});
-});*/

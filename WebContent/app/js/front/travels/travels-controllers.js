@@ -15,17 +15,24 @@ angular.module('travels-controllers', [
 // TravelListCtrl controller
 // ------------------------------------------------------------------------
 .controller('TravelListCtrl', 
-            ['$scope', '$log', 'TravelRest', 'MapService', 'TravelService',
-		    function($scope, $log, TravelRest, MapService, TravelService) {
+            ['$scope', '$log', 'TravelRest', 'MapService', 'TravelService', 'AlertService',
+		    function($scope, $log, TravelRest, MapService, TravelService, AlertService) {
 	
     // --------------------------------------------------------------------
     // Initializations.
     // -------------------------------------------------------------------- 
     TravelService.initTravels();
     
-    $scope.MainErrors = [];
-    
     $scope.selectedTravel = null;
+    
+    AlertService.initAlerts("main");
+//    AlertService.addAlert("main", "danger", "aa");
+//    AlertService.addAlert("main", "warning", "bb");
+//    AlertService.addAlert("main", "danger", "cc");
+    
+    $scope.addAlert = function() {
+    	AlertService.addAlert("main", "info", "dd");
+    }
     
     TravelRest.query(function(travels) {
 		// List of travels.
@@ -33,15 +40,10 @@ angular.module('travels-controllers', [
 	    $scope.initializeTravels(travels);
     }, function() {
     	$log.info('Error while loading travels');
-    	$scope.pushError("danger", "The travels can't be loaded. Please retry.");
+    	AlertService.addAlert("main", "danger", "The travels can't be loaded. Please retry.");
     });
     
-    // --------------------------------------------------------------------
-    // Error management.
-    // --------------------------------------------------------------------
-    $scope.pushError = function(errorClass, errorDescription) {
-	    $scope.MainErrors.push({"class": errorClass, "description": errorDescription});
-    };
+    
 	  
     // --------------------------------------------------------------------
     // Map initialization.
@@ -117,7 +119,7 @@ angular.module('travels-controllers', [
 	    }, function(travel) {
 	    	$log.info("Failed to update travel " + id + " / " + travel.country);
 	    	var msg = "Error while refreshing the travel " + travel.name;
-	    	$scope.pushError("danger", msg);
+	    	AlertService.addAlert("main", "danger", msg);
 	    }); 
     };
     
@@ -137,37 +139,37 @@ angular.module('travels-controllers', [
     // Manage popups.
     // --------------------------------------------------------------------
     // Set add travel.
-    $scope.setAddTravel = function() {
-        $scope.showAddTravelError = false;
+    $scope.initAddTravel = function() {
+        $scope.showAddTravelAlert = false;
     };
     
     // Set update travel.
     $scope.setUpdateTravel = function(travel) {
-    	$scope.showUpdateTravelError = false;
+    	$scope.showUpdateTravelAlert = false;
         $scope.setCurrentTravel(travel);
     };
 
     // Set delete travel.
     $scope.setDeleteTravel = function(travel) {
-    	$scope.showDeleteTravelError = false;
+    	$scope.showDeleteTravelAlert = false;
     	$scope.setCurrentTravel(travel);
     };
 
     // Set edit stop.
 	$scope.setEditStop = function(marker) {
-		$scope.showEditStopError = false;
+		$scope.showEditStopAlert = false;
 	    $scope.setCurrentStop(marker);
 	};
     
     // Set "upload photos" travel.
     $scope.setUploadPhotosTravel = function(travel) {
-        $scope.showUploadImagesTravelError = false;
+        $scope.showUploadImagesTravelAlert = false;
     	$scope.setCurrentTravel(travel);
     };
     
     // Set "manage photos" travel.
     $scope.setManagePhotosTravel = function(travel) {
-        $scope.showManageImagesTravelError = false;
+        $scope.showManageImagesTravelAlert = false;
     	$scope.setCurrentTravel(travel);
     };
 
@@ -196,10 +198,10 @@ angular.module('travels-controllers', [
         ['$scope', '$log', 'TravelRest', 'AddTravelService', 'TravelService', 'CommonService',
 		    function($scope, $log, TravelRest, AddTravelService, TravelService, CommonService) {
     
-    $scope.$parent.showAddTravelError = false;
+    $scope.$parent.showAddTravelAlert = false;
     
-    $scope.getAddTravelError = function () {
-    	return $scope.$parent.showAddTravelError;
+    $scope.getAddTravelAlert = function () {
+    	return $scope.$parent.showAddTravelAlert;
     };
     
     // Create travel.
@@ -215,10 +217,10 @@ angular.module('travels-controllers', [
 	 	        //$scope.$parent.addTravelToList(travel);
 	            //$('#addTravel').modal('hide');
 	            $log.error("There was an error saving");
-	            $scope.$parent.showAddTravelError = true;
+	            $scope.$parent.showAddTravelAlert = true;
 	        }, function() {
 		        $log.error("There was an error saving");
-		        $scope.$parent.showAddTravelError = true;
+		        $scope.$parent.showAddTravelAlert = true;
 	    });
     };
     
@@ -239,10 +241,10 @@ angular.module('travels-controllers', [
         ['$scope', '$log', 'TravelRest', 'UpdateTravelService', 'TravelService', 'CommonService',
 		    function($scope, $log, TravelRest, UpdateTravelService, TravelService, CommonService) {
        
-    $scope.$parent.showUpdateTravelError = false;
+    $scope.$parent.showUpdateTravelAlert = false;
     
-    $scope.getUpdateTravelError = function () {
-    	return $scope.$parent.showUpdateTravelError;
+    $scope.getUpdateTravelAlert = function () {
+    	return $scope.$parent.showUpdateTravelAlert;
     };
      
     // Update travel.
@@ -256,8 +258,8 @@ angular.module('travels-controllers', [
  	            $('#updateTravel').modal('hide');
     	    }, function() {
     			$log.error("There was an error updating");
-    			$scope.$parentshowUpdateTravelError = true;
-		        $scope.$parent.showEditStopError = true;
+    			$scope.$parentshowUpdateTravelAlert = true;
+		        $scope.$parent.showEditStopAlert = true;
     	});
     };
     
@@ -266,10 +268,10 @@ angular.module('travels-controllers', [
     };
   
     // Update stops.
-    $scope.$parent.showEditStopError = false;
+    $scope.$parent.showEditStopAlert = false;
  
-    $scope.getShowEditStopError = function () {
-    	return $scope.$parent.showEditStopError;
+    $scope.getShowEditStopAlert = function () {
+    	return $scope.$parent.showEditStopAlert;
     };
 
 	// Update stop.
@@ -290,10 +292,10 @@ angular.module('travels-controllers', [
         ['$scope', '$log', 'TravelRest', 'DeleteTravelService', 'TravelService', 'CommonService',
 		    function($scope, $log, TravelRest, DeleteTravelService, TravelService, CommonService) {    
         	
-    $scope.$parent.showDeleteTravelError = false;
+    $scope.$parent.showDeleteTravelAlert = false;
     
-    $scope.getDeleteTravelError = function () {
-    	return $scope.$parent.showDeleteTravelError;
+    $scope.getDeleteTravelAlert = function () {
+    	return $scope.$parent.showDeleteTravelAlert;
     };
        	
     // Delete travel.
@@ -311,7 +313,7 @@ angular.module('travels-controllers', [
  	       $('#deleteTravel').modal('hide');
         }, function() {
         	$log.error("There was an error deleting");
-        	$scope.$parent.showDeleteTravelError = true;
+        	$scope.$parent.showDeleteTravelAlert = true;
         });
     };
     
@@ -327,10 +329,10 @@ angular.module('travels-controllers', [
      ['$scope', '$log', '$timeout', '$upload',
 		    function($scope, $log, $timeout, $upload) {    
   
-    $scope.$parent.showUploadImagesTravelError = false;
+    $scope.$parent.showUploadImagesTravelAlert = false;
  
-    $scope.getUploadImagesTravelError = function () {
- 	    return $scope.$parent.showUploadImagesTravelError;
+    $scope.getUploadImagesTravelAlert = function () {
+ 	    return $scope.$parent.showUploadImagesTravelAlert;
     };
     	
     // Upload started.
@@ -503,33 +505,39 @@ angular.module('travels-controllers', [
      ['$scope', '$log',
 		    function($scope, $log) {    
   
-    $scope.$parent.showManageImagesTravelError = false;
+    // Alert + level
+    $scope.$parent.showManageImagesTravelAlert = false;
+    $scope.$parent.manageImagesTravelAlertLevel = "alert-danger";
+    
+    // Multi-selection.
+    $scope.nbSelected = 0;
  
-    $scope.getManageImagesTravelError = function () {
- 	    return $scope.$parent.showManageImagesTravelError;
+    $scope.getManageImagesTravelAlert = function () {
+ 	    return $scope.$parent.showManageImagesTravelAlert;
     };
     
-    $scope.editManagePhotoTitle = function (index) {
-    	$scope.currentManagePhotoIndex = index;
-    	$scope.currentManagePhotoType = "title";
-    	$scope.currentTravel.currentManagePhotoText = $scope.currentTravel.images[index].title;
+    $scope.getManageImagesTravelAlertLevel = function () {
+ 	    return $scope.$parent.manageImagesTravelAlertLevel;
     };
-    
-    $scope.editManagePhotoDescription = function (index) {
-    	$scope.currentManagePhotoIndex = index;
-    	$scope.currentManagePhotoType = "description";
-    	$scope.currentTravel.currentManagePhotoText = $scope.currentTravel.images[index].description;
-    };
-    
-    $scope.checkManagePhotoText = function(data) {
-    	if ($scope.currentManagePhotoType == "title") {
-    		// Set title.
-    		$scope.currentTravel.images[$scope.currentManagePhotoIndex].title = data;
+   
+    $scope.togglePhotoSelection = function (photoIndex) {
+    	var selected = $scope.currentTravel.images[photoIndex].selected;
+    	$scope.currentTravel.images[photoIndex].selected = selected == undefined ? true : !selected;
+    	if ($scope.currentTravel.images[photoIndex].selected == true) {
+    		$scope.nbSelected += 1;
     	} else {
-    		// Set description.
-    		$scope.currentTravel.images[$scope.currentManagePhotoIndex].description = data;
+    		$scope.nbSelected -= 1;
     	}
     };
+    
+    $scope.deleteSelectedPhotos = function() {
+    	if ($scope.nbSelected == 0) {
+    		// No photos selected.
+    		// TODO
+    	} else {
+    		// Ask for confirmation.
+    	}
+    }
 }])
 
 // ------------------------------------------------------------------------

@@ -116,15 +116,8 @@ body {
     overflow: hidden; 
     white-space: nowrap;
 }
-.cte {
-    //height: 35px;
-    padding:0;
-}
-
-.cuttext {
-    text-decoration: none; 
-    text-overflow: ellipsis; 
-    overflow: hidden; 
-    white-space: nowrap;
-    width: 100%;
+.photoselected {
+  border-width:5px;
+  border-style:solid;
+  border-color:#428bca;
 }

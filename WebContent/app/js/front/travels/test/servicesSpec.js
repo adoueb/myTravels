@@ -52,13 +52,13 @@ describe('Service: travels services', function() {
 		// By default, no error to show.
 		it('should set no error by default', function() {
 			expect(AddTravelService).toBeDefined();
-			expect(AddTravelService.getShowAddTravelError()).toBeFalsy();
+			expect(AddTravelService.getShowAddTravelAlert()).toBeFalsy();
 		});
 
 		// Show error.
 		it('should show error when required', function() {
-			AddTravelService.setShowAddTravelError(true);
-			expect(AddTravelService.getShowAddTravelError()).toBeTruthy();
+			AddTravelService.setShowAddTravelAlert(true);
+			expect(AddTravelService.getShowAddTravelAlert()).toBeTruthy();
 		});
 	});
 	
@@ -77,13 +77,13 @@ describe('Service: travels services', function() {
 		// By default, no error to show.
 		it('should set no error by default', function() {
 			expect(UpdateTravelService).toBeDefined();
-			expect(UpdateTravelService.getShowUpdateTravelError()).toBeFalsy();
+			expect(UpdateTravelService.getShowUpdateTravelAlert()).toBeFalsy();
 		});
 
 		// Show error.
 		it('should show error when required', function() {
-			UpdateTravelService.setShowUpdateTravelError(true);
-			expect(UpdateTravelService.getShowUpdateTravelError()).toBeTruthy();
+			UpdateTravelService.setShowUpdateTravelAlert(true);
+			expect(UpdateTravelService.getShowUpdateTravelAlert()).toBeTruthy();
 		});
 	});
 
@@ -102,13 +102,13 @@ describe('Service: travels services', function() {
 		// By default, no error to show.
 		it('should set no error by default', function() {
 			expect(DeleteTravelService).toBeDefined();
-			expect(DeleteTravelService.getShowDeleteTravelError()).toBeFalsy();
+			expect(DeleteTravelService.getShowDeleteTravelAlert()).toBeFalsy();
 		});
 
 		// Show error.
 		it('should show error when required', function() {
-			DeleteTravelService.setShowDeleteTravelError(true);
-			expect(DeleteTravelService.getShowDeleteTravelError()).toBeTruthy();
+			DeleteTravelService.setShowDeleteTravelAlert(true);
+			expect(DeleteTravelService.getShowDeleteTravelAlert()).toBeTruthy();
 		});
 	});
 });
