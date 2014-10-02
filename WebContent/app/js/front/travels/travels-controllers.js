@@ -140,7 +140,7 @@ angular.module('travels-controllers', [
     // --------------------------------------------------------------------
     // Set add travel.
     $scope.initAddTravel = function() {
-        $scope.showAddTravelAlert = false;
+        AlertService.resetAlerts("addTravel");
     };
     
     // Set update travel.
@@ -195,14 +195,8 @@ angular.module('travels-controllers', [
 // AddTravelCtrl controller
 // ------------------------------------------------------------------------
 .controller('AddTravelCtrl', 
-        ['$scope', '$log', 'TravelRest', 'AddTravelService', 'TravelService', 'CommonService',
-		    function($scope, $log, TravelRest, AddTravelService, TravelService, CommonService) {
-    
-    $scope.$parent.showAddTravelAlert = false;
-    
-    $scope.getAddTravelAlert = function () {
-    	return $scope.$parent.showAddTravelAlert;
-    };
+        ['$scope', '$log', 'TravelRest', 'AddTravelService', 'TravelService', 'CommonService', 'AlertService',
+		    function($scope, $log, TravelRest, AddTravelService, TravelService, CommonService, AlertService) {
     
     // Create travel.
     $scope.addTravel = function() {
@@ -214,22 +208,16 @@ angular.module('travels-controllers', [
 	    // POST /travels
 	    $log.info("add " +  newTravel.name);
 	    TravelRest.save(newTravel, function(travel) {
-	 	        //$scope.$parent.addTravelToList(travel);
-	            //$('#addTravel').modal('hide');
-	            $log.error("There was an error saving");
-	            $scope.$parent.showAddTravelAlert = true;
+	 	        $scope.$parent.addTravelToList(travel);
+	            $('#addTravel').modal('hide');
 	        }, function() {
 		        $log.error("There was an error saving");
-		        $scope.$parent.showAddTravelAlert = true;
+		        AlertService.addAlert("addTravel", "danger", "The travel can't be added. Please retry.");
 	    });
     };
     
     $scope.canAddTravel = function() {
     	return $scope.addTravelForm.$dirty && $scope.addTravelForm.$valid;
-    };
-       
-    $scope.showError = function(ngModelController, error) {
-    	return CommonService.showError(ngModelController, error);
     };
    
 }])

@@ -58,7 +58,8 @@ angular.module('common-services', [])
 
     // Close all alerts for a key.
     alertService.resetAlerts = function(key) {
-      $rootScope.alerts[key].clear();
+      this.initAlerts(key);
+      $rootScope.alerts[key].splice(0, $rootScope.alerts[key].length);
     };
 
     return alertService;

@@ -276,17 +276,6 @@ angular.module('travels-services', [ 'ngResource'])
 .factory('AddTravelService', ['$log', function($log) {
 	var me = {};
 	
-	me.showAddTravelAlert = false;	
-
-	me.getShowAddTravelAlert = function() {
-		return me.showAddTravelAlert;
-	};
-
-	me.setShowAddTravelAlert = function(bValue) {
-		me.showAddTravelAlert = bValue;
-		$log.info("showAddTravelAlert = " + me.showAddTravelAlert);
-	};
-
 	return me;
 }])
 

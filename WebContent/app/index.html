@@ -306,10 +306,11 @@
 					<h4>Add Travel</h4>
 				</div>
 				<div class="modal-body">
-					<div class="alert alert-danger alert-dismissable" ng-show="getAddTravelAlert()">
-		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		  				<strong>Error!</strong> The travel can't be added.
-					</div>
+					<show-alerts key="addTravel" alerts="alerts"></show-alerts>
+<!-- 					<div class="alert alert-danger alert-dismissable" ng-show="getAddTravelAlert()"> -->
+<!-- 		  				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+<!-- 		  				<strong>Error!</strong> The travel can't be added. -->
+<!-- 					</div> -->
 					
 					<div class="form-group">
 						<label for="contact-new-country" class="col-lg-2 control-label">Country:</label>
