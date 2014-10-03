@@ -9,7 +9,8 @@
 angular.module('travels-controllers', [
            'google-maps',
            'ngRoute',
-           'angularFileUpload'])
+           'angularFileUpload',
+           'ngDragDrop'])
  
 // ------------------------------------------------------------------------
 // TravelListCtrl controller
@@ -167,6 +168,9 @@ angular.module('travels-controllers', [
     // Set current travel.
     $scope.setCurrentTravel = function(travel) {
         $scope.currentTravel = travel;
+        if ($scope.currentTravel.nbSelected == undefined) {
+        	$scope.currentTravel.nbSelected = 0;
+        }
     };
 
     // Set current stop.
@@ -450,24 +454,34 @@ angular.module('travels-controllers', [
      ['$scope', '$log', 'AlertService',
 		    function($scope, $log, AlertService) {    
   
-    // Multi-selection.
-    $scope.nbSelected = 0;
-  
     // Toggle photo selection.
     $scope.togglePhotoSelection = function (photoIndex) {
     	var selected = $scope.currentTravel.images[photoIndex].selected;
     	$scope.currentTravel.images[photoIndex].selected = selected == undefined ? true : !selected;
     	if ($scope.currentTravel.images[photoIndex].selected == true) {
-    		$scope.nbSelected += 1;
+    		$scope.currentTravel.nbSelected += 1;
     	} else {
-    		$scope.nbSelected -= 1;
+    		$scope.currentTravel.nbSelected -= 1;
     	}
     };
     
     // Delete selected photos.
     $scope.deleteSelectedPhotos = function() {
-    	alert("TO BE IMPLEMENTED (delete photos)");
-    }
+    	// Iterate on photos for deletion.
+    	for (var index = $scope.currentTravel.images.length - 1; index >= 0; index--) {
+			if ($scope.currentTravel.images[index].selected == true) {
+				$scope.currentTravel.images.splice(index, 1);
+				$scope.currentTravel.nbSelected -= 1;
+				// Server-side TODO
+			}
+		}	
+    };
+    
+    // Drag&drop: when drop on photo, set the dragged photo in place.
+    $scope.onDropPhoto = function(toIndex, fromIndex){
+    	$scope.currentTravel.images.move(fromIndex, toIndex);
+    	// Server-side TODO
+    };
 }])
 
 // ------------------------------------------------------------------------

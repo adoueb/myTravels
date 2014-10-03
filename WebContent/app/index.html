@@ -56,7 +56,12 @@
 	<!-- Bootbox -->
 	<script src="lib/bootbox-4.3.0/bootbox.js"></script>
 	
+	<!-- Draganddrop -->
+	<script src="lib/angular-draganddrop/draganddrop.js"></script>
+	
 	<!-- Application -->
+	<script src="js/util/util.js"></script>
+
 	<script src="js/front/common/common-services.js"></script>
 	<script src="js/front/common/common-directives.js"></script>
 	<script src="js/front/common/common.js"></script>
@@ -531,7 +536,7 @@
 			
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4>Manage photos<span ng-show="nbSelected != 0"> / {{nbSelected}} selected</span></h4>
+					<h4>Manage photos<span ng-show="currentTravel.nbSelected != 0"> / {{currentTravel.nbSelected}} selected</span></h4>
 				</div>
 				<div class="modal-body panel-body-dark">
 				
@@ -542,7 +547,10 @@
 							<div data-ng-repeat="i in [0,1,2,3]">
 								<div class="col-lg-3">
 									<!-- Block -->
-									<div class="panel panel-default" ng-class="{'photoselected': currentTravel.images[$parent.$index+$index].selected == true}" ng-show="$parent.$index+$index < currentTravel.images.length">
+									<div class="panel panel-default" 
+									     ng-class="{'photoselected': currentTravel.images[$parent.$index+$index].selected == true}" 
+									     ng-show="$parent.$index+$index < currentTravel.images.length" 
+									     ui-draggable="true" drag="{{$parent.$index+$index}}" ui-on-drop="onDropPhoto({{$parent.$index+$index}}, $data)">
 									  <!-- Image -->
 							          <div class="panel-thumbnail" ng-click="togglePhotoSelection($parent.$index+$index)">
 							            <img ng-src="{{currentTravel.images[$parent.$index+$index].url}}" class="img-responsive panel-img">
