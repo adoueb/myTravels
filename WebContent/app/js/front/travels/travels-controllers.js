@@ -35,9 +35,7 @@ angular.module('travels-controllers', [
     	$log.info('Error while loading travels');
     	AlertService.addAlert("main", "danger", "The travels can't be loaded. Please retry.");
     });
-    
-    
-	  
+
     // --------------------------------------------------------------------
     // Map initialization.
     // --------------------------------------------------------------------   
@@ -449,12 +447,13 @@ angular.module('travels-controllers', [
 // ManageImagesCtrl controller
 // ------------------------------------------------------------------------
 .controller('ManageImagesCtrl', 
-     ['$scope', '$log',
-		    function($scope, $log) {    
+     ['$scope', '$log', 'AlertService',
+		    function($scope, $log, AlertService) {    
   
     // Multi-selection.
     $scope.nbSelected = 0;
-   
+  
+    // Toggle photo selection.
     $scope.togglePhotoSelection = function (photoIndex) {
     	var selected = $scope.currentTravel.images[photoIndex].selected;
     	$scope.currentTravel.images[photoIndex].selected = selected == undefined ? true : !selected;
@@ -465,13 +464,9 @@ angular.module('travels-controllers', [
     	}
     };
     
+    // Delete selected photos.
     $scope.deleteSelectedPhotos = function() {
-    	if ($scope.nbSelected == 0) {
-    		// No photos selected.
-    		// TODO
-    	} else {
-    		// Ask for confirmation.
-    	}
+    	alert("TO BE IMPLEMENTED (delete photos)");
     }
 }])
 

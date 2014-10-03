@@ -53,6 +53,9 @@
 	<!-- speak.js -->
 	<script src="lib/speakjs/speakClient.js"></script>
 	
+	<!-- Bootbox -->
+	<script src="lib/bootbox-4.3.0/bootbox.js"></script>
+	
 	<!-- Application -->
 	<script src="js/front/common/common-services.js"></script>
 	<script src="js/front/common/common-directives.js"></script>
@@ -557,7 +560,10 @@
 				</div>
 				<div class="modal-footer">
 					<a class="btn btn-default" data-dismiss="modal">Close</a>
-					<button class="btn btn-primary" ng-click="deleteSelectedPhotos()">Delete</button>
+					<button class="btn btn-primary" 
+					        warning-condition="{{nbSelected == 0}}" warning-message="Please select some photos and then click on the Delete button."
+					        confirmation-message="Do you really want to delete the selected photos?" 
+					        warning-and-confirmation-click="deleteSelectedPhotos()">Delete</button>
 				</div>
 			
 		</div>
