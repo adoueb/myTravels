@@ -116,13 +116,19 @@
  					<li class="dropdown">
  						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Itinerary <b class="caret"></b></a>
  						<ul class="dropdown-menu">
- 						<li><a href="#">Manage</a></li>
+ 							<li><a href="#">Manage</a></li>
+ 							<li><a ng-click="initManagePhotosTravel(selectedTravel)" href="#managePhotosTravel" data-toggle="modal">Manage photos</a></li>
  						</ul>
  					</li>
   					<li class="dropdown">
  						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Photos <b class="caret"></b></a>
+ 						<!-- Manage photos of selected travel if any (if not, display warning message) -->
  						<ul class="dropdown-menu">
- 						<li><a href="#">Manage</a></li>
+ 							<li ng-switch on="hasPhotos(selectedTravel)">
+ 								<a ng-switch-when="0" warning-message="No selected travel">Manage</a>
+ 								<a ng-switch-when="1" warning-message="No photos">Manage</a>
+								<a ng-switch-default ng-click="initManagePhotosTravel(selectedTravel)" href="#managePhotosTravel" data-toggle="modal">Manage</a>					
+ 							</li>
  						</ul>
  					</li>
  					<li><a href="#">About</a></li>
@@ -265,23 +271,31 @@
 			 						</div>				
 			 					</p>
 		 					</div>
-		 					<div class="gray-link" ng-class="{active:travel.id==selectedTravel.id}" style="text-align: right;">			
+		 					<div class="gray-link" ng-class="{active:travel.id==selectedTravel.id}" style="text-align: right;" ng-switch on="hasPhotos(travel)">
+		 						<!-- Delete travel -->			
 								<a ng-click="initDeleteTravel(travel)" href="#deleteTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-trash" title="Delete travel"></i>
 								</a>
+								<!-- Update travel -->
 								<a ng-click="initUpdateTravel(travel)" href="#updateTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-edit" title="Update travel"></i>
-								</a>								
+								</a>
+								<!-- Upload photos -->								
 								<a ng-click="initUploadPhotosTravel(travel)" href="#uploadPhotosTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-upload" title="Upload photos of travel"></i>
 								</a>
-								<a ng-click="initManagePhotosTravel(travel)" href="#managePhotosTravel" data-toggle="modal">
-								    <i class="glyphicon glyphicon-camera" title="Manage photos of travel"></i>
-								</a>
+								<!-- Manage photos -->
+	 							<a ng-switch-when="0" warning-message="No selected travel">
+	 								<i class="glyphicon glyphicon-camera" title="Manage photos of travel"></i>
+	 							</a>
+	 							<a ng-switch-when="1" warning-message="No photos">
+	 								<i class="glyphicon glyphicon-camera" title="Manage photos of travel"></i>
+	 							</a>
+								<a ng-switch-default ng-click="initManagePhotosTravel(travel)" href="#managePhotosTravel" data-toggle="modal">
+									<i class="glyphicon glyphicon-camera" title="Manage photos of travel"></i>
+								</a>					
 							</div>
 		 				</a>
-		 							
-						<!-- a href="#" class="btn btn-default pull-right">Read More</a -->
 	 				</div>
 	 			</div>	 			
 	 		</div>

@@ -119,4 +119,21 @@ angular.module('common-directives', [])
             };
         }
     }
+}])
+
+/**
+ * Display warning if some conditions are met.
+ * Usage: Add attributes: warning-message="Warning: nothing to do"
+ */
+.directive('warningMessage', [function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('click', function() {
+            	// Display warning.
+            	var warningMessage = attrs.warningMessage;
+            	bootbox.alert(warningMessage, function() {});
+            });
+        }
+    }
 }]);

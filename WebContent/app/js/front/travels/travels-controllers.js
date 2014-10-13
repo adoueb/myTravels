@@ -183,6 +183,19 @@ angular.module('travels-controllers', [
 	$scope.readAloud = function(marker) {
 		speak(marker.title + "   " + marker.description);
 	};
+	
+	$scope.hasPhotos = function(selectedTravel) {
+		if (selectedTravel == null) {
+			// No selected travel.
+			return 0;
+		} else if (selectedTravel.images.length == 0) {
+			// No photos.
+			return 1;
+		} else {
+			// Some photos.
+			return 2;
+		}
+	}
 
 }])
 
