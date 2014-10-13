@@ -93,33 +93,26 @@
  		<div class="container">
  			<a href="#" class="navbar-brand"><img src="img/static/Logo.jpg" height="20px"> My Travels</a>
  			
+ 			<!-- Responsive -->
  			<button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
  				<span class="icon-bar"></span>
  				<span class="icon-bar"></span>
  				<span class="icon-bar"></span>
  			</button>
  			
- 			<!-- TODO -->
+ 			<!-- Menu -->
  			<div class="collapse navbar-collapse navHeaderCollapse">
  				<ul class="nav navbar-nav navbar-right">
+ 					<!-- Home -->
  					<li class="active"><a href="#">Home</a></li>
- 					<!-- li><a href="#">Blog</a></li>
- 					<li class="dropdown">
- 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Social Media <b class="caret"></b></a>
- 						<ul class="dropdown-menu">
- 						<li><a href="#">Twitter</a></li>
- 						<li><a href="#">Facebook</a></li>
- 						<li><a href="#">Google+</a></li>
- 						<li><a href="#">Instagram</a></li>
- 						</ul>
- 					</li -->
+ 					<!-- Itinerary -->
  					<li class="dropdown">
  						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Itinerary <b class="caret"></b></a>
  						<ul class="dropdown-menu">
  							<li><a href="#">Manage</a></li>
- 							<li><a ng-click="initManagePhotosTravel(selectedTravel)" href="#managePhotosTravel" data-toggle="modal">Manage photos</a></li>
  						</ul>
  					</li>
+ 					<!-- Photos -->
   					<li class="dropdown">
  						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Photos <b class="caret"></b></a>
  						<!-- Manage photos of selected travel if any (if not, display warning message) -->
@@ -131,14 +124,15 @@
  							</li>
  						</ul>
  					</li>
- 					<li><a href="#">About</a></li>
+ 					<!-- About -->
+<!--  					<li><a href="#">About</a></li> -->
+ 					<!-- Contact -->
  					<li><a href="#contact" data-toggle="modal">Contact</a></li>
  				</ul>
  			</div>
 
  		</div>
- 	</div>
- 	
+ 	</div>	
  	
   	<!-- ========================================================================================== -->
  	<!-- Alerts                                                                                     -->
@@ -587,11 +581,9 @@
 					        confirmation-message="Do you really want to delete the selected photos?" 
 					        warning-and-confirmation-click="deleteSelectedPhotos()">Delete</button>
 				</div>
-			
+			</div>
 		</div>
 	</div>
-	
-  	<!--  a href="#" editable-text="user.name">{{ user.name || "empty" }}</a -->
 
 	<!-- ========================================================================================== -->
  	<!-- Contact dialog                                                                             -->
