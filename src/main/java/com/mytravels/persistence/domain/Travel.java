@@ -26,6 +26,8 @@ public class Travel {
     
     private int imageMax = 0;
     
+    private int nbSelected = 0;
+    
     public Travel() {}
 
 	public Travel(String year, String country, String name, String description) {
@@ -106,6 +108,14 @@ public class Travel {
 
 	public void incrementImageMax() {
 		this.imageMax += 1;
+	}
+
+	public int getNbSelected() {
+		return nbSelected;
+	}
+
+	public void setNbSelected(int nbSelected) {
+		this.nbSelected = nbSelected;
 	}
 
 	@Override
