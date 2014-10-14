@@ -12,6 +12,8 @@ public class Stop {
     private double longitude;
     private String title;
     private String description;
+    private String icon;
+    private boolean draggable;
 
     public Stop() {}
 
@@ -62,6 +64,22 @@ public class Stop {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	public boolean isDraggable() {
+		return draggable;
+	}
+
+	public void setDraggable(boolean draggable) {
+		this.draggable = draggable;
 	}
 
 	@Override
