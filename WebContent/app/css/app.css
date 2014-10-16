@@ -121,3 +121,9 @@ body {
   border-style:solid;
   border-color:#428bca;
 }
+.map-window {
+	color:rgb(66, 139, 202);
+}
+.marker-labels {
+	color:rgb(66, 139, 202);
+}

@@ -7,17 +7,28 @@
 /* Controllers */
 
 angular.module('travels-controllers', [
-           'google-maps',
+           'google-maps'.ns(),
            'ngRoute',
            'angularFileUpload',
            'ngDragDrop'])
+           
+// ------------------------------------------------------------------------
+// Configuration.
+// ------------------------------------------------------------------------
+.config(['GoogleMapApiProvider'.ns(), function (GoogleMapApi) {
+  GoogleMapApi.configure({
+    key: 'AIzaSyDgJxEkV1ZAgRRZprakChmwJvMdlPvcs7w',
+    v: '3.16',
+    libraries: 'weather,geometry,visualization'
+  });
+}])
  
 // ------------------------------------------------------------------------
 // TravelListCtrl controller
 // ------------------------------------------------------------------------
 .controller('TravelListCtrl', 
-            ['$scope', '$log', 'TravelRest', 'MapService', 'TravelService', 'AlertService',
-		    function($scope, $log, TravelRest, MapService, TravelService, AlertService) {
+            ['$scope', '$log', 'TravelRest', 'MapService', 'TravelService', 'AlertService', 'GoogleMapApi'.ns(),
+		    function($scope, $log, TravelRest, MapService, TravelService, AlertService, GoogleMapApi) {
 	
     // --------------------------------------------------------------------
     // Initializations.
@@ -38,33 +49,38 @@ angular.module('travels-controllers', [
     });
 
     // --------------------------------------------------------------------
-    // Map initialization.
-    // --------------------------------------------------------------------   
-    MapService.initMap();
-      
-    // Initialize map.
-	$scope.map = {
-	            center: {
-	    		    latitude: 0,
-	    			longitude: 0
-	    		},
-	    		zoom:23,
-	    		draggable: true,
-	    		streetViewControl: true,
-	    		events: {
-	    			tilesloaded: function (map) {
-	    				$scope.$apply(function () {
-	    					$scope.mapInstance = map;			
-	    				});
-	    			}
-	    		}
-    };
-	
+    // Map.
     // --------------------------------------------------------------------
-    // Manage map.
-    // --------------------------------------------------------------------	  
+    /* Init.
+     * GoogleMapApi is a promise with a
+     * then callback of the google.maps object
+     *   @pram: maps = google.maps
+     */
+     GoogleMapApi.then(function(maps) {
+    	 maps.visualRefresh = true;
+    	 
+	    // Initialize map.
+		$scope.map = {
+		            center: {
+		    		    latitude: 0,
+		    			longitude: 0
+		    		},
+		    		zoom:23,
+		    		draggable: true,
+		    		streetViewControl: true,
+		    		events: {
+		    			tilesloaded: function (map) {
+		    				$scope.$apply(function () {
+		    					$scope.mapInstance = map;			
+		    				});
+		    			}
+		    		}
+	    };
+     });
+      
 	$scope.onMarkerClicked = function (marker) {
 	    marker.showWindow = true;
+	    $scope.$apply();
 	};
     
     // --------------------------------------------------------------------
@@ -98,7 +114,7 @@ angular.module('travels-controllers', [
 	
 	$scope.selectTravel = function(travel) {
 		var travelData = TravelService.getSelectedTravelData(travel);
-    	$scope.selectedTravel = travelData.selectedTravel;
+		$scope.selectedTravel = travelData.selectedTravel;
     	$scope.map = travelData.map;
     	$scope.markers = travelData.markers;
     };
@@ -147,12 +163,19 @@ angular.module('travels-controllers', [
     	$scope.setCurrentTravel(travel);
     };
 
-    // Init edit stop.
-	$scope.initEditStop = function(marker) {
+    // Init update stop.
+	$scope.initUpdateStop = function(travel, marker) {
     	AlertService.resetAlerts("updateTravel");
+    	$scope.setCurrentTravel(travel);
 	    $scope.setCurrentStop(marker);
 	};
-    
+
+    // Init delete stop.
+	$scope.initDeleteStop = function(travel, marker) {
+    	$scope.setCurrentTravel(travel);
+	    $scope.setCurrentStop(marker);
+	};
+  
     // Init "upload photos" travel.
     $scope.initUploadPhotosTravel = function(travel) {
     	AlertService.resetAlerts("uploadImages");
@@ -195,7 +218,12 @@ angular.module('travels-controllers', [
 			// Some photos.
 			return 2;
 		}
-	}
+	};
+	
+	$scope.deleteStop = function(stop) {
+		$scope.currentTravel.itinerary.stops.splice(stop.id, 1);
+		// Server-side TODO
+	};
 
 }])
 
@@ -234,15 +262,20 @@ angular.module('travels-controllers', [
 // UpdateTravelCtrl controller
 // ------------------------------------------------------------------------
 .controller('UpdateTravelCtrl', 
-        ['$scope', '$log', 'TravelRest', 'UpdateTravelService', 'TravelService', 'CommonService', 'AlertService',
-		    function($scope, $log, TravelRest, UpdateTravelService, TravelService, CommonService, AlertService) {
+        ['$scope', '$log', 'TravelRest', 'MapService', 'TravelService', 'CommonService', 'AlertService',
+		    function($scope, $log, TravelRest, MapService, TravelService, CommonService, AlertService) {
      
     // Update travel.
     $scope.updateTravel = function(travel) {
         // PUT /travels
     	$log.info("update " +  travel.name);
     	$log.info("selected travel " +  $scope.$parent.selectedTravel.name);
-    	TravelRest.update(travel, function(travel) {
+    	
+    	// Keep only latitude, longitude, title, description for the stops.
+    	var travelToCopy = jQuery.extend(true, {}, travel);
+    	MapService.resetStops(travelToCopy.itinerary.stops);
+    	
+    	TravelRest.update(travelToCopy, function(travel) {
     	        // Update list of travels.
     			$scope.$parent.updateTravelInList(travel);
  	            $('#updateTravel').modal('hide');

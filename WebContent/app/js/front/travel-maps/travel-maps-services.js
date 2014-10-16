@@ -106,12 +106,31 @@ angular.module('travel-maps-services', [])
 		};
     };
 	
-	// Update stops with icon.
+	// Update stops with id, icon, show, onMarkerClick.
 	this.updateStops = function(stops) {
 		for (var stopIndex=0; stopIndex < stops.length; stopIndex++) {
 		    var currentStop = stops[stopIndex];
+		    currentStop.id = stopIndex;
 			currentStop.icon = "img/static/blue_Marker" + String.fromCharCode(65 + stopIndex) + ".png";
-			currentStop.draggable = true;
+			currentStop.show = false;
+			currentStop.options = {
+				labelContent: currentStop.title,
+				labelClass: "marker-labels"
+			};
+			currentStop.onMarkerClick = function(){
+				this.show = !this.show;
+			};
+    	}
+	};
+	
+	// Reset stops.
+	this.resetStops = function(stops) {
+		for (var stopIndex=0; stopIndex < stops.length; stopIndex++) {
+		    var currentStop = stops[stopIndex];
+		    delete currentStop.id;
+		    delete currentStop.icon;
+		    delete currentStop.show;
+		    delete currentStop.onMarkerClick;
     	}
 	};
     

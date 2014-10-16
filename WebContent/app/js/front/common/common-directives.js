@@ -71,6 +71,12 @@ angular.module('common-directives', [])
             element.bind('click', function() {
                 var message = attrs.confirmationMessage;
                 if (message) {
+                	// Take care of param if any.
+                    var param = attrs.confirmationParam;
+                    if (param != undefined) {
+                    	// Replace the param in the message.
+                    	message = message.replace("%param%", param);
+                    }
                 	scope.confirmDlg(message, attrs.confirmationClick);
                 }
             });
@@ -105,6 +111,11 @@ angular.module('common-directives', [])
             		// If no warning to display, ask for confirmation.
 	                var message = attrs.confirmationMessage;
 	                if (message) {
+	                    var param = attrs.confirmationParam;
+	                    if (param != undefined) {
+	                    	// Replace the param in the message.
+	                    	message = message.replace("%param%", param);
+	                    }
 	                	scope.confirmDlg(message, attrs.warningAndConfirmationClick);
 	                }
             	}
