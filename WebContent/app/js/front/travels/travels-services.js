@@ -141,32 +141,6 @@ angular.module('travels-services', [ 'ngResource'])
 .service('TravelService', ['$filter', '$log', 'MapService', 'TravelRest', function($filter, $log, MapService, TravelRest) {
 	
 	this.initTravels = function() {
-		/*
-	    Restangular.all("travels").getList()
-		   .then(function(travels) {
-			  // List of travels.
-		      $log.info('travels loaded');
-			  $scope.travels = travels;
-		  
-			  // Selected travel.
-		      if (travels.length >= 1) {
-		          $scope.setSelectedTravel(travels[0]);
-		      }
-	    });
-	    */
-		/*
-		var travelsData = {travels:{selectedTravel:null}, error:{}};
-		
-	    TravelRest.query(function(travels) {
-			// List of travels.
-		    $log.info('travels loaded');
-		    travelsData.travels = []; //this.getTravelsData(travels);
-	    }, function() {
-	    	$log.info('Error while loading travels');
-	    	travelsData.error = {"class": "danger", "description": "The travels can't be loaded. Please retry."};
-	    });
-	    
-	    return travelsData;*/
 	};
 	
 	// Order for display the travels.

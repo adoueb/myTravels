@@ -106,7 +106,7 @@ angular.module('travel-maps-services', [])
 		};
     };
 	
-	// Update stops with id, icon, show, onMarkerClick.
+	// Update stops with id, icon, show, options, onMarkerClick.
 	this.updateStops = function(stops) {
 		for (var stopIndex=0; stopIndex < stops.length; stopIndex++) {
 		    var currentStop = stops[stopIndex];

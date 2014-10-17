@@ -110,6 +110,10 @@ angular.module('travels-controllers', [
     	if (updateTravelData.selectedTravel != null) {
     		$scope.selectedTravel = updateTravelData.selectedTravel;
     	}
+    	if (travel.id == $scope.selectedTravel.id) {
+    		// The updated travel is the selected travel.
+    		$scope.selectTravel(travel);
+    	}
 	};
 	
 	$scope.selectTravel = function(travel) {
@@ -117,6 +121,7 @@ angular.module('travels-controllers', [
 		$scope.selectedTravel = travelData.selectedTravel;
     	$scope.map = travelData.map;
     	$scope.markers = travelData.markers;
+		alert($scope.map.bounds.southwest);
     };
    
     $scope.refreshTravel = function(id) {
@@ -259,16 +264,31 @@ angular.module('travels-controllers', [
     			AlertService.addAlert("updateTravel", "danger", "The travel can't be updated. Please retry.");
     	});
     };
+    
+    // Create stop.
+    $scope.addStop = function() {
+        var newStop = {title:        $scope.addStopData.title, 
+    			       description:  $scope.addStopData.description, 
+    			       latitude:     $scope.addStopData.latitude, 
+    			       longitude:    $scope.addStopData.longitude};
+
+	    $log.info("add " +  newStop.title);
+	    $scope.$parent.selectedTravel.itinerary.stops.push(newStop);
+	    $scope.updateTravel($scope.$parent.selectedTravel);
+	    $('#addStop').modal('hide');
+    };
+    
+    $scope.canAddStop = function() {
+    	return $scope.addStopForm.$dirty && $scope.addStopForm.$valid;
+    };
 
 	// Update stop.
 	$scope.updateStop = function(stop) {
-        // PUT /stops
+        // PUT / travel
 	    $log.info("update " +  stop.title);
 	    $scope.updateTravel($scope.$parent.selectedTravel);
-	    // TODO: different error
 	    $('#updateStop').modal('hide');
     };
-    
 }])
 
 // ------------------------------------------------------------------------

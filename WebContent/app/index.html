@@ -267,7 +267,8 @@
 				<div class="list-group">
 	 				<!-- a href="#" class="list-group-item" ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)"-->
 	 				<div class="list-group-item" ng-repeat="travel in travels" ng-style="activeStyle(travel)">
-	 					<a href="#" class="list-group-item thumbnail" ng-class="{active:travel.id==selectedTravel.id}" style="border:0px;padding:0;margin-bottom:0" ng-click="selectTravel(travel);">
+	 					<a href="#" class="list-group-item thumbnail" ng-class="{active:travel.id==selectedTravel.id}" 
+	 					   style="border:0px;padding:0;margin-bottom:0" ng-click="selectTravel(travel);">
 		 					<div>
 			 					<h4 class="list-group-item-heading">{{travel.year}} - {{travel.name}}</h4>
 			 					<p class="list-group-item-heading" style="overflow:auto">
@@ -640,19 +641,48 @@
   	<!-- ========================================================================================== -->
  	<!-- Add stop                                                                                   -->
  	<!-- ========================================================================================== -->
- 	<div class="modal fade" id="addStop" role="dialog" tabindex="-1" ng-controller="AddTravelCtrl">
+ 	<div class="modal fade" id="addStop" role="dialog" tabindex="-1" ng-controller="UpdateTravelCtrl">
  		<div class="modal-dialog">
  			<div class="modal-content">
- 				<form class="form-horizontal">
+ 				<form class="form-horizontal" name="addStopForm">
 	 				<div class="modal-header">
 	 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	 					<h4>Add Stop</h4>
 	 				</div>
 	 				<div class="modal-body">
+						<show-alerts key="addStop" alerts="alerts"></show-alerts>
+						
+						<div class="form-group">
+							<label for="stop-new-title" class="col-lg-2 control-label">Title:</label>
+							<div class="col-lg-10">
+								<input type="text" class="form-control" id="stop-new-title" name="addStopTitle" placeholder="Title" 
+								       ng-model="addStopData.title" required>
+								<span ng-show="showError(addStopForm.addStopTitle, 'required')">The title is required</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="stop-new-description" class="col-lg-2 control-label">Description:</label>
+							<div class="col-lg-10">
+								<textarea class="form-control" rows="6" id="stop-new-description" ng-model="addStopData.description"></textarea>
+							</div>
+						</div>
+	 					<div class="form-group">
+	 						<label for="stop-new-latitude" class="col-lg-2 control-label">Latitude, longitude:</label>
+	 						<div class="col-lg-5">
+	 							<input type="text" class="form-control" id="stop-new-latitude" name="addStopLatitude" placeholder="Latitude" 
+								       ng-model="addStopData.latitude" required>
+								<span ng-show="showError(addStopForm.addStopLatitude, 'required')">The latitude is required</span>
+	 						</div>
+	 						<div class="col-lg-5">
+	 							<input type="text" class="form-control" id="stop-new-longitude" name="addStopLongitude" placeholder="longitude" 
+								       ng-model="addStopData.longitude" required>
+								<span ng-show="showError(addStopForm.addStopLongitude, 'required')">The longitude is required</span>
+	 						</div>
+	 					</div>
 	 				</div>
 	 				<div class="modal-footer">
 	 					<a class="btn btn-default" data-dismiss="modal">Close</a>
-	 					<button class="btn btn-primary" ng-click="addStop()">Add</button>
+	 					<button class="btn btn-primary" ng-click="addStop()" ng-disabled="!canAddStop()">Add</button>
 	 				</div>
  				</form>
  			</div>
