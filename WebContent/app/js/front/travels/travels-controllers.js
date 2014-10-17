@@ -146,46 +146,16 @@ angular.module('travels-controllers', [
     // --------------------------------------------------------------------
     // Manage popups.
     // --------------------------------------------------------------------
-    // Init add travel.
-    $scope.initAddTravel = function() {
-        AlertService.resetAlerts("addTravel");
-    };
-    
-    // Init update travel.
-    $scope.initUpdateTravel = function(travel) {
-    	AlertService.resetAlerts("updateTravel");
-        $scope.setCurrentTravel(travel);
-    };
-
-    // Init delete travel.
-    $scope.initDeleteTravel = function(travel) {
-    	AlertService.resetAlerts("deleteTravel");
-    	$scope.setCurrentTravel(travel);
-    };
-
-    // Init update stop.
-	$scope.initUpdateStop = function(travel, marker) {
-    	AlertService.resetAlerts("updateTravel");
-    	$scope.setCurrentTravel(travel);
-	    $scope.setCurrentStop(marker);
-	};
-
-    // Init delete stop.
-	$scope.initDeleteStop = function(travel, marker) {
-    	$scope.setCurrentTravel(travel);
-	    $scope.setCurrentStop(marker);
-	};
-  
-    // Init "upload photos" travel.
-    $scope.initUploadPhotosTravel = function(travel) {
-    	AlertService.resetAlerts("uploadImages");
-    	$scope.setCurrentTravel(travel);
-    };
-    
-    // Init "manage photos" travel.
-    $scope.initManagePhotosTravel = function(travel) {
-    	AlertService.resetAlerts("manageImages");
-    	$scope.setCurrentTravel(travel);
+    $scope.initData = function(action, travel, marker) {
+    	if (action != '') {
+        	AlertService.resetAlerts(action);
+    	}
+    	if (travel != undefined) {
+    		$scope.setCurrentTravel(travel);
+    	}
+    	if (marker != undefined) {
+    		$scope.setCurrentStop(marker);
+    	}
     };
 
     // Set current travel.
@@ -200,13 +170,15 @@ angular.module('travels-controllers', [
 	$scope.setCurrentStop = function(marker) {
 	    $scope.currentStop = marker;
 	};
-	
 
     // Read aloud the description.
 	$scope.readAloud = function(marker) {
 		speak(marker.title + "   " + marker.description);
 	};
 	
+    // --------------------------------------------------------------------
+    // Manage photos.
+    // --------------------------------------------------------------------
 	$scope.hasPhotos = function(selectedTravel) {
 		if (selectedTravel == null) {
 			// No selected travel.
@@ -220,6 +192,9 @@ angular.module('travels-controllers', [
 		}
 	};
 	
+    // --------------------------------------------------------------------
+    // Manage itinerary.
+    // --------------------------------------------------------------------
 	$scope.deleteStop = function(stop) {
 		$scope.currentTravel.itinerary.stops.splice(stop.id, 1);
 		// Server-side TODO

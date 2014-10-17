@@ -120,7 +120,7 @@
  							<li ng-switch on="hasPhotos(selectedTravel)">
  								<a ng-switch-when="0" warning-message="No selected travel">Manage</a>
  								<a ng-switch-when="1" warning-message="No photos">Manage</a>
-								<a ng-switch-default ng-click="initManagePhotosTravel(selectedTravel)" href="#managePhotosTravel" data-toggle="modal">Manage</a>					
+								<a ng-switch-default ng-click="initData('manageImages', selectedTravel)" href="#managePhotosTravel" data-toggle="modal">Manage</a>					
  							</li>
  						</ul>
  					</li>
@@ -156,7 +156,7 @@
 			 			<center>
 			 				<h1>No selected travels</h1>
 							<p>Enter your travels with your pictures and itinerary</p>
-							<a class="btn btn-default" ng-click="initAddTravel()" href="#addTravel" data-toggle="modal">Add Travel</a>
+							<a class="btn btn-default" ng-click="initData('addTravel')" href="#addTravel" data-toggle="modal">Add Travel</a>
 						</center>
 					</div>
 				</div>
@@ -189,20 +189,28 @@
 
 						<!--  Description and stops -->
 						<div>
-							<h4 style="margin-top:20px;margin-bottom:20px">{{selectedTravel.description}}</h4>
-							<div ng-show="map.markers.length >= 1">
-								<h4 >Itinerary</h4>
-								<div class="modal-body" ng-repeat="marker in map.markers">
+							<div>
+								<h4 style="margin-top:20px;margin-bottom:20px">{{selectedTravel.description}}</h4>
+								<h4>Itinerary</h4>
+								<!--  Add new stop  -->
+								<a style="margin-left: 10px; font-size: 14px; display: inline-block;" ng-click="initData('', travel)"
+								   href="#addStop" data-toggle="modal"> 
+									<i class="glyphicon glyphicon-plus-sign" title="Add Stop"></i> Add Stop
+								</a>								
+							</div>
+							
+							<div class="modal-body" ng-repeat="marker in map.markers">
+								<div>
 									<h5><b>{{marker.title}}:</b></h5>
 									<p>{{marker.description}}</p>
 									
 									<div class="gray-link" style="text-align: right;">
-										<a ng-click="initDeleteStop(selectedTravel, marker)" 
+										<a ng-click="initData('', selectedTravel, marker)" 
 										   confirmation-message="Do you really want to delete the %param% stop?" 
 										   confirmation-param="{{marker.title}}" confirmation-click="deleteStop(marker)">
 											<i class="glyphicon glyphicon-trash" title="Delete stop"></i>
 										</a>
-										<a ng-click="initUpdateStop(selectedTravel, marker)" href="#updateStop" data-toggle="modal">
+										<a ng-click="initData('updateTravel', selectedTravel, marker)" href="#updateStop" data-toggle="modal">
 											<i class="glyphicon glyphicon-edit" title="Update stop"></i>
 										</a>
 <!-- 										<a ng-click="readAloud(marker)"> -->
@@ -251,7 +259,7 @@
 		 	<!-- ========================================================================================== -->
 	 		<div class="col-lg-3">
 				<!--  Add new travel  -->
-				<a style="margin-left: 10px; font-size: 14px; display: inline-block;" ng-click="initAddTravel()" href="#addTravel" data-toggle="modal"
+				<a style="margin-left: 10px; font-size: 14px; display: inline-block;" ng-click="initData('addTravel')" href="#addTravel" data-toggle="modal"
 				   ng-show="travels.length != 0"> 
 					<i class="glyphicon glyphicon-plus-sign" title="Add Travel"></i> Add Travel
 				</a>
@@ -271,15 +279,15 @@
 		 					</div>
 		 					<div class="gray-link" ng-class="{active:travel.id==selectedTravel.id}" style="text-align: right;" ng-switch on="hasPhotos(travel)">
 		 						<!-- Delete travel -->			
-								<a ng-click="initDeleteTravel(travel)" href="#deleteTravel" data-toggle="modal">
+								<a ng-click="initData('deleteTravel', travel)" href="#deleteTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-trash" title="Delete travel"></i>
 								</a>
 								<!-- Update travel -->
-								<a ng-click="initUpdateTravel(travel)" href="#updateTravel" data-toggle="modal">
+								<a ng-click="initData('updateTravel', travel)" href="#updateTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-edit" title="Update travel"></i>
 								</a>
 								<!-- Upload photos -->								
-								<a ng-click="initUploadPhotosTravel(travel)" href="#uploadPhotosTravel" data-toggle="modal">
+								<a ng-click="initData('uploadImages', travel)" href="#uploadPhotosTravel" data-toggle="modal">
 								    <i class="glyphicon glyphicon-upload" title="Upload photos of travel"></i>
 								</a>
 								<!-- Manage photos -->
@@ -289,7 +297,7 @@
 	 							<a ng-switch-when="1" warning-message="No photos">
 	 								<i class="glyphicon glyphicon-camera" title="Manage photos of travel"></i>
 	 							</a>
-								<a ng-switch-default ng-click="initManagePhotosTravel(travel)" href="#managePhotosTravel" data-toggle="modal">
+								<a ng-switch-default ng-click="initData('manageImages', travel)" href="#managePhotosTravel" data-toggle="modal">
 									<i class="glyphicon glyphicon-camera" title="Manage photos of travel"></i>
 								</a>					
 							</div>
@@ -630,6 +638,28 @@
  	</div>
  	
   	<!-- ========================================================================================== -->
+ 	<!-- Add stop                                                                                   -->
+ 	<!-- ========================================================================================== -->
+ 	<div class="modal fade" id="addStop" role="dialog" tabindex="-1" ng-controller="AddTravelCtrl">
+ 		<div class="modal-dialog">
+ 			<div class="modal-content">
+ 				<form class="form-horizontal">
+	 				<div class="modal-header">
+	 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	 					<h4>Add Stop</h4>
+	 				</div>
+	 				<div class="modal-body">
+	 				</div>
+	 				<div class="modal-footer">
+	 					<a class="btn btn-default" data-dismiss="modal">Close</a>
+	 					<button class="btn btn-primary" ng-click="addStop()">Add</button>
+	 				</div>
+ 				</form>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	
+  	<!-- ========================================================================================== -->
  	<!-- Update stop                                                                                -->
  	<!-- ========================================================================================== -->
  	<div class="modal fade" id="updateStop" role="dialog" tabindex="-1" ng-controller="UpdateTravelCtrl">
@@ -652,7 +682,16 @@
 	 					<div class="form-group">
 	 						<label for="stop-update-description" class="col-lg-2 control-label">Description:</label>
 	 						<div class="col-lg-10">
-	 							<textarea class="form-control" rows="8" id="stop-update-description" ng-model="currentStop.description"></textarea>
+	 							<textarea class="form-control" rows="6" id="stop-update-description" ng-model="currentStop.description"></textarea>
+	 						</div>
+	 					</div>
+	 					<div class="form-group">
+	 						<label for="stop-update-latitude" class="col-lg-2 control-label">Latitude, longitude:</label>
+	 						<div class="col-lg-5">
+	 							<input type="text" class="form-control" id="stop-update-latitude" placeholder="Latitude"  ng-model="currentStop.latitude">
+	 						</div>
+	 						<div class="col-lg-5">
+	 							<input type="text" class="form-control" id="stop-update-longitude" placeholder="longitude"  ng-model="currentStop.longitude">
 	 						</div>
 	 					</div>
 	 				</div>

@@ -131,6 +131,7 @@ angular.module('travel-maps-services', [])
 		    delete currentStop.icon;
 		    delete currentStop.show;
 		    delete currentStop.onMarkerClick;
+		    delete currentStop.options;
     	}
 	};
     
