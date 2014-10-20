@@ -169,11 +169,10 @@
 	 					</div>
 
 						<!-- Map with itinerary -->
-						<ui-gmap-google-map center="map.center" zoom="map.zoom"
-							        bounds="map.bounds" events="map.events" 
-							        options="map.options">
+						<ui-gmap-google-map events="map.events" options="map.options"
+         							        center="map.center" zoom="map.zoom" bounds="map.bounds">
 							<ui-gmap-markers models="map.markers" coords="'self'" icon="'icon'" idKey="'id'"
-							                 options="'options'" click="'onMarkerClick'">
+							                 options="'options'" click="'onMarkerClick'" fit="true">
 							
 								<ui-gmap-windows show="'show'">
 									<div class="modal-body" ng-non-bindable>
@@ -188,29 +187,29 @@
 						</ui-gmap-google-map>
 
 						<!--  Description and stops -->
-						<div>
+						<div ng-controller="UpdateTravelCtrl">
 							<div>
-								<h4 style="margin-top:20px;margin-bottom:20px">{{selectedTravel.description}}</h4>
+								<h4 style="margin-top:20px;margin-bottom:20px">{{$parent.selectedTravel.description}}</h4>
 								<h4>Itinerary</h4>
 								<!--  Add new stop  -->
-								<a style="margin-left: 10px; font-size: 14px; display: inline-block;" ng-click="initData('', travel)"
+								<a style="margin-left: 10px; font-size: 14px; display: inline-block;" ng-click="$parent.initData('', travel)"
 								   href="#addStop" data-toggle="modal"> 
 									<i class="glyphicon glyphicon-plus-sign" title="Add Stop"></i> Add Stop
 								</a>								
 							</div>
 							
-							<div class="modal-body" ng-repeat="marker in map.markers">
-								<div>
+							<div class="modal-body" ng-repeat="marker in $parent.map.markers">
+								<div ui-draggable="true" drag="{{$index}}" ui-on-drop="onDropStop({{$index}}, $data)">
 									<h5><b>{{marker.title}}:</b></h5>
 									<p>{{marker.description}}</p>
 									
 									<div class="gray-link" style="text-align: right;">
-										<a ng-click="initData('', selectedTravel, marker)" 
+										<a ng-click="$parent.initData('', $parent.selectedTravel, marker)" 
 										   confirmation-message="Do you really want to delete the %param% stop?" 
 										   confirmation-param="{{marker.title}}" confirmation-click="deleteStop(marker)">
 											<i class="glyphicon glyphicon-trash" title="Delete stop"></i>
 										</a>
-										<a ng-click="initData('updateTravel', selectedTravel, marker)" href="#updateStop" data-toggle="modal">
+										<a ng-click="$parent.initData('updateTravel', $parent.selectedTravel, marker)" href="#updateStop" data-toggle="modal">
 											<i class="glyphicon glyphicon-edit" title="Update stop"></i>
 										</a>
 <!-- 										<a ng-click="readAloud(marker)"> -->

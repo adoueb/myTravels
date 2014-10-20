@@ -33,55 +33,27 @@ angular.module('travels-controllers', [
     // --------------------------------------------------------------------
     // Initializations.
     // -------------------------------------------------------------------- 
-    TravelService.initTravels();
-    
-    $scope.selectedTravel = null;
-    
     AlertService.initAlerts("main");
-    
-    TravelRest.query(function(travels) {
-		// List of travels.
-	    $log.info('travels loaded');
-	    $scope.initializeTravels(travels);
-    }, function() {
-    	$log.info('Error while loading travels');
-    	AlertService.addAlert("main", "danger", "The travels can't be loaded. Please retry.");
-    });
 
-    // --------------------------------------------------------------------
-    // Map.
-    // --------------------------------------------------------------------
-    /* Init.
+    /* Init map.
      * GoogleMapApi is a promise with a
      * then callback of the google.maps object
      *   @pram: maps = google.maps
      */
      GoogleMapApi.then(function(maps) {
-    	 maps.visualRefresh = true;
+    	maps.visualRefresh = true;   
     	 
-	    // Initialize map.
-		$scope.map = {
-		            center: {
-		    		    latitude: 0,
-		    			longitude: 0
-		    		},
-		    		zoom:23,
-		    		draggable: true,
-		    		streetViewControl: true,
-		    		events: {
-		    			tilesloaded: function (map) {
-		    				$scope.$apply(function () {
-		    					$scope.mapInstance = map;			
-		    				});
-		    			}
-		    		}
-	    };
+	    $scope.selectedTravel = null;
+	    
+	    TravelRest.query(function(travels) {
+			// List of travels.
+		    $log.info('travels loaded');
+		    $scope.initializeTravels(travels);
+	    }, function() {
+	    	$log.info('Error while loading travels');
+	    	AlertService.addAlert("main", "danger", "The travels can't be loaded. Please retry.");
+	    });
      });
-      
-	$scope.onMarkerClicked = function (marker) {
-	    marker.showWindow = true;
-	    $scope.$apply();
-	};
     
     // --------------------------------------------------------------------
     // Manage travels.
@@ -121,7 +93,6 @@ angular.module('travels-controllers', [
 		$scope.selectedTravel = travelData.selectedTravel;
     	$scope.map = travelData.map;
     	$scope.markers = travelData.markers;
-		alert($scope.map.bounds.southwest);
     };
    
     $scope.refreshTravel = function(id) {
@@ -200,11 +171,6 @@ angular.module('travels-controllers', [
     // --------------------------------------------------------------------
     // Manage itinerary.
     // --------------------------------------------------------------------
-	$scope.deleteStop = function(stop) {
-		$scope.currentTravel.itinerary.stops.splice(stop.id, 1);
-		// Server-side TODO
-	};
-
 }])
 
 // ------------------------------------------------------------------------
@@ -265,7 +231,7 @@ angular.module('travels-controllers', [
     	});
     };
     
-    // Create stop.
+    // Add stop.
     $scope.addStop = function() {
         var newStop = {title:        $scope.addStopData.title, 
     			       description:  $scope.addStopData.description, 
@@ -282,12 +248,29 @@ angular.module('travels-controllers', [
     	return $scope.addStopForm.$dirty && $scope.addStopForm.$valid;
     };
 
-	// Update stop.
+	// Update stop (by updating travel).
 	$scope.updateStop = function(stop) {
-        // PUT / travel
-	    $log.info("update " +  stop.title);
-	    $scope.updateTravel($scope.$parent.selectedTravel);
+	    $log.info("update stop " +  stop.title);
+	    var selectedTravel = $scope.$parent.selectedTravel;
+	    $scope.updateTravel(selectedTravel);
 	    $('#updateStop').modal('hide');
+    };
+    
+    // Delete stop (by updating travel).
+	$scope.deleteStop = function(stop) {
+		$log.info("delete stop " +  stop.title);
+		var selectedTravel = $scope.$parent.selectedTravel;
+		selectedTravel.itinerary.stops.splice(stop.id, 1);
+		$scope.updateTravel(selectedTravel);
+	};
+	
+	// Move stops (by updating travel).
+	// Drag&drop: when drop on stop, set the dragged stop in place.
+    $scope.onDropStop = function(toIndex, fromIndex){
+    	$log.info("drag&drop stop " + fromIndex + " to " + toIndex);
+    	var selectedTravel = $scope.$parent.selectedTravel;
+    	selectedTravel.itinerary.stops.move(fromIndex, toIndex);
+    	$scope.updateTravel(selectedTravel);
     };
 }])
 

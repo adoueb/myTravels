@@ -41,7 +41,7 @@ angular.module('travel-maps-services', [])
 		}
 		*/
 
-		return this.getMapData({coords: {latitude:47, longitude:-122}}, 2, []);  
+		return this.getMapData({coords: {latitude:0, longitude:0}}, 2, []);  
 	};
 	
 	// Return map data (map + markers) from an array of stops.
@@ -49,62 +49,30 @@ angular.module('travel-maps-services', [])
 		var map = {};
 		
     	if (stops.length >= 1) {
-    	    // Compute southwest and northeast points for all the markers to be displayed.
-    		// Iterate through the stops.
-    		var bounds = this.computeBounds(stops);
-    		map.center = {
-	    	    latitude: stops[0].latitude,
-	    		longitude: stops[0].longitude
-	    	};
-    		map.zoom = 9;
     		map.markers = stops;
+    		
+    		var bounds = {
+    			    southwest: {
+    				    latitude: 0,
+    					longitude: 0
+    				},
+    				northeast: {
+    				    latitude: 0,
+    				    longitude: 0
+    				}
+    			};
     		map.bounds = bounds;
+    		map.center = {
+	    	    latitude: 0,
+	    		longitude: 0
+	    	};
+    		map.zoom = 9;    		    		
 	    } else {
 	    	map = this.getDefaultMapData().map;
 	    	map.markers = [];
 	    }
 		return map;
 	};
-	
-	// Compute bounds from an array of stops.	
-    this.computeBounds = function(stops) {
-    	$log.info("computeBounds for " + stops.length + " stops");
-	    var southwest_latitude = stops[0].latitude;
-		var southwest_longitude = stops[0].longitude;
-		var northeast_latitude = stops[0].latitude;
-		var northeast_longitude = stops[0].longitude;
-		
-		for (var stopIndex=0; stopIndex < stops.length; stopIndex++) {
-			var currentStop = stops[stopIndex];
-			if (currentStop.latitude < southwest_latitude) {
-				southwest_latitude = currentStop.latitude;
-			}
-			if (currentStop.longitude < southwest_longitude) {
-				southwest_longitude = currentStop.longitude;
-			}
-			if (currentStop.latitude > northeast_latitude) {
-				northeast_latitude = currentStop.latitude;
-			}
-			if (currentStop.longitude > northeast_longitude) {
-				northeast_longitude = currentStop.longitude;
-			}
-		}
-		southwest_latitude -= 0.01;
-		southwest_longitude -= 0.01;
-		northeast_latitude += 0.01;
-		northeast_longitude += 0.01;
-		
-		return {
-		    southwest: {
-			    latitude: southwest_latitude,
-				longitude: southwest_longitude
-			},
-			northeast: {
-			    latitude: northeast_latitude,
-			    longitude: northeast_longitude
-			}
-		};
-    };
 	
 	// Update stops with id, icon, show, options, onMarkerClick.
 	this.updateStops = function(stops) {
