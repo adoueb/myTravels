@@ -79,14 +79,15 @@ angular.module('travel-maps-services', [])
 		for (var stopIndex=0; stopIndex < stops.length; stopIndex++) {
 		    var currentStop = stops[stopIndex];
 		    currentStop.id = stopIndex;
-			currentStop.icon = "img/static/blue_Marker" + String.fromCharCode(65 + stopIndex) + ".png";
-			currentStop.show = false;
+		    var stopLetter = String.fromCharCode(65 + stopIndex);
+			currentStop.icon = "img/static/blue_Marker" + stopLetter + ".png";
 			currentStop.options = {
 				labelContent: currentStop.title,
 				labelClass: "marker-labels"
 			};
-			currentStop.onMarkerClick = function(){
-				this.show = !this.show;
+			currentStop.onStopClicked = function(){
+				$log.info("onStopClicked " + stopLetter);
+				
 			};
     	}
 	};
@@ -97,7 +98,6 @@ angular.module('travel-maps-services', [])
 		    var currentStop = stops[stopIndex];
 		    delete currentStop.id;
 		    delete currentStop.icon;
-		    delete currentStop.show;
 		    delete currentStop.onMarkerClick;
 		    delete currentStop.options;
     	}

@@ -171,6 +171,25 @@ angular.module('travels-controllers', [
     // --------------------------------------------------------------------
     // Manage itinerary.
     // --------------------------------------------------------------------
+	$scope.onStopClicked = function(marker) {
+		$log.info("onStopClicked " + marker.title);
+		$scope.initData('updateTravel', $scope.selectedTravel, marker);
+		$('#updateStop').modal('show');
+	};
+	
+	$scope.mapOpt =  {
+		events: {
+        click: function (marker) {
+          $log.info("Map clicked! latitude: " + marker.center.lat() + " longitude: " + marker.center.lng());
+          $scope.initData('', $scope.selectedTravel);
+          if ($scope.addStopData == undefined) {
+        	  $scope.addStopData = {};
+          }
+          $scope.addStopData.latitude = marker.center.lat();
+	      $scope.addStopData.longitude = marker.center.lng();
+          $('#addStop').modal('show');
+        }
+	}};
 }])
 
 // ------------------------------------------------------------------------
