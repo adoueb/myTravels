@@ -27,8 +27,8 @@ angular.module('travels-controllers', [
 // TravelListCtrl controller
 // ------------------------------------------------------------------------
 .controller('TravelListCtrl', 
-            ['$scope', '$log', 'TravelRest', 'MapService', 'TravelService', 'AlertService', 'GoogleMapApi'.ns(),
-		    function($scope, $log, TravelRest, MapService, TravelService, AlertService, GoogleMapApi) {
+            ['$scope', '$log', '$timeout', 'TravelRest', 'MapService', 'TravelService', 'AlertService', 'GoogleMapApi'.ns(),
+		    function($scope, $log, $timeout, TravelRest, MapService, TravelService, AlertService, GoogleMapApi) {
 	
     // --------------------------------------------------------------------
     // Initializations.
@@ -179,16 +179,32 @@ angular.module('travels-controllers', [
 	
 	$scope.mapOpt =  {
 		events: {
-        click: function (marker) {
-          $log.info("Map clicked! latitude: " + marker.center.lat() + " longitude: " + marker.center.lng());
-          $scope.initData('', $scope.selectedTravel);
-          if ($scope.addStopData == undefined) {
-        	  $scope.addStopData = {};
-          }
-          $scope.addStopData.latitude = marker.center.lat();
-	      $scope.addStopData.longitude = marker.center.lng();
-          $('#addStop').modal('show');
-        }
+			tilesloaded: function (map) {
+				// Store map instance.
+	            $scope.$apply(function () {
+	                $scope.mapInstance = map;           
+	            });
+			},
+		    click: function (marker) {
+		    	// Open popup to add a stop.
+		    	$scope.clickTimeout = $timeout(function () {
+				      $log.info("Map clicked! latitude: " + marker.center.lat() + " longitude: " + marker.center.lng());
+				      $scope.initData('', $scope.selectedTravel);
+				      if ($scope.addStopData == undefined) {
+				    	  $scope.addStopData = {};
+				      }
+				      $scope.addStopData.latitude = marker.center.lat();
+				      $scope.addStopData.longitude = marker.center.lng();
+				      $('#addStop').modal('show');
+		    	}, 200);
+		    },    
+		    dblclick: function (marker) {
+		    	// Zoom in to double clicked place.
+		    	$timeout.cancel($scope.clickTimeout);
+			    $log.info("Map dblclicked! latitude: " + marker.center.lat() + " longitude: " + marker.center.lng());
+			    var latLng = new google.maps.LatLng(marker.center.lat(), marker.center.lng());
+			    $scope.mapInstance.panTo(latLng);
+			}
 	}};
 }])
 
