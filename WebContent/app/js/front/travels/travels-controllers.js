@@ -177,6 +177,7 @@ angular.module('travels-controllers', [
 		$('#updateStop').modal('show');
 	};
 	
+	// Map events.
 	$scope.mapOpt =  {
 		events: {
 			tilesloaded: function (map) {
@@ -185,26 +186,30 @@ angular.module('travels-controllers', [
 	                $scope.mapInstance = map;           
 	            });
 			},
-		    click: function (marker) {
+		    click: function (mapModel, eventName, originalEventArgs) {
 		    	// Open popup to add a stop.
 		    	$scope.clickTimeout = $timeout(function () {
-				      $log.info("Map clicked! latitude: " + marker.center.lat() + " longitude: " + marker.center.lng());
+		    		  var clickedLatitude = originalEventArgs[0].latLng.lat();
+		    		  var clickedLongitude = originalEventArgs[0].latLng.lng();
+				      $log.info("Map clicked! latitude: " + clickedLatitude + " longitude: " + clickedLongitude);
 				      $scope.initData('', $scope.selectedTravel);
 				      if ($scope.addStopData == undefined) {
 				    	  $scope.addStopData = {};
 				      }
-				      $scope.addStopData.latitude = marker.center.lat();
-				      $scope.addStopData.longitude = marker.center.lng();
+				      $scope.addStopData.latitude = clickedLatitude;
+				      $scope.addStopData.longitude = clickedLongitude;
 				      $('#addStop').modal('show');
 		    	}, 200);
 		    },    
-		    dblclick: function (marker) {
+		    dblclick: function (mapModel, eventName, originalEventArgs) {
 		    	// Zoom in to double clicked place.
 		    	$timeout.cancel($scope.clickTimeout);
-			    $log.info("Map dblclicked! latitude: " + marker.center.lat() + " longitude: " + marker.center.lng());
-			    var latLng = new google.maps.LatLng(marker.center.lat(), marker.center.lng());
+		    	var clickedLatitude = originalEventArgs[0].latLng.lat();
+	    		var clickedLongitude = originalEventArgs[0].latLng.lng();
+			    $log.info("Map dblclicked! latitude: " + clickedLatitude + " longitude: " + clickedLongitude);
+			    var latLng = new google.maps.LatLng(clickedLatitude, clickedLongitude);
 			    $scope.mapInstance.panTo(latLng);
-			}
+			} 
 	}};
 }])
 
@@ -272,6 +277,7 @@ angular.module('travels-controllers', [
     			       description:  $scope.addStopData.description, 
     			       latitude:     $scope.addStopData.latitude, 
     			       longitude:    $scope.addStopData.longitude};
+        newStop.id =  $scope.$parent.selectedTravel.itinerary.stops.length;
 
 	    $log.info("add " +  newStop.title);
 	    $scope.$parent.selectedTravel.itinerary.stops.push(newStop);
