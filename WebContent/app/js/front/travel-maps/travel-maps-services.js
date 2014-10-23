@@ -79,7 +79,7 @@ angular.module('travel-maps-services', [])
 		for (var stopIndex=0; stopIndex < stops.length; stopIndex++) {
 		    var currentStop = stops[stopIndex];
 		    currentStop.id = stopIndex;
-		    var stopLetter = String.fromCharCode(65 + stopIndex);
+		    var stopLetter = String.fromCharCode(65 + (stopIndex%26));
 			currentStop.icon = "img/static/blue_Marker" + stopLetter + ".png";
 			currentStop.options = {
 				labelContent: currentStop.title,
