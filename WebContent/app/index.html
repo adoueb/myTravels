@@ -723,7 +723,12 @@
 	 					
 	 				</div>
 	 				<div class="modal-footer">
+	 					<!-- Close -->
 	 					<a class="btn btn-default" data-dismiss="modal" ng-click="closeUpdateStop(currentStop)">{{labels.updateStopCancelLabel}}</a>
+	 					<!-- Delete -->
+	 					<a class="btn btn-default" confirmation-message="Do you really want to delete the %param% stop?" 
+						   confirmation-param="{{marker.title}}" confirmation-click="deleteStop(currentStop)">Delete</a>
+						<!-- Update or Update and confirm new position -->
 	 					<button class="btn btn-primary" ng-click="updateStop(currentStop)">{{labels.updateStopUpdateLabel}}</button>
 	 				</div>
  				</form>

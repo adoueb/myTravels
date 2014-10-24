@@ -342,6 +342,7 @@ angular.module('travels-controllers', [
 		var selectedTravel = $scope.$parent.selectedTravel;
 		selectedTravel.itinerary.stops.splice(stop.id, 1);
 		$scope.updateTravel(selectedTravel);
+		$('#updateStop').modal('hide'); // Just in case.
 	};
 	
 	// Move stops (by updating travel).
