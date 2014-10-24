@@ -172,22 +172,8 @@
 						<ui-gmap-google-map events="mapOpt.events" options="map.options"
          							        center="map.center" zoom="map.zoom" bounds="map.bounds">
          				    <ui-gmap-marker ng-repeat="marker in map.markers"  coords='marker' icon='marker.icon' click='onStopClicked(marker)' 
-         				                    fit="true" idkey='marker.id' options='marker.options'>
+         				                    fit="true" idkey='marker.id' options='marker.options'  events='markerOpt.events'>
          				    </ui-gmap-marker>
-<!-- 							<ui-gmap-markers models="map.markers" coords="'self'" icon="'icon'" idKey="'id'" -->
-<!-- 							                 options="'options'" fit="true" > -->
-							
-<!-- 								<ui-gmap-windows show="'show'"> -->
-<!-- 									<div class="modal-body" ng-non-bindable> -->
-<!-- 										<div> -->
-<!-- 											<h5><b>{{title}}</b></h5> -->
-<!-- 	    									<p class="map-window">{{description}}</p> -->
-<!--     									</div> -->
-<!-- 									</div> -->
-<!-- 								</ui-gmap-window> -->
-								
-							</ui-gmap-markers>
-							
 						</ui-gmap-google-map>
 
 						<!--  Description and stops -->
@@ -727,10 +713,18 @@
 	 							<input type="text" class="form-control" id="stop-update-longitude" placeholder="longitude"  ng-model="currentStop.longitude">
 	 						</div>
 	 					</div>
+	 					
+<!-- 	 					<ui-gmap-google-map width="200px" height="200px" center="detailMap.center" zoom="detailMap.zoom" bounds="detailMap.bounds"> -->
+<!--          				    <ui-gmap-marker ng-repeat="marker in map.markers"  coords='marker' icon='marker.icon'  -->
+<!--          				                    idkey='marker.id' options='marker.options'> -->
+<!--          				    </ui-gmap-marker> -->
+<!-- 						</ui-gmap-google-map> -->
+	 					
+	 					
 	 				</div>
 	 				<div class="modal-footer">
-	 					<a class="btn btn-default" data-dismiss="modal">Close</a>
-	 					<button class="btn btn-primary" ng-click="updateStop(currentStop)">Update</button>
+	 					<a class="btn btn-default" data-dismiss="modal" ng-click="closeUpdateStop(currentStop)">{{labels.updateStopCancelLabel}}</a>
+	 					<button class="btn btn-primary" ng-click="updateStop(currentStop)">{{labels.updateStopUpdateLabel}}</button>
 	 				</div>
  				</form>
  			</div>

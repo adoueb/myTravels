@@ -45,6 +45,8 @@ angular.module('travels-controllers', [
     	 
 	    $scope.selectedTravel = null;
 	    
+	    $scope.labels = {};
+	    
 	    TravelRest.query(function(travels) {
 			// List of travels.
 		    $log.info('travels loaded');
@@ -64,6 +66,14 @@ angular.module('travels-controllers', [
     	$scope.selectedTravel = travelsData.selectedTravel;
     	$scope.map = travelsData.map;
     	$scope.markers = travelsData.markers;
+    	
+    	// Detail map.
+    	$scope.detailMap = {};
+    	$scope.detailMap.center =  {
+		        latitude: 0,
+		        longitude: 0
+	    };
+    	$scope.detailMap.zoom = 12;
     };
     
     $scope.addTravelToList = function (travel) {
@@ -131,6 +141,9 @@ angular.module('travels-controllers', [
     	}
     	if (marker != undefined) {
     		$scope.setCurrentStop(marker);
+    	    $scope.labels.updateStopUpdateLabel = "Update";
+    	    $scope.labels.updateStopCancelLabel = "Close";
+    	    $scope.resetPosition = false;
     	}
     };
 
@@ -186,31 +199,49 @@ angular.module('travels-controllers', [
 	                $scope.mapInstance = map;           
 	            });
 			},
-		    click: function (mapModel, eventName, originalEventArgs) {
+		    click: function (mapModel, eventName, args) {
 		    	// Open popup to add a stop.
 		    	$scope.clickTimeout = $timeout(function () {
-		    		  var clickedLatitude = originalEventArgs[0].latLng.lat();
-		    		  var clickedLongitude = originalEventArgs[0].latLng.lng();
-				      $log.info("Map clicked! latitude: " + clickedLatitude + " longitude: " + clickedLongitude);
-				      $scope.initData('', $scope.selectedTravel);
-				      if ($scope.addStopData == undefined) {
-				    	  $scope.addStopData = {};
-				      }
-				      $scope.addStopData.latitude = clickedLatitude;
-				      $scope.addStopData.longitude = clickedLongitude;
-				      $('#addStop').modal('show');
+			    		  var clickedLatitude = args[0].latLng.lat();
+			    		  var clickedLongitude = args[0].latLng.lng();
+					      $log.info("Click on map latitude: " + clickedLatitude + " longitude: " + clickedLongitude);
+					      $scope.initData('', $scope.selectedTravel);
+					      if ($scope.addStopData == undefined) {
+					    	  $scope.addStopData = {};
+					      }
+					      $scope.addStopData.latitude = clickedLatitude;
+					      $scope.addStopData.longitude = clickedLongitude;
+					      $('#addStop').modal('show');
 		    	}, 200);
 		    },    
-		    dblclick: function (mapModel, eventName, originalEventArgs) {
+		    dblclick: function (mapModel, eventName, args) {
 		    	// Zoom in to double clicked place.
 		    	$timeout.cancel($scope.clickTimeout);
-		    	var clickedLatitude = originalEventArgs[0].latLng.lat();
-	    		var clickedLongitude = originalEventArgs[0].latLng.lng();
-			    $log.info("Map dblclicked! latitude: " + clickedLatitude + " longitude: " + clickedLongitude);
+		    	var clickedLatitude = args[0].latLng.lat();
+	    		var clickedLongitude = args[0].latLng.lng();
+			    $log.info("Doubleclick on map latitude: " + clickedLatitude + " longitude: " + clickedLongitude);
 			    var latLng = new google.maps.LatLng(clickedLatitude, clickedLongitude);
 			    $scope.mapInstance.panTo(latLng);
-			} 
+			}
 	}};
+	$scope.markerOpt =  {
+			events: {
+			    dragstart: function (marker, eventName, model, args) {
+			    	$scope.dragLatitude = marker.position.lat();
+			    	$scope.dragLongitude = marker.position.lng();
+				    $log.info("Drag marker latitude: " + $scope.dragLatitude + " longitude: " + $scope.dragLongitude);
+				},
+			    dragend: function (marker, eventName, model, args) {
+			    	var dropLatitude = marker.position.lat();
+		    		var dropLongitude = marker.position.lng();
+				    $log.info("Dragend marker latitude: " + dropLatitude + " longitude: " + dropLongitude);
+				    $scope.initData('updateTravel', $scope.selectedTravel, $scope.selectedTravel.itinerary.stops[marker.key]);
+				    $scope.labels.updateStopUpdateLabel = "Update and confirm new position";
+				    $scope.labels.updateStopCancelLabel = "Close";
+				    $scope.resetPosition = true;
+				    $('#updateStop').modal('show');			    
+				}
+		}};
 }])
 
 // ------------------------------------------------------------------------
@@ -295,6 +326,14 @@ angular.module('travels-controllers', [
 	    var selectedTravel = $scope.$parent.selectedTravel;
 	    $scope.updateTravel(selectedTravel);
 	    $('#updateStop').modal('hide');
+    };
+    
+    $scope.closeUpdateStop = function(stop) {
+    	if ($scope.resetPosition == true) {
+    		// Cancel stop drop.
+    		stop.latitude = $scope.dragLatitude;
+    		stop.longitude = $scope.dragLongitude;
+    	}
     };
     
     // Delete stop (by updating travel).

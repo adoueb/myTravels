@@ -83,8 +83,17 @@ angular.module('travel-maps-services', [])
 			currentStop.icon = "img/static/blue_Marker" + stopLetter + ".png";
 			currentStop.options = {
 				labelContent: currentStop.title,
-				labelClass: "marker-labels"
+				labelClass: "marker-labels",
+				draggable: true
 			};
+//			currentStop.events = {
+//				dragend: function (marker, eventName, model, args) {
+//			    	var dropLatitude = args[0].latLng.lat();
+//		    		var dropLongitude =  args[0].latLng.lng();
+//		    		$log.info("Dragend! latitude: " + dropLatitude + " longitude: " + dropLongitude);
+//		    		marker.onDrop(dropLatitude, dropLongitude);
+//				}
+//			};
 			currentStop.onStopClicked = function(){
 				$log.info("onStopClicked " + stopLetter);
 				
