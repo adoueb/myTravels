@@ -10,7 +10,8 @@ angular.module('travels-controllers', [
            'google-maps'.ns(),
            'ngRoute',
            'angularFileUpload',
-           'ngDragDrop'])
+           'ngDragDrop',
+           'datePicker'])
            
 // ------------------------------------------------------------------------
 // Configuration.

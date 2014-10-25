@@ -18,6 +18,8 @@
 <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
 <link rel="stylesheet" href="css/jquery.fileupload.css">
 <link rel="stylesheet" href="css/jquery.fileupload-ui.css">
+<!-- Datepicker -->
+<link rel="stylesheet" href="lib/angular-datepicker-master/index.css">
 </head>
 
 <body  ng-controller="TravelListCtrl" ng-cloak>
@@ -58,6 +60,9 @@
 	
 	<!-- Draganddrop -->
 	<script src="lib/angular-draganddrop/draganddrop.js"></script>
+	
+	<!-- Datepicker -->
+	<script src="lib/angular-datepicker-master/index.js"></script>
 	
 	<!-- Application -->
 	<script src="js/util/util.js"></script>
@@ -138,7 +143,6 @@
  	<!-- Alerts                                                                                     -->
  	<!-- ========================================================================================== -->
  	<show-alerts key="main" alerts="alerts"></show-alerts>
-<!-- 	<a ng-click="addAlert()">Add alert</a> -->
  
   	<!-- ========================================================================================== -->
  	<!-- Articles                                                                                   -->
@@ -165,7 +169,7 @@
 	 			<div class="panel panel-default" ng-switch-default>
 	 				<div class="panel-body">
 	 					<div class="page-header">
-	 						<h3>{{selectedTravel.name}} - <small>{{selectedTravel.year}}</small></h3>	
+	 						<h3>{{selectedTravel.name}} - <small>{{selectedTravel.year | date:'yyyy MMMM'}}</small></h3>	
 	 					</div>
 
 						<!-- Map with itinerary -->
@@ -259,7 +263,8 @@
 	 					<a href="#" class="list-group-item thumbnail" ng-class="{active:travel.id==selectedTravel.id}" 
 	 					   style="border:0px;padding:0;margin-bottom:0" ng-click="selectTravel(travel);">
 		 					<div>
-			 					<h4 class="list-group-item-heading">{{travel.year}} - {{travel.name}}</h4>
+			 					<h4 class="list-group-item-heading">{{travel.name}}</h4>
+			 					<h5 class="list-group-item-heading">{{travel.year | date:'yyyy MMMM'}}</h5>
 			 					<p class="list-group-item-heading" style="overflow:auto">
 			 						<div ng-switch on="travel.images.length">
 			 							<div ng-switch-when="0">{{travel.description}}</div>
@@ -334,9 +339,10 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="contact-new-year" class="col-lg-2 control-label">Year:</label>
+						<label for="contact-new-year" class="col-lg-2 control-label">Year/month:</label>
 						<div class="col-lg-10">
-							<input type="text" class="form-control" id="contact-new-year" name="addTravelYear" placeholder="2014" ng-model="addTravelData.year" required>
+							<input type="text" class="form-control" id="contact-new-year" name="addTravelYear" placeholder="2014 October" ng-model="addTravelData.year" required="true"
+							       date-time="" view="year" min-view="month" format="yyyy MMMM"/>
 							<span ng-show="showError(addTravelForm.addTravelYear, 'required')">The year is required</span>
 						</div>
 					</div>
@@ -386,7 +392,8 @@
 					<div class="form-group">
 						<label for="contact-update-year" class="col-lg-2 control-label">Year:</label>
 						<div class="col-lg-10">
-							<input type="text" class="form-control" id="contact-update-year" placeholder="2014" ng-model="currentTravel.year">
+							<input type="text" class="form-control" id="contact-update-year" placeholder="2014 October" ng-model="currentTravel.year"
+							       date-time="" view="year" min-view="month" format="yyyy MMMM"/>
 						</div>
 					</div>
 					<div class="form-group">
