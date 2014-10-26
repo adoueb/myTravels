@@ -11,7 +11,9 @@ angular.module('travels-controllers', [
            'ngRoute',
            'angularFileUpload',
            'ngDragDrop',
-           'datePicker'])
+           'datePicker',
+           'ngAutocomplete',
+           'countrySelect'])
            
 // ------------------------------------------------------------------------
 // Configuration.
@@ -35,6 +37,13 @@ angular.module('travels-controllers', [
     // Initializations.
     // -------------------------------------------------------------------- 
     AlertService.initAlerts("main");
+    
+//    $scope.result2 = '';
+//    $scope.options2 = {
+//      country: 'us',
+//      types: '(cities)'
+//    };
+//    $scope.details2 = '';
 
     /* Init map.
      * GoogleMapApi is a promise with a
