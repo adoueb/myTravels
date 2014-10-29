@@ -149,9 +149,7 @@
  	<!-- Alerts                                                                                     -->
  	<!-- ========================================================================================== -->
  	<show-alerts key="main" alerts="alerts"></show-alerts>
-<!--  	<country-select data-ng-model="country.selectedCountry"></country-select> -->
 <!--  	<input type="text" ng-autocomplete ng-model="result2" details="details2" options="options2"/> -->
-<!--  	<div>{{country.selectedCountry}}</div> -->
  
   	<!-- ========================================================================================== -->
  	<!-- Articles                                                                                   -->
@@ -353,7 +351,7 @@
 					<div class="form-group">
 						<label for="contact-new-year" class="col-lg-2 control-label">Year/month:</label>
 						<div class="col-lg-10">
-							<input type="text" class="form-control" id="contact-new-year" name="addTravelYear" placeholder="2014 October" ng-model="addTravelData.year" required="true"
+							<input class="form-control" id="contact-new-year" name="addTravelYear" placeholder="2014 October" ng-model="addTravelData.year" required="true"
 							       date-time="" view="year" min-view="month" format="yyyy MMMM"/>
 							<span ng-show="showError(addTravelForm.addTravelYear, 'required')">The year is required</span>
 						</div>
