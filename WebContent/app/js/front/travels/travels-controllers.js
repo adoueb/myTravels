@@ -234,14 +234,17 @@ angular.module('travels-controllers', [
 			    $scope.mapInstance.panTo(latLng);
 			}
 	}};
+	// Markers events.
 	$scope.markerOpt =  {
 			events: {
 			    dragstart: function (marker, eventName, model, args) {
+			    	// Start dragging a marker: store initial position.
 			    	$scope.dragLatitude = marker.position.lat();
 			    	$scope.dragLongitude = marker.position.lng();
 				    $log.info("Drag marker latitude: " + $scope.dragLatitude + " longitude: " + $scope.dragLongitude);
 				},
 			    dragend: function (marker, eventName, model, args) {
+			    	// End dragging a marker: open "Update stop" popup with new position.
 			    	var dropLatitude = marker.position.lat();
 		    		var dropLongitude = marker.position.lng();
 				    $log.info("Dragend marker latitude: " + dropLatitude + " longitude: " + dropLongitude);
@@ -251,7 +254,22 @@ angular.module('travels-controllers', [
 				    $scope.resetPosition = true;
 				    $('#updateStop').modal('show');			    
 				}
-		}};
+	}};
+	
+	// Zoom to address (ex: country).
+	$scope.zoomToAddress = function(address) {
+		var geocoder = new google.maps.Geocoder();
+		geocoder.geocode( { 'address': address}, function(results, status) {
+		    if (status == google.maps.GeocoderStatus.OK) {
+		        var bounds = results[0].geometry.bounds;
+			    $scope.mapInstance.fitBounds(bounds);
+			    $scope.mapInstance.panToBounds(bounds);
+		    } else {
+		    	var msg = "Zoom to " + address + " failed due to: " + status;
+		    	AlertService.addAlert("main", "danger", msg);
+		    }
+		});
+	};
 }])
 
 // ------------------------------------------------------------------------
