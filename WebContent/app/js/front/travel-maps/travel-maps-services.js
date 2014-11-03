@@ -371,6 +371,10 @@ angular.module('travel-maps-services', [])
                       	      {code: 'ZM', name:  'ZAMBIA'},
                       	      {code: 'ZW', name:  'ZIMBABWE'}
                       	    ];
+   
+    this.getCountries = function() {
+    	return codesAndCountries;
+    };
     
     this.getCountryCount = function() {
     	return codesAndCountries.length;
