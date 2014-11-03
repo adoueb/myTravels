@@ -5,5 +5,6 @@
 
 // Declare travel-maps level module which depends on filters, services, directives and controllers.
 angular.module('travel-maps', [
-  'travel-maps-services'
+  'travel-maps-services',
+  'travel-maps-directives'
 ]);

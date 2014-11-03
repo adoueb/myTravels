@@ -12,8 +12,7 @@ angular.module('travels-controllers', [
            'angularFileUpload',
            'ngDragDrop',
            'datePicker',
-           'ngAutocomplete',
-           'countrySelect'])
+           'ngAutocomplete'])
            
 // ------------------------------------------------------------------------
 // Configuration.
@@ -40,7 +39,7 @@ angular.module('travels-controllers', [
     
 //    $scope.result2 = '';
 //    $scope.options2 = {
-//      country: 'us',
+//      country: 'ar',
 //      types: '(cities)'
 //    };
 //    $scope.details2 = '';
@@ -53,7 +52,7 @@ angular.module('travels-controllers', [
      GoogleMapApi.then(function(maps) {
     	maps.visualRefresh = true;   
     	 
-	    $scope.selectedTravel = null;
+    	$scope.setSelectedTravel(null);
 	    
 	    $scope.labels = {};
 	    
@@ -73,7 +72,7 @@ angular.module('travels-controllers', [
     $scope.initializeTravels = function(travels) {
     	var travelsData = TravelService.getTravelsData(travels);
     	$scope.travels = travelsData.travelsList;
-    	$scope.selectedTravel = travelsData.selectedTravel;
+    	$scope.setSelectedTravel(travelsData.selectedTravel);
     	$scope.map = travelsData.map;
     	$scope.markers = travelsData.markers;
     	
@@ -86,12 +85,25 @@ angular.module('travels-controllers', [
     	$scope.detailMap.zoom = 12;
     };
     
+    $scope.setSelectedTravel = function(travel) {
+    	$scope.selectedTravel = travel;
+    	if (travel != undefined && travel != null) {
+    		if ($scope.addStop == undefined) {
+    			$scope.addStop = {};
+    		}
+	        $scope.addStop.options = {
+	        		country: $scope.selectedTravel.country,
+	        		types: '(cities)'
+	        };
+    	}
+    };
+    
     $scope.addTravelToList = function (travel) {
     	var travelsData = TravelService.addTravel($scope.travels, travel);
     	$scope.travels = travelsData.travelsList;
     	if (travelsData.selectedTravel != null) {
     		// New selection.
-        	$scope.selectedTravel = travelsData.selectedTravel;
+        	$scope.setSelectedTravel(travelsData.selectedTravel);
         	$scope.map = travelsData.map;
         	$scope.markers = travelsData.markers;
     	}
@@ -100,7 +112,7 @@ angular.module('travels-controllers', [
     $scope.updateTravelInList = function (travel) {
     	var updateTravelData = TravelService.updateTravel($scope.travels, $scope.selectedTravel, travel);
     	if (updateTravelData.selectedTravel != null) {
-    		$scope.selectedTravel = updateTravelData.selectedTravel;
+    		$scope.setSelectedTravel(updateTravelData.selectedTravel);
     	}
     	if (travel.id == $scope.selectedTravel.id) {
     		// The updated travel is the selected travel.
@@ -110,7 +122,7 @@ angular.module('travels-controllers', [
 	
 	$scope.selectTravel = function(travel) {
 		var travelData = TravelService.getSelectedTravelData(travel);
-		$scope.selectedTravel = travelData.selectedTravel;
+		$scope.setSelectedTravel(travelData.selectedTravel);
     	$scope.map = travelData.map;
     	$scope.markers = travelData.markers;
     };

@@ -67,9 +67,6 @@
 	<!-- ngAutoComplete -->
 	<script src="lib/ngAutocomplete/ngAutocomplete.js"></script>
 	
-	<!-- angular-country-select -->
-	<script src="lib/angular-country-select/angular.country-select.js"></script>
-	
 	<!-- Application -->
 	<script src="js/util/util.js"></script>
 
@@ -81,6 +78,7 @@
 	<script src="js/front/upload//angular-file-upload.js"></script>
 	
 	<script src="js/front/travel-maps/travel-maps-services.js"></script>
+	<script src="js/front/travel-maps/travel-maps-directives.js"></script>
 	<script src="js/front/travel-maps/travel-maps.js"></script>
 	
 	<script src="js/front/travels/travels-services.js"></script>
@@ -199,7 +197,12 @@
 								<a style="margin-left: 10px; font-size: 14px; display: inline-block;" ng-click="$parent.initData('', travel)"
 								   href="#addStop" data-toggle="modal"> 
 									<i class="glyphicon glyphicon-plus-sign" title="Add Stop"></i> Add Stop
-								</a>								
+								</a>
+								
+								<!-- Add stops from suggested places -->
+								<br/>							
+								<input type="text" width="500px" ng-autocomplete ng-model="$parent.addStop.results" 
+								       details="$parent.addStop.details" options="$parent.addStop.options"/>
 							</div>
 							
 							<div class="modal-body" ng-repeat="marker in $parent.map.markers">
@@ -401,6 +404,7 @@
 						<div class="col-lg-10">
 <!-- 							<input type="text" class="form-control" id="contact-update-country" placeholder="Country" ng-model="currentTravel.country"> -->
 							<country-select ng-model="currentTravel.country" class="form-control" id="contact-update-country" placeholder="Country">
+							</country-select>
 						</div>
 					</div>
 					<div class="form-group">
