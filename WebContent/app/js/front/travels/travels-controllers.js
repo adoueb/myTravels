@@ -36,13 +36,6 @@ angular.module('travels-controllers', [
     // Initializations.
     // -------------------------------------------------------------------- 
     AlertService.initAlerts("main");
-    
-//    $scope.result2 = '';
-//    $scope.options2 = {
-//      country: 'ar',
-//      types: '(cities)'
-//    };
-//    $scope.details2 = '';
 
     /* Init map.
      * GoogleMapApi is a promise with a
@@ -88,10 +81,10 @@ angular.module('travels-controllers', [
     $scope.setSelectedTravel = function(travel) {
     	$scope.selectedTravel = travel;
     	if (travel != undefined && travel != null) {
-    		if ($scope.addStop == undefined) {
-    			$scope.addStop = {};
+    		if ($scope.addStopFromPlaceData == undefined) {
+    			$scope.addStopFromPlaceData = {};
     		}
-	        $scope.addStop.options = {
+	        $scope.addStopFromPlaceData.options = {
 	        		country: $scope.selectedTravel.country,
 	        		types: '(cities)'
 	        };
@@ -354,6 +347,19 @@ angular.module('travels-controllers', [
 	    $scope.$parent.selectedTravel.itinerary.stops.push(newStop);
 	    $scope.updateTravel($scope.$parent.selectedTravel);
 	    $('#addStop').modal('hide');
+    };
+ 
+    // Add stop from place.
+    $scope.addStopFromPlace = function() {
+    	$log.info("add stop from place " + $scope.addStopFromPlaceData.results);
+    	$scope.initData('', $scope.$parent.selectedTravel);
+    	if ($scope.addStopData == undefined) {
+    		$scope.addStopData = {};
+    	}
+    	$scope.addStopData.title = $scope.addStopFromPlaceData.results;
+    	$scope.addStopData.latitude = $scope.addStopFromPlaceData.details.geometry.location.lat();
+    	$scope.addStopData.longitude = $scope.addStopFromPlaceData.details.geometry.location.lng();
+    	$('#addStop').modal('show');
     };
     
     $scope.canAddStop = function() {

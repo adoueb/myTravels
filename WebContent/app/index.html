@@ -147,7 +147,6 @@
  	<!-- Alerts                                                                                     -->
  	<!-- ========================================================================================== -->
  	<show-alerts key="main" alerts="alerts"></show-alerts>
-<!--  	<input type="text" ng-autocomplete ng-model="result2" details="details2" options="options2"/> -->
  
   	<!-- ========================================================================================== -->
  	<!-- Articles                                                                                   -->
@@ -193,6 +192,7 @@
 							<div>
 								<h4 style="margin-top:20px;margin-bottom:20px">{{$parent.selectedTravel.description}}</h4>
 								<h4>Itinerary</h4>
+								
 								<!--  Add new stop  -->
 								<a style="margin-left: 10px; font-size: 14px; display: inline-block;" ng-click="$parent.initData('', travel)"
 								   href="#addStop" data-toggle="modal"> 
@@ -200,9 +200,20 @@
 								</a>
 								
 								<!-- Add stops from suggested places -->
-								<br/>							
-								<input type="text" width="500px" ng-autocomplete ng-model="$parent.addStop.results" 
-								       details="$parent.addStop.details" options="$parent.addStop.options"/>
+								<form ng-submit="addStopFromPlace()" class="form-horizontal">
+									<div class="form-group">
+<!-- 									    <label for="addStopFromPlace" class="col-lg-2 control-label">Add stop from:</label> -->
+				 						<div>
+				 							<input type="text" class="form-control" id="addStopFromPlace" placeholder="Enter city"
+				 							       ng-autocomplete ng-model="addStopFromPlaceData.results" 
+									               details="addStopFromPlaceData.details" options="$parent.addStopFromPlaceData.options"/>
+									        <input type="submit" value="Add stop"/>
+				 						</div>
+			 						</div>
+								</form>
+<!-- 								<div>{{$parent.addStop.results}}</div> -->
+<!-- 								<div>{{$parent.addStop.details.geometry.location.lat()}}</div> -->
+<!-- 								<div>{{$parent.addStop.details.geometry.location.lng()}}</div> -->
 							</div>
 							
 							<div class="modal-body" ng-repeat="marker in $parent.map.markers">
