@@ -257,7 +257,31 @@ angular.module('travels-services', [ 'ngResource'])
 // UpdateTravelService
 // ------------------------------------------------------------------------
 .factory('UpdateTravelService', ['$log', function($log) {
-	var me = {};
+	var me = {
+			addStopData: {
+				title:"",
+				description:"",
+				latitude:"",
+				longitude:""
+			}
+	};
+	
+	me.getAddStopData = function() {
+	    return me.addStopData;
+	};
+	
+	me.setAddStopDataTitle = function(title) {
+	    me.addStopData.title = title;
+	};
+	
+	me.setAddStopDataDescription = function(description) {
+	    me.addStopData.description = description;
+	};
+	
+	me.setAddStopDataLatLng = function(latitude, longitude) {
+	    me.addStopData.latitude = latitude;
+	    me.addStopData.longitude = longitude;
+	};
 	
 	return me;
 }])

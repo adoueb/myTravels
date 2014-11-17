@@ -194,26 +194,24 @@
 								<h4>Itinerary</h4>
 								
 								<!--  Add new stop  -->
-								<a style="margin-left: 10px; font-size: 14px; display: inline-block;" ng-click="$parent.initData('', travel)"
+								<a style="font-size: 14px; display: inline-block;" ng-click="$parent.initData('', travel)"
 								   href="#addStop" data-toggle="modal"> 
 									<i class="glyphicon glyphicon-plus-sign" title="Add Stop"></i> Add Stop
 								</a>
 								
 								<!-- Add stops from suggested places -->
-								<form ng-submit="addStopFromPlace()" class="form-horizontal">
-									<div class="form-group">
-<!-- 									    <label for="addStopFromPlace" class="col-lg-2 control-label">Add stop from:</label> -->
-				 						<div>
+								<div style="margin-left: 15px;">
+									<form class="form-horizontal" >
+										<div class="form-group">
+				 							<a style="font-size: 14px; display: inline-block;" ng-click="addStopFromPlace()"> 
+												<i class="glyphicon glyphicon-plus-sign" title="Add Stop from"></i> Add Stop From:
+											</a>
 				 							<input type="text" class="form-control" id="addStopFromPlace" placeholder="Enter city"
 				 							       ng-autocomplete ng-model="addStopFromPlaceData.results" 
 									               details="addStopFromPlaceData.details" options="$parent.addStopFromPlaceData.options"/>
-									        <input type="submit" value="Add stop"/>
 				 						</div>
-			 						</div>
-								</form>
-<!-- 								<div>{{$parent.addStop.results}}</div> -->
-<!-- 								<div>{{$parent.addStop.details.geometry.location.lat()}}</div> -->
-<!-- 								<div>{{$parent.addStop.details.geometry.location.lng()}}</div> -->
+									</form>
+								</div>
 							</div>
 							
 							<div class="modal-body" ng-repeat="marker in $parent.map.markers">
@@ -681,26 +679,26 @@
 							<label for="stop-new-title" class="col-lg-2 control-label">Title:</label>
 							<div class="col-lg-10">
 								<input type="text" class="form-control" id="stop-new-title" name="addStopTitle" placeholder="Title" 
-								       ng-model="addStopData.title" required>
+								       ng-model="getAddStopData().title" required>
 								<span ng-show="showError(addStopForm.addStopTitle, 'required')">The title is required</span>
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="stop-new-description" class="col-lg-2 control-label">Description:</label>
 							<div class="col-lg-10">
-								<textarea class="form-control" rows="6" id="stop-new-description" ng-model="addStopData.description"></textarea>
+								<textarea class="form-control" rows="6" id="stop-new-description" ng-model="getAddStopData().description"></textarea>
 							</div>
 						</div>
 	 					<div class="form-group">
 	 						<label for="stop-new-latitude" class="col-lg-2 control-label">Latitude, longitude:</label>
 	 						<div class="col-lg-5">
 	 							<input type="text" class="form-control" id="stop-new-latitude" name="addStopLatitude" placeholder="Latitude" 
-								       ng-model="addStopData.latitude" required>
+								       ng-model="getAddStopData().latitude" required>
 								<span ng-show="showError(addStopForm.addStopLatitude, 'required')">The latitude is required</span>
 	 						</div>
 	 						<div class="col-lg-5">
 	 							<input type="text" class="form-control" id="stop-new-longitude" name="addStopLongitude" placeholder="longitude" 
-								       ng-model="addStopData.longitude" required>
+								       ng-model="getAddStopData().longitude" required>
 								<span ng-show="showError(addStopForm.addStopLongitude, 'required')">The longitude is required</span>
 	 						</div>
 	 					</div>

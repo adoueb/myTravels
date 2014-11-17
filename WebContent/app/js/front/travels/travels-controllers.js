@@ -29,8 +29,8 @@ angular.module('travels-controllers', [
 // TravelListCtrl controller
 // ------------------------------------------------------------------------
 .controller('TravelListCtrl', 
-            ['$scope', '$log', '$timeout', 'TravelRest', 'MapService', 'TravelService', 'AlertService', 'GoogleMapApi'.ns(),
-		    function($scope, $log, $timeout, TravelRest, MapService, TravelService, AlertService, GoogleMapApi) {
+            ['$scope', '$log', '$timeout', 'TravelRest', 'MapService', 'TravelService', 'UpdateTravelService', 'AlertService', 'GoogleMapApi'.ns(),
+		    function($scope, $log, $timeout, TravelRest, MapService, TravelService, UpdateTravelService, AlertService, GoogleMapApi) {
 	
     // --------------------------------------------------------------------
     // Initializations.
@@ -221,11 +221,9 @@ angular.module('travels-controllers', [
 			    		  var clickedLongitude = args[0].latLng.lng();
 					      $log.info("Click on map latitude: " + clickedLatitude + " longitude: " + clickedLongitude);
 					      $scope.initData('', $scope.selectedTravel);
-					      if ($scope.addStopData == undefined) {
-					    	  $scope.addStopData = {};
-					      }
-					      $scope.addStopData.latitude = clickedLatitude;
-					      $scope.addStopData.longitude = clickedLongitude;
+					      UpdateTravelService.setAddStopDataTitle("");
+					      UpdateTravelService.setAddStopDataDescription("");
+					      UpdateTravelService.setAddStopDataLatLng(clickedLatitude, clickedLongitude);
 					      $('#addStop').modal('show');
 		    	}, 200);
 		    },    
@@ -312,8 +310,8 @@ angular.module('travels-controllers', [
 // UpdateTravelCtrl controller
 // ------------------------------------------------------------------------
 .controller('UpdateTravelCtrl', 
-        ['$scope', '$log', 'TravelRest', 'MapService', 'TravelService', 'CommonService', 'AlertService',
-		    function($scope, $log, TravelRest, MapService, TravelService, CommonService, AlertService) {
+        ['$scope', '$log', 'TravelRest', 'MapService', 'TravelService', 'UpdateTravelService', 'CommonService', 'AlertService',
+		    function($scope, $log, TravelRest, MapService, TravelService, UpdateTravelService, CommonService, AlertService) {
      
     // Update travel.
     $scope.updateTravel = function(travel) {
@@ -337,10 +335,10 @@ angular.module('travels-controllers', [
     
     // Add stop.
     $scope.addStop = function() {
-        var newStop = {title:        $scope.addStopData.title, 
-    			       description:  $scope.addStopData.description, 
-    			       latitude:     $scope.addStopData.latitude, 
-    			       longitude:    $scope.addStopData.longitude};
+        var newStop = {title:        UpdateTravelService.getAddStopData().title, 
+    			       description:  UpdateTravelService.getAddStopData().description, 
+    			       latitude:     UpdateTravelService.getAddStopData().latitude, 
+    			       longitude:    UpdateTravelService.getAddStopData().longitude};
         newStop.id =  $scope.$parent.selectedTravel.itinerary.stops.length;
 
 	    $log.info("add " +  newStop.title);
@@ -351,15 +349,20 @@ angular.module('travels-controllers', [
  
     // Add stop from place.
     $scope.addStopFromPlace = function() {
-    	$log.info("add stop from place " + $scope.addStopFromPlaceData.results);
-    	$scope.initData('', $scope.$parent.selectedTravel);
-    	if ($scope.addStopData == undefined) {
-    		$scope.addStopData = {};
+    	if (($scope.addStopFromPlaceData.details == undefined) || 
+    		($scope.addStopFromPlaceData.results == undefined) ||
+    		($scope.addStopFromPlaceData.results.length() == 0)) {
+    		// No place.
+    		AlertService.addAlert("main", "danger", "Please select a city and retry.");
+    	} else {
+        	$log.info("add stop from place " + $scope.addStopFromPlaceData.results);
+        	$scope.initData('', $scope.$parent.selectedTravel);
+        	UpdateTravelService.setAddStopDataTitle($scope.addStopFromPlaceData.results);
+        	UpdateTravelService.setAddStopDataDescription("");
+        	UpdateTravelService.setAddStopDataLatLng($scope.addStopFromPlaceData.details.geometry.location.lat(),
+        			                                 $scope.addStopFromPlaceData.details.geometry.location.lng());
+        	$('#addStop').modal('show');
     	}
-    	$scope.addStopData.title = $scope.addStopFromPlaceData.results;
-    	$scope.addStopData.latitude = $scope.addStopFromPlaceData.details.geometry.location.lat();
-    	$scope.addStopData.longitude = $scope.addStopFromPlaceData.details.geometry.location.lng();
-    	$('#addStop').modal('show');
     };
     
     $scope.canAddStop = function() {
@@ -398,6 +401,10 @@ angular.module('travels-controllers', [
     	var selectedTravel = $scope.$parent.selectedTravel;
     	selectedTravel.itinerary.stops.move(fromIndex, toIndex);
     	$scope.updateTravel(selectedTravel);
+    };
+    
+    $scope.getAddStopData = function() {
+    	return UpdateTravelService.getAddStopData();
     };
 }])
 
