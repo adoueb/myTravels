@@ -1,16 +1,17 @@
 /* app css stylesheet */
 body {
-	margin-bottom: 80px;
+	margin-top: 80px;
+	margin-bottom: 0px;
 }
 .page-header {
-	margin-top: 0;
+	margin-top: 0px;
 }
 
 .panel-body {
 	padding-top: 0;
 }
 .activeTravel {
-	background-color: '#428BCA';
+	background-color: rgb(66, 139, 202);
 }
 .featuredImg {
 	margin-bottom: 15px;

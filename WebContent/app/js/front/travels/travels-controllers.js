@@ -351,7 +351,7 @@ angular.module('travels-controllers', [
     $scope.addStopFromPlace = function() {
     	if (($scope.addStopFromPlaceData.details == undefined) || 
     		($scope.addStopFromPlaceData.results == undefined) ||
-    		($scope.addStopFromPlaceData.results.length() == 0)) {
+    		($scope.addStopFromPlaceData.results.length == 0)) {
     		// No place.
     		AlertService.addAlert("main", "danger", "Please select a city and retry.");
     	} else {
@@ -366,7 +366,8 @@ angular.module('travels-controllers', [
     };
     
     $scope.canAddStop = function() {
-    	return $scope.addStopForm.$dirty && $scope.addStopForm.$valid;
+    	//return $scope.addStopForm.$dirty && $scope.addStopForm.$valid;
+    	return $scope.addStopForm.$valid;
     };
 
 	// Update stop (by updating travel).
