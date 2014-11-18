@@ -282,7 +282,7 @@
 				
 				<div class="list-group">
 	 				<!-- a href="#" class="list-group-item" ng-repeat="travel in filtered = (travels | excludeSelectedTravelFilter:selectedTravel)"-->
-	 				<div class="list-group-item" ng-repeat="travel in travels" ng-style="activeStyle(travel)">
+	 				<div class="list-group-item" ng-repeat="travel in travels" ng-class="{active:travel.id==selectedTravel.id}">
 	 					<a href="#" class="list-group-item thumbnail" ng-class="{active:travel.id==selectedTravel.id}" 
 	 					   style="border:0px;padding:0;margin-bottom:0" ng-click="selectTravel(travel);">
 		 					<div>

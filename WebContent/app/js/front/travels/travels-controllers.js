@@ -131,18 +131,6 @@ angular.module('travels-controllers', [
 	    	AlertService.addAlert("main", "danger", msg);
 	    }); 
     };
-    
-    $scope.activeStyle = function(travel) {
-    	if (travel.id == $scope.selectedTravel.id) {
-    		return {
-    			'background-color': '#428BCA'
-    		};
-    	} else {
-    		return {
-    			'background-color': ''
-    		};
-    	}
-    };
         
     // --------------------------------------------------------------------
     // Manage popups.
