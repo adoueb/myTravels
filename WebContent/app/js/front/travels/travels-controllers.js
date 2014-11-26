@@ -7,7 +7,7 @@
 /* Controllers */
 
 angular.module('travels-controllers', [
-           'google-maps'.ns(),
+           'uiGmapgoogle-maps',
            'ngRoute',
            'angularFileUpload',
            'ngDragDrop',
@@ -17,7 +17,7 @@ angular.module('travels-controllers', [
 // ------------------------------------------------------------------------
 // Configuration.
 // ------------------------------------------------------------------------
-.config(['GoogleMapApiProvider'.ns(), function (GoogleMapApi) {
+.config(['uiGmapGoogleMapApiProvider', function (GoogleMapApi) {
   GoogleMapApi.configure({
     key: 'AIzaSyDgJxEkV1ZAgRRZprakChmwJvMdlPvcs7w',
     v: '3.16',
@@ -29,8 +29,8 @@ angular.module('travels-controllers', [
 // TravelListCtrl controller
 // ------------------------------------------------------------------------
 .controller('TravelListCtrl', 
-            ['$scope', '$log', '$timeout', 'TravelRest', 'MapService', 'TravelService', 'UpdateTravelService', 'AlertService', 'GoogleMapApi'.ns(),
-		    function($scope, $log, $timeout, TravelRest, MapService, TravelService, UpdateTravelService, AlertService, GoogleMapApi) {
+            ['$scope', '$log', '$timeout', 'TravelRest', 'MapService', 'TravelService', 'UpdateTravelService', 'AlertService', 'uiGmapGoogleMapApi',
+		    function($scope, $log, $timeout, TravelRest, MapService, TravelService, UpdateTravelService, AlertService, uiGmapGoogleMapApi) {
 	
     // --------------------------------------------------------------------
     // Initializations.
@@ -42,7 +42,7 @@ angular.module('travels-controllers', [
      * then callback of the google.maps object
      *   @pram: maps = google.maps
      */
-     GoogleMapApi.then(function(maps) {
+    uiGmapGoogleMapApi.then(function(maps) {
     	maps.visualRefresh = true;   
     	 
     	$scope.setSelectedTravel(null);
