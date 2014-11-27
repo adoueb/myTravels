@@ -16,12 +16,11 @@ describe('Service: common services', function() {
 			$log = _$log_;
 		}));
 
-		/*
 		it('should set no alert by default', function() {
+			AlertService.initAlerts("main");
 			expect(AlertService).toBeDefined();
-			expect(AlertService.getAlerts("main")).toBeUndefined();
+			expect(AlertService.getAlerts("main")).toEqual([]);
 		});
-
 
 		it('should store alert when addAlert is called', function() {
 			AlertService.addAlert("main","error", "error1");
@@ -31,7 +30,7 @@ describe('Service: common services', function() {
 			var alert = alerts[0];
 			expect(alert).toBeDefined();
 			expect(alert.type).toEqual("error");
-			expect(alert.msg).toEqual("error1");
+			expect(alert.message).toEqual("error1");
 		});
 
 		it('should store several alerts when addAlert is called several times', function() {
@@ -47,13 +46,13 @@ describe('Service: common services', function() {
 			var alert = alerts[0];
 			expect(alert).toBeDefined();
 			expect(alert.type).toEqual("error");
-			expect(alert.msg).toEqual("error1");
+			expect(alert.message).toEqual("error1");
 			
 			// Alert 2
 			alert = alerts[1];
 			expect(alert).toBeDefined();
 			expect(alert.type).toEqual("error");
-			expect(alert.msg).toEqual("error2");
+			expect(alert.message).toEqual("error2");
 		});
 
 		it('should store several alerts with different keys when required', function() {
@@ -69,7 +68,7 @@ describe('Service: common services', function() {
 			var alert = alerts[0];
 			expect(alert).toBeDefined();
 			expect(alert.type).toEqual("error");
-			expect(alert.msg).toEqual("error1");
+			expect(alert.message).toEqual("error1");
 			
 			// addTravel alerts
 			alerts = AlertService.getAlerts("addTravel");
@@ -80,7 +79,7 @@ describe('Service: common services', function() {
 			var alert = alerts[0];
 			expect(alert).toBeDefined();
 			expect(alert.type).toEqual("warning");
-			expect(alert.msg).toEqual("warningTravel1");
+			expect(alert.message).toEqual("warningTravel1");
 		});
 
 		it('should remove alert when closeAlert is called', function() {
@@ -99,7 +98,7 @@ describe('Service: common services', function() {
 			var alert = alerts[0];
 			expect(alert).toBeDefined();
 			expect(alert.type).toEqual("error");
-			expect(alert.msg).toEqual("error2");
+			expect(alert.message).toEqual("error2");
 			
 			AlertService.closeAlert("addTravel", 0);
 			
@@ -108,6 +107,5 @@ describe('Service: common services', function() {
 			expect(alerts).toBeDefined();
 			expect(alerts.length).toEqual(0);
 		});
-		*/
 	});
 });

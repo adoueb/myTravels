@@ -8,7 +8,6 @@ describe('Service: travels services', function() {
 		// Load the travels-services module, which contains the service
 		beforeEach(function(){
 		    module('ngResource');
-		    //module('travels-services');
 		});
 		
 		beforeEach(module('travels-services', function($provide) {
