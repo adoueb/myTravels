@@ -585,10 +585,12 @@ angular.module('travels-controllers', [
 	
 	// Upload dialog closed.
 	$scope.closeUpload = function() {
-		// Iterate through files to upload.
-		for (var index = $scope.selectedFiles.length - 1; index >= 0; index--) {
-			if ($scope.selectedFiles[index].completed == true) {
-				$scope.clearUploads(index);
+		if ($scope.selectedFiles != undefined) {
+			// Iterate through files to upload.
+			for (var index = $scope.selectedFiles.length - 1; index >= 0; index--) {
+				if ($scope.selectedFiles[index].completed == true) {
+					$scope.clearUploads(index);
+				}
 			}
 		}
 	};

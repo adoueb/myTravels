@@ -17,7 +17,7 @@ describe('Service: common services', function() {
 		}));
 
 		/*
-		    it('should set no alert by default', function() {
+		it('should set no alert by default', function() {
 			expect(AlertService).toBeDefined();
 			expect(AlertService.getAlerts("main")).toBeUndefined();
 		});

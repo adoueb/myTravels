@@ -32,7 +32,7 @@ angular.module('travels-services', [ 'ngResource'])
 // Consuming REST services 
 // REST: CRUD methods: query, save, remove, update
 // ------------------------------------------------------------------------
-.factory('travelResource', function ($http) {
+.factory('travelResource', ['$http', function ($http) {
 
     return function () {
 
@@ -123,15 +123,15 @@ angular.module('travels-services', [ 'ngResource'])
 
         return Resource;
     };
-})
+}])
 
 // ------------------------------------------------------------------------
 // TravelRest factory
 // The one used in the controller.
 // ------------------------------------------------------------------------
-.factory('TravelRest', function (travelResource) {
+.factory('TravelRest', ['travelResource', function (travelResource) {
     return travelResource();
-})
+}])
 
 // ------------------------------------------------------------------------
 // travelResource factory
